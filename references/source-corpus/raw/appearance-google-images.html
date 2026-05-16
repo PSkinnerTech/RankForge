@@ -1,0 +1,4972 @@
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html 
+      lang="th-x-mtfrom-en"
+      dir="ltr">
+  <head>
+    <meta name="google-signin-client-id" content="721724668570-nbkv1cfusk7kk4eni4pjvepaus73b13t.apps.googleusercontent.com"><meta name="google-signin-scope"
+          content="profile email https://www.googleapis.com/auth/developerprofiles https://www.googleapis.com/auth/developerprofiles.award https://www.googleapis.com/auth/devprofiles.full_control.firstparty"><meta property="og:site_name" content="Google for Developers">
+    <meta property="og:type" content="website"><meta name="theme-color" content="#fff"><meta charset="utf-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <link rel="manifest" href="/_pwa/developers/manifest.json"
+          crossorigin="use-credentials">
+    <link rel="preconnect" href="//www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="//fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="//www.google-analytics.com" crossorigin><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700&display=swap">
+      <link rel="stylesheet"
+            href="//fonts.googleapis.com/css2?family=Material+Icons&family=Material+Symbols+Outlined&display=block"><link rel="stylesheet" href="//fonts.googleapis.com/earlyaccess/notosansthai.css"><link rel="stylesheet" href="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/css/app.css">
+      <link rel="shortcut icon" href="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/favicon-new.png">
+    <link rel="apple-touch-icon" href="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/touchicon-180-new.png"><link rel="canonical" href="https://developers.google.com/search/docs/appearance/google-images?hl=th"><link rel="search" type="application/opensearchdescription+xml"
+            title="Google for Developers" href="https://developers.google.com/s/opensearch.xml?hl=th">
+      <link rel="alternate" hreflang="en"
+          href="https://developers.google.com/search/docs/appearance/google-images" /><link rel="alternate" hreflang="x-default" href="https://developers.google.com/search/docs/appearance/google-images" /><link rel="alternate" hreflang="ar"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=ar" /><link rel="alternate" hreflang="zh-Hans"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=zh-cn" /><link rel="alternate" hreflang="zh-Hant"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=zh-tw" /><link rel="alternate" hreflang="fr"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=fr" /><link rel="alternate" hreflang="de"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=de" /><link rel="alternate" hreflang="hi"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=hi" /><link rel="alternate" hreflang="id"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=id" /><link rel="alternate" hreflang="it"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=it" /><link rel="alternate" hreflang="ja"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=ja" /><link rel="alternate" hreflang="ko"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=ko" /><link rel="alternate" hreflang="pl"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=pl" /><link rel="alternate" hreflang="pt-BR"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=pt-br" /><link rel="alternate" hreflang="ru"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=ru" /><link rel="alternate" hreflang="es"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=es" /><link rel="alternate" hreflang="es-419"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=es-419" /><link rel="alternate" hreflang="th"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=th" /><link rel="alternate" hreflang="tr"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=tr" /><link rel="alternate" hreflang="vi"
+          href="https://developers.google.com/search/docs/appearance/google-images?hl=vi" /><title>แนวทางปฏิบัติแนะนำสำหรับ SEO ของรูปภาพ | Google Search Central &nbsp;|&nbsp; Documentation &nbsp;|&nbsp; Google for Developers</title>
+
+<meta property="og:title" content="แนวทางปฏิบัติแนะนำสำหรับ SEO ของรูปภาพ | Google Search Central &nbsp;|&nbsp; Documentation &nbsp;|&nbsp; Google for Developers"><meta name="description" content="Google Search ช่วยให้ผู้ใช้เห็นข้อมูลบนเว็บ สำรวจแนวทางปฏิบัติแนะนำสำหรับ SEO รูปภาพ เช่น คำอธิบายภาพและป้าย">
+  <meta property="og:description" content="Google Search ช่วยให้ผู้ใช้เห็นข้อมูลบนเว็บ สำรวจแนวทางปฏิบัติแนะนำสำหรับ SEO รูปภาพ เช่น คำอธิบายภาพและป้าย"><meta property="og:url" content="https://developers.google.com/search/docs/appearance/google-images?hl=th"><meta property="og:image" content="https://developers.google.com/static/search/images/home-social-share-lockup.jpg?hl=th">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675"><meta property="og:locale" content="th"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Search Central",
+      "item": "https://developers.google.com/search"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Documentation",
+      "item": "https://developers.google.com/search/docs"
+    },{
+      "@type": "ListItem",
+      "position": 3,
+      "name": "แนวทางปฏิบัติแนะนำสำหรับ SEO ของรูปภาพ | Google Search Central",
+      "item": "https://developers.google.com/search/docs/appearance/google-images"
+    }]
+  }
+  </script><link rel="alternate machine-translated-from" hreflang="en"
+        href="https://developers.google.com/search/docs/appearance/google-images?hl=en">
+  
+    
+    
+    
+    
+    
+    
+    
+    <meta name="apple-itunes-app" content="app-id=1512522198">
+    
+    
+  
+
+    </head>
+  <body class="color-scheme--light"
+        template="page"
+        theme="white"
+        type="lcat"
+        
+        
+        
+        layout="docs"
+        
+        
+        
+        
+        
+          
+            concierge='closed'
+          
+        
+        display-toc
+        pending>
+  
+    <devsite-progress type="indeterminate" id="app-progress"></devsite-progress>
+  
+  
+    <a href="#main-content" class="skip-link button">
+      
+      ข้ามไปที่เนื้อหาหลัก
+    </a>
+    <section class="devsite-wrapper">
+      <devsite-cookie-notification-bar></devsite-cookie-notification-bar>
+        <devsite-header role="banner">
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-header--inner" data-nosnippet>
+  <div class="devsite-top-logo-row-wrapper-wrapper">
+    <div class="devsite-top-logo-row-wrapper">
+      <div class="devsite-top-logo-row">
+        <button type="button" id="devsite-hamburger-menu"
+          class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+          data-category="Site-Wide Custom Events"
+          data-label="Navigation menu button"
+          visually-hidden
+          aria-label="เปิดเมนู">
+        </button>
+        
+<div class="devsite-product-name-wrapper">
+
+  
+    
+  
+  <a href="https://developers.google.com/search?hl=th">
+    
+  <div class="devsite-product-logo-container"
+       
+       
+       
+    size="medium"
+  >
+  
+    <picture>
+      
+      <img class="devsite-product-logo"
+           alt="Google Search Central"
+           src="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=th"
+           srcset=" /static/search/images/google-search-central-logo.svg"
+           sizes="64px"
+           loading="lazy"
+           >
+    </picture>
+  
+  </div>
+  
+  </a>
+  
+
+  
+
+
+
+  
+  
+  <span class="devsite-product-name">
+    <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             devsite-has-google-wordmark">
+    
+    
+    
+      
+      
+        
+  <a href="https://developers.google.com/search?hl=th"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Upper Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Google Search Central"
+      
+    >
+    
+          <svg class="devsite-google-wordmark"
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 148 48">
+    <title>Google</title>
+    <path class="devsite-google-wordmark-svg-path" d="M19.58,37.65c-9.87,0-18.17-8.04-18.17-17.91c0-9.87,8.3-17.91,18.17-17.91c5.46,0,9.35,2.14,12.27,4.94l-3.45,3.45c-2.1-1.97-4.93-3.49-8.82-3.49c-7.21,0-12.84,5.81-12.84,13.02c0,7.21,5.64,13.02,12.84,13.02c4.67,0,7.34-1.88,9.04-3.58c1.4-1.4,2.32-3.41,2.66-6.16H19.58v-4.89h16.47c0.18,0.87,0.26,1.92,0.26,3.06c0,3.67-1.01,8.21-4.24,11.44C28.93,35.9,24.91,37.65,19.58,37.65z M61.78,26.12c0,6.64-5.1,11.53-11.36,11.53s-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53S61.78,19.43,61.78,26.12z M56.8,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C53.84,33.11,56.8,30.22,56.8,26.12z M87.25,26.12c0,6.64-5.1,11.53-11.36,11.53c-6.26,0-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53C82.15,14.59,87.25,19.43,87.25,26.12zM82.28,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C79.32,33.11,82.28,30.22,82.28,26.12z M112.09,15.29v20.7c0,8.52-5.02,12.01-10.96,12.01c-5.59,0-8.95-3.76-10.22-6.81l4.41-1.83c0.79,1.88,2.71,4.1,5.81,4.1c3.8,0,6.16-2.36,6.16-6.77v-1.66h-0.18c-1.14,1.4-3.32,2.62-6.07,2.62c-5.76,0-11.05-5.02-11.05-11.49c0-6.51,5.28-11.57,11.05-11.57c2.75,0,4.93,1.22,6.07,2.58h0.18v-1.88H112.09z M107.64,26.16c0-4.06-2.71-7.03-6.16-7.03c-3.49,0-6.42,2.97-6.42,7.03c0,4.02,2.93,6.94,6.42,6.94C104.93,33.11,107.64,30.18,107.64,26.16z M120.97,3.06v33.89h-5.07V3.06H120.97z M140.89,29.92l3.93,2.62c-1.27,1.88-4.32,5.11-9.61,5.11c-6.55,0-11.28-5.07-11.28-11.53c0-6.86,4.77-11.53,10.71-11.53c5.98,0,8.91,4.76,9.87,7.34l0.52,1.31l-15.42,6.38c1.18,2.31,3.01,3.49,5.59,3.49C137.79,33.11,139.58,31.84,140.89,29.92zM128.79,25.77l10.31-4.28c-0.57-1.44-2.27-2.45-4.28-2.45C132.24,19.04,128.66,21.31,128.79,25.77z"/>
+  </svg>Search Central
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+  </span>
+
+</div>
+        <div class="devsite-top-logo-row-middle">
+          <div class="devsite-header-upper-tabs">
+            
+              
+              
+  <devsite-tabs class="upper-tabs">
+
+    <nav class="devsite-tabs-wrapper" aria-label="แท็บระดับบน">
+      
+        
+          <tab class="devsite-dropdown
+    devsite-dropdown-full
+    devsite-active
+    
+    ">
+  
+    <a href="https://developers.google.com/search/docs?hl=th"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/docs?hl=th"
+    
+       track-type="nav"
+       track-metadata-position="nav - เอกสารประกอบ"
+       track-metadata-module="primary nav"
+       aria-label="เอกสารประกอบ, selected" 
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: เอกสารประกอบ"
+         
+           track-name="เอกสารประกอบ"
+         
+       >
+    เอกสารประกอบ
+  
+    </a>
+    
+      <button
+         aria-haspopup="menu"
+         aria-expanded="false"
+         aria-label="เมนูแบบเลื่อนลงสำหรับ เอกสารประกอบ"
+         track-type="nav"
+         track-metadata-eventdetail="https://developers.google.com/search/docs?hl=th"
+         track-metadata-position="nav - เอกสารประกอบ"
+         track-metadata-module="primary nav"
+         
+          
+            data-category="Site-Wide Custom Events"
+          
+            data-label="Tab: เอกสารประกอบ"
+          
+            track-name="เอกสารประกอบ"
+          
+        
+         class="devsite-tabs-dropdown-toggle devsite-icon devsite-icon-arrow-drop-down"></button>
+    
+  
+  <div class="devsite-tabs-dropdown" role="menu" aria-label="submenu" hidden>
+    <div class="devsite-tabs-dropdown-content">
+      
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>หลักการพื้นฐานเกี่ยวกับ SEO</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="หลักการพื้นฐานเกี่ยวกับ seo"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      บทนำ
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/essentials?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/essentials?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="หลักการพื้นฐานเกี่ยวกับ seo"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Search Essentials
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="หลักการพื้นฐานเกี่ยวกับ seo"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      คู่มือ SEO สำหรับมือใหม่
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/fundamentals/how-search-works?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/fundamentals/how-search-works?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="หลักการพื้นฐานเกี่ยวกับ seo"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      วิธีการทำงานของ Google Search
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/fundamentals/do-i-need-seo?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="หลักการพื้นฐานเกี่ยวกับ seo"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      คุณต้องการ SEO ไหม
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>การ Crawl และการจัดทำดัชนี</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การ crawl และการจัดทำดัชนี"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Sitemap
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การ crawl และการจัดทำดัชนี"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      robots.txt
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/special-tags?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/special-tags?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การ crawl และการจัดทำดัชนี"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      เมตาแท็ก
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การ crawl และการจัดทำดัชนี"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      การจัดการ Crawler
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/control-what-you-share?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/control-what-you-share?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การ crawl และการจัดทำดัชนี"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      การนำออก
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การ crawl และการจัดทำดัชนี"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      การกำหนดหน้า Canonical
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/301-redirects?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/301-redirects?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การ crawl และการจัดทำดัชนี"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      การเปลี่ยนเส้นทาง
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การ crawl และการจัดทำดัชนี"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      JavaScript SEO
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>การจัดอันดับและลักษณะที่ปรากฏในการค้นหา</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/visual-elements-gallery?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/visual-elements-gallery?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การจัดอันดับและลักษณะที่ปรากฏในการค้นหา"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      แกลเลอรีองค์ประกอบที่มองเห็น
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/title-link?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/title-link?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การจัดอันดับและลักษณะที่ปรากฏในการค้นหา"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      ลิงก์ Title
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/snippet?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/snippet?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การจัดอันดับและลักษณะที่ปรากฏในการค้นหา"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      ตัวอย่างข้อมูล
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/google-images?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/google-images?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การจัดอันดับและลักษณะที่ปรากฏในการค้นหา"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      รูปภาพ
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/video?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/video?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การจัดอันดับและลักษณะที่ปรากฏในการค้นหา"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      วิดีโอ
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/structured-data/search-gallery?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/structured-data/search-gallery?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การจัดอันดับและลักษณะที่ปรากฏในการค้นหา"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Structured data
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/favicon-in-search?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/favicon-in-search?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="การจัดอันดับและลักษณะที่ปรากฏในการค้นหา"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      ไอคอน Fav
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>คำแนะนำเฉพาะเว็บไซต์</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/specialty/ecommerce?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/specialty/ecommerce?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="คำแนะนำเฉพาะเว็บไซต์"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      อีคอมเมิร์ซ
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/specialty/international?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/specialty/international?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="คำแนะนำเฉพาะเว็บไซต์"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      เว็บไซต์ภาษาต่างประเทศและหลายภาษา
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>การวิเคราะห์ข้อมูล</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/search-console-start?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/search-console-start?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="คำแนะนำเฉพาะเว็บไซต์"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      เริ่มต้นใช้งาน Search Console
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="คำแนะนำเฉพาะเว็บไซต์"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      แก้ไขข้อบกพร่องการเข้าชมลดลง
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/google-analytics-search-console?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/google-analytics-search-console?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="คำแนะนำเฉพาะเว็บไซต์"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      การใช้ Search Console และข้อมูล Google Analytics สําหรับ SEO
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/trends-start?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/trends-start?hl=th"
+                     track-metadata-position="nav - เอกสารประกอบ"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="คำแนะนำเฉพาะเว็บไซต์"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      เริ่มต้นใช้งาน Google เทรนด์
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+    </div>
+  </div>
+</tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/help?hl=th"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/help?hl=th"
+    
+       track-type="nav"
+       track-metadata-position="nav - การสนับสนุน"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: การสนับสนุน"
+         
+           track-name="การสนับสนุน"
+         
+       >
+    การสนับสนุน
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/blog?hl=th"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/blog?hl=th"
+    
+       track-type="nav"
+       track-metadata-position="nav - บล็อก"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: บล็อก"
+         
+           track-name="บล็อก"
+         
+       >
+    บล็อก
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab class="devsite-dropdown
+    
+    
+    
+    ">
+  
+    <a href="https://developers.google.com/search/news?hl=th"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/news?hl=th"
+    
+       track-type="nav"
+       track-metadata-position="nav - มีอะไรใหม่"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: มีอะไรใหม่"
+         
+           track-name="มีอะไรใหม่"
+         
+       >
+    มีอะไรใหม่
+  
+    </a>
+    
+      <button
+         aria-haspopup="menu"
+         aria-expanded="false"
+         aria-label="เมนูแบบเลื่อนลงสำหรับ มีอะไรใหม่"
+         track-type="nav"
+         track-metadata-eventdetail="https://developers.google.com/search/news?hl=th"
+         track-metadata-position="nav - มีอะไรใหม่"
+         track-metadata-module="primary nav"
+         
+          
+            data-category="Site-Wide Custom Events"
+          
+            data-label="Tab: มีอะไรใหม่"
+          
+            track-name="มีอะไรใหม่"
+          
+        
+         class="devsite-tabs-dropdown-toggle devsite-icon devsite-icon-arrow-drop-down"></button>
+    
+  
+  <div class="devsite-tabs-dropdown" role="menu" aria-label="submenu" hidden>
+    <div class="devsite-tabs-dropdown-content">
+      
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/news?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/news?hl=th"
+                     track-metadata-position="nav - มีอะไรใหม่"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      การอัปเดตทั้งหมด
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/updates?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/updates?hl=th"
+                     track-metadata-position="nav - มีอะไรใหม่"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      การอัปเดตเอกสารประกอบ
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history?hl=th"
+                     track-metadata-position="nav - มีอะไรใหม่"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      การอัปเดตการจัดอันดับ
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA?hl=th"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA?hl=th"
+                     track-metadata-position="nav - มีอะไรใหม่"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      วิดีโอ YouTube ใหม่
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://pod.link/1512522198"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://pod.link/1512522198"
+                     track-metadata-position="nav - มีอะไรใหม่"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      พอดแคสต์ตอนล่าสุด
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+    </div>
+  </div>
+</tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/events?hl=th"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/events?hl=th"
+    
+       track-type="nav"
+       track-metadata-position="nav - กิจกรรม"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: กิจกรรม"
+         
+           track-name="กิจกรรม"
+         
+       >
+    กิจกรรม
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/case-studies?hl=th"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/case-studies?hl=th"
+    
+       track-type="nav"
+       track-metadata-position="nav - กรณีศึกษา"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: กรณีศึกษา"
+         
+           track-name="กรณีศึกษา"
+         
+       >
+    กรณีศึกษา
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+    </nav>
+
+  </devsite-tabs>
+
+            
+           </div>
+          
+<devsite-search
+    enable-signin
+    enable-search
+    enable-suggestions
+      enable-query-completion
+    
+    enable-search-summaries
+    project-name="Documentation"
+    tenant-name="Google for Developers"
+    project-scope="/search/docs"
+    url-scoped="https://developers.google.com/s/results/search/docs?hl=th"
+    
+    
+    
+    >
+  <form class="devsite-search-form" action="https://developers.google.com/s/results?hl=th" method="GET">
+    <div class="devsite-search-container">
+      <button type="button"
+              search-open
+              class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+              
+              aria-label="เปิดการค้นหา"></button>
+      <div class="devsite-searchbox">
+        <input
+          aria-activedescendant=""
+          aria-autocomplete="list"
+          
+          aria-label="ค้นหา"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          autocomplete="off"
+          class="devsite-search-field devsite-search-query"
+          name="q"
+          
+          placeholder="ค้นหา"
+          role="combobox"
+          type="text"
+          value=""
+          >
+          <div class="devsite-search-image material-icons" aria-hidden="true">
+            
+              <svg class="devsite-search-ai-image" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_6641_386)">
+                    <path d="M19.6 21L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16C7.68333 16 6.14167 15.375 4.875 14.125C3.625 12.8583 3 11.3167 3 9.5C3 7.68333 3.625 6.15 4.875 4.9C6.14167 3.63333 7.68333 3 9.5 3C10.0167 3 10.5167 3.05833 11 3.175C11.4833 3.275 11.9417 3.43333 12.375 3.65L10.825 5.2C10.6083 5.13333 10.3917 5.08333 10.175 5.05C9.95833 5.01667 9.73333 5 9.5 5C8.25 5 7.18333 5.44167 6.3 6.325C5.43333 7.19167 5 8.25 5 9.5C5 10.75 5.43333 11.8167 6.3 12.7C7.18333 13.5667 8.25 14 9.5 14C10.6667 14 11.6667 13.625 12.5 12.875C13.35 12.1083 13.8417 11.15 13.975 10H15.975C15.925 10.6333 15.7833 11.2333 15.55 11.8C15.3333 12.3667 15.05 12.8667 14.7 13.3L21 19.6L19.6 21ZM17.5 12C17.5 10.4667 16.9667 9.16667 15.9 8.1C14.8333 7.03333 13.5333 6.5 12 6.5C13.5333 6.5 14.8333 5.96667 15.9 4.9C16.9667 3.83333 17.5 2.53333 17.5 0.999999C17.5 2.53333 18.0333 3.83333 19.1 4.9C20.1667 5.96667 21.4667 6.5 23 6.5C21.4667 6.5 20.1667 7.03333 19.1 8.1C18.0333 9.16667 17.5 10.4667 17.5 12Z" fill="#5F6368"/>
+                  </g>
+                <defs>
+                <clipPath id="clip0_6641_386">
+                <rect width="24" height="24" fill="white"/>
+                </clipPath>
+                </defs>
+              </svg>
+            
+          </div>
+          <div class="devsite-search-shortcut-icon-container" aria-hidden="true">
+            <kbd class="devsite-search-shortcut-icon">/</kbd>
+          </div>
+      </div>
+    </div>
+  </form>
+  <button type="button"
+          search-close
+          class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+          
+          aria-label="ปิดการค้นหา"></button>
+</devsite-search>
+
+        </div>
+
+        
+
+          
+
+          
+
+          
+
+          
+
+          
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es"
+        >Español</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+
+          
+
+        
+
+        
+          <devsite-user 
+                        
+                        
+                          enable-profiles
+                        
+                        
+                          fp-auth
+                        
+                        id="devsite-user">
+            
+              
+              <span class="button devsite-top-button" aria-hidden="true" visually-hidden>ลงชื่อเข้าใช้</span>
+            
+          </devsite-user>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="devsite-collapsible-section
+    
+      devsite-header-no-lower-tabs
+    ">
+    <div class="devsite-header-background">
+      
+        
+          <div class="devsite-product-id-row"
+           >
+            <div class="devsite-product-description-row">
+              
+                
+                <div class="devsite-product-id">
+                  
+                  
+                  
+                    <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/search/docs?hl=th"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Lower Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Documentation"
+      
+    >
+    
+          Documentation
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+                </div>
+                
+              
+              
+            </div>
+            
+              <div class="devsite-product-button-row">
+  
+
+  
+  <a href="https://goo.gle/searchconsole"
+  
+    class="button button-primary
+      "
+    
+    
+      
+        data-label="open search console header button"
+      
+        data-category="Search docs"
+      
+    
+    >Search Console</a>
+
+</div>
+            
+          </div>
+          
+        
+      
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+  
+
+  
+</devsite-header>
+        <devsite-book-nav scrollbars >
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-book-nav-filter"
+     hidden>
+  <span class="filter-list-icon material-icons" aria-hidden="true"></span>
+  <input type="text"
+         placeholder="ตัวกรอง"
+         
+         aria-label="พิมพ์เพื่อกรอง"
+         role="searchbox">
+  
+  <span class="filter-clear-button hidden"
+        data-title="ล้างตัวกรอง"
+        aria-label="ล้างตัวกรอง"
+        role="button"
+        tabindex="0"></span>
+</div>
+
+<nav class="devsite-book-nav devsite-nav nocontent" data-nosnippet
+     aria-label="เมนูด้านข้าง">
+  <div class="devsite-mobile-header">
+    <button type="button"
+            id="devsite-close-nav"
+            class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+            data-category="Site-Wide Custom Events"
+            data-label="Close navigation"
+            aria-label="ปิดการนำทาง">
+    </button>
+    <div class="devsite-product-name-wrapper">
+
+  
+    
+  
+  <a href="https://developers.google.com/search?hl=th">
+    
+  <div class="devsite-product-logo-container"
+       
+       
+       
+    size="medium"
+  >
+  
+    <picture>
+      
+      <img class="devsite-product-logo"
+           alt="Google Search Central"
+           src="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=th"
+           srcset=" /static/search/images/google-search-central-logo.svg"
+           sizes="64px"
+           loading="lazy"
+           >
+    </picture>
+  
+  </div>
+  
+  </a>
+  
+
+  
+
+
+  
+      <span class="devsite-product-name">
+        
+        
+        <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             devsite-has-google-wordmark">
+    
+    
+    
+      
+      
+        
+  <a href="https://developers.google.com/search?hl=th"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Upper Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Google Search Central"
+      
+    >
+    
+          <svg class="devsite-google-wordmark"
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 148 48">
+    <title>Google</title>
+    <path class="devsite-google-wordmark-svg-path" d="M19.58,37.65c-9.87,0-18.17-8.04-18.17-17.91c0-9.87,8.3-17.91,18.17-17.91c5.46,0,9.35,2.14,12.27,4.94l-3.45,3.45c-2.1-1.97-4.93-3.49-8.82-3.49c-7.21,0-12.84,5.81-12.84,13.02c0,7.21,5.64,13.02,12.84,13.02c4.67,0,7.34-1.88,9.04-3.58c1.4-1.4,2.32-3.41,2.66-6.16H19.58v-4.89h16.47c0.18,0.87,0.26,1.92,0.26,3.06c0,3.67-1.01,8.21-4.24,11.44C28.93,35.9,24.91,37.65,19.58,37.65z M61.78,26.12c0,6.64-5.1,11.53-11.36,11.53s-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53S61.78,19.43,61.78,26.12z M56.8,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C53.84,33.11,56.8,30.22,56.8,26.12z M87.25,26.12c0,6.64-5.1,11.53-11.36,11.53c-6.26,0-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53C82.15,14.59,87.25,19.43,87.25,26.12zM82.28,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C79.32,33.11,82.28,30.22,82.28,26.12z M112.09,15.29v20.7c0,8.52-5.02,12.01-10.96,12.01c-5.59,0-8.95-3.76-10.22-6.81l4.41-1.83c0.79,1.88,2.71,4.1,5.81,4.1c3.8,0,6.16-2.36,6.16-6.77v-1.66h-0.18c-1.14,1.4-3.32,2.62-6.07,2.62c-5.76,0-11.05-5.02-11.05-11.49c0-6.51,5.28-11.57,11.05-11.57c2.75,0,4.93,1.22,6.07,2.58h0.18v-1.88H112.09z M107.64,26.16c0-4.06-2.71-7.03-6.16-7.03c-3.49,0-6.42,2.97-6.42,7.03c0,4.02,2.93,6.94,6.42,6.94C104.93,33.11,107.64,30.18,107.64,26.16z M120.97,3.06v33.89h-5.07V3.06H120.97z M140.89,29.92l3.93,2.62c-1.27,1.88-4.32,5.11-9.61,5.11c-6.55,0-11.28-5.07-11.28-11.53c0-6.86,4.77-11.53,10.71-11.53c5.98,0,8.91,4.76,9.87,7.34l0.52,1.31l-15.42,6.38c1.18,2.31,3.01,3.49,5.59,3.49C137.79,33.11,139.58,31.84,140.89,29.92zM128.79,25.77l10.31-4.28c-0.57-1.44-2.27-2.45-4.28-2.45C132.24,19.04,128.66,21.31,128.79,25.77z"/>
+  </svg>Search Central
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+      </span>
+    
+
+</div>
+  </div>
+
+  <div class="devsite-book-nav-wrapper">
+    <div class="devsite-mobile-nav-top">
+      
+        <ul class="devsite-nav-list">
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/docs"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              devsite-nav-active"
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: เอกสารประกอบ"
+      
+        track-name="เอกสารประกอบ"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: เอกสารประกอบ"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      เอกสารประกอบ
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+  
+    <ul class="devsite-nav-responsive-tabs devsite-nav-has-menu
+               ">
+      
+<li class="devsite-nav-item">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: เอกสารประกอบ"
+      
+        track-name="เอกสารประกอบ"
+      
+    >
+  
+    <span class="devsite-nav-text" tooltip menu="เอกสารประกอบ">
+      เพิ่มเติม
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          menu="เอกสารประกอบ">
+    </span>
+    
+  
+  </span>
+  
+
+</li>
+
+    </ul>
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/help"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: การสนับสนุน"
+      
+        track-name="การสนับสนุน"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: การสนับสนุน"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      การสนับสนุน
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/blog"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: บล็อก"
+      
+        track-name="บล็อก"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: บล็อก"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      บล็อก
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/news"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: มีอะไรใหม่"
+      
+        track-name="มีอะไรใหม่"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: มีอะไรใหม่"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      มีอะไรใหม่
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+  
+    <ul class="devsite-nav-responsive-tabs devsite-nav-has-menu
+               ">
+      
+<li class="devsite-nav-item">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: มีอะไรใหม่"
+      
+        track-name="มีอะไรใหม่"
+      
+    >
+  
+    <span class="devsite-nav-text" tooltip menu="มีอะไรใหม่">
+      เพิ่มเติม
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          menu="มีอะไรใหม่">
+    </span>
+    
+  
+  </span>
+  
+
+</li>
+
+    </ul>
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/events"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: กิจกรรม"
+      
+        track-name="กิจกรรม"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: กิจกรรม"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      กิจกรรม
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/case-studies"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: กรณีศึกษา"
+      
+        track-name="กรณีศึกษา"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: กรณีศึกษา"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      กรณีศึกษา
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+          
+          
+        </ul>
+      
+    </div>
+    
+      <div class="devsite-mobile-nav-bottom">
+        
+          
+          <ul class="devsite-nav-list" menu="_book">
+            <li class="devsite-nav-item"><a href="/search/docs"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>บทนำ</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Search Essentials</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/essentials"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ภาพรวม</span></a></li><li class="devsite-nav-item"><a href="/search/docs/essentials/technical"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ข้อกำหนดทางเทคนิค</span></a></li><li class="devsite-nav-item"><a href="/search/docs/essentials/spam-policies"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>นโยบายสแปม</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>หลักการพื้นฐานเกี่ยวกับ SEO</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/fundamentals/seo-starter-guide"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>คู่มือ SEO สำหรับมือใหม่</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/how-search-works"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>วิธีการทำงานของ Google Search</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/creating-helpful-content"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การสร้างเนื้อหาที่มีประโยชน์ น่าเชื่อถือ และคำนึงถึงผู้ใช้เป็นหลัก</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/do-i-need-seo"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>คุณต้องการ SEO ไหม</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/get-started"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การดูแลรักษา SEO ของเว็บไซต์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/get-started-developers"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>คู่มือ Search สำหรับนักพัฒนาซอฟต์แวร์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/get-on-google"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ทำให้เว็บไซต์ปรากฏใน Google</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/using-gen-ai-content"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>คำแนะนำในการใช้ Generative AI</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>การ Crawl และการจัดทำดัชนี</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ภาพรวม</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/indexable-file-types"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ประเภทไฟล์ที่ Google จัดทำดัชนีได้</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/url-structure"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>โครงสร้าง URL</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/links-crawlable"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ลิงก์</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Sitemap</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ดูข้อมูลเกี่ยวกับ Sitemap</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/build-sitemap"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>สร้างและส่งแผนผังเว็บไซต์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/large-sitemaps"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>จัดการ Sitemap ด้วยไฟล์ดัชนี Sitemap</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>ส่วนขยาย Sitemap</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/image-sitemaps"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Sitemap สำหรับรูปภาพ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/news-sitemap"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Sitemap สำหรับ News</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/video-sitemaps"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แผนผังเว็บไซต์วิดีโอและตัวเลือกอื่นๆ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/combine-sitemap-extensions"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การรวมส่วนขยาย Sitemap</span></a></li></ul></div></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>การจัดการ Crawler</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/ask-google-to-recrawl"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ขอให้ Google รวบรวมข้อมูล URL อีกครั้ง</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/troubleshoot-crawling-errors"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แก้ปัญหาข้อผิดพลาดจากการ Crawl</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>โปรแกรมรวบรวมข้อมูลของ Google</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/crawlers-fetchers/overview-google-crawlers"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>รายการ Crawler ของ Google</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="ภายนอก"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/googlebot"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Googlebot</span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/crawlers-fetchers/reduce-crawl-rate"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ลดอัตราการ Crawl ของ Google</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="ภายนอก"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/crawlers-fetchers/verifying-googlebot"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การยืนยัน Googlebot และโปรแกรมรวบรวมข้อมูลอื่นๆ ของ Google</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="ภายนอก"
+        aria-hidden="true"></span></a></li></ul></div></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>robots.txt</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/robots/intro"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ข้อมูลเบื้องต้นเกี่ยวกับ robots.txt</span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/robots-txt/robots-txt-spec"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>วิธีที่ Google ตีความข้อกําหนดของ robots.txt</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="ภายนอก"
+        aria-hidden="true"></span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>การกำหนดหน้า Canonical</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/canonicalization"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การกำหนดหน้า Canonical URL คืออะไร</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/consolidate-duplicate-urls"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>วิธีระบุ Canonical URL ด้วย rel=&#34;canonical&#34; และวิธีการอื่นๆ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/canonicalization-troubleshooting"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แก้ปัญหาการกําหนดหน้า Canonical</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เว็บไซต์เวอร์ชันมือถือและการจัดทำดัชนีเพื่อมือถือเป็นอันดับแรก</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>AMP</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>หลักเกณฑ์เกี่ยวกับ AMP ใน Google Search</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/about-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ทำความเข้าใจการทำงานของ AMP ในผลการค้นหา</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/enhance-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เพิ่มประสิทธิภาพเนื้อหา AMP</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/validate-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ตรวจสอบเนื้อหา AMP</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/remove-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>นำเนื้อหา AMP ออก</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>JavaScript</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ทำความเข้าใจหลักการพื้นฐานของ JavaScript SEO</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/javascript/fix-search-javascript"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แก้ไขปัญหา JavaScript ที่เกี่ยวข้องกับการค้นหา</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/javascript/lazy-loading"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แก้ไขเนื้อหาที่โหลดแบบ Lazy Loading</span></a></li><li class="devsite-nav-item
+           devsite-nav-deprecated"><a href="/search/docs/crawling-indexing/javascript/dynamic-rendering"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ใช้การแสดงผลแบบไดนามิกเป็นวิธีแก้ปัญหาชั่วคราว</span><span class="devsite-nav-icon material-icons"
+        data-icon="deprecated"
+        data-title="เลิกใช้งานแล้ว"
+        aria-hidden="true"></span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>ข้อมูลเมตาของหน้าและเนื้อหา</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/valid-page-metadata"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ข้อมูลเมตาของหน้า</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>เมตาแท็ก</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/special-tags"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เมตาแท็กและแอตทริบิวต์ HTML ที่ Google รองรับ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/robots-meta-tag"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เมตาแท็ก robots, data-nosnippet และ X-Robots-Tag</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/block-indexing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>noindex</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/qualify-outbound-links"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แอตทริบิวต์ rel</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>การนำออก</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/control-what-you-share"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ควบคุมสิ่งที่คุณแชร์กับ Google</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/remove-information"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การนำหน้าเว็บออก</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/prevent-images-on-your-page"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การนำรูปภาพออก</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/keep-redacted-information-out"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ข้อมูลที่ปกปิด</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>การย้ายและการเปลี่ยนแปลงเว็บไซต์</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/301-redirects"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การเปลี่ยนเส้นทางและ Google Search</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>การย้ายเว็บไซต์</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/site-move-no-url-changes"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การเปลี่ยนโฮสติ้ง</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/site-move-with-url-changes"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ย้ายเว็บไซต์ที่มีการเปลี่ยนแปลง URL</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/website-testing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การทดสอบ A/B</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/pause-online-business"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>หยุดชั่วคราวหรือปิดใช้เว็บไซต์ชั่วคราว</span></a></li></ul></div></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>การจัดอันดับและลักษณะที่ปรากฏในการค้นหา</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ภาพรวม</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/ai-features"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ฟีเจอร์ AI</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/publication-dates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>บรรทัดวันที่</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/favicon-in-search"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ไอคอน Fav</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/featured-snippets"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ตัวอย่างข้อมูลแนะนำ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/flexible-sampling"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การให้เนื้อหาตัวอย่างแบบยืดหยุ่น</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/google-discover"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google Discover</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/google-images"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>รูปภาพ</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>ฟีเจอร์ในเครื่อง</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/establish-business-details"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>รายละเอียดธุรกิจ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/top-places-list"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>รายการสถานที่ยอดนิยม</span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="https://support.google.com/webmasters/answer/3035947"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การเลือกไม่แสดงผลการค้นหาในพื้นที่</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="ภายนอก"
+        aria-hidden="true"></span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>ประสบการณ์การใช้งานหน้าเว็บ</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/page-experience"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การทำความเข้าใจประสบการณ์การใช้งานหน้าเว็บ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/core-web-vitals"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Core Web Vitals</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/avoid-intrusive-interstitials"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>โฆษณาคั่นระหว่างหน้าและกล่องโต้ตอบ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/signed-exchange"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เริ่มต้นใช้งาน Signed Exchange ใน Google Search</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/preferred-sources"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แหล่งที่มาที่ต้องการ</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>ระบบการจัดอันดับ</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/ranking-systems-guide"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>คำแนะนำเกี่ยวกับระบบการจัดอันดับของ Google Search</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/reviews-system"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ระบบรีวิว</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>การอัปเดตการจัดอันดับ</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-external"><a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>รายการอัปเดตการจัดอันดับ</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="ภายนอก"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/core-updates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การอัปเดตหลัก</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/spam-updates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การอัปเดตสแปม</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/site-names"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ชื่อเว็บไซต์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/sitelinks"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ไซต์ลิงก์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/snippet"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ตัวอย่างข้อมูล</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Structured data</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/intro-structured-data"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ทำความเข้าใจวิธีการทำงานของ Structured Data</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/sd-policies"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>หลักเกณฑ์ทั่วไปเกี่ยวกับ Structured Data</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/enriched-search-results"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ผลการค้นหาที่สมบูรณ์ขึ้น</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/generate-structured-data-with-javascript"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>สร้าง Structured Data ด้วย JavaScript</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>คำแนะนำฟีเจอร์</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/search-gallery"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ฟีเจอร์ Structured Data ทั้งหมด</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/article"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>บทความ</span></a></li><li class="devsite-nav-item
+           devsite-nav-limited"><a href="/search/docs/appearance/structured-data/book"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การดำเนินการกับหนังสือ</span><span class="devsite-nav-icon material-icons"
+        data-icon="limited"
+        data-title="การเข้าถึงแบบจำกัด"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/breadcrumb"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การแสดงเส้นทาง</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/carousel"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ภาพสไลด์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/course"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>รายการหลักสูตร</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/dataset"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ชุดข้อมูล</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/discussion-forum"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ฟอรัมแลกเปลี่ยนความเห็น</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/education-qa"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ถามและตอบเกี่ยวกับการศึกษา</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/employer-rating"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>คะแนนรวมของนายจ้าง</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/factcheck"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ตรวจสอบข้อเท็จจริง</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/event"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>กิจกรรม</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/faqpage"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>คำถามที่พบบ่อย</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/image-license-metadata"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ข้อมูลเมตาของรูปภาพ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/job-posting"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ประกาศรับสมัครงาน</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/local-business"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ธุรกิจท้องถิ่น</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/math-solvers"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เครื่องมือแก้โจทย์คณิต</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/movie"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ภาพสไลด์ภาพยนตร์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/organization"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>องค์กร</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>ช็อปปิ้ง</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/product"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ภาพรวม</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/product-snippet"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ตัวอย่างข้อมูลผลิตภัณฑ์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/merchant-listing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ส่วนข้อมูลผลิตภัณฑ์ของผู้ขาย</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/product-variants"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ผลิตภัณฑ์ย่อย</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/loyalty-program"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>โปรแกรมสะสมคะแนน</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/return-policy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>นโยบายคืนสินค้าของผู้ขาย</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/shipping-policy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>นโยบายการจัดส่งของผู้ขาย</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/profile-page"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>หน้าโปรไฟล์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/qapage"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ถามและตอบ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/recipe"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>สูตรอาหาร</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/review-snippet"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ตัวอย่างรีวิว</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/software-app"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แอปซอฟต์แวร์</span></a></li><li class="devsite-nav-item
+           devsite-nav-beta"><a href="/search/docs/appearance/structured-data/speakable"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>คำที่ใช้พูดได้</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="เบต้า"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/paywalled-content"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การสมัครรับข้อมูลและเนื้อหาเพย์วอลล์</span></a></li><li class="devsite-nav-item
+           devsite-nav-limited"><a href="/search/docs/appearance/structured-data/vacation-rental"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ที่พักให้เช่า</span><span class="devsite-nav-icon material-icons"
+        data-icon="limited"
+        data-title="การเข้าถึงแบบจำกัด"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/video"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>วิดีโอ</span></a></li></ul></div></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/title-link"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ลิงก์ Title</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>ฟีเจอร์ที่แปลแล้ว</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/translated-results"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ผลการค้นหาที่แปล</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/ad-network-and-translation"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เครือข่ายโฆษณาและฟีเจอร์การแปลที่เกี่ยวข้องกับ Google Search</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/video"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>วิดีโอ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/visual-elements-gallery"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แกลเลอรีองค์ประกอบที่มองเห็น</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Web Stories</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/enable-web-stories"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เปิดใช้ Web Stories ใน Google</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/web-stories-creation-best-practices"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แนวทางปฏิบัติแนะนำสําหรับการสร้าง Web Stories</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/web-stories-content-policy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>นโยบายเนื้อหา Web Story</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>โปรแกรมลูกค้ารายแรกสุดที่เปิดรับนวัตกรรม</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-beta"><a href="/search/docs/appearance/package-tracking"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การติดตามพัสดุภัณฑ์</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="เบต้า"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-beta"><a href="/search/docs/appearance/structured-data/carousels-beta"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Structured Data สำหรับภาพสไลด์ (เบต้า)</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="เบต้า"
+        aria-hidden="true"></span></a></li></ul></div></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>การตรวจสอบและการแก้ไขข้อบกพร่อง</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/debugging-search-traffic-drops"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แก้ไขข้อบกพร่องการเข้าชมที่ลดลงใน Search</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>ตรวจสอบด้วย Search Console</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-console-start"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เริ่มต้นใช้งาน Search Console</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/bubble-chart-analysis"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ปรับปรุง SEO ด้วยแผนภูมิฟองอากาศ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/google-analytics-search-console"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การใช้ Search Console และข้อมูล Google Analytics สําหรับ SEO</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>แก้ไขข้อบกพร่องด้วยโอเปอเรเตอร์การค้นหา</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-operators"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ภาพรวม</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-operators/all-search-site"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>โอเปอเรเตอร์การค้นหา site:</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-operators/image-search"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>โอเปอเรเตอร์การค้นหาของ Google รูปภาพ</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>การป้องกันและการตรวจสอบการละเมิด</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ภาพรวม</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/prevent-abuse"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ป้องกันสแปมที่ผู้ใช้สร้างขึ้น</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/malware"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>มัลแวร์และซอฟต์แวร์ไม่พึงประสงค์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/prevent-malware"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ป้องกันการติดมัลแวร์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/social-engineering"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>วิศวกรรมสังคม (ฟิชชิงและเว็บไซต์หลอกลวง)</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/safe-browsing-repeat-offenders"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>นโยบายผู้กระทำความผิดซ้ำของ Google Safe Browsing</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/trends-start"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เริ่มต้นใช้งาน Google เทรนด์</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>คำแนะนำเฉพาะเว็บไซต์</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>อีคอมเมิร์ซ</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ภาพรวม</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/where-ecommerce-data-can-appear-on-google"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เนื้อหาสามารถปรากฏขึ้นที่ใด</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/share-your-product-data-with-google"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แชร์ข้อมูลผลิตภัณฑ์</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/include-structured-data-relevant-to-ecommerce"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ใส่ Structured Data</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/how-to-launch-an-ecommerce-website"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>เปิดตัวเว็บไซต์ใหม่</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/write-high-quality-reviews"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การเขียนรีวิวคุณภาพสูง</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/designing-a-url-structure-for-ecommerce-sites"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ออกแบบโครงสร้าง URL</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>โครงสร้างเว็บไซต์อีคอมเมิร์ซ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การแบ่งหน้า การโหลดหน้าเว็บที่เพิ่มขึ้น และ Search</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>ภาษาต่างประเทศและหลายภาษา</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/specialty/international"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ภาพรวม</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/international/managing-multi-regional-sites"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>การจัดการเว็บไซต์ที่ให้บริการในหลายภูมิภาคและหลายภาษา</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/international/localized-versions"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>แจ้งให้ Google ทราบเกี่ยวกับเวอร์ชันที่แปลแล้วของหน้าเว็บ</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/international/locale-adaptive-pages"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google รวบรวมข้อมูลหน้าที่ปรับตามสถานที่/ภาษาอย่างไร</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>เนื้อหาที่อาจไม่เหมาะสม</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/specialty/explicit/guidelines"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>หลักเกณฑ์สำหรับเว็บไซต์ที่มีเนื้อหาที่อาจไม่เหมาะสม</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/explicit/troubleshooting"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>สิ่งที่ต้องทำหากเว็บไซต์ของคุณได้รับแจ้งอย่างไม่ถูกต้องว่ามีเนื้อหาที่อาจไม่เหมาะสม</span></a></li></ul></div></li></ul></div></li>
+          </ul>
+        
+        
+          
+    
+      
+      <ul class="devsite-nav-list" menu="เอกสารประกอบ"
+          aria-label="เมนูด้านข้าง" hidden>
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      หลักการพื้นฐานเกี่ยวกับ SEO
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: บทนำ"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      บทนำ
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/essentials"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Search Essentials"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Search Essentials
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/fundamentals/seo-starter-guide"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: คู่มือ SEO สำหรับมือใหม่"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      คู่มือ SEO สำหรับมือใหม่
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/fundamentals/how-search-works"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: วิธีการทำงานของ Google Search"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      วิธีการทำงานของ Google Search
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/fundamentals/do-i-need-seo"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: คุณต้องการ SEO ไหม"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      คุณต้องการ SEO ไหม
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      การ Crawl และการจัดทำดัชนี
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/sitemaps/overview"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Sitemap"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Sitemap
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/robots/intro"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: robots.txt"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      robots.txt
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/special-tags"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: เมตาแท็ก"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      เมตาแท็ก
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/ask-google-to-recrawl"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: การจัดการ Crawler"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      การจัดการ Crawler
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/control-what-you-share"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: การนำออก"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      การนำออก
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/consolidate-duplicate-urls"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: การกำหนดหน้า Canonical"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      การกำหนดหน้า Canonical
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/301-redirects"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: การเปลี่ยนเส้นทาง"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      การเปลี่ยนเส้นทาง
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: JavaScript SEO"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      JavaScript SEO
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      การจัดอันดับและลักษณะที่ปรากฏในการค้นหา
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/visual-elements-gallery"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: แกลเลอรีองค์ประกอบที่มองเห็น"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      แกลเลอรีองค์ประกอบที่มองเห็น
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/title-link"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: ลิงก์ Title"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      ลิงก์ Title
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/snippet"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: ตัวอย่างข้อมูล"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      ตัวอย่างข้อมูล
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/google-images"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: รูปภาพ"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      รูปภาพ
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/video"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: วิดีโอ"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      วิดีโอ
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/structured-data/search-gallery"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Structured data"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Structured data
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/favicon-in-search"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: ไอคอน Fav"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      ไอคอน Fav
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      คำแนะนำเฉพาะเว็บไซต์
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/specialty/ecommerce"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: อีคอมเมิร์ซ"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      อีคอมเมิร์ซ
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/specialty/international"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: เว็บไซต์ภาษาต่างประเทศและหลายภาษา"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      เว็บไซต์ภาษาต่างประเทศและหลายภาษา
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      การวิเคราะห์ข้อมูล
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/search-console-start"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: เริ่มต้นใช้งาน Search Console"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      เริ่มต้นใช้งาน Search Console
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/debugging-search-traffic-drops"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: แก้ไขข้อบกพร่องการเข้าชมลดลง"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      แก้ไขข้อบกพร่องการเข้าชมลดลง
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/google-analytics-search-console"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: การใช้ Search Console และข้อมูล Google Analytics สําหรับ SEO"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      การใช้ Search Console และข้อมูล Google Analytics สําหรับ SEO
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/trends-start"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: เริ่มต้นใช้งาน Google เทรนด์"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      เริ่มต้นใช้งาน Google เทรนด์
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+      </ul>
+    
+  
+    
+  
+    
+  
+    
+      
+      <ul class="devsite-nav-list" menu="มีอะไรใหม่"
+          aria-label="เมนูด้านข้าง" hidden>
+        
+          
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/news"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: การอัปเดตทั้งหมด"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      การอัปเดตทั้งหมด
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/updates"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: การอัปเดตเอกสารประกอบ"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      การอัปเดตเอกสารประกอบ
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: การอัปเดตการจัดอันดับ"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      การอัปเดตการจัดอันดับ
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: วิดีโอ YouTube ใหม่"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      วิดีโอ YouTube ใหม่
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="https://pod.link/1512522198"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: พอดแคสต์ตอนล่าสุด"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      พอดแคสต์ตอนล่าสุด
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+      </ul>
+    
+  
+    
+  
+    
+  
+        
+        
+          
+    
+  
+        
+      </div>
+    
+  </div>
+</nav>
+          
+        </devsite-book-nav>
+      
+      <section id="gc-wrapper">
+        <main role="main" id="main-content" class="devsite-main-content"
+            
+              has-book-nav
+              has-sidebar
+            >
+          <div class="devsite-sidebar">
+            <div class="devsite-sidebar-content">
+                
+                <devsite-toc class="devsite-nav"
+                            role="navigation"
+                            aria-label="ในหน้านี้"
+                            depth="2"
+                            scrollbars
+                            data-nosnippet
+                  ></devsite-toc>
+                <devsite-recommendations-sidebar class="nocontent devsite-nav" data-nosnippet>
+                </devsite-recommendations-sidebar>
+            </div>
+          </div>
+          <devsite-content>
+            
+              
+
+
+
+
+
+
+
+
+
+
+<article class="devsite-article"><style>
+      /* Styles inlined from /search/sitewide.css */
+/* Popped white box with shadow*/
+.sc-shadow-box-row .devsite-landing-row-inner {
+  background-color: #fff;
+  box-shadow: 0 13px 18px -8px rgba(0,0,0,0.15), 0 11px 55px 10px rgba(0,0,0,0.07);
+  border-radius: 8px;
+  margin-bottom: 55px;
+}
+
+/* Stat box for big numbers and description*/
+.big-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 64px 32px;
+    text-align: center;
+}
+@media (min-width: 481px) {
+  .big-stats {
+      flex-direction: row;
+  }
+}
+.big-stat {
+    margin-bottom: 32px;
+}
+@media (min-width: 481px) {
+  .big-stat {
+      flex: 1;
+      margin: 0 8px;
+  }
+}
+.big-stat__figure {
+    font-size: 1.5em;
+    line-height: 1em;
+}
+@media (min-width: 241px) {
+  .big-stat__figure {
+      font-size: 4em;
+  }
+}
+@media (min-width: 1020px) {
+  .big-stat__figure {
+      font-size: 6em;
+  }
+}
+.big-stat__description,
+.big-stat__figure {
+    color: inherit;
+    font-family: "Google Sans",sans-serif;
+    margin: 0;
+    text-align: inherit;
+}
+.big-stat__description {
+    line-height: 1.5em;
+}
+.big-stat__description,
+.big-stat__figure {
+    color: inherit;
+    font-family: "Google Sans",sans-serif;
+    margin: 0;
+    text-align: inherit;
+}
+.big-stat__sub {
+    font-size: .5em;
+    line-height: 1em;
+    vertical-align: baseline;
+}
+
+/* Green background and text -- consistent style with devsite notices */
+.green {
+    background: #e0f2f1;
+    color: #00796b;
+}
+
+/* Color scheme of unconference for background and text */
+.unconference-yellow {
+  background: #fdd901;
+  color: #3a3a3a;
+}
+
+/* Publish date styling */
+.publish-date {
+  font-size: smaller;
+  font-style: italic
+}
+
+/*
+  Fixes SVG label spacing fix to avoid webkit (Safari et. al.) issues
+*/
+foreignObject p {
+  margin: 0 ;
+  padding: 1rem 0;
+}
+
+      </style>
+  
+  
+  
+  
+  
+
+  <div class="devsite-article-meta nocontent" role="navigation" data-nosnippet>
+    
+    
+    <ul class="devsite-breadcrumb-list"
+  
+    aria-label="เบรดครัมบ์">
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/?hl=th"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+          หน้าแรก
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/search?hl=th"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="2"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="2"
+      
+        track-metadata-eventdetail="Google Search Central"
+      
+    >
+    
+          Search Central
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/search/docs?hl=th"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="3"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="3"
+      
+        track-metadata-eventdetail="Documentation"
+      
+    >
+    
+          Documentation
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+    
+      
+    <devsite-thumb-rating position="header">
+    </devsite-thumb-rating>
+  
+    
+  </div>
+  
+    <devsite-feedback
+  position="header"
+  project-name="Documentation"
+  product-id="103417"
+  bucket="Search Docs"
+  context="DevSite feedback link"
+  version="t-devsite-webserver-20260507-r00-rc00.477408230701735660"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="header"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=th"
+    
+  
+  
+    project-support-url="https://developers.google.com/search/help?hl=th"
+  
+  
+  >
+
+  <button>
+  
+    
+    ส่งความคิดเห็น
+  
+  </button>
+</devsite-feedback>
+  <devsite-actions hidden data-nosnippet>
+    <devsite-llm-tools></devsite-llm-tools></devsite-actions>
+  
+    
+  
+
+  <devsite-toc class="devsite-nav"
+    depth="2"
+    devsite-toc-embedded
+    >
+  </devsite-toc>
+  <div class="devsite-article-body clearfix
+  devsite-no-page-title">
+
+  
+    
+    
+    
+  <h1 class="page-title" data-text="แนวทางปฏิบัติแนะนําสําหรับ SEO ของ Google รูปภาพ" id="google-image-seo-best-practices" tabindex="-1">แนวทางปฏิบัติแนะนําสําหรับ SEO ของ Google รูปภาพ</h1>
+  
+<p>
+  Google มีฟีเจอร์และผลิตภัณฑ์หลายอย่างของ Search ที่ช่วยให้ผู้ใช้ค้นพบข้อมูลบนเว็บ เช่น <a href="https://developers.google.com/search/docs/appearance/visual-elements-gallery?hl=th#text-result-image">รูปภาพผลการค้นหาข้อความ</a>, Google Discover และ Google รูปภาพ แม้ว่าฟีเจอร์และผลิตภัณฑ์แต่ละอย่างจะดูแตกต่างออกไป แต่คําแนะนําทั่วไปสําหรับการแสดงรูปภาพจะเหมือนกัน
+</p>
+<img alt="ภาพแสดงรูปภาพในผลการค้นหาของ Google, แท็บรูปภาพ และแท็บสำรวจ" src="https://developers.google.com/static/search/docs/images/images-on-google.png?hl=th" />
+<p>
+  คุณสามารถเพิ่มประสิทธิภาพรูปภาพเพื่อให้ปรากฏในผลการค้นหาของ Google ได้โดยทําตามแนวทางปฏิบัติแนะนําต่อไปนี้
+</p>
+<ol>
+  <li><a href="#discover-images">ช่วยเราค้นพบและจัดทําดัชนีรูปภาพ</a></li>
+  <li><a href="#optimize-landing-page">เพิ่มประสิทธิภาพหน้า Landing Page ของรูปภาพ</a></li>
+</ol>
+<h2 data-text="ช่วยเราค้นพบและจัดทําดัชนีรูปภาพ" id="discover-images" tabindex="-1">ช่วยเราค้นพบและจัดทําดัชนีรูปภาพ</h2>
+<div class="video-wrapper">
+  <devsite-video video-id="SfC27XgelgE"></devsite-video>
+</div>
+<p>
+  <a href="https://developers.google.com/search/docs/essentials/technical?hl=th">ข้อกำหนดทางเทคนิค</a>ในการทำให้เนื้อหาในผลการค้นหาของ Google มีผลกับรูปภาพด้วย เนื่องจากรูปภาพมีรูปแบบที่แตกต่างกันอย่างมากเมื่อเทียบกับ HTML ซึ่งหมายความว่ามีข้อกําหนดเพิ่มเติมสําหรับการจัดทําดัชนีรูปภาพ เช่น การค้นหารูปภาพในเว็บไซต์จะแตกต่างออกไป และการนําเสนอรูปภาพก็ส่งผลต่อการจัดทําดัชนีรูปภาพเช่นกัน รวมทั้งคีย์เวิร์ดที่เหมาะสมด้วย
+</p>
+<h3 data-text="ใช้องค์ประกอบรูปภาพ HTML เพื่อฝังรูปภาพ" id="semantic-html" tabindex="-1">ใช้องค์ประกอบรูปภาพ HTML เพื่อฝังรูปภาพ</h3>
+<p>
+  การใช้องค์ประกอบรูปภาพ HTML มาตรฐานจะช่วยให้ Crawler ค้นหาและประมวลผลรูปภาพได้ Google สามารถค้นหารูปภาพในแอตทริบิวต์ <code dir="ltr" translate="no">src</code> ขององค์ประกอบ <code dir="ltr" translate="no">&lt;img&gt;</code> (แม้ว่าจะเป็นองค์ประกอบย่อยขององค์ประกอบอื่นๆ เช่น องค์ประกอบ <code dir="ltr" translate="no">&lt;picture&gt;</code>) Google ไม่จัดทำดัชนีรูปภาพ CSS
+</p>
+<p>
+  <span aria-hidden="true" class="compare-yes"></span><b>ดี:</b>
+</p>
+<blockquote>
+  <span translate="no">&lt;img src="puppy.jpg" alt="</span>ลูกสุนัขโกลเด้นรีทรีฟเวอร์<span translate="no">" /&gt;</span>
+</blockquote>
+<p>
+  <span aria-hidden="true" class="compare-no"></span><b>ไม่ดี:</b>
+</p>
+<blockquote>
+  <span translate="no">&lt;div style="background-image:url(puppy.jpg)"&gt;</span>ลูกสุนัขโกลเด้นรีทรีฟเวอร์<span translate="no">&lt;/div&gt;</span>
+</blockquote>
+
+<h3 data-text="ใช้แผนผังเว็บไซต์สำหรับรูปภาพ" id="use-an-image-sitemap" tabindex="-1">ใช้แผนผังเว็บไซต์สำหรับรูปภาพ</h3>
+<p>
+  คุณระบุ URL ของรูปภาพที่เราอาจหาไม่เจอได้โดย<a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps?hl=th">การส่ง Sitemap สำหรับรูปภาพ</a>
+</p>
+<p>
+  คุณใส่ URL จากโดเมนอื่นในองค์ประกอบ <code dir="ltr" translate="no">&lt;image:loc></code> ของ Sitemap รูปภาพได้ ซึ่งต่างจาก Sitemap ทั่วไป ซึ่งช่วยให้คุณใช้เครือข่ายนำส่งข้อมูล (CDN) เพื่อโฮสต์รูปภาพได้ หากคุณใช้ CDN เราสนับสนุนให้คุณ<a class="external-link" href="https://support.google.com/webmasters/answer/9008080?hl=th" >ยืนยันการเป็นเจ้าของ</a>ชื่อโดเมนของ CDN ใน Search Console เพื่อให้เราแจ้งข้อผิดพลาดจากการ Crawl ที่อาจพบแก่คุณได้
+</p>
+
+<h3 data-text="รูปภาพที่ปรับเปลี่ยนตามอุปกรณ์" id="responsive-images" tabindex="-1">รูปภาพที่ปรับเปลี่ยนตามอุปกรณ์</h3>
+<p>
+  การออกแบบหน้าเว็บที่ปรับเปลี่ยนตามอุปกรณ์จะทำให้ผู้ใช้ได้รับประสบการณ์ใช้งานที่ดีขึ้น เนื่องจากจะเข้าถึงอุปกรณ์ประเภทต่างๆ ได้เป็นจํานวนมาก อ่าน<a class="external-link" href="https://web.dev/articles/responsive-images?hl=th" >คู่มือเกี่ยวกับรูปภาพที่ปรับเปลี่ยนตามอุปกรณ์</a>เพื่อดูข้อมูลเกี่ยวกับแนวทางปฏิบัติแนะนําสําหรับการจัดการรูปภาพในเว็บไซต์
+</p>
+<p>
+  หน้าเว็บใช้องค์ประกอบ <code dir="ltr" translate="no">&lt;picture&gt;</code> หรือแอตทริบิวต์ <code dir="ltr" translate="no">srcset</code> ขององค์ประกอบ <code dir="ltr" translate="no">img</code> เพื่อระบุรูปภาพที่ปรับเปลี่ยนตามอุปกรณ์ อย่างไรก็ตาม เบราว์เซอร์และ Crawler บางประเภทอาจไม่เข้าใจแอตทริบิวต์เหล่านี้ เราขอแนะนำให้คุณระบุ URL สำรองไว้เสมอโดยใช้แอตทริบิวต์ <code dir="ltr" translate="no">src</code>
+</p>
+<p>
+  แอตทริบิวต์ <code dir="ltr" translate="no">srcset</code> ช่วยให้คุณกำหนดเวอร์ชันต่างๆ ของรูปภาพเดียวกันสำหรับหน้าจอที่มีขนาดแตกต่างกันได้ เช่น
+</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" data-label="srcset attribute" translate="no" dir="ltr" is-upgraded syntax="Text only" syntax-guessed>&lt;img
+  srcset="maine-coon-nap-320w.jpg 320w, maine-coon-nap-480w.jpg 480w, maine-coon-nap-800w.jpg 800w"
+  sizes="(max-width: 320px) 280px, (max-width: 480px) 440px, 800px"
+  src="maine-coon-nap-800w.jpg"
+  alt="A watercolor illustration of a maine coon napping leisurely in front of a fireplace"&gt;</pre></devsite-code>
+
+<p>
+  องค์ประกอบ <code dir="ltr" translate="no">&lt;picture&gt;</code> คือคอนเทนเนอร์ที่ใช้ในการจัดกลุ่ม <code dir="ltr" translate="no">&lt;source&gt;</code> เวอร์ชันต่างๆ ของรูปภาพเดียวกัน โดยมีวิธีการสำรองเพื่อให้เบราว์เซอร์เลือกรูปภาพที่เหมาะสมตามความสามารถของอุปกรณ์ เช่น ความหนาแน่นพิกเซลและขนาดหน้าจอ องค์ประกอบ <code dir="ltr" translate="no">picture</code> ยังมีประโยชน์สำหรับการใช้รูปภาพรูปแบบใหม่ด้วยการลดลงอย่างค่อยเป็นค่อยไปในตัวสำหรับไคลเอ็นต์ที่อาจยังไม่รองรับรูปแบบใหม่เหล่านี้
+</p>
+<p>
+  ตาม<a class="external-link" href="https://html.spec.whatwg.org/multipage/embedded-content.html#the-picture-element" >ส่วนที่ 4.8.1 ของมาตรฐาน HTML</a> โปรดตรวจสอบว่าคุณได้ให้องค์ประกอบ <code dir="ltr" translate="no">img</code> เป็นองค์ประกอบสํารองที่มีแอตทริบิวต์ <code dir="ltr" translate="no">src</code> เมื่อใช้องค์ประกอบ <code dir="ltr" translate="no">picture</code> ที่ใช้รูปแบบต่อไปนี้
+</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" data-label="img src within a picture element" translate="no" dir="ltr" is-upgraded syntax="Carbon" syntax-guessed>&lt;<span class="devsite-syntax-nx">picture</span>&gt;
+<span class="devsite-syntax-w">  </span>&lt;<span class="devsite-syntax-nx">source</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">type</span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-s">"image/svg+xml"</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">srcset</span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-s">"pyramid.svg"</span>&gt;
+<span class="devsite-syntax-w">  </span>&lt;<span class="devsite-syntax-nx">source</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">type</span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-s">"image/webp"</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">srcset</span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-s">"pyramid.webp"</span>&gt;
+<span class="devsite-syntax-w">  </span>&lt;<span class="devsite-syntax-nx">img</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">src</span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-s">"pyramid.png"</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-nx">alt</span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-s">"An 1800s oil painting of The Great Pyramid"</span>&gt;
+&lt;<span class="devsite-syntax-o">/</span><span class="devsite-syntax-nx">picture</span>&gt;</pre></devsite-code>
+
+<h3 data-text="ใช้รูปแบบรูปภาพที่รองรับ" id="supported-image-formats" tabindex="-1">ใช้รูปแบบรูปภาพที่รองรับ</h3>
+<p>
+  Google Search รองรับรูปภาพที่อ้างอิงในแอตทริบิวต์ <code dir="ltr" translate="no">src</code> ของ <code dir="ltr" translate="no">img</code> ในรูปแบบไฟล์ต่อไปนี้
+ BMP, GIF, JPEG, PNG, WebP, SVG, and AVIFนอกจากนี้คุณควรใส่นามสกุลของชื่อไฟล์ให้ตรงกับประเภทไฟล์ด้วย
+</p>
+<p>
+  นอกจากนี้คุณยังแทรกรูปภาพในหน้าเป็น URI ข้อมูลได้อีกด้วย URI ข้อมูลมีวิธีในการรวมไฟล์ (เช่น ไฟล์รูปภาพ) ไว้ในหน้าโดยการตั้งค่าแอตทริบิวต์ <code dir="ltr" translate="no">src</code> ขององค์ประกอบ <code dir="ltr" translate="no">img</code> ให้เป็นสตริงที่เข้ารหัส Base64 โดยใช้รูปแบบต่อไปนี้
+</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" data-label="Image as a Data URI" translate="no" dir="ltr" is-upgraded syntax="Transact-SQL" syntax-guessed>&lt;<span class="devsite-syntax-n">img</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-n">src</span><span class="devsite-syntax-o">=</span><span class="devsite-syntax-ss">"data:image/svg+xml;base64,[<i>data</i>]"</span>&gt;</pre></devsite-code>
+<p>
+  แม้ว่ารูปภาพในหน้าจะลดคำขอ HTTP ได้ แต่คุณควรพิจารณาอย่างรอบคอบว่าจะใช้รูปภาพแบบดังกล่าวเมื่อใด เนื่องจากรูปภาพในหน้าอาจเพิ่มขนาดของหน้าเว็บอย่างมาก ดูข้อมูลเพิ่มเติมได้ใน<a class="external-link" href="https://web.dev/articles/responsive-images?hl=th#inlining_pros_cons" >ส่วนข้อดีและข้อเสียของรูปภาพในหน้าที่หน้า web.dev ของเรา</a>
+</p>
+
+<h3 data-text="เพิ่มประสิทธิภาพเพื่อความเร็วและคุณภาพ" id="good-quality-photos optimize-for-speed" tabindex="-1">เพิ่มประสิทธิภาพเพื่อความเร็วและคุณภาพ</h3>
+<div class="video-wrapper">
+  <devsite-video video-id="_6Tz_-3_4ok">
+  </devsite-video>
+</div>
+<p>
+  รูปภาพคุณภาพสูงดึงดูดผู้ใช้ได้มากกว่ารูปภาพที่เบลอและไม่ชัดเจน อีกทั้งรูปภาพที่คมชัดในแบบภาพขนาดย่อของผลลัพธ์ยังดึงดูดผู้ใช้ได้มากกว่าและสามารถเพิ่มโอกาสในการได้รับการเข้าชมจากผู้ใช้ กล่าวคือ รูปภาพมักเป็นสิ่งที่มีส่วนสำคัญมากที่สุดสำหรับขนาดหน้าเว็บโดยรวม ซึ่งอาจทำให้โหลดหน้าเว็บได้ช้าและสิ้นเปลืองอินเทอร์เน็ต อย่าลืมใช้<a class="external-link" href="https://web.dev/fast?hl=th#optimize-your-images" >การเพิ่มประสิทธิภาพรูปภาพล่าสุด</a>และ<a class="external-link" href="https://web.dev/learn/design?hl=th" >เทคนิครูปภาพที่ปรับเปลี่ยนตามอุปกรณ์</a>เพื่อแสดงรูปภาพที่มีคุณภาพสูงและให้ประสบการณ์ที่รวดเร็วสำหรับผู้ใช้
+</p>
+<p>
+  วิเคราะห์ความเร็วเว็บไซต์ด้วย <a class="external-link" href="https://pagespeed.web.dev/?hl=th" >PageSpeed Insights</a> และอ่าน<a class="external-link" href="https://web.dev/learn/performance/why-speed-matters?hl=th" >เหตุใดความเร็วจึงสําคัญ</a>
+  เพื่อดูแนวทางปฏิบัติแนะนําและเทคนิคในการปรับปรุงประสิทธิภาพเว็บไซต์
+</p>
+
+<h2 data-text="เพิ่มประสิทธิภาพหน้า Landing Page ของรูปภาพ" id="optimize-landing-page" tabindex="-1">เพิ่มประสิทธิภาพหน้า Landing Page ของรูปภาพ</h2>
+<p>
+  แม้ว่าจะไม่ได้แสดงให้เห็นทันทีทันใด แต่เนื้อหาและข้อมูลเมตาของหน้าที่มีรูปภาพฝังอยู่สามารถส่งผลอย่างมากต่อตำแหน่งและลักษณะที่รูปภาพอาจปรากฏในผลการค้นหาของ Google
+</p>
+<h3 data-text="ระบุรูปภาพที่ต้องการด้วยข้อมูลเมตา" id="specify-preferred-image" tabindex="-1">ระบุรูปภาพที่ต้องการด้วยข้อมูลเมตา</h3>
+<p>
+  การเลือกรูปภาพตัวอย่างของ Google เป็นแบบอัตโนมัติทั้งหมด และพิจารณาจากแหล่งที่มาต่างๆ เพื่อเลือกรูปภาพในหน้าเว็บที่กำหนดซึ่งจะแสดงบน Google (เช่น <a href="https://developers.google.com/search/docs/appearance/visual-elements-gallery?hl=th#text-result-image">รูปภาพของผลการค้นหาข้อความ</a>หรือรูปภาพตัวอย่างใน Discover)
+</p>
+<p>
+  คุณกำหนดรูปภาพที่จะแสดงได้ด้วยการระบุรูปภาพที่ต้องการผ่านแหล่งที่มาของข้อมูลเมตาแบบใดแบบหนึ่งต่อไปนี้
+</p>
+<ul>
+  <li id="schema-primary-image-of-page">ระบุพร็อพเพอร์ตี้ <a class="external-link" href="https://schema.org/primaryImageOfPage" ><code dir="ltr" translate="no">primaryImageOfPage</code></a> ของ schema.org ด้วย <code dir="ltr" translate="no">URL</code> หรือ <code dir="ltr" translate="no">ImageObject</code>
+    <div></div><devsite-code><pre class="devsite-click-to-copy" data-label="schema.org" translate="no" dir="ltr" is-upgraded syntax="Carbon" syntax-guessed>&lt;<span class="devsite-syntax-nx">script</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">type</span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-s">"application/ld+json"</span>&gt;<span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"@context"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://schema.org"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"@type"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"WebPage"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"url"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://example.com/url"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"primaryImageOfPage"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://example.com/images/cat.png"</span>
+<span class="devsite-syntax-p">}</span>&lt;<span class="devsite-syntax-o">/</span><span class="devsite-syntax-nx">script</span>&gt;</pre></devsite-code>
+  <p>หรือระบุพร็อพเพอร์ตี้รูปภาพ <code dir="ltr" translate="no">URL</code> หรือ <code dir="ltr" translate="no">ImageObject</code> แล้วแนบไปกับเอนทิตีหลัก (โดยใช้พร็อพเพอร์ตี้ <a class="external-link" href="https://schema.org/mainEntity" ><code dir="ltr" translate="no">mainEntity</code></a> หรือ <a class="external-link" href="https://schema.org/mainEntityOfPage" ><code dir="ltr" translate="no">mainEntityOfPage</code></a> ของ schema.org)
+  </p>
+  <div></div><devsite-code><pre class="devsite-click-to-copy" data-label="schema.org" translate="no" dir="ltr" is-upgraded syntax="Carbon" syntax-guessed>&lt;<span class="devsite-syntax-nx">script</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-k">type</span><span class="devsite-syntax-p">=</span><span class="devsite-syntax-s">"application/ld+json"</span>&gt;<span class="devsite-syntax-p">{</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"@context"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://schema.org"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"@type"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"BlogPosting"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"mainEntityOfPage"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://example.com/url"</span><span class="devsite-syntax-p">,</span>
+<span class="devsite-syntax-w">  </span><span class="devsite-syntax-s">"image"</span><span class="devsite-syntax-p">:</span><span class="devsite-syntax-w"> </span><span class="devsite-syntax-s">"https://example.com/images/cat.png"</span>
+<span class="devsite-syntax-p">}</span>&lt;<span class="devsite-syntax-o">/</span><span class="devsite-syntax-nx">script</span>&gt;</pre></devsite-code>
+  </li>
+  <li>ระบุแท็ก <a class="external-link" href="https://ogp.me/" ><code dir="ltr" translate="no">og:image</code></a> <code dir="ltr" translate="no">meta</code>
+    <div></div><devsite-code><pre class="devsite-click-to-copy" data-label="og:image" translate="no" dir="ltr" is-upgraded syntax="Text only" syntax-guessed>&lt;meta property="og:image" content="https://example.com/images/cat.png"&gt;</pre></devsite-code>
+  </li>
+</ul>
+<p>
+  เมื่อเลือกรูปภาพที่ต้องการใช้ในมาร์กอัป schema.org หรือแท็ก <code dir="ltr" translate="no">og:image</code> <code dir="ltr" translate="no">meta</code> ให้ทำตามแนวทางปฏิบัติแนะนำต่อไปนี้
+</p>
+<ul>
+  <li>เลือกรูปภาพที่เกี่ยวข้องและสื่อถึงหน้าเว็บ</li>
+  <li>หลีกเลี่ยงการใช้รูปภาพทั่วไป (เช่น โลโก้ของเว็บไซต์) หรือรูปภาพที่มีข้อความในมาร์กอัป schema.org หรือแท็ก <code dir="ltr" translate="no">og:image</code> <code dir="ltr" translate="no">meta</code></li>
+  <li>หลีกเลี่ยงการใช้รูปภาพที่มีสัดส่วนภาพไม่ปกติ (เช่น รูปภาพที่แคบหรือกว้างเกินไป)</li>
+  <li>ใช้ความละเอียดสูงหากเป็นไปได้</li>
+</ul>
+<h3 data-text="ตรวจสอบชื่อและคำอธิบายของหน้าเว็บ" id="check-your-page-title-and-description" tabindex="-1">ตรวจสอบชื่อและคำอธิบายของหน้าเว็บ</h3>
+<p>
+  Google Search จะสร้างลิงก์ Title และตัวอย่างข้อมูลโดยอัตโนมัติเพื่ออธิบายแต่ละผลลัพธ์ให้ดีที่สุดและอธิบายว่าเกี่ยวข้องกับข้อความค้นหาของผู้ใช้อย่างไร ซึ่งจะช่วยให้ผู้ใช้ตัดสินใจว่าจะคลิกที่ผลการค้นหาหรือไม่
+  ต่อไปนี้คือตัวอย่าง 2 รายการของลิงก์ Title และตัวอย่างข้อมูลในหน้าผลการค้นหาของ Google
+</p>
+<img alt="ภาพแสดงชื่อและคำอธิบายในผลการค้นหารูปภาพ" src="https://developers.google.com/static/search/docs/images/titles-descriptions-in-image-results.png?hl=th" />
+<p>เราจะใช้แหล่งข้อมูลจำนวนหนึ่งที่ไม่ซ้ำกันสำหรับข้อมูลนี้ รวมทั้งข้อมูลรายละเอียดในแท็ก <code dir="ltr" translate="no">title</code> และ <code dir="ltr" translate="no">meta</code> สำหรับหน้าเว็บแต่ละหน้า</p>
+<p>
+  คุณช่วยปรับปรุงคุณภาพของลิงก์ Title และตัวอย่างข้อมูลที่แสดงในหน้าเว็บได้โดยทำตามหลักเกณฑ์สำหรับ<a href="https://developers.google.com/search/docs/appearance/title-link?hl=th">ชื่อ</a>และ<a href="https://developers.google.com/search/docs/appearance/snippet?hl=th">ตัวอย่างข้อมูล</a>ของ Google
+</p>
+
+<h3 data-text="เพิ่ม Structured Data" id="structured_data" tabindex="-1">เพิ่ม Structured Data</h3>
+<p>
+  หากใส่ Structured Data ไว้ Google จะแสดงรูปภาพใน<a href="https://developers.google.com/search/docs/appearance/structured-data/search-gallery?hl=th">ผลการค้นหาที่เป็นริชมีเดีย</a>บางรายการได้ ซึ่งรวมถึง<a href="https://developers.google.com/search/blog/2017/08/badges-on-image-search-help-users-find?hl=th">ป้ายที่โดดเด่น</a>ใน Google รูปภาพ ซึ่งช่วยให้ผู้ใช้ทราบข้อมูลที่เกี่ยวข้องกับหน้าเว็บของคุณ และเพิ่มการเข้าชมที่ตรงเป้าหมายไปยังเว็บไซต์ได้มากขึ้น
+</p>
+<p>
+  ปฏิบัติตาม<a href="https://developers.google.com/search/docs/appearance/structured-data/sd-policies?hl=th">หลักเกณฑ์ของ Structured Data ทั่วไป</a> รวมไปถึงหลักเกณฑ์เฉพาะของประเภท Structured Data ของคุณ มิฉะนั้น Structured Data อาจไม่มีสิทธิ์สำหรับการแสดงเป็นผลการค้นหาที่เป็นริชมีเดียใน Google รูปภาพ ในแต่ละประเภท Structured Data เหล่านี้ แอตทริบิวต์รูปภาพเป็นช่องที่ต้องกรอกเพื่อให้มีสิทธิ์ได้รับป้ายและแสดงเป็นผลการค้นหาที่เป็นริชมีเดียใน Google รูปภาพ ต่อไปนี้คือตัวอย่าง 2 รายการแสดงลักษณะของผลการค้นหาที่เป็นริชมีเดียใน Google รูปภาพ
+</p>
+<img alt="ภาพแสดงลักษณะที่ผลการค้นหาที่เป็นริชมีเดียปรากฏใน Google รูปภาพ" src="https://developers.google.com/static/search/docs/images/structured-data-in-image-results.png?hl=th" />
+
+<h3 data-text="ใช้ชื่อไฟล์ ชื่อเรื่อง และข้อความแสดงแทนที่สื่อความหมาย" id="descriptive-alt-text descriptive-titles-captions-filenames" tabindex="-1">ใช้ชื่อไฟล์ ชื่อเรื่อง และข้อความแสดงแทนที่สื่อความหมาย</h3>
+<p>
+  Google จะดึงข้อมูลเกี่ยวกับหัวเรื่องของรูปภาพออกจากเนื้อหาของหน้าเว็บ รวมทั้งคำอธิบายภาพและชื่อเรื่องของรูปภาพ เมื่อใดที่เหมาะสม ให้ตรวจสอบว่ารูปภาพวางไว้ใกล้กับข้อความที่เกี่ยวข้องและในหน้าเว็บที่เกี่ยวข้องกับหัวเรื่องของรูปภาพ
+</p>
+<p>
+  ในทำนองเดียวกัน ชื่อไฟล์จะช่วยให้ Google เดาได้นิดหนึ่งว่าเป็นรูปภาพอะไร
+  หากเป็นไปได้ ให้ใช้ชื่อไฟล์ที่สั้นแต่สื่อความหมาย ตัวอย่างเช่น ชื่อ <code dir="ltr" translate="no">my-new-black-kitten.jpg</code> จะดีกว่า <code dir="ltr" translate="no">IMG00023.JPG</code> หลีกเลี่ยงการใช้ชื่อไฟล์ทั่วไป เช่น <code dir="ltr" translate="no">image1.jpg</code>, <code dir="ltr" translate="no">pic.gif</code>, <code dir="ltr" translate="no">1.jpg</code> หากสามารถทำได้
+  หากเว็บไซต์มีรูปภาพหลายพันรูป คุณอาจพิจารณาใช้การตั้งชื่อรูปภาพแบบอัตโนมัติ หากคุณแปลรูปภาพ อย่าลืมแปลชื่อไฟล์ด้วย โดยยึดตาม<a href="https://developers.google.com/search/docs/crawling-indexing/url-structure?hl=th">หลักเกณฑ์การเข้ารหัส URL</a> หากมีการใช้อักขระที่ไม่ใช่ละตินหรือสัญลักษณ์พิเศษ
+</p>
+<div class="video-wrapper">
+  <devsite-video video-id="3NbuDpB_BTc"></devsite-video>
+</div>
+
+<p>
+  แอตทริบิวต์ที่สําคัญที่สุดเมื่อให้ข้อมูลเมตาเพิ่มเติมแก่รูปภาพคือข้อความแสดงแทน (ข้อความที่อธิบายรูปภาพ) และยังช่วยปรับปรุงการช่วยเหลือพิเศษสําหรับผู้ที่มองไม่เห็นรูปภาพบนหน้าเว็บ รวมถึงผู้ใช้ที่ใช้โปรแกรมอ่านหน้าจอหรือมีการเชื่อมต่อที่มีแบนด์วิดท์ต่ำ
+</p>
+<p>
+  Google ใช้ข้อความแสดงแทนพร้อมกับอัลกอริทึมคอมพิวเตอร์วิทัศน์และเนื้อหาของหน้าเว็บรวมทั้งเพื่อทำความเข้าใจเรื่องของรูปภาพ นอกจากนี้ ข้อความแสดงแทนในรูปภาพยังมีประโยชน์ในการเป็น anchor text หากคุณตัดสินใจที่จะใช้รูปภาพเป็นลิงก์
+</p>
+<p>
+  เมื่อเขียนข้อความแสดงแทน ให้เน้นการสร้างเนื้อหาที่มีประโยชน์และเนื้อหาที่มีข้อมูลอย่างละเอียด ซึ่งใช้คีย์เวิร์ดอย่างเหมาะสมและอยู่ในบริบทเนื้อหาของหน้าเว็บ หลีกเลี่ยงการกรอกแอตทริบิวต์ <code dir="ltr" translate="no">alt</code> ด้วยคีย์เวิร์ด (หรือที่เรียกว่า<a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=th#keyword-stuffing">การใช้คีย์เวิร์ดในทางที่ผิด</a>) เนื่องจากส่งผลเสียต่อประสบการณ์ของผู้ใช้และอาจทำให้ผู้ใช้เห็นว่าเว็บไซต์เป็นสแปม
+</p>
+<p>
+  <span aria-hidden="true" class="compare-no"></span><b>ไม่ดี (ไม่มีข้อความแสดงแทน)</b>:
+</p>
+<blockquote>
+  <span translate="no">&lt;img src="puppy.jpg"/&gt;</span>
+</blockquote>
+<p>
+  <span aria-hidden="true" class="compare-no"></span><b>ไม่ดี (การใช้คีย์เวิร์ดในทางที่ผิด)</b>:
+</p>
+<blockquote>
+  <span translate="no">&lt;img src="puppy.jpg" alt="</span>ลูกหมา ลูกสุนัข น้องหมาน่ารัก น้องหมาคิ้วท์ๆ หมา สุนัข ลูกหมาโกลเด้น โกลเดนรีทรีฟเวอร์ ลาบราดอร์ วูฟฮาวนด์ ลูกหมา แจ็กรัสเซล เทอร์เรีย อาหารหมา อาหารสุนัขราคาถูก อาหารลูกสุนัข<span translate="no">"/&gt;</span>
+</blockquote>
+
+<p>
+  <span aria-hidden="true" class="compare-yes"></span><b>ดีกว่า</b>:
+</p>
+<blockquote>
+  <span translate="no">&lt;img src="puppy.jpg" alt="</span>ลูกสุนัข<span translate="no">"/&gt;</span>
+</blockquote>
+
+<p>
+  <span aria-hidden="true" class="compare-yes"></span><b>ดีที่สุด</b>:
+</p>
+<blockquote>
+  <span translate="no">&lt;img src="puppy.jpg" alt="</span>ลูกสุนัขพันธุ์ดัลเมเชียนกำลังเล่นวิ่งไปคาบของกลับมา<span translate="no">"/&gt;</span>
+</blockquote>
+
+<p>
+  นอกจากนี้ ให้พิจารณาทําให้สามารถเข้าถึงข้อความแสดงแทนได้ง่ายด้วย โดยทำตาม<a class="external-link" href="https://www.w3.org/WAI/tutorials/images/" >หลักเกณฑ์ W3</a>
+  สําหรับองค์ประกอบ <code dir="ltr" translate="no">&lt;img&gt;</code> คุณสามารถเพิ่มแอตทริบิวต์ <code dir="ltr" translate="no">alt</code> ขององค์ประกอบได้ ในขณะที่องค์ประกอบ <code dir="ltr" translate="no">&lt;svg&gt;</code> ในบรรทัด คุณใช้องค์ประกอบ <code dir="ltr" translate="no">&lt;title&gt;</code> ได้ เช่น
+</p>
+<div></div><devsite-code><pre class="devsite-click-to-copy" data-label="svg title" translate="no" dir="ltr" is-upgraded syntax="Text only" syntax-guessed>&lt;svg aria-labelledby="svgtitle1"&gt;
+  &lt;title id="svgtitle1">Googlebot wearing an apron and chef hat, struggling to make pancakes on the stovetop&lt;/title&gt;
+&lt;/svg&gt;</pre></devsite-code>
+
+<p>
+  เราขอแนะนำให้ทดสอบเนื้อหาโดย<a class="external-link" href="https://developer.chrome.com/docs/devtools/accessibility/reference?hl=th" >ตรวจสอบความสามารถเข้าถึงได้ง่าย</a>และ<a class="external-link" href="https://developer.chrome.com/docs/devtools/network/reference?hl=th#throttling" >ใช้ตัวจำลองการเชื่อมต่อเครือข่ายที่ช้า</a>
+</p>
+
+<p>
+  หากมีการอ้างอิงรูปภาพในหน้าเว็บหลายหน้าภายในเว็บไซต์ขนาดใหญ่ ให้พิจารณา<a href="https://developers.google.com/search/docs/crawling-indexing/large-site-managing-crawl-budget?hl=th">Crawl Budget โดยรวมของเว็บไซต์</a>
+  โดยเฉพาะอย่างยิ่ง ให้อ้างอิงรูปภาพด้วย URL เดียวกันเสมอเพื่อให้ Google แคชและใช้รูปภาพซ้ำได้โดยไม่ต้องขอหลายครั้ง
+</p>
+
+<h2 data-text="เลือกไม่ใช้การลิงก์แบบในหน้ากับ Google รูปภาพ" id="opt-out" tabindex="-1">เลือกไม่ใช้การลิงก์แบบในหน้ากับ Google รูปภาพ</h2>
+<p>
+  คุณป้องกันไม่ให้ภาพขนาดเต็มแสดงในหน้าผลการค้นหารูปภาพของ Google ได้ โดยเลือกไม่ใช้ลิงก์แบบในหน้ากับผลการค้นหาของ Google รูปภาพ
+  <b>วิธีเลือกไม่ใช้การลิงก์แบบในหน้า</b>
+</p>
+
+<ol>
+  <li>
+    เมื่อมีการขอรูปภาพ ให้ตรวจสอบ<a class="external-link" href="https://en.wikipedia.org/wiki/HTTP_referer" >ส่วนหัวผู้อ้างอิง HTTP</a> ในคำขอ
+  </li>
+  <li>
+    หากคําขอนั้นมาจากโดเมนของ Google ให้ตอบกลับด้วยรหัสสถานะ HTTP <code dir="ltr" translate="no">200</code> หรือรหัสสถานะ HTTP <code dir="ltr" translate="no">204</code> โดยไม่มีเนื้อหา
+  </li>
+</ol>
+
+<p>
+  Google จะรวบรวมข้อมูลหน้าเว็บและเห็นรูปภาพนั้นอยู่ต่อไป แต่จะแสดงภาพขนาดย่อที่สร้างขึ้น ณ เวลาที่รวบรวมข้อมูลในผลการค้นหา การเลือกไม่ใช้นี้ทำได้ทุกเมื่อและไม่ต้องมีการดำเนินการกับรูปภาพของเว็บไซต์อีกครั้ง ลักษณะการทํางานนี้ไม่ถือว่าเป็น<a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=th#cloaking">การปิดบังหน้าเว็บจริง</a>ด้วยรูปภาพ และจะไม่ส่งผลให้มีการดําเนินการโดยเจ้าหน้าที่
+</p>
+<p>
+  หรือจะ<a href="https://developers.google.com/search/docs/crawling-indexing/prevent-images-on-your-page?hl=th">ป้องกันไม่ให้รูปภาพปรากฏในผลการค้นหาทั้งหมด</a>ก็ได้
+</p>
+
+<h2 data-text="เพิ่มประสิทธิภาพสำหรับค้นหาปลอดภัย" id="safe_search" tabindex="-1">เพิ่มประสิทธิภาพสำหรับค้นหาปลอดภัย</h2>
+<p>
+  ค้นหาปลอดภัยคือการตั้งค่าในบัญชีผู้ใช้ Google ซึ่งจะเป็นตัวกำหนดว่าจะแสดง เบลอ หรือบล็อกรูปภาพ วิดีโอ และเว็บไซต์ที่อาจไม่เหมาะสมในผลการค้นหาของ Google Search โปรดตรวจสอบว่า Google เข้าใจลักษณะของเว็บไซต์เพื่อให้ Google ใช้ตัวกรองค้นหาปลอดภัยกับเว็บไซต์ได้ตามความเหมาะสม
+  <a href="https://developers.google.com/search/docs/crawling-indexing/safesearch?hl=th">ดูข้อมูลเพิ่มเติมเกี่ยวกับการติดป้ายกํากับหน้าสําหรับค้นหาปลอดภัย</a>
+</p>
+
+ 
+    
+ 
+
+  
+  
+  
+  
+
+  
+    <devsite-hats-survey class="nocontent" data-nosnippet
+      hats-id="egUfosvgZ0gb2CML1jd0VMoBx2ec"
+      listnr-id="103417"></devsite-hats-survey>
+  
+</div>
+
+  
+    
+    
+      
+    <devsite-thumb-rating position="footer">
+    </devsite-thumb-rating>
+  
+       
+         <devsite-feedback
+  position="footer"
+  project-name="Documentation"
+  product-id="103417"
+  bucket="Search Docs"
+  context="DevSite feedback link"
+  version="t-devsite-webserver-20260507-r00-rc00.477408230701735660"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="footer"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=th"
+    
+  
+  
+    project-support-url="https://developers.google.com/search/help?hl=th"
+  
+  
+  >
+
+  <button>
+  
+    
+    ส่งความคิดเห็น
+  
+  </button>
+</devsite-feedback>
+       
+    
+    
+  
+
+  <div class="devsite-floating-action-buttons"></div></article>
+
+
+<devsite-content-footer class="nocontent" data-nosnippet>
+  <p>เนื้อหาของหน้าเว็บนี้ได้รับอนุญาตภายใต้<a href="https://creativecommons.org/licenses/by/4.0/">ใบอนุญาตที่ต้องระบุที่มาของครีเอทีฟคอมมอนส์ 4.0</a> และตัวอย่างโค้ดได้รับอนุญาตภายใต้<a href="https://www.apache.org/licenses/LICENSE-2.0">ใบอนุญาต Apache 2.0</a> เว้นแต่จะระบุไว้เป็นอย่างอื่น โปรดดูรายละเอียดที่<a href="https://developers.google.com/site-policies?hl=th">นโยบายเว็บไซต์ Google Developers</a> Java เป็นเครื่องหมายการค้าจดทะเบียนของ Oracle และ/หรือบริษัทในเครือ</p>
+  <p>อัปเดตล่าสุด 2026-03-03 UTC</p>
+</devsite-content-footer>
+
+
+<devsite-notification
+>
+</devsite-notification>
+
+
+  
+<div class="devsite-content-data">
+  
+    
+    
+    <template class="devsite-thumb-rating-feedback">
+      <devsite-feedback
+  position="thumb-rating"
+  project-name="Documentation"
+  product-id="103417"
+  bucket="Search Docs"
+  context="DevSite feedback link"
+  version="t-devsite-webserver-20260507-r00-rc00.477408230701735660"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="thumb-rating"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=th"
+    
+  
+  
+    project-support-url="https://developers.google.com/search/help?hl=th"
+  
+  
+  >
+
+  <button>
+  
+    หากต้องการบอกให้เราทราบเพิ่มเติม
+  
+  </button>
+</devsite-feedback>
+    </template>
+  
+  
+    <template class="devsite-content-data-template">
+      [[["เข้าใจง่าย","easyToUnderstand","thumb-up"],["แก้ปัญหาของฉันได้","solvedMyProblem","thumb-up"],["อื่นๆ","otherUp","thumb-up"]],[["ไม่มีข้อมูลที่ฉันต้องการ","missingTheInformationINeed","thumb-down"],["ซับซ้อนเกินไป/มีหลายขั้นตอนมากเกินไป","tooComplicatedTooManySteps","thumb-down"],["ล้าสมัย","outOfDate","thumb-down"],["ปัญหาเกี่ยวกับการแปล","translationIssue","thumb-down"],["ตัวอย่าง/ปัญหาเกี่ยวกับโค้ด","samplesCodeIssue","thumb-down"],["อื่นๆ","otherDown","thumb-down"]],["อัปเดตล่าสุด 2026-03-03 UTC"],[],["To optimize images for Google Search, use HTML image elements, including `\u003cimg\u003e` with `src` and descriptive `alt` attributes, and avoid CSS images. Utilize image sitemaps, responsive images with `\u003cpicture\u003e` or `srcset`, and supported formats like JPEG, PNG, WebP, SVG, etc. Enhance landing pages with descriptive filenames, relevant titles, alt text, and structured data. Ensure speed and quality are high.  Opt-out of inline linking via HTTP header checks and label pages appropriately for SafeSearch.\n"]]
+    </template>
+  
+</div>
+            
+          </devsite-content>
+        </main>
+        <devsite-footer-promos class="devsite-footer">
+          
+            
+
+<nav class="devsite-footer-promos nocontent"
+     aria-label="โปรโมชัน"
+     data-nosnippet>
+  <ul class="devsite-footer-promos-list">
+    
+    <li class="devsite-footer-promo">
+      <a href="https://www.linkedin.com/showcase/googlesearchcentral/"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         data-label="linkedin footer promo"
+       
+         aria-label="LinkedIn feed for Google Search Central"
+       
+         data-category="Search docs"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/search/images/li.png?hl=th"
+                loading="lazy"
+                alt="LinkedIn">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          LinkedIn
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">เข้าร่วมกับเราบน LinkedIn</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA?hl=th"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         data-label="youtube footer promo"
+       
+         aria-label="Google Search Central YouTube channel"
+       
+         data-category="Search docs"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/homepage-assets/images/yt.svg?hl=th"
+                loading="lazy"
+                alt="YouTube">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          YouTube
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">ดูวิดีโอของเรา</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://feeds.feedburner.com/blogspot/amDG"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         data-label="blog footer promo"
+       
+         aria-label="RSS feed for the Search Central Blog"
+       
+         data-category="Search docs"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/rss_feed/default/24px.svg"
+                loading="lazy"
+                alt="บล็อก">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          บล็อก
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">สมัครรับข้อมูลฟีด RSS ของเรา</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://pod.link/1512522198"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         data-label="podcast footer promo"
+       
+         aria-label="Search Off the Record podcast episodes"
+       
+         data-category="Search docs"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/search/images/search-off-the-record-podcast-logo.png?hl=th"
+                loading="lazy"
+                alt="พอดแคสต์">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          พอดแคสต์
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">ฟัง Search Off the Record</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://twitter.com/googlesearchc"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         data-label="twitter footer promo"
+       
+         aria-label="Twitter feed for Google Search Central"
+       
+         data-category="Search docs"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/homepage-assets/images/x.svg?hl=th"
+                loading="lazy"
+                alt="X (Twitter)">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          X (Twitter)
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">เข้าร่วมกับเราบน X (Twitter)</div>
+    </li>
+    
+  </ul>
+</nav>
+
+          
+        </devsite-footer-promos>
+        <devsite-footer-linkboxes class="devsite-footer">
+          
+            
+<nav class="devsite-footer-linkboxes nocontent"
+     aria-label="ลิงก์ส่วนท้าย"
+     data-nosnippet>
+  
+  <ul class="devsite-footer-linkboxes-list">
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">รับการสนับสนุน</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://support.google.com/webmasters/community"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            ไปที่ฟอรัมความช่วยเหลือ
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/help/office-hours"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            ส่งคำถามสำหรับเวลาทำการ
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/help/report-quality-issues"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            รายงานสแปม ฟิชชิง หรือมัลแวร์
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/help"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+              
+              
+            
+          
+            แหล่งข้อมูลการสนับสนุนเพิ่มเติม
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">แหล่งข้อมูล</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/docs/fundamentals/get-on-google"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            คุณต้องการ SEO ไหม
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/docs/fundamentals/seo-starter-guide"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            คู่มือ SEO สำหรับมือใหม่
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://status.search.google.com"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            สถานะของระบบ Search
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://support.google.com/webmasters"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+          
+            เอกสารประกอบเกี่ยวกับ Search Console
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/case-studies/overview"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 5)"
+            >
+            
+              
+              
+            
+          
+            กรณีศึกษา
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">เครื่องมือ</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://search.google.com/search-console"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            Search Console
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://search.google.com/test/rich-results"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            การทดสอบผลการค้นหาที่เป็นสื่อสมบูรณ์
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://pagespeed.web.dev"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            PageSpeed Insights
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://search.google.com/test/amp"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+              
+              
+            
+          
+            การทดสอบ AMP
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+  </ul>
+  
+</nav>
+          
+        </devsite-footer-linkboxes>
+        <devsite-footer-utility class="devsite-footer">
+          
+            
+
+<div class="devsite-footer-utility nocontent" data-nosnippet>
+  
+  
+  <nav class="devsite-footer-sites" aria-label="เว็บไซต์ Google Developers อื่นๆ">
+    <a href="https://developers.google.com/?hl=th"
+       class="devsite-footer-sites-logo-link gc-analytics-event"
+       data-category="Site-Wide Custom Events"
+       data-label="Footer Google Developers Link">
+      <picture>
+        
+        <img class="devsite-footer-sites-logo"
+             src="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/lockup-google-for-developers.svg"
+             loading="lazy"
+             alt="Google Developers">
+      </picture>
+    </a>
+    <ul class="devsite-footer-sites-list">
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//developer.android.com?hl=th"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Android Link"
+         
+         >
+          Android
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//developer.chrome.com/home?hl=th"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Chrome Link"
+         
+         >
+          Chrome
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//firebase.google.com?hl=th"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Firebase Link"
+         
+         >
+          Firebase
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//cloud.google.com?hl=th"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Google Cloud Platform Link"
+         
+         >
+          Google Cloud Platform
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//ai.google.dev/?hl=th"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Google AI Link"
+         
+         >
+          Google AI
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="https://developers.google.com/products?hl=th"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer All products Link"
+         
+         >
+          ผลิตภัณฑ์ทั้งหมด
+        </a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+
+  
+  <nav class="devsite-footer-utility-links" aria-label="ลิงก์ยูทิลิตี">
+    
+    <ul class="devsite-footer-utility-list">
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="https://developers.google.com/terms/site-terms?hl=th"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Terms link"
+         >
+          ข้อกำหนด
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="//policies.google.com/privacy?hl=th"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Privacy link"
+         >
+          ความเป็นส่วนตัว
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 glue-cookie-notification-bar-control">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="#"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Manage cookies link"
+         
+           aria-hidden="true"
+         >
+          Manage cookies
+        </a>
+        
+      </li>
+      
+    </ul>
+    
+    
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es"
+        >Español</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+  </nav>
+</div>
+          
+        </devsite-footer-utility>
+        <devsite-panel>
+          
+        </devsite-panel>
+        
+          <devsite-concierge
+  
+  
+    data-info-panel
+  
+  
+    data-ai-panel
+  
+  
+  
+  
+    data-api-explorer-panel
+  >
+</devsite-concierge>
+        
+      </section>
+      </section>
+    <devsite-sitemask></devsite-sitemask>
+    <devsite-snackbar></devsite-snackbar>
+    <devsite-tooltip ></devsite-tooltip>
+    <devsite-heading-link></devsite-heading-link>
+    <devsite-analytics>
+      
+        <script type="application/json" analytics>[{&#34;dimensions&#34;: {&#34;dimension5&#34;: &#34;th&#34;, &#34;dimension3&#34;: false, &#34;dimension4&#34;: &#34;Documentation&#34;, &#34;dimension11&#34;: false, &#34;dimension6&#34;: &#34;th&#34;, &#34;dimension1&#34;: &#34;Signed out&#34;}, &#34;gaid&#34;: &#34;UA-24532603-1&#34;, &#34;metrics&#34;: {&#34;ratings_count&#34;: &#34;metric2&#34;, &#34;ratings_value&#34;: &#34;metric1&#34;}, &#34;purpose&#34;: 1}, {&#34;dimensions&#34;: {&#34;dimension5&#34;: &#34;th&#34;, &#34;dimension3&#34;: false, &#34;dimension4&#34;: &#34;Documentation&#34;, &#34;dimension11&#34;: false, &#34;dimension6&#34;: &#34;th&#34;, &#34;dimension1&#34;: &#34;Signed out&#34;}, &#34;gaid&#34;: &#34;UA-24532603-6&#34;, &#34;metrics&#34;: {&#34;ratings_count&#34;: &#34;metric2&#34;, &#34;ratings_value&#34;: &#34;metric1&#34;}, &#34;purpose&#34;: 0}]</script>
+<script type="application/json" tag-management>{&#34;at&#34;: &#34;True&#34;, &#34;ga4&#34;: [{&#34;id&#34;: &#34;G-272J68FCRF&#34;, &#34;purpose&#34;: 1}, {&#34;id&#34;: &#34;G-Q04XXL6ZW2&#34;, &#34;purpose&#34;: 0}], &#34;ga4p&#34;: [{&#34;id&#34;: &#34;G-272J68FCRF&#34;, &#34;purpose&#34;: 1}], &#34;gtm&#34;: [{&#34;id&#34;: &#34;GTM-T98GCPGN&#34;, &#34;purpose&#34;: 1}], &#34;parameters&#34;: {&#34;internalUser&#34;: &#34;False&#34;, &#34;language&#34;: {&#34;machineTranslated&#34;: &#34;False&#34;, &#34;requested&#34;: &#34;th&#34;, &#34;served&#34;: &#34;th&#34;}, &#34;pageType&#34;: &#34;lcat&#34;, &#34;projectName&#34;: &#34;Documentation&#34;, &#34;signedIn&#34;: &#34;False&#34;, &#34;tenant&#34;: &#34;developers&#34;, &#34;recommendations&#34;: {&#34;sourcePage&#34;: &#34;&#34;, &#34;sourceType&#34;: 0, &#34;sourceRank&#34;: 0, &#34;sourceIdenticalDescriptions&#34;: 0, &#34;sourceTitleWords&#34;: 0, &#34;sourceDescriptionWords&#34;: 0, &#34;experiment&#34;: &#34;&#34;}, &#34;experiment&#34;: {&#34;ids&#34;: &#34;&#34;}}}</script>
+      
+    </devsite-analytics>
+    
+      <devsite-badger></devsite-badger>
+    
+    
+    
+    
+<script nonce="B7i+88vAsJDwbW1fz/xGTiIJVbpSxU">
+  
+  (function(d,e,v,s,i,t,E){d['GoogleDevelopersObject']=i;
+    t=e.createElement(v);t.async=1;t.src=s;E=e.getElementsByTagName(v)[0];
+    E.parentNode.insertBefore(t,E);})(window, document, 'script',
+    'https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/js/app_loader.js', '[1,"th",null,"/js/devsite_app_module.js","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers","https://developers-dot-devsite-v2-prod.appspot.com",null,null,["/_pwa/developers/manifest.json","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/images/video-placeholder.svg","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/favicon-new.png","https://fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700&display=swap"],1,null,[1,6,8,12,14,17,21,25,50,52,63,70,75,76,80,87,91,92,93,97,98,100,101,102,103,104,105,107,108,109,110,112,113,117,118,120,122,124,125,126,127,129,130,131,132,133,134,135,136,138,140,141,147,148,149,151,152,156,157,158,159,161,163,164,168,169,170,179,180,182,183,186,191,193,196],"AIzaSyAP-jjEJBzmIyKR4F-3XITp8yM9T1gEEI8","AIzaSyB6xiKGDR5O3Ak2okS4rLkauxGUG7XP0hg","developers.google.com","AIzaSyAQk0fBONSGUqCNznf6Krs82Ap1-NV6J4o","AIzaSyCCxcqdrZ_7QMeLCRY20bh_SXdAYqy70KY",null,null,null,["DevPro__enable_devsite_captcha","MiscFeatureFlags__enable_explain_this_code","Analytics__enable_clearcut_logging","Concierge__enable_remove_info_panel_tags","Profiles__enable_public_developer_profiles","Concierge__enable_concierge","Profiles__enable_purchase_prompts","DevPro__enable_nvidia_credits_card","DevPro__enable_vertex_credit_card","Profiles__enable_developer_profile_benefits_ui_redesign","Search__enable_dynamic_content_confidential_banner","DevPro__enable_enterprise","MiscFeatureFlags__enable_framebox_badge_methods","Profiles__enable_targeted_hero","DevPro__remove_eu_tax_intake_form","Profiles__enable_awarding_url","TpcFeatures__enable_unmirrored_page_left_nav","Search__enable_ai_search_summaries_for_all","Concierge__enable_devsite_llm_tools","DevPro__enable_firebase_workspaces_card","MiscFeatureFlags__enable_appearance_cookies","Profiles__require_profile_eligibility_for_signin","Concierge__enable_actions_menu","Cloud__enable_cloud_shell_fte_user_flow","Profiles__enable_completequiz_endpoint","MiscFeatureFlags__developers_footer_image","MiscFeatureFlags__enable_view_transitions","Profiles__enable_complete_playlist_endpoint","DevPro__enable_credits_banner","Search__enable_page_map","CloudShell__cloud_code_overflow_menu","Cloud__enable_cloud_dlp_service","MiscFeatureFlags__fix_lower_breadcrumbs","MiscFeatureFlags__gdp_dashboard_reskin_enabled","Cloud__enable_llm_concierge_chat","DevPro__enable_cloud_innovators_plus","MiscFeatureFlags__enable_explicit_template_dependencies","Search__enable_ai_search_summaries_restricted","BookNav__enable_tenant_cache_key","Search__enable_ai_eligibility_checks","MiscFeatureFlags__enable_project_variables","SignIn__enable_l1_signup_flow","Cloud__enable_legacy_calculator_redirect","Concierge__enable_concierge_restricted","Profiles__enable_profile_collections","Profiles__enable_join_program_group_endpoint","Cloud__enable_cloud_shell","Profiles__enable_release_notes_notifications","DevPro__enable_developer_subscriptions","Profiles__enable_callout_notifications","Concierge__enable_pushui","Cloud__enable_cloudx_experiment_ids","Concierge__enable_key_takeaways","DevPro__enable_g1_integration","Analytics__enable_devpro_interaction_logging","MiscFeatureFlags__enable_variable_operator_index_yaml","MiscFeatureFlags__developers_footer_dark_image","DevPro__enable_google_payments","MiscFeatureFlags__remove_cross_domain_tracking_params","EngEduTelemetry__enable_engedu_telemetry","Cloud__cache_serialized_dynamic_content","DevPro__enable_embed_profile_creation","MiscFeatureFlags__enable_firebase_utm","Profiles__enable_developer_profile_pages_as_content","Search__enable_ai_search_summaries","Cloud__enable_free_trial_server_call","Profiles__enable_dashboard_curated_recommendations","Profiles__enable_developer_profiles_callout","Profiles__enable_user_type","Concierge__enable_key_takeaways_new_ui","Profiles__enable_recognition_badges","Profiles__enable_completecodelab_endpoint","Search__enable_suggestions_from_borg","CloudShell__cloud_shell_button","DevPro__enable_free_benefits","MiscFeatureFlags__enable_variable_operator","Cloud__fast_free_trial","TpcFeatures__proxy_prod_host","DevPro__enable_google_payments_buyflow","Profiles__enable_playlist_community_acl","DevPro__enable_google_one_card","Profiles__enable_stripe_subscription_management","Profiles__enable_auto_apply_credits","DevPro__enable_devpro_offers","Significatio__enable_by_tenant","Experiments__reqs_query_experiments","Profiles__enable_page_saving","DevPro__enable_code_assist"],null,null,"AIzaSyBLEMok-5suZ67qRPzx0qUtbnLmyT_kCVE","https://developerscontentserving-pa.clients6.google.com","AIzaSyCM4QpTRSqP5qI4Dvjt4OAScIN8sOUlO-k","https://developerscontentsearch-pa.clients6.google.com",1,4,null,"https://developerprofiles-pa.clients6.google.com",[1,"developers","Google for Developers","developers.google.com",null,"developers-dot-devsite-v2-prod.appspot.com",null,null,[1,1,[1],null,null,null,null,null,null,null,null,[1],null,null,null,null,null,null,[1],[1,null,null,[1,20],"/recommendations/information"],null,null,null,[1,1,1],[1,1,null,1,1,null,null,["/meridian"]],[1,null,null,null,null,null,null,["/admob","/ad-manager/mobile-ads-sdk","/ml-kit"]],null,[null,["/meridian","/youtube/devices/"]],1,null,[1]],null,[null,null,null,null,null,null,"/images/lockup-new.svg","/images/touchicon-180-new.png",null,null,null,null,1,null,null,null,null,null,null,null,null,1,null,null,null,"/images/lockup-dark-theme-new.svg",[]],[],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[6,1,14,15,20,22,23,29,32,36],null,[[null,null,null,[3,7,10,2,39,17,4,32,24,11,12,13,34,15,25],null,null,[1,[["docType","Choose a content type",[["Tutorial",null,null,null,null,null,null,null,null,"Tutorial"],["Guide",null,null,null,null,null,null,null,null,"Guide"],["Sample",null,null,null,null,null,null,null,null,"Sample"]]],["product","Choose a product",[["Android",null,null,null,null,null,null,null,null,"Android"],["ARCore",null,null,null,null,null,null,null,null,"ARCore"],["ChromeOS",null,null,null,null,null,null,null,null,"ChromeOS"],["Firebase",null,null,null,null,null,null,null,null,"Firebase"],["Flutter",null,null,null,null,null,null,null,null,"Flutter"],["Assistant",null,null,null,null,null,null,null,null,"Google Assistant"],["GoogleCloud",null,null,null,null,null,null,null,null,"Google Cloud"],["GoogleMapsPlatform",null,null,null,null,null,null,null,null,"Google Maps Platform"],["GooglePay",null,null,null,null,null,null,null,null,"Google Pay & Google Wallet"],["GooglePlay",null,null,null,null,null,null,null,null,"Google Play"],["Tensorflow",null,null,null,null,null,null,null,null,"TensorFlow"]]],["category","Choose a topic",[["AiAndMachineLearning",null,null,null,null,null,null,null,null,"AI and Machine Learning"],["Data",null,null,null,null,null,null,null,null,"Data"],["Enterprise",null,null,null,null,null,null,null,null,"Enterprise"],["Gaming",null,null,null,null,null,null,null,null,"Gaming"],["Mobile",null,null,null,null,null,null,null,null,"Mobile"],["Web",null,null,null,null,null,null,null,null,"Web"]]]]]],[1,1],null,1],[[["UA-24532603-1"],["UA-22084204-5"],null,null,["UA-24532603-5"],["GTM-T98GCPGN"],null,[["G-272J68FCRF"],null,null,[["G-272J68FCRF",2]]],[["UA-24532603-1",2]],null,[["UA-24532603-5",2]],[["GTM-T98GCPGN",2]],1],[[16,13],[12,9],[1,1],[13,10],[6,5],[11,8],[4,3],[15,12],[14,11],[3,2],[5,4]],[[1,1],[2,2]]],null,4,null,null,null,null,null,null,null,null,null,null,null,null,null,"developers.devsite.google",null,null,null,null,null,[]],null,"pk_live_5170syrHvgGVmSx9sBrnWtA5luvk9BwnVcvIi7HizpwauFG96WedXsuXh790rtij9AmGllqPtMLfhe2RSwD6Pn38V00uBCydV4m",1,1,"https://developerscontentinsights-pa.clients6.google.com","AIzaSyCg-ZUslalsEbXMfIo9ZP8qufZgo3LSBDU","AIzaSyDxT0vkxnY_KeINtA4LSePJO-4MAZPMRsE","https://developers.clients6.google.com",["https://codeassist.google.com","https://code-assist-free-tier.corp.google.com"],null,"AIzaSyBQom12tzI-rybN7Sf-KfeL4nwm-Rf7PmI\n",null,null,"https://developers.googleapis.com"]')
+  
+</script>
+
+    <devsite-a11y-announce></devsite-a11y-announce>
+  </body>
+</html>

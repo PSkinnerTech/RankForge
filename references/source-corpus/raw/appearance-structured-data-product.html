@@ -1,0 +1,4836 @@
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html 
+      lang="hi-x-mtfrom-en"
+      dir="ltr">
+  <head>
+    <meta name="google-signin-client-id" content="721724668570-nbkv1cfusk7kk4eni4pjvepaus73b13t.apps.googleusercontent.com"><meta name="google-signin-scope"
+          content="profile email https://www.googleapis.com/auth/developerprofiles https://www.googleapis.com/auth/developerprofiles.award https://www.googleapis.com/auth/devprofiles.full_control.firstparty"><meta property="og:site_name" content="Google for Developers">
+    <meta property="og:type" content="website"><meta name="theme-color" content="#fff"><meta charset="utf-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <link rel="manifest" href="/_pwa/developers/manifest.json"
+          crossorigin="use-credentials">
+    <link rel="preconnect" href="//www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="//fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="//www.google-analytics.com" crossorigin><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700&display=swap">
+      <link rel="stylesheet"
+            href="//fonts.googleapis.com/css2?family=Material+Icons&family=Material+Symbols+Outlined&display=block"><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto+Sans"><link rel="stylesheet" href="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/css/app.css">
+      <link rel="shortcut icon" href="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/favicon-new.png">
+    <link rel="apple-touch-icon" href="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/touchicon-180-new.png"><link rel="canonical" href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=hi"><link rel="search" type="application/opensearchdescription+xml"
+            title="Google for Developers" href="https://developers.google.com/s/opensearch.xml?hl=hi">
+      <link rel="alternate" hreflang="en"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product" /><link rel="alternate" hreflang="x-default" href="https://developers.google.com/search/docs/appearance/structured-data/product" /><link rel="alternate" hreflang="ar"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=ar" /><link rel="alternate" hreflang="zh-Hans"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=zh-cn" /><link rel="alternate" hreflang="zh-Hant"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=zh-tw" /><link rel="alternate" hreflang="fr"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=fr" /><link rel="alternate" hreflang="de"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=de" /><link rel="alternate" hreflang="hi"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=hi" /><link rel="alternate" hreflang="id"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=id" /><link rel="alternate" hreflang="it"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=it" /><link rel="alternate" hreflang="ja"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=ja" /><link rel="alternate" hreflang="ko"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=ko" /><link rel="alternate" hreflang="pl"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=pl" /><link rel="alternate" hreflang="pt-BR"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=pt-br" /><link rel="alternate" hreflang="ru"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=ru" /><link rel="alternate" hreflang="es"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=es" /><link rel="alternate" hreflang="es-419"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=es-419" /><link rel="alternate" hreflang="th"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=th" /><link rel="alternate" hreflang="tr"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=tr" /><link rel="alternate" hreflang="vi"
+          href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=vi" /><title>Google पर प्रॉडक्ट के स्ट्रक्चर्ड डेटा के बारे में जानकारी | Google Search Central &nbsp;|&nbsp; Documentation &nbsp;|&nbsp; Google for Developers</title>
+
+<meta property="og:title" content="Google पर प्रॉडक्ट के स्ट्रक्चर्ड डेटा के बारे में जानकारी | Google Search Central &nbsp;|&nbsp; Documentation &nbsp;|&nbsp; Google for Developers"><meta name="description" content="इस बारे में खास जानकारी पाएं कि Google पर खरीदारी के लिए सामान खोजने के दौरान अपने वेब पेजों पर प्रॉडक्ट का स्ट्रक्चर्ड डेटा जोड़ने से, संभावित खरीदारों का ध्यान कैसे खींचा जा सकता है.">
+  <meta property="og:description" content="इस बारे में खास जानकारी पाएं कि Google पर खरीदारी के लिए सामान खोजने के दौरान अपने वेब पेजों पर प्रॉडक्ट का स्ट्रक्चर्ड डेटा जोड़ने से, संभावित खरीदारों का ध्यान कैसे खींचा जा सकता है."><meta property="og:url" content="https://developers.google.com/search/docs/appearance/structured-data/product?hl=hi"><meta property="og:image" content="https://developers.google.com/static/search/images/home-social-share-lockup.jpg?hl=hi">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675"><meta property="og:locale" content="hi"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Search Central",
+      "item": "https://developers.google.com/search"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Documentation",
+      "item": "https://developers.google.com/search/docs"
+    },{
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Google पर प्रॉडक्ट के स्ट्रक्चर्ड डेटा के बारे में जानकारी | Google Search Central",
+      "item": "https://developers.google.com/search/docs/appearance/structured-data/product"
+    }]
+  }
+  </script><link rel="alternate machine-translated-from" hreflang="en"
+        href="https://developers.google.com/search/docs/appearance/structured-data/product?hl=en">
+  
+    
+    
+    
+    
+    
+    
+    
+    <meta name="apple-itunes-app" content="app-id=1512522198">
+    
+    
+  
+
+    </head>
+  <body class="color-scheme--light"
+        template="page"
+        theme="white"
+        type="lcat"
+        
+        
+        
+        layout="docs"
+        
+        
+        
+        
+        
+          
+            concierge='closed'
+          
+        
+        display-toc
+        pending>
+  
+    <devsite-progress type="indeterminate" id="app-progress"></devsite-progress>
+  
+  
+    <a href="#main-content" class="skip-link button">
+      
+      सीधे मुख्य कॉन्टेंट पर जाएं
+    </a>
+    <section class="devsite-wrapper">
+      <devsite-cookie-notification-bar></devsite-cookie-notification-bar>
+        <devsite-header role="banner">
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-header--inner" data-nosnippet>
+  <div class="devsite-top-logo-row-wrapper-wrapper">
+    <div class="devsite-top-logo-row-wrapper">
+      <div class="devsite-top-logo-row">
+        <button type="button" id="devsite-hamburger-menu"
+          class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+          data-category="Site-Wide Custom Events"
+          data-label="Navigation menu button"
+          visually-hidden
+          aria-label="मेन्यू खोलें">
+        </button>
+        
+<div class="devsite-product-name-wrapper">
+
+  
+    
+  
+  <a href="https://developers.google.com/search?hl=hi">
+    
+  <div class="devsite-product-logo-container"
+       
+       
+       
+    size="medium"
+  >
+  
+    <picture>
+      
+      <img class="devsite-product-logo"
+           alt="Google Search Central"
+           src="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=hi"
+           srcset=" /static/search/images/google-search-central-logo.svg"
+           sizes="64px"
+           loading="lazy"
+           >
+    </picture>
+  
+  </div>
+  
+  </a>
+  
+
+  
+
+
+
+  
+  
+  <span class="devsite-product-name">
+    <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             devsite-has-google-wordmark">
+    
+    
+    
+      
+      
+        
+  <a href="https://developers.google.com/search?hl=hi"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Upper Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Google Search Central"
+      
+    >
+    
+          <svg class="devsite-google-wordmark"
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 148 48">
+    <title>Google</title>
+    <path class="devsite-google-wordmark-svg-path" d="M19.58,37.65c-9.87,0-18.17-8.04-18.17-17.91c0-9.87,8.3-17.91,18.17-17.91c5.46,0,9.35,2.14,12.27,4.94l-3.45,3.45c-2.1-1.97-4.93-3.49-8.82-3.49c-7.21,0-12.84,5.81-12.84,13.02c0,7.21,5.64,13.02,12.84,13.02c4.67,0,7.34-1.88,9.04-3.58c1.4-1.4,2.32-3.41,2.66-6.16H19.58v-4.89h16.47c0.18,0.87,0.26,1.92,0.26,3.06c0,3.67-1.01,8.21-4.24,11.44C28.93,35.9,24.91,37.65,19.58,37.65z M61.78,26.12c0,6.64-5.1,11.53-11.36,11.53s-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53S61.78,19.43,61.78,26.12z M56.8,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C53.84,33.11,56.8,30.22,56.8,26.12z M87.25,26.12c0,6.64-5.1,11.53-11.36,11.53c-6.26,0-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53C82.15,14.59,87.25,19.43,87.25,26.12zM82.28,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C79.32,33.11,82.28,30.22,82.28,26.12z M112.09,15.29v20.7c0,8.52-5.02,12.01-10.96,12.01c-5.59,0-8.95-3.76-10.22-6.81l4.41-1.83c0.79,1.88,2.71,4.1,5.81,4.1c3.8,0,6.16-2.36,6.16-6.77v-1.66h-0.18c-1.14,1.4-3.32,2.62-6.07,2.62c-5.76,0-11.05-5.02-11.05-11.49c0-6.51,5.28-11.57,11.05-11.57c2.75,0,4.93,1.22,6.07,2.58h0.18v-1.88H112.09z M107.64,26.16c0-4.06-2.71-7.03-6.16-7.03c-3.49,0-6.42,2.97-6.42,7.03c0,4.02,2.93,6.94,6.42,6.94C104.93,33.11,107.64,30.18,107.64,26.16z M120.97,3.06v33.89h-5.07V3.06H120.97z M140.89,29.92l3.93,2.62c-1.27,1.88-4.32,5.11-9.61,5.11c-6.55,0-11.28-5.07-11.28-11.53c0-6.86,4.77-11.53,10.71-11.53c5.98,0,8.91,4.76,9.87,7.34l0.52,1.31l-15.42,6.38c1.18,2.31,3.01,3.49,5.59,3.49C137.79,33.11,139.58,31.84,140.89,29.92zM128.79,25.77l10.31-4.28c-0.57-1.44-2.27-2.45-4.28-2.45C132.24,19.04,128.66,21.31,128.79,25.77z"/>
+  </svg>Search Central
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+  </span>
+
+</div>
+        <div class="devsite-top-logo-row-middle">
+          <div class="devsite-header-upper-tabs">
+            
+              
+              
+  <devsite-tabs class="upper-tabs">
+
+    <nav class="devsite-tabs-wrapper" aria-label="ऊपर के टैब">
+      
+        
+          <tab class="devsite-dropdown
+    devsite-dropdown-full
+    devsite-active
+    
+    ">
+  
+    <a href="https://developers.google.com/search/docs?hl=hi"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/docs?hl=hi"
+    
+       track-type="nav"
+       track-metadata-position="nav - दस्तावेज़"
+       track-metadata-module="primary nav"
+       aria-label="दस्तावेज़, selected" 
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: दस्तावेज़"
+         
+           track-name="दस्तावेज़"
+         
+       >
+    दस्तावेज़
+  
+    </a>
+    
+      <button
+         aria-haspopup="menu"
+         aria-expanded="false"
+         aria-label="इसके लिए ड्रॉपडाउन मेन्यू दस्तावेज़"
+         track-type="nav"
+         track-metadata-eventdetail="https://developers.google.com/search/docs?hl=hi"
+         track-metadata-position="nav - दस्तावेज़"
+         track-metadata-module="primary nav"
+         
+          
+            data-category="Site-Wide Custom Events"
+          
+            data-label="Tab: दस्तावेज़"
+          
+            track-name="दस्तावेज़"
+          
+        
+         class="devsite-tabs-dropdown-toggle devsite-icon devsite-icon-arrow-drop-down"></button>
+    
+  
+  <div class="devsite-tabs-dropdown" role="menu" aria-label="submenu" hidden>
+    <div class="devsite-tabs-dropdown-content">
+      
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>एसईओ से जुड़ी बुनियादी बातें</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="एसईओ से जुड़ी बुनियादी बातें"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      शुरुआती जानकारी
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/essentials?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/essentials?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="एसईओ से जुड़ी बुनियादी बातें"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Search पर कॉन्टेंट दिखाने के बुनियादी दिशा-निर्देश
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="एसईओ से जुड़ी बुनियादी बातें"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      एसईओ स्टार्टर गाइड
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/fundamentals/how-search-works?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/fundamentals/how-search-works?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="एसईओ से जुड़ी बुनियादी बातें"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Google Search के काम करने का तरीका
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/fundamentals/do-i-need-seo?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="एसईओ से जुड़ी बुनियादी बातें"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      क्या आपको एसईओ एक्सपर्ट की ज़रूरत है?
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>क्रॉल और इंंडेक्स करना</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="क्रॉल और इंंडेक्स करना"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      साइटमैप
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="क्रॉल और इंंडेक्स करना"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      robots.txt
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/special-tags?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/special-tags?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="क्रॉल और इंंडेक्स करना"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      मेटा टैग
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="क्रॉल और इंंडेक्स करना"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      क्रॉलर मैनेजमेंट
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/control-what-you-share?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/control-what-you-share?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="क्रॉल और इंंडेक्स करना"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      निष्कासन
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="क्रॉल और इंंडेक्स करना"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      यूआरएल के कैननिकल होने की जांच करना
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/301-redirects?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/301-redirects?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="क्रॉल और इंंडेक्स करना"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      रीडायरेक्ट
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="क्रॉल और इंंडेक्स करना"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      JavaScript एसईओ
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>रैंकिंग और खोज नतीजों में दिखने का तरीका</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/visual-elements-gallery?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/visual-elements-gallery?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="रैंकिंग और खोज नतीजों में दिखने का तरीका"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      विज़ुअल एलिमेंट गैलरी
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/title-link?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/title-link?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="रैंकिंग और खोज नतीजों में दिखने का तरीका"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      टाइटल के लिंक
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/snippet?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/snippet?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="रैंकिंग और खोज नतीजों में दिखने का तरीका"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      स्निपेट
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/google-images?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/google-images?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="रैंकिंग और खोज नतीजों में दिखने का तरीका"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      इमेज
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/video?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/video?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="रैंकिंग और खोज नतीजों में दिखने का तरीका"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      वीडियो
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/structured-data/search-gallery?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/structured-data/search-gallery?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="रैंकिंग और खोज नतीजों में दिखने का तरीका"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      स्ट्रक्चर्ड डेटा
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/favicon-in-search?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/favicon-in-search?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="रैंकिंग और खोज नतीजों में दिखने का तरीका"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      फ़ेविकॉन
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>साइट के हिसाब से गाइड</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/specialty/ecommerce?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/specialty/ecommerce?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="साइट के हिसाब से गाइड"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      ई-कॉमर्स
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/specialty/international?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/specialty/international?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="साइट के हिसाब से गाइड"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      अंतरराष्ट्रीय और कई भाषाओं वाली साइटें
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>डेटा का विश्लेषण</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/search-console-start?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/search-console-start?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="साइट के हिसाब से गाइड"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Search Console के इस्तेमाल की जानकारी
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="साइट के हिसाब से गाइड"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      ट्रैफ़िक में आई गिरावट को डीबग करना
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/google-analytics-search-console?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/google-analytics-search-console?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="साइट के हिसाब से गाइड"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      एसईओ के लिए Search Console और Google Analytics के डेटा का इस्तेमाल करना
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/trends-start?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/trends-start?hl=hi"
+                     track-metadata-position="nav - दस्तावेज़"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="साइट के हिसाब से गाइड"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Google Trends का इस्तेमाल शुरू करें
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+    </div>
+  </div>
+</tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/help?hl=hi"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/help?hl=hi"
+    
+       track-type="nav"
+       track-metadata-position="nav - सहायता"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: सहायता"
+         
+           track-name="सहायता"
+         
+       >
+    सहायता
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/blog?hl=hi"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/blog?hl=hi"
+    
+       track-type="nav"
+       track-metadata-position="nav - ब्लॉग"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: ब्लॉग"
+         
+           track-name="ब्लॉग"
+         
+       >
+    ब्लॉग
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab class="devsite-dropdown
+    
+    
+    
+    ">
+  
+    <a href="https://developers.google.com/search/news?hl=hi"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/news?hl=hi"
+    
+       track-type="nav"
+       track-metadata-position="nav - नया क्या है"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: नया क्या है"
+         
+           track-name="नया क्या है"
+         
+       >
+    नया क्या है
+  
+    </a>
+    
+      <button
+         aria-haspopup="menu"
+         aria-expanded="false"
+         aria-label="इसके लिए ड्रॉपडाउन मेन्यू नया क्या है"
+         track-type="nav"
+         track-metadata-eventdetail="https://developers.google.com/search/news?hl=hi"
+         track-metadata-position="nav - नया क्या है"
+         track-metadata-module="primary nav"
+         
+          
+            data-category="Site-Wide Custom Events"
+          
+            data-label="Tab: नया क्या है"
+          
+            track-name="नया क्या है"
+          
+        
+         class="devsite-tabs-dropdown-toggle devsite-icon devsite-icon-arrow-drop-down"></button>
+    
+  
+  <div class="devsite-tabs-dropdown" role="menu" aria-label="submenu" hidden>
+    <div class="devsite-tabs-dropdown-content">
+      
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/news?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/news?hl=hi"
+                     track-metadata-position="nav - नया क्या है"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      सभी अपडेट
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/updates?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/updates?hl=hi"
+                     track-metadata-position="nav - नया क्या है"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      दस्तावेज़ से जुड़े अपडेट
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history?hl=hi"
+                     track-metadata-position="nav - नया क्या है"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      रैंकिंग से जुड़े अपडेट
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA?hl=hi"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA?hl=hi"
+                     track-metadata-position="nav - नया क्या है"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      YouTube के नए वीडियो
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://pod.link/1512522198"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://pod.link/1512522198"
+                     track-metadata-position="nav - नया क्या है"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      पॉडकास्ट के हाल ही के एपिसोड
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+    </div>
+  </div>
+</tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/events?hl=hi"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/events?hl=hi"
+    
+       track-type="nav"
+       track-metadata-position="nav - इवेंट"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: इवेंट"
+         
+           track-name="इवेंट"
+         
+       >
+    इवेंट
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/case-studies?hl=hi"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/case-studies?hl=hi"
+    
+       track-type="nav"
+       track-metadata-position="nav - केस स्टडी"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: केस स्टडी"
+         
+           track-name="केस स्टडी"
+         
+       >
+    केस स्टडी
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+    </nav>
+
+  </devsite-tabs>
+
+            
+           </div>
+          
+<devsite-search
+    enable-signin
+    enable-search
+    enable-suggestions
+      enable-query-completion
+    
+    enable-search-summaries
+    project-name="Documentation"
+    tenant-name="Google for Developers"
+    project-scope="/search/docs"
+    url-scoped="https://developers.google.com/s/results/search/docs?hl=hi"
+    
+    
+    
+    >
+  <form class="devsite-search-form" action="https://developers.google.com/s/results?hl=hi" method="GET">
+    <div class="devsite-search-container">
+      <button type="button"
+              search-open
+              class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+              
+              aria-label="खोज बॉक्स खोलें"></button>
+      <div class="devsite-searchbox">
+        <input
+          aria-activedescendant=""
+          aria-autocomplete="list"
+          
+          aria-label="खोजें"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          autocomplete="off"
+          class="devsite-search-field devsite-search-query"
+          name="q"
+          
+          placeholder="खोजें"
+          role="combobox"
+          type="text"
+          value=""
+          >
+          <div class="devsite-search-image material-icons" aria-hidden="true">
+            
+              <svg class="devsite-search-ai-image" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_6641_386)">
+                    <path d="M19.6 21L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16C7.68333 16 6.14167 15.375 4.875 14.125C3.625 12.8583 3 11.3167 3 9.5C3 7.68333 3.625 6.15 4.875 4.9C6.14167 3.63333 7.68333 3 9.5 3C10.0167 3 10.5167 3.05833 11 3.175C11.4833 3.275 11.9417 3.43333 12.375 3.65L10.825 5.2C10.6083 5.13333 10.3917 5.08333 10.175 5.05C9.95833 5.01667 9.73333 5 9.5 5C8.25 5 7.18333 5.44167 6.3 6.325C5.43333 7.19167 5 8.25 5 9.5C5 10.75 5.43333 11.8167 6.3 12.7C7.18333 13.5667 8.25 14 9.5 14C10.6667 14 11.6667 13.625 12.5 12.875C13.35 12.1083 13.8417 11.15 13.975 10H15.975C15.925 10.6333 15.7833 11.2333 15.55 11.8C15.3333 12.3667 15.05 12.8667 14.7 13.3L21 19.6L19.6 21ZM17.5 12C17.5 10.4667 16.9667 9.16667 15.9 8.1C14.8333 7.03333 13.5333 6.5 12 6.5C13.5333 6.5 14.8333 5.96667 15.9 4.9C16.9667 3.83333 17.5 2.53333 17.5 0.999999C17.5 2.53333 18.0333 3.83333 19.1 4.9C20.1667 5.96667 21.4667 6.5 23 6.5C21.4667 6.5 20.1667 7.03333 19.1 8.1C18.0333 9.16667 17.5 10.4667 17.5 12Z" fill="#5F6368"/>
+                  </g>
+                <defs>
+                <clipPath id="clip0_6641_386">
+                <rect width="24" height="24" fill="white"/>
+                </clipPath>
+                </defs>
+              </svg>
+            
+          </div>
+          <div class="devsite-search-shortcut-icon-container" aria-hidden="true">
+            <kbd class="devsite-search-shortcut-icon">/</kbd>
+          </div>
+      </div>
+    </div>
+  </form>
+  <button type="button"
+          search-close
+          class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+          
+          aria-label="खोज बॉक्स बंद करें"></button>
+</devsite-search>
+
+        </div>
+
+        
+
+          
+
+          
+
+          
+
+          
+
+          
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es"
+        >Español</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+
+          
+
+        
+
+        
+          <devsite-user 
+                        
+                        
+                          enable-profiles
+                        
+                        
+                          fp-auth
+                        
+                        id="devsite-user">
+            
+              
+              <span class="button devsite-top-button" aria-hidden="true" visually-hidden>प्रवेश करें</span>
+            
+          </devsite-user>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="devsite-collapsible-section
+    
+      devsite-header-no-lower-tabs
+    ">
+    <div class="devsite-header-background">
+      
+        
+          <div class="devsite-product-id-row"
+           >
+            <div class="devsite-product-description-row">
+              
+                
+                <div class="devsite-product-id">
+                  
+                  
+                  
+                    <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/search/docs?hl=hi"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Lower Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Documentation"
+      
+    >
+    
+          Documentation
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+                </div>
+                
+              
+              
+            </div>
+            
+              <div class="devsite-product-button-row">
+  
+
+  
+  <a href="https://goo.gle/searchconsole"
+  
+    class="button button-primary
+      "
+    
+    
+      
+        data-label="open search console header button"
+      
+        data-category="Search docs"
+      
+    
+    >Search Console</a>
+
+</div>
+            
+          </div>
+          
+        
+      
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+  
+
+  
+</devsite-header>
+        <devsite-book-nav scrollbars >
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-book-nav-filter"
+     hidden>
+  <span class="filter-list-icon material-icons" aria-hidden="true"></span>
+  <input type="text"
+         placeholder="फ़िल्टर करें"
+         
+         aria-label="फ़िल्टर करने के लिए टाइप करें"
+         role="searchbox">
+  
+  <span class="filter-clear-button hidden"
+        data-title="फ़िल्टर हटाएं"
+        aria-label="फ़िल्टर हटाएं"
+        role="button"
+        tabindex="0"></span>
+</div>
+
+<nav class="devsite-book-nav devsite-nav nocontent" data-nosnippet
+     aria-label="साइड मेन्यू">
+  <div class="devsite-mobile-header">
+    <button type="button"
+            id="devsite-close-nav"
+            class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+            data-category="Site-Wide Custom Events"
+            data-label="Close navigation"
+            aria-label="नेविगेशन बंद करें">
+    </button>
+    <div class="devsite-product-name-wrapper">
+
+  
+    
+  
+  <a href="https://developers.google.com/search?hl=hi">
+    
+  <div class="devsite-product-logo-container"
+       
+       
+       
+    size="medium"
+  >
+  
+    <picture>
+      
+      <img class="devsite-product-logo"
+           alt="Google Search Central"
+           src="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=hi"
+           srcset=" /static/search/images/google-search-central-logo.svg"
+           sizes="64px"
+           loading="lazy"
+           >
+    </picture>
+  
+  </div>
+  
+  </a>
+  
+
+  
+
+
+  
+      <span class="devsite-product-name">
+        
+        
+        <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             devsite-has-google-wordmark">
+    
+    
+    
+      
+      
+        
+  <a href="https://developers.google.com/search?hl=hi"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Upper Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Google Search Central"
+      
+    >
+    
+          <svg class="devsite-google-wordmark"
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 148 48">
+    <title>Google</title>
+    <path class="devsite-google-wordmark-svg-path" d="M19.58,37.65c-9.87,0-18.17-8.04-18.17-17.91c0-9.87,8.3-17.91,18.17-17.91c5.46,0,9.35,2.14,12.27,4.94l-3.45,3.45c-2.1-1.97-4.93-3.49-8.82-3.49c-7.21,0-12.84,5.81-12.84,13.02c0,7.21,5.64,13.02,12.84,13.02c4.67,0,7.34-1.88,9.04-3.58c1.4-1.4,2.32-3.41,2.66-6.16H19.58v-4.89h16.47c0.18,0.87,0.26,1.92,0.26,3.06c0,3.67-1.01,8.21-4.24,11.44C28.93,35.9,24.91,37.65,19.58,37.65z M61.78,26.12c0,6.64-5.1,11.53-11.36,11.53s-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53S61.78,19.43,61.78,26.12z M56.8,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C53.84,33.11,56.8,30.22,56.8,26.12z M87.25,26.12c0,6.64-5.1,11.53-11.36,11.53c-6.26,0-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53C82.15,14.59,87.25,19.43,87.25,26.12zM82.28,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C79.32,33.11,82.28,30.22,82.28,26.12z M112.09,15.29v20.7c0,8.52-5.02,12.01-10.96,12.01c-5.59,0-8.95-3.76-10.22-6.81l4.41-1.83c0.79,1.88,2.71,4.1,5.81,4.1c3.8,0,6.16-2.36,6.16-6.77v-1.66h-0.18c-1.14,1.4-3.32,2.62-6.07,2.62c-5.76,0-11.05-5.02-11.05-11.49c0-6.51,5.28-11.57,11.05-11.57c2.75,0,4.93,1.22,6.07,2.58h0.18v-1.88H112.09z M107.64,26.16c0-4.06-2.71-7.03-6.16-7.03c-3.49,0-6.42,2.97-6.42,7.03c0,4.02,2.93,6.94,6.42,6.94C104.93,33.11,107.64,30.18,107.64,26.16z M120.97,3.06v33.89h-5.07V3.06H120.97z M140.89,29.92l3.93,2.62c-1.27,1.88-4.32,5.11-9.61,5.11c-6.55,0-11.28-5.07-11.28-11.53c0-6.86,4.77-11.53,10.71-11.53c5.98,0,8.91,4.76,9.87,7.34l0.52,1.31l-15.42,6.38c1.18,2.31,3.01,3.49,5.59,3.49C137.79,33.11,139.58,31.84,140.89,29.92zM128.79,25.77l10.31-4.28c-0.57-1.44-2.27-2.45-4.28-2.45C132.24,19.04,128.66,21.31,128.79,25.77z"/>
+  </svg>Search Central
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+      </span>
+    
+
+</div>
+  </div>
+
+  <div class="devsite-book-nav-wrapper">
+    <div class="devsite-mobile-nav-top">
+      
+        <ul class="devsite-nav-list">
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/docs"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              devsite-nav-active"
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: दस्तावेज़"
+      
+        track-name="दस्तावेज़"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: दस्तावेज़"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      दस्तावेज़
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+  
+    <ul class="devsite-nav-responsive-tabs devsite-nav-has-menu
+               ">
+      
+<li class="devsite-nav-item">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: दस्तावेज़"
+      
+        track-name="दस्तावेज़"
+      
+    >
+  
+    <span class="devsite-nav-text" tooltip menu="दस्तावेज़">
+      और देखें
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          menu="दस्तावेज़">
+    </span>
+    
+  
+  </span>
+  
+
+</li>
+
+    </ul>
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/help"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: सहायता"
+      
+        track-name="सहायता"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: सहायता"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      सहायता
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/blog"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: ब्लॉग"
+      
+        track-name="ब्लॉग"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: ब्लॉग"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      ब्लॉग
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/news"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: नया क्या है"
+      
+        track-name="नया क्या है"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: नया क्या है"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      नया क्या है
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+  
+    <ul class="devsite-nav-responsive-tabs devsite-nav-has-menu
+               ">
+      
+<li class="devsite-nav-item">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: नया क्या है"
+      
+        track-name="नया क्या है"
+      
+    >
+  
+    <span class="devsite-nav-text" tooltip menu="नया क्या है">
+      और देखें
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          menu="नया क्या है">
+    </span>
+    
+  
+  </span>
+  
+
+</li>
+
+    </ul>
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/events"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: इवेंट"
+      
+        track-name="इवेंट"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: इवेंट"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      इवेंट
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/case-studies"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: केस स्टडी"
+      
+        track-name="केस स्टडी"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: केस स्टडी"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      केस स्टडी
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+          
+          
+        </ul>
+      
+    </div>
+    
+      <div class="devsite-mobile-nav-bottom">
+        
+          
+          <ul class="devsite-nav-list" menu="_book">
+            <li class="devsite-nav-item"><a href="/search/docs"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>शुरुआती जानकारी</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Search पर कॉन्टेंट दिखाने के बुनियादी दिशा-निर्देश</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/essentials"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>खास जानकारी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/essentials/technical"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>तकनीकी ज़रूरतें</span></a></li><li class="devsite-nav-item"><a href="/search/docs/essentials/spam-policies"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>स्पैम की रोकथाम के लिए बनी नीतियां</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>एसईओ से जुड़ी बुनियादी बातें</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/fundamentals/seo-starter-guide"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>एसईओ स्टार्टर गाइड</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/how-search-works"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google Search कैसे काम करता है</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/creating-helpful-content"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>मददगार, भरोसेमंद, और लोगों को जानकारी देने वाला उपयोगी कॉन्टेंट बनाना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/do-i-need-seo"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>क्या आपको एसईओ एक्सपर्ट की ज़रूरत है?</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/get-started"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>अपनी साइट के एसईओ को बनाए रखना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/get-started-developers"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Search के लिए डेवलपर की गाइड</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/get-on-google"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>अपनी वेबसाइट को Google के खोज नतीजों में दिखाना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/using-gen-ai-content"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>जनरेटिव एआई का इस्तेमाल करने से जुड़े दिशा-निर्देश</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>क्रॉल और इंंडेक्स करना</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>खास जानकारी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/indexable-file-types"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ऐसे फ़ाइल टाइप जिन्हें Google इंडेक्स कर सकता है</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/url-structure"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>यूआरएल का स्ट्रक्चर</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/links-crawlable"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>लिंक</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>साइटमैप</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>साइटमैप के बारे में जानकारी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/build-sitemap"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>साइटमैप बनाना और उसे सबमिट करना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/large-sitemaps"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>साइटमैप की इंडेक्स फ़ाइल से साइटमैप मैनेज करना</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>साइटमैप के एक्सटेंशन</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/image-sitemaps"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>इमेज के साइटमैप</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/news-sitemap"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>समाचार साइटमैप</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/video-sitemaps"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>वीडियो साइटमैप और उनके विकल्प</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/combine-sitemap-extensions"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>साइटमैप एक्सटेंशन को जोड़ना</span></a></li></ul></div></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>क्रॉलर मैनेजमेंट</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/ask-google-to-recrawl"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google से अपने यूआरएल फिर से क्रॉल करने का अनुरोध करना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/troubleshoot-crawling-errors"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>क्रॉल करने पर मिली गड़बड़ियों को ठीक करना</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Google के क्रॉलर</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/crawlers-fetchers/overview-google-crawlers"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google के क्रॉलर की सूची</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="बाहरी"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/googlebot"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Googlebot</span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/crawlers-fetchers/reduce-crawl-rate"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google की क्रॉल दर को कम करना</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="बाहरी"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/crawlers-fetchers/verifying-googlebot"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Googlebot और Google के अन्य क्रॉलर की पुष्टि करना</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="बाहरी"
+        aria-hidden="true"></span></a></li></ul></div></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>robots.txt</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/robots/intro"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>robots.txt फ़ाइल के बारे में जानकारी</span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/robots-txt/robots-txt-spec"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google, robots.txt फ़ाइल के निर्देशों को कैसे समझता है</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="बाहरी"
+        aria-hidden="true"></span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>यूआरएल के कैननिकल होने की जांच करना</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/canonicalization"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>यूआरएल के कैननिकल होने की जांच करना क्या होता है</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/consolidate-duplicate-urls"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>rel=&#34;canonical&#34; और दूसरे तरीकों से कैननिकल यूआरएल तय करने का तरीका</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/canonicalization-troubleshooting"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>यूआरएल के कैननिकल होने की समस्या ठीक करना</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>मोबाइल साइट और वेब पेज के मोबाइल वर्शन को पहले इंडेक्स करने की सुविधा</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>एएमपी</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google Search पर एएमपी के लिए दिशा-निर्देश</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/about-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>खोज के नतीजों में एएमपी के काम करने का तरीका समझना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/enhance-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>एएमपी कॉन्टेंट को बेहतर बनाना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/validate-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>एएमपी कॉन्टेंट की पुष्टि करना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/remove-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>एएमपी कॉन्टेंट हटाना</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>JavaScript</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>JavaScript एसईओ से जुड़ी बुनियादी बातें समझना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/javascript/fix-search-javascript"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>खोज से जुड़ी JavaScript समस्याओं को ठीक करना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/javascript/lazy-loading"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>धीमी रफ़्तार से कॉन्टेंट लोड होने की समस्या को ठीक करना</span></a></li><li class="devsite-nav-item
+           devsite-nav-deprecated"><a href="/search/docs/crawling-indexing/javascript/dynamic-rendering"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>अस्थायी समाधान के तौर पर डाइनैमिक रेंडरिंग का इस्तेमाल करना</span><span class="devsite-nav-icon material-icons"
+        data-icon="deprecated"
+        data-title="समर्थन नहीं है या रोका गया है"
+        aria-hidden="true"></span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>पेज और कॉन्टेंट से जुड़ा मेटाडेटा</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/valid-page-metadata"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>पेज का मेटाडेटा</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>मेटा टैग</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/special-tags"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ऐसे मेटा टैग और एट्रिब्यूट जिनका इस्तेमाल, Google के लिए किया जा सकता है</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/robots-meta-tag"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>रोबोट मेटा टैग, data-nosnippet, और X-Robots-Tag</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/block-indexing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>noindex</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/qualify-outbound-links"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>rel एट्रिब्यूट</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>निष्कासन</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/control-what-you-share"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>यह कंट्रोल करना कि Google के साथ आपका कौनसा कॉन्टेंट शेयर किया जाए</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/remove-information"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>पेज हटाना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/prevent-images-on-your-page"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>इमेज हटाना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/keep-redacted-information-out"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>छिपाने के लिए बदली गई जानकारी</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>साइट को नए प्लैटफ़ॉर्म या यूआरएल पर ले जाना और उसमें बदलाव करना</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/301-redirects"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>रीडायरेक्ट और Google Search</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>साइट को नए प्लैटफ़ॉर्म पर ले जाना</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/site-move-no-url-changes"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>अपनी होस्टिंग बदलना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/site-move-with-url-changes"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>यूआरएल में बदलाव करके साइट का प्रोटोकॉल बदलना</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/website-testing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>A/B टेस्टिंग</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/pause-online-business"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>वेबसाइट को कुछ समय के लिए रोकना या बंद करना</span></a></li></ul></div></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>रैंकिंग और खोज नतीजों में दिखने का तरीका</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>खास जानकारी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/ai-features"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>एआई की सुविधाएं</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/publication-dates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>बायलाइन की तारीखें</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/favicon-in-search"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>फ़ेविकॉन</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/featured-snippets"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>फ़ीचर्ड स्निपेट</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/flexible-sampling"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>लचीली सैंपलिंग</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/google-discover"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google डिस्कवर</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/google-images"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>इमेज</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>स्थानीय सुविधाएं</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/establish-business-details"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>कारोबार की जानकारी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/top-places-list"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>लोकप्रिय जगहों की सूची</span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="https://support.google.com/webmasters/answer/3035947"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>आस-पास के खोज नतीजे दिखाने वाली सुविधा से ऑप्ट आउट करना</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="बाहरी"
+        aria-hidden="true"></span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>पेज की परफ़ॉर्मेंस</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/page-experience"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>पेज की परफ़ॉर्मेंस को समझना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/core-web-vitals"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Core Web Vitals</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/avoid-intrusive-interstitials"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>पेज पर अचानक दिखने वाले एलिमेंट और डायलॉग</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/signed-exchange"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google Search के लिए, साइन किए हुए एक्सचेंज का इस्तेमाल शुरू करें</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/preferred-sources"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>पसंदीदा सोर्स</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>रैंकिंग सिस्टम</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/ranking-systems-guide"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google Search के रैंकिंग सिस्टम के बारे में गाइड</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/reviews-system"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>समीक्षाएं करने वाला सिस्टम</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>रैंकिंग से जुड़े अपडेट</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-external"><a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>रैंकिंग से जुड़े अपडेट की सूची</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="बाहरी"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/core-updates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ज़रूरी अपडेट</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/spam-updates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>स्पैम से जुड़े अपडेट</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/site-names"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>साइट के नाम</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/sitelinks"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>साइटलिंक</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/snippet"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>स्निपेट</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>स्ट्रक्चर्ड डेटा</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/intro-structured-data"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>स्ट्रक्चर्ड डेटा के काम करने का तरीका समझना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/sd-policies"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>स्ट्रक्चर्ड डेटा के सामान्य दिशा-निर्देश</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/enriched-search-results"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>बेहतर खोज नतीजे</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/generate-structured-data-with-javascript"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>JavaScript से स्ट्रक्चर्ड डेटा जनरेट करना</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>सुविधा की गाइड</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/search-gallery"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>स्ट्रक्चर्ड डेटा का इस्तेमाल करने वाली सभी सुविधाएं</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/article"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>लेख</span></a></li><li class="devsite-nav-item
+           devsite-nav-limited"><a href="/search/docs/appearance/structured-data/book"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>किताब से जुड़ी कार्रवाइयां</span><span class="devsite-nav-icon material-icons"
+        data-icon="limited"
+        data-title="सीमित ऐक्सेस"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/breadcrumb"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ब्रेडक्रंब</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/carousel"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>कैरसेल</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/course"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>कोर्स की सूची</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/dataset"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>डेटासेट</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/discussion-forum"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>चर्चा फ़ोरम</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/education-qa"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>शिक्षा से जुड़े सवाल और जवाब</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/employer-rating"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>नौकरी देने वाली कंपनी की कुल रेटिंग</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/factcheck"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>तथ्यों की जांच</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/event"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>इवेंट</span></a></li><li class="devsite-nav-item
+           devsite-nav-deprecated"><a href="/search/docs/appearance/structured-data/faqpage"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>अक्सर पूछे जाने वाले सवाल</span><span class="devsite-nav-icon material-icons"
+        data-icon="deprecated"
+        data-title="समर्थन नहीं है या रोका गया है"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/image-license-metadata"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>इमेज का मेटाडेटा</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/job-posting"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>नौकरी का विज्ञापन</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/local-business"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>स्थानीय कारोबार</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/math-solvers"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>मैथ सॉल्वर</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/movie"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>मूवी का कैरसेल</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/organization"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>संगठन</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>खरीदारी</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/product"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>खास जानकारी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/product-snippet"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>प्रॉडक्ट का स्निपेट</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/merchant-listing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>कारोबारी या कंपनी की दिखाई जाने वाली लिस्टिंग</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/product-variants"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>वैरिएंट</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/loyalty-program"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>लॉयल्टी कार्यक्रम</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/return-policy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>कारोबारी या कंपनी की सामान लौटाने की नीति</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/shipping-policy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>कारोबारी या कंपनी की शिपिंग से जुड़ी नीति</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/profile-page"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>प्रोफ़ाइल पेज</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/qapage"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>सवाल और जवाब</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/recipe"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>रेसिपी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/review-snippet"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>समीक्षा स्निपेट</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/software-app"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>सॉफ़्टवेयर ऐप्लिकेशन</span></a></li><li class="devsite-nav-item
+           devsite-nav-beta"><a href="/search/docs/appearance/structured-data/speakable"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>बोले जा सकने लायक</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="बीटा"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/paywalled-content"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>सदस्यता और paywall किया गया कॉन्टेंट</span></a></li><li class="devsite-nav-item
+           devsite-nav-limited"><a href="/search/docs/appearance/structured-data/vacation-rental"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>छुट्टियों में किराये पर उपलब्ध जगहें</span><span class="devsite-nav-icon material-icons"
+        data-icon="limited"
+        data-title="सीमित ऐक्सेस"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/video"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>वीडियो</span></a></li></ul></div></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/title-link"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>टाइटल के लिंक</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>ऐसी सुविधाएं जिनका अनुवाद किया गया है</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/translated-results"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>खोज के ऐसे नतीजे जिनका अनुवाद किया गया है</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/ad-network-and-translation"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>विज्ञापन नेटवर्क कंपनी और अनुवाद से जुड़ी Google Search की सुविधाएं</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/video"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>वीडियो</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/visual-elements-gallery"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>विज़ुअल एलिमेंट गैलरी</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>वेब स्टोरी</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/enable-web-stories"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google पर वेब स्टोरी चालू करना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/web-stories-creation-best-practices"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>&#39;वेब स्टोरी&#39; बनाने के सबसे सही तरीके</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/web-stories-content-policy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>वेब स्टोरी कॉन्टेंट की नीति</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>शुरुआती उपभोक्ता प्रोग्राम</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-beta"><a href="/search/docs/appearance/package-tracking"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>पैकेज ट्रैकिंग</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="बीटा"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-beta"><a href="/search/docs/appearance/structured-data/carousels-beta"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>स्ट्रक्चर्ड डेटा कैरसेल (बीटा)</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="बीटा"
+        aria-hidden="true"></span></a></li></ul></div></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>निगरानी और डीबग करना</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/debugging-search-traffic-drops"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Search के ट्रैफ़िक में आई गिरावट की वजहों को डीबग करना</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Search Console की मदद से मॉनिटर करना</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-console-start"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Search Console के इस्तेमाल की जानकारी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/bubble-chart-analysis"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>बबल चार्ट की मदद से एसईओ को बेहतर बनाना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/google-analytics-search-console"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>एसईओ के लिए Search Console और Google Analytics के डेटा का इस्तेमाल करना</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>खोज ऑपरेटर की मदद से डीबग करना</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-operators"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>खास जानकारी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-operators/all-search-site"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>साइट: खोज ऑपरेटर</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-operators/image-search"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google Images के खोज ऑपरेटर</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>गलत इस्तेमाल को रोकना और इस पर नज़र रखना</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>खास जानकारी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/prevent-abuse"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>लोगों के बनाए गए स्पैम को रोकना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/malware"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>मैलवेयर और अनचाहा सॉफ़्टवेयर</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/prevent-malware"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>मैलवेयर की गड़बड़ी से बचना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/social-engineering"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>सोशल इंजीनियरिंग (फ़िशिंग और धोखाधड़ी करने वाली साइटें)</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/safe-browsing-repeat-offenders"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>&#39;Google सुरक्षित ब्राउज़िंग&#39; का बार-बार उल्लंघन करने वालों से जुड़ी नीति</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/trends-start"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google Trends का इस्तेमाल शुरू करें</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>साइट के हिसाब से गाइड</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>ई-कॉमर्स</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>खास जानकारी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/where-ecommerce-data-can-appear-on-google"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>कॉन्टेंट कहां दिख सकता है</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/share-your-product-data-with-google"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>प्रॉडक्ट डेटा शेयर करें</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/include-structured-data-relevant-to-ecommerce"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>स्ट्रक्चर्ड डेटा शामिल करें</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/how-to-launch-an-ecommerce-website"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>नई वेबसाइट लॉन्च करें</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/write-high-quality-reviews"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>अच्छी क्वालिटी की समीक्षाएं लिखना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/designing-a-url-structure-for-ecommerce-sites"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>यूआरएल का स्ट्रक्चर डिज़ाइन करें</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>ई-कॉमर्स साइट का स्ट्रक्चर</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>पेज पर नंबर डालना, इंंक्रीमेंटल पेज लोडिंग, और Search</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>अंतरराष्ट्रीय और कई भाषाओं में</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/specialty/international"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>खास जानकारी</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/international/managing-multi-regional-sites"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>एक से ज़्यादा इलाकों के लिए और कई भाषाओं में बनाई गई साइटें मैनेज करना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/international/localized-versions"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>अलग-अलग भाषा और जगह के हिसाब से बनाए गए अपने पेज के वर्शन के बारे में Google को बताना</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/international/locale-adaptive-pages"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google, जगह और भाषा के हिसाब से काॅन्टेंट दिखाने वाले पेजों को किस तरह क्रॉल करता है</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>अश्लील कॉन्टेंट</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/specialty/explicit/guidelines"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>अश्लील कॉन्टेंट वाली साइटों के लिए दिशा-निर्देश</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/explicit/troubleshooting"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>अगर आपकी साइट को गलत तरीके से अश्लील कॉन्टेंट के तौर पर फ़्लैग किया गया है, तो क्या करें</span></a></li></ul></div></li></ul></div></li>
+          </ul>
+        
+        
+          
+    
+      
+      <ul class="devsite-nav-list" menu="दस्तावेज़"
+          aria-label="साइड मेन्यू" hidden>
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      एसईओ से जुड़ी बुनियादी बातें
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: शुरुआती जानकारी"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      शुरुआती जानकारी
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/essentials"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Search पर कॉन्टेंट दिखाने के बुनियादी दिशा-निर्देश"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Search पर कॉन्टेंट दिखाने के बुनियादी दिशा-निर्देश
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/fundamentals/seo-starter-guide"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: एसईओ स्टार्टर गाइड"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      एसईओ स्टार्टर गाइड
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/fundamentals/how-search-works"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Google Search के काम करने का तरीका"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Google Search के काम करने का तरीका
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/fundamentals/do-i-need-seo"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: क्या आपको एसईओ एक्सपर्ट की ज़रूरत है?"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      क्या आपको एसईओ एक्सपर्ट की ज़रूरत है?
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      क्रॉल और इंंडेक्स करना
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/sitemaps/overview"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: साइटमैप"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      साइटमैप
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/robots/intro"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: robots.txt"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      robots.txt
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/special-tags"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: मेटा टैग"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      मेटा टैग
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/ask-google-to-recrawl"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: क्रॉलर मैनेजमेंट"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      क्रॉलर मैनेजमेंट
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/control-what-you-share"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: निष्कासन"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      निष्कासन
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/consolidate-duplicate-urls"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: यूआरएल के कैननिकल होने की जांच करना"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      यूआरएल के कैननिकल होने की जांच करना
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/301-redirects"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: रीडायरेक्ट"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      रीडायरेक्ट
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: JavaScript एसईओ"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      JavaScript एसईओ
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      रैंकिंग और खोज नतीजों में दिखने का तरीका
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/visual-elements-gallery"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: विज़ुअल एलिमेंट गैलरी"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      विज़ुअल एलिमेंट गैलरी
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/title-link"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: टाइटल के लिंक"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      टाइटल के लिंक
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/snippet"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: स्निपेट"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      स्निपेट
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/google-images"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: इमेज"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      इमेज
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/video"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: वीडियो"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      वीडियो
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/structured-data/search-gallery"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: स्ट्रक्चर्ड डेटा"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      स्ट्रक्चर्ड डेटा
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/favicon-in-search"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: फ़ेविकॉन"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      फ़ेविकॉन
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      साइट के हिसाब से गाइड
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/specialty/ecommerce"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: ई-कॉमर्स"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      ई-कॉमर्स
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/specialty/international"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: अंतरराष्ट्रीय और कई भाषाओं वाली साइटें"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      अंतरराष्ट्रीय और कई भाषाओं वाली साइटें
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      डेटा का विश्लेषण
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/search-console-start"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Search Console के इस्तेमाल की जानकारी"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Search Console के इस्तेमाल की जानकारी
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/debugging-search-traffic-drops"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: ट्रैफ़िक में आई गिरावट को डीबग करना"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      ट्रैफ़िक में आई गिरावट को डीबग करना
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/google-analytics-search-console"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: एसईओ के लिए Search Console और Google Analytics के डेटा का इस्तेमाल करना"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      एसईओ के लिए Search Console और Google Analytics के डेटा का इस्तेमाल करना
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/trends-start"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Google Trends का इस्तेमाल शुरू करें"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Google Trends का इस्तेमाल शुरू करें
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+      </ul>
+    
+  
+    
+  
+    
+  
+    
+      
+      <ul class="devsite-nav-list" menu="नया क्या है"
+          aria-label="साइड मेन्यू" hidden>
+        
+          
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/news"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: सभी अपडेट"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      सभी अपडेट
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/updates"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: दस्तावेज़ से जुड़े अपडेट"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      दस्तावेज़ से जुड़े अपडेट
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: रैंकिंग से जुड़े अपडेट"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      रैंकिंग से जुड़े अपडेट
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: YouTube के नए वीडियो"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      YouTube के नए वीडियो
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="https://pod.link/1512522198"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: पॉडकास्ट के हाल ही के एपिसोड"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      पॉडकास्ट के हाल ही के एपिसोड
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+      </ul>
+    
+  
+    
+  
+    
+  
+        
+        
+          
+    
+  
+        
+      </div>
+    
+  </div>
+</nav>
+          
+        </devsite-book-nav>
+      
+      <section id="gc-wrapper">
+        <main role="main" id="main-content" class="devsite-main-content"
+            
+              has-book-nav
+              has-sidebar
+            >
+          <div class="devsite-sidebar">
+            <div class="devsite-sidebar-content">
+                
+                <devsite-toc class="devsite-nav"
+                            role="navigation"
+                            aria-label="इस पेज पर"
+                            depth="2"
+                            scrollbars
+                            data-nosnippet
+                  ></devsite-toc>
+                <devsite-recommendations-sidebar class="nocontent devsite-nav" data-nosnippet>
+                </devsite-recommendations-sidebar>
+            </div>
+          </div>
+          <devsite-content>
+            
+              
+
+
+
+
+
+
+
+
+
+
+<article class="devsite-article"><style>
+      /* Styles inlined from /search/sitewide.css */
+/* Popped white box with shadow*/
+.sc-shadow-box-row .devsite-landing-row-inner {
+  background-color: #fff;
+  box-shadow: 0 13px 18px -8px rgba(0,0,0,0.15), 0 11px 55px 10px rgba(0,0,0,0.07);
+  border-radius: 8px;
+  margin-bottom: 55px;
+}
+
+/* Stat box for big numbers and description*/
+.big-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 64px 32px;
+    text-align: center;
+}
+@media (min-width: 481px) {
+  .big-stats {
+      flex-direction: row;
+  }
+}
+.big-stat {
+    margin-bottom: 32px;
+}
+@media (min-width: 481px) {
+  .big-stat {
+      flex: 1;
+      margin: 0 8px;
+  }
+}
+.big-stat__figure {
+    font-size: 1.5em;
+    line-height: 1em;
+}
+@media (min-width: 241px) {
+  .big-stat__figure {
+      font-size: 4em;
+  }
+}
+@media (min-width: 1020px) {
+  .big-stat__figure {
+      font-size: 6em;
+  }
+}
+.big-stat__description,
+.big-stat__figure {
+    color: inherit;
+    font-family: "Google Sans",sans-serif;
+    margin: 0;
+    text-align: inherit;
+}
+.big-stat__description {
+    line-height: 1.5em;
+}
+.big-stat__description,
+.big-stat__figure {
+    color: inherit;
+    font-family: "Google Sans",sans-serif;
+    margin: 0;
+    text-align: inherit;
+}
+.big-stat__sub {
+    font-size: .5em;
+    line-height: 1em;
+    vertical-align: baseline;
+}
+
+/* Green background and text -- consistent style with devsite notices */
+.green {
+    background: #e0f2f1;
+    color: #00796b;
+}
+
+/* Color scheme of unconference for background and text */
+.unconference-yellow {
+  background: #fdd901;
+  color: #3a3a3a;
+}
+
+/* Publish date styling */
+.publish-date {
+  font-size: smaller;
+  font-style: italic
+}
+
+/*
+  Fixes SVG label spacing fix to avoid webkit (Safari et. al.) issues
+*/
+foreignObject p {
+  margin: 0 ;
+  padding: 1rem 0;
+}
+
+      </style>
+  
+  
+  
+  
+  
+
+  <div class="devsite-article-meta nocontent" role="navigation" data-nosnippet>
+    
+    
+    <ul class="devsite-breadcrumb-list"
+  
+    aria-label="ब्रेडक्रंब">
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/?hl=hi"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+          होम पेज
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/search?hl=hi"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="2"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="2"
+      
+        track-metadata-eventdetail="Google Search Central"
+      
+    >
+    
+          Search Central
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/search/docs?hl=hi"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="3"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="3"
+      
+        track-metadata-eventdetail="Documentation"
+      
+    >
+    
+          Documentation
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+    
+      
+    <devsite-thumb-rating position="header">
+    </devsite-thumb-rating>
+  
+    
+  </div>
+  
+    <devsite-feedback
+  position="header"
+  project-name="Documentation"
+  product-id="103417"
+  bucket="Search Docs"
+  context="DevSite feedback link"
+  version="t-devsite-webserver-20260507-r00-rc00.477408230701735660"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="header"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=hi"
+    
+  
+  
+    project-support-url="https://developers.google.com/search/help?hl=hi"
+  
+  
+  >
+
+  <button>
+  
+    
+    सुझाव भेजें
+  
+  </button>
+</devsite-feedback>
+  <devsite-actions hidden data-nosnippet>
+    <devsite-llm-tools></devsite-llm-tools></devsite-actions>
+  
+    
+  
+
+  <devsite-toc class="devsite-nav"
+    depth="2"
+    devsite-toc-embedded
+    >
+  </devsite-toc>
+  <div class="devsite-article-body clearfix
+  devsite-no-page-title">
+
+  
+    
+    
+    
+  <h1 class="page-title" data-text="Product स्ट्रक्चर्ड डेटा के बारे में जानकारी" id="introduction-to-product-structured-data" tabindex="-1"><code dir="ltr" translate="no">Product</code> स्ट्रक्चर्ड डेटा के बारे में जानकारी</h1>
+  
+<p>
+  प्रॉडक्ट पेजों में स्ट्रक्चर्ड डेटा जोड़ने पर, Google Search के नतीजों में आपके प्रॉडक्ट की जानकारी बेहतर तरीके से दिख सकती है. इनमें <a class="external-link" href="https://images.google.com/?hl=hi" >Google इमेज</a> और <a class="external-link" href="https://lens.google/?hl=hi" >Google लेंस</a> के नतीजे शामिल हैं. उदाहरण के लिए, लोग खोज के नतीजों में ही किसी प्रॉडक्ट की कीमत, उसकी उपलब्धता की जानकारी, समीक्षा की रेटिंग, शिपिंग की जानकारी वगैरह देख सकते हैं.
+</p>
+<h2 data-text="तय करना कि किस मार्कअप का इस्तेमाल करना है" id="decide" tabindex="-1">तय करना कि किस मार्कअप का इस्तेमाल करना है</h2>
+<p>प्रॉडक्ट के स्ट्रक्चर्ड डेटा के दो मुख्य क्लास हैं. आपके इस्तेमाल के हिसाब से, सबसे सही टाइप से जुड़ी ज़रूरी शर्तों को पूरा करें:
+</p>
+
+
+
+
+<ul>
+  <li>
+     <b><a href="https://developers.google.com/search/docs/appearance/structured-data/product-snippet?hl=hi">प्रॉडक्ट का स्निपेट</a></b>: प्रॉडक्ट के ऐसे पेज के लिए जहां लोग सीधे तौर पर प्रॉडक्ट नहीं खरीद सकते. इस मार्कअप में समीक्षा की जानकारी देने के ज़्यादा विकल्प मौजूद हैं. जैसे, एडिटोरियल प्रॉडक्ट की समीक्षा वाले पेज पर <a href="https://developers.google.com/search/docs/appearance/structured-data/product-snippet?hl=hi#pros-cons-example">फ़ायदे और नुकसान</a>.
+  </li>
+  <li>
+     <b><a href="https://developers.google.com/search/docs/appearance/structured-data/merchant-listing?hl=hi">कारोबारी या कंपनी की दिखाई जाने वाली लिस्टिंग</a></b>: ऐसे पेजों के लिए जहां खरीदार आपके प्रॉडक्ट खरीद सकते हैं. इस मार्कअप में प्रॉडक्ट की ज़्यादा जानकारी देने के लिए ज़्यादा विकल्प मौजूद होते हैं. जैसे, <a href="https://developers.google.com/search/docs/appearance/structured-data/merchant-listing?hl=hi#size-specification-properties">कपड़े के साइज़</a>, <a href="https://developers.google.com/search/docs/appearance/structured-data/merchant-listing?hl=hi#shipping">शिपिंग की जानकारी</a>, और <a href="https://developers.google.com/search/docs/appearance/structured-data/merchant-listing?hl=hi#returns">सामान लौटाने की नीति</a>.
+  </li>
+</ul>
+
+<p>
+  ध्यान दें कि प्रॉडक्ट से जुड़ी इन दोनों सुविधाओं के बीच कुछ ओवरलैप है. आम तौर पर, कारोबारी या कंपनी की लिस्टिंग के लिए, <a href="https://developers.google.com/search/docs/appearance/structured-data/merchant-listing?hl=hi#product-information">प्रॉडक्ट की जानकारी देने वाली ज़रूरी प्रॉपर्टी</a> जोड़ने का मतलब है कि आपके प्रॉडक्ट पेज पर भी प्रॉडक्ट स्निपेट दिखाए जा सकते हैं.
+  दोनों सुविधाओं को अलग-अलग तरीके से बेहतर बनाया जाता है. इसलिए, अपनी साइट के हिसाब से सही मार्कअप तय करते समय, दोनों को ज़रूर देखें. जितनी ज़्यादा प्रॉपर्टी जोड़ी जाती हैं, आपके पेज को उतना ही ज़्यादा बेहतर बनाया जा सकता है.
+</p>
+<aside class="note">
+  <b>क्या अपने प्रॉडक्ट के वैरिएंट ऑफ़र किए जाते हैं?</b> <a href="https://developers.google.com/search/docs/appearance/structured-data/product-variants?hl=hi">प्रॉडक्ट के वैरिएंट का स्ट्रक्चर्ड डेटा</a> जोड़ने से, Google को बेहतर तरीके से यह समझने में मदद मिल सकती है कि एक ही वैरिएंट पैरंट के प्रॉडक्ट कौन-कौनसे हैं. प्रॉडक्ट स्निपेट और कारोबारी या कंपनी की लिस्टिंग, दोनों में प्रॉडक्ट के वैरिएंट का इस्तेमाल किया जा सकता है.
+</aside>
+
+<p>हमारा सुझाव है कि बेचे जाने वाले हर प्रॉडक्ट के लिए स्ट्रक्चर्ड डेटा के साथ-साथ, <code dir="ltr" translate="no">Organization</code> मार्कअप में नेस्ट किए गए, अपने ई-कॉमर्स कारोबार की नीतियों के बारे में बताने वाला स्ट्रक्चर्ड डेटा भी जोड़ें:</p>
+<ul>
+  <li><b><a href="https://developers.google.com/search/docs/appearance/structured-data/return-policy?hl=hi">कारोबारी या कंपनी की प्रॉडक्ट लौटाने की नीति</a></b>:
+    अपने कारोबार के लिए, प्रॉडक्ट लौटाने की नीति (या नीतियां) बताएं.</li>
+<li><b><a href="https://developers.google.com/search/docs/appearance/structured-data/loyalty-program?hl=hi">लॉयल्टी प्रोग्राम</a></b>:
+    अपने लॉयल्टी प्रोग्राम के बारे में बताएं.</li>
+</ul>
+
+<h2 data-text="Google Search पर खरीदारी से जुड़ी सुविधाएं कैसे दिख सकती हैं" id="shopping-experiences" tabindex="-1">Google Search पर खरीदारी से जुड़ी सुविधाएं कैसे दिख सकती हैं</h2>
+<p>
+  यहां बताया गया है कि Google Search के नतीजों में खरीदारी से जुड़ी सुविधाएं कैसे दिख सकती हैं.
+  यह सूची पूरी नहीं है—लोग अपनी पसंद की चीज़ें आसानी से खोज सकें, इसके लिए, Google Search लगातार नए और बेहतर तरीकों की खोज कर रहा है. इससे समय के साथ लोगों को बेहतर अनुभव दिया जा सकता है.
+</p>
+  <table class="responsive">
+    <tbody>
+      <tr>
+        <td>
+          <h5 data-text="प्रॉडक्ट का स्निपेट" id="product-snippet" tabindex="-1">प्रॉडक्ट का स्निपेट</h5>
+          <p>ऐसा <a href="https://developers.google.com/search/docs/appearance/visual-elements-gallery?hl=hi#text-result">टेक्स्ट वाला नतीजा</a> जिसमें प्रॉडक्ट की अन्य जानकारी शामिल हो. जैसे, रेटिंग, समीक्षा की जानकारी, कीमत, और खरीदारी के लिए उपलब्धता
+          </p>
+        </td>
+        <td>
+        <img alt="खोज के नतीजों में प्रॉडक्ट स्निपेट दिखाने के बारे में जानकारी" src="https://developers.google.com/static/search/docs/images/product-snippet.png?hl=hi" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h5 data-text="लोकप्रिय प्रॉडक्ट" id="popular-products" tabindex="-1">लोकप्रिय प्रॉडक्ट</h5>
+          <p>
+            प्रॉडक्ट को बेचने के लिए, उसे विज़ुअल तौर पर बेहतर तरीके से दिखाना
+          </p>
+        </td>
+        <td>
+          <img alt="खोज के नतीजों में लोकप्रिय प्रॉडक्ट" src="https://developers.google.com/static/search/docs/images/popular-products.png?hl=hi" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h5 data-text="Shopping का नॉलेज पैनल" id="shopping-knowledge-panel" tabindex="-1">Shopping का नॉलेज पैनल</h5>
+          <p>
+            सेलर की सूची के साथ प्रॉडक्ट की ज़्यादा जानकारी (प्रॉडक्ट आइडेंटिफ़ायर जैसी जानकारी का इस्तेमाल करके) दिखाई जा सकती है.
+          </p>
+        </td>
+        <td>
+          <img alt="खोज के नतीजों में Shopping का नॉलेज पैनल" src="https://developers.google.com/static/search/docs/images/shopping-knowledge-panel.png?hl=hi" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <h5 data-text="Google Images" id="google-images" tabindex="-1">Google Images</h5>
+          <p>
+            बेचने के लिए उपलब्ध प्रॉडक्ट की एनोटेटेड इमेज
+          </p>
+        </td>
+        <td>
+          <img alt="खोज के नतीजों में Google Images के नतीजे" src="https://developers.google.com/static/search/docs/images/google-images.png?hl=hi" />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<h3 data-text="खोज के नतीजों को बेहतर बनाना" id="result-enhancements" tabindex="-1">खोज के नतीजों को बेहतर बनाना</h3>
+<p>
+  खोज के नतीजों से जुड़ी खास सुविधाएं, हर व्यक्ति के अनुभव के आधार पर दिखाई जाती हैं. इसमें समय के साथ बदलाव हो सकता है. इसलिए, हमारा सुझाव है कि प्रॉडक्ट की ज़्यादा से ज़्यादा जानकारी दें. इस बारे में न सोचें कि यह जानकारी किन सुविधाओं में इस्तेमाल की जाएगी.
+  प्रॉडक्ट के ज़्यादा बेहतर नतीजों (रिच रिज़ल्ट) को बेहतर बनाने के कुछ उदाहरण यहां दिए गए हैं:
+</p>
+<ul>
+  <li><b>रेटिंग</b>: <a href="https://developers.google.com/search/docs/appearance/structured-data/product-snippet?hl=hi#product-reviews">खरीदारों से मिली समीक्षाएं और रेटिंग</a> दिखाकर, खोज के नतीजों में अपने प्रॉडक्ट बेहतर तरीके से दिखाएं.</li>
+  <li><b>फ़ायदे और नुकसान</b>: अपने प्रॉडक्ट की समीक्षा की जानकारी में, इसके <a href="https://developers.google.com/search/docs/appearance/structured-data/product-snippet?hl=hi#pros-cons">फ़ायदे और नुकसान</a> के बारे में बताएं. इससे उन्हें खोज के नतीजों में हाइलाइट किया जा सकता है.</li>
+  <li><b>शिपिंग</b>: <a href="https://developers.google.com/search/docs/appearance/structured-data/merchant-listing?hl=hi#shipping">शिपिंग के लिए खरीदार से लिए जाने वाले शुल्क</a> की जानकारी शेयर करें. खास तौर पर, मुफ़्त शिपिंग की जानकारी ज़रूर दें. इससे खरीदार, शिपिंग की कुल कीमत जान पाएंगे.</li>
+  <li><b>खरीदारी के लिए उपलब्धता</b>: खरीदारी के लिए <a href="https://developers.google.com/search/docs/appearance/structured-data/merchant-listing?hl=hi#availability">उपलब्धता</a> से जुड़ा डेटा दें. इससे खरीदारों को पता चलेगा कि फ़िलहाल आपके पास कोई प्रॉडक्ट स्टॉक में है या नहीं.</li>
+  <li id="price-drop"><b>कीमत में कमी</b>: Google, कीमत में कमी का हिसाब लगाने के लिए, समय के साथ प्रॉडक्ट की कीमत में होने वाले बदलावों पर नज़र रखता है. इस बात की कोई गारंटी नहीं है कि कीमत में आई कमी की जानकारी खोज के नतीजों में दिखाई जाएगी.</li>
+  <li><b>प्रॉडक्ट लौटाने की जानकारी</b>: प्रॉडक्ट <a href="https://developers.google.com/search/docs/appearance/structured-data/merchant-listing?hl=hi#returns">लौटाने की जानकारी</a> शेयर करें. जैसे, प्रॉडक्ट लौटाने की नीति, उसे लौटाने में लगने वाले शुल्क, और खरीदार कितने दिन के अंदर प्रॉडक्ट लौटा सकते हैं.</li>
+</ul>
+<h2 data-text="Google Search में प्रॉडक्ट डेटा उपलब्ध कराना" id="providing-product-data-to-google-search" tabindex="-1">Google Search में प्रॉडक्ट डेटा उपलब्ध कराना</h2>
+<p>
+  Google Search को रिच प्रॉडक्ट डेटा देने के लिए, अपने वेब पेजों में <code dir="ltr" translate="no">Product</code> के स्ट्रक्चर्ड डेटा को जोड़ा जा सकता है. Google Merchant Center के ज़रिए, डेटा फ़ीड अपलोड किया जा सकता है. साथ ही, Merchant Center के कंसोल में जाकर, मुफ़्त में दिखाई जाने वाली लिस्टिंग के लिए ऑप्ट-इन किया जा सकता है. इसके अलावा, दोनों काम भी किए जा सकते हैं. Search Central का दस्तावेज़, वेब पेजों पर मौजूद स्ट्रक्चर्ड डेटा पर फ़ोकस करता है.
+</p>
+<p>
+  वेब पेजों पर स्ट्रक्चर्ड डेटा और Merchant Center में फ़ीड देने से, आपको खरीदारी की सुविधाएं मिल सकती हैं. इससे Google, आपके डेटा को सही तरीके से समझ सकता है और उसकी पुष्टि भी कर सकता है.
+  कुछ सुविधाओं में, स्ट्रक्चर्ड डेटा और Google Merchant Center के फ़ीड, दोनों का इस्तेमाल किया जाता है. हालांकि, ऐसा तब किया जाता है, जब दोनों उपलब्ध हों. उदाहरण के लिए, अगर पेज पर स्ट्रक्चर्ड डेटा में कीमत से जुड़ा डेटा मौजूद नहीं है, तो प्रॉडक्ट स्निपेट के लिए आपके व्यापारी फ़ीड पर मौजूद कीमत से जुड़ा डेटा इस्तेमाल किया जा सकता है. <a class="external-link" href="https://support.google.com/merchants/answer/7052112?hl=hi" >Google Merchant Center फ़ीड के दस्तावेज़ों</a> में, फ़ीड एट्रिब्यूट के लिए अतिरिक्त सुझाव और ज़रूरी शर्तें शामिल होती हैं.
+</p>
+<p>
+  Google Search के अलावा, <a class="external-link" href="https://support.google.com/merchants/answer/9826670?hl=hi" >Google Shopping टैब</a> से जुड़ी ज़रूरी शर्तों के बारे में ज़्यादा जानें. इसके लिए, <a class="external-link" href="https://support.google.com/merchants/answer/9199328?hl=hi" >Google Merchant Center में डेटा और ज़रूरी शर्तें</a> देखें.
+</p>
+
+ 
+    
+ 
+
+  
+  
+  
+  
+
+  
+    <devsite-hats-survey class="nocontent" data-nosnippet
+      hats-id="egUfosvgZ0gb2CML1jd0VMoBx2ec"
+      listnr-id="103417"></devsite-hats-survey>
+  
+</div>
+
+  
+    
+    
+      
+    <devsite-thumb-rating position="footer">
+    </devsite-thumb-rating>
+  
+       
+         <devsite-feedback
+  position="footer"
+  project-name="Documentation"
+  product-id="103417"
+  bucket="Search Docs"
+  context="DevSite feedback link"
+  version="t-devsite-webserver-20260507-r00-rc00.477408230701735660"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="footer"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=hi"
+    
+  
+  
+    project-support-url="https://developers.google.com/search/help?hl=hi"
+  
+  
+  >
+
+  <button>
+  
+    
+    सुझाव भेजें
+  
+  </button>
+</devsite-feedback>
+       
+    
+    
+  
+
+  <div class="devsite-floating-action-buttons"></div></article>
+
+
+<devsite-content-footer class="nocontent" data-nosnippet>
+  <p>जब तक कुछ अलग से न बताया जाए, तब तक इस पेज की सामग्री को <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 License</a> के तहत और कोड के नमूनों को <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 License</a> के तहत लाइसेंस मिला है. ज़्यादा जानकारी के लिए, <a href="https://developers.google.com/site-policies?hl=hi">Google Developers साइट नीतियां</a> देखें. Oracle और/या इससे जुड़ी हुई कंपनियों का, Java एक रजिस्टर किया हुआ ट्रेडमार्क है.</p>
+  <p>आखिरी बार 2025-12-18 (UTC) को अपडेट किया गया.</p>
+</devsite-content-footer>
+
+
+<devsite-notification
+>
+</devsite-notification>
+
+
+  
+<div class="devsite-content-data">
+  
+    
+    
+    <template class="devsite-thumb-rating-feedback">
+      <devsite-feedback
+  position="thumb-rating"
+  project-name="Documentation"
+  product-id="103417"
+  bucket="Search Docs"
+  context="DevSite feedback link"
+  version="t-devsite-webserver-20260507-r00-rc00.477408230701735660"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="thumb-rating"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=hi"
+    
+  
+  
+    project-support-url="https://developers.google.com/search/help?hl=hi"
+  
+  
+  >
+
+  <button>
+  
+    क्या आपको हमें और कुछ बताना है?
+  
+  </button>
+</devsite-feedback>
+    </template>
+  
+  
+    <template class="devsite-content-data-template">
+      [[["समझने में आसान है","easyToUnderstand","thumb-up"],["मेरी समस्या हल हो गई","solvedMyProblem","thumb-up"],["अन्य","otherUp","thumb-up"]],[["वह जानकारी मौजूद नहीं है जो मुझे चाहिए","missingTheInformationINeed","thumb-down"],["बहुत मुश्किल है / बहुत सारे चरण हैं","tooComplicatedTooManySteps","thumb-down"],["पुराना","outOfDate","thumb-down"],["अनुवाद से जुड़ी समस्या","translationIssue","thumb-down"],["सैंपल / कोड से जुड़ी समस्या","samplesCodeIssue","thumb-down"],["अन्य","otherDown","thumb-down"]],["आखिरी बार 2025-12-18 (UTC) को अपडेट किया गया."],[],["Product structured data enhances how product information appears in Google Search, including Google Images and Lens. Two markup types exist: **Product snippets** for non-purchase pages, emphasizing reviews, and **Merchant listings** for purchase pages, highlighting product details like sizing and shipping. Adding product variant data can help Google. Key actions include adding structured data to webpages, or uploading data feeds to Google Merchant Center to enhance search visibility with details like ratings, shipping, availability, price drops, and return information. Providing both structured data and a Merchant Center feed maximizes product visibility.\n"]]
+    </template>
+  
+</div>
+            
+          </devsite-content>
+        </main>
+        <devsite-footer-promos class="devsite-footer">
+          
+            
+
+<nav class="devsite-footer-promos nocontent"
+     aria-label="प्रमोशन"
+     data-nosnippet>
+  <ul class="devsite-footer-promos-list">
+    
+    <li class="devsite-footer-promo">
+      <a href="https://www.linkedin.com/showcase/googlesearchcentral/"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         aria-label="LinkedIn feed for Google Search Central"
+       
+         data-category="Search docs"
+       
+         data-label="linkedin footer promo"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/search/images/li.png?hl=hi"
+                loading="lazy"
+                alt="LinkedIn">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          LinkedIn
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">LinkedIn पर हमसे जुड़ें</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA?hl=hi"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         data-label="youtube footer promo"
+       
+         aria-label="Google Search Central YouTube channel"
+       
+         data-category="Search docs"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/homepage-assets/images/yt.svg?hl=hi"
+                loading="lazy"
+                alt="YouTube">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          YouTube
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">हमारे वीडियो देखें</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://feeds.feedburner.com/blogspot/amDG"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         aria-label="RSS feed for the Search Central Blog"
+       
+         data-category="Search docs"
+       
+         data-label="blog footer promo"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/rss_feed/default/24px.svg"
+                loading="lazy"
+                alt="ब्लॉग">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          ब्लॉग
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">हमारे आरएसएस फ़ीड की सदस्यता लें</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://pod.link/1512522198"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         data-label="podcast footer promo"
+       
+         aria-label="Search Off the Record podcast episodes"
+       
+         data-category="Search docs"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/search/images/search-off-the-record-podcast-logo.png?hl=hi"
+                loading="lazy"
+                alt="पॉडकास्ट">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          पॉडकास्ट
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">Search Off the Record सुनें</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://twitter.com/googlesearchc"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         aria-label="Twitter feed for Google Search Central"
+       
+         data-category="Search docs"
+       
+         data-label="twitter footer promo"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/homepage-assets/images/x.svg?hl=hi"
+                loading="lazy"
+                alt="X (Twitter)">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          X (Twitter)
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">X (Twitter) पर हमसे जुड़ें</div>
+    </li>
+    
+  </ul>
+</nav>
+
+          
+        </devsite-footer-promos>
+        <devsite-footer-linkboxes class="devsite-footer">
+          
+            
+<nav class="devsite-footer-linkboxes nocontent"
+     aria-label="फ़ुटर लिंक"
+     data-nosnippet>
+  
+  <ul class="devsite-footer-linkboxes-list">
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">मदद पाएं</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://support.google.com/webmasters/community"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            सहायता फ़ोरम पर जाएं
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/help/office-hours"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            ऑफ़िस में कामकाज के घंटों के बारे में सवाल सबमिट करें
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/help/report-quality-issues"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            स्पैम, फ़िशिंग या मैलवेयर की शिकायत करना
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/help"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+              
+              
+            
+          
+            सहायता पाने के दूसरे तरीके
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">संसाधन</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/docs/fundamentals/get-on-google"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            क्या आपको एसईओ की ज़रूरत है?
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/docs/fundamentals/seo-starter-guide"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            एसईओ स्टार्टर गाइड
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://status.search.google.com"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            Search सिस्टम का स्टेटस
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://support.google.com/webmasters"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+          
+            Search Console के दस्तावेज़
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/case-studies/overview"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 5)"
+            >
+            
+              
+              
+            
+          
+            केस स्टडी
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">टूल</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://search.google.com/search-console"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            Search Console
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://search.google.com/test/rich-results"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            ज़्यादा बेहतर नतीजे (रिच रिज़ल्ट) की जांच करना
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://pagespeed.web.dev"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            PageSpeed Insights
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://search.google.com/test/amp"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+              
+              
+            
+          
+            एएमपी जांच
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+  </ul>
+  
+</nav>
+          
+        </devsite-footer-linkboxes>
+        <devsite-footer-utility class="devsite-footer">
+          
+            
+
+<div class="devsite-footer-utility nocontent" data-nosnippet>
+  
+  
+  <nav class="devsite-footer-sites" aria-label="Google Developers की दूसरी वेबसाइटें">
+    <a href="https://developers.google.com/?hl=hi"
+       class="devsite-footer-sites-logo-link gc-analytics-event"
+       data-category="Site-Wide Custom Events"
+       data-label="Footer Google Developers Link">
+      <picture>
+        
+        <img class="devsite-footer-sites-logo"
+             src="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/lockup-google-for-developers.svg"
+             loading="lazy"
+             alt="Google Developers">
+      </picture>
+    </a>
+    <ul class="devsite-footer-sites-list">
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//developer.android.com?hl=hi"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Android Link"
+         
+         >
+          Android
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//developer.chrome.com/home?hl=hi"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Chrome Link"
+         
+         >
+          Chrome
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//firebase.google.com?hl=hi"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Firebase Link"
+         
+         >
+          Firebase
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//cloud.google.com?hl=hi"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Google Cloud Platform Link"
+         
+         >
+          Google Cloud Platform
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//ai.google.dev/?hl=hi"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Google AI Link"
+         
+         >
+          Google AI
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="https://developers.google.com/products?hl=hi"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer All products Link"
+         
+         >
+          सारे प्रॉडक्ट
+        </a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+
+  
+  <nav class="devsite-footer-utility-links" aria-label="यूटिलिटी के लिंक">
+    
+    <ul class="devsite-footer-utility-list">
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="https://developers.google.com/terms/site-terms?hl=hi"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Terms link"
+         >
+          शर्तें
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="//policies.google.com/privacy?hl=hi"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Privacy link"
+         >
+          निजता
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 glue-cookie-notification-bar-control">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="#"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Manage cookies link"
+         
+           aria-hidden="true"
+         >
+          Manage cookies
+        </a>
+        
+      </li>
+      
+    </ul>
+    
+    
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es"
+        >Español</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+  </nav>
+</div>
+          
+        </devsite-footer-utility>
+        <devsite-panel>
+          
+        </devsite-panel>
+        
+          <devsite-concierge
+  
+  
+    data-info-panel
+  
+  
+    data-ai-panel
+  
+  
+  
+  
+    data-api-explorer-panel
+  >
+</devsite-concierge>
+        
+      </section>
+      </section>
+    <devsite-sitemask></devsite-sitemask>
+    <devsite-snackbar></devsite-snackbar>
+    <devsite-tooltip ></devsite-tooltip>
+    <devsite-heading-link></devsite-heading-link>
+    <devsite-analytics>
+      
+        <script type="application/json" analytics>[{&#34;dimensions&#34;: {&#34;dimension1&#34;: &#34;Signed out&#34;, &#34;dimension6&#34;: &#34;hi&#34;, &#34;dimension11&#34;: false, &#34;dimension4&#34;: &#34;Documentation&#34;, &#34;dimension5&#34;: &#34;hi&#34;, &#34;dimension3&#34;: false}, &#34;gaid&#34;: &#34;UA-24532603-1&#34;, &#34;metrics&#34;: {&#34;ratings_value&#34;: &#34;metric1&#34;, &#34;ratings_count&#34;: &#34;metric2&#34;}, &#34;purpose&#34;: 1}, {&#34;dimensions&#34;: {&#34;dimension1&#34;: &#34;Signed out&#34;, &#34;dimension6&#34;: &#34;hi&#34;, &#34;dimension11&#34;: false, &#34;dimension4&#34;: &#34;Documentation&#34;, &#34;dimension5&#34;: &#34;hi&#34;, &#34;dimension3&#34;: false}, &#34;gaid&#34;: &#34;UA-24532603-6&#34;, &#34;metrics&#34;: {&#34;ratings_value&#34;: &#34;metric1&#34;, &#34;ratings_count&#34;: &#34;metric2&#34;}, &#34;purpose&#34;: 0}]</script>
+<script type="application/json" tag-management>{&#34;at&#34;: &#34;True&#34;, &#34;ga4&#34;: [{&#34;id&#34;: &#34;G-272J68FCRF&#34;, &#34;purpose&#34;: 1}, {&#34;id&#34;: &#34;G-Q04XXL6ZW2&#34;, &#34;purpose&#34;: 0}], &#34;ga4p&#34;: [{&#34;id&#34;: &#34;G-272J68FCRF&#34;, &#34;purpose&#34;: 1}], &#34;gtm&#34;: [{&#34;id&#34;: &#34;GTM-T98GCPGN&#34;, &#34;purpose&#34;: 1}], &#34;parameters&#34;: {&#34;internalUser&#34;: &#34;False&#34;, &#34;language&#34;: {&#34;machineTranslated&#34;: &#34;False&#34;, &#34;requested&#34;: &#34;hi&#34;, &#34;served&#34;: &#34;hi&#34;}, &#34;pageType&#34;: &#34;lcat&#34;, &#34;projectName&#34;: &#34;Documentation&#34;, &#34;signedIn&#34;: &#34;False&#34;, &#34;tenant&#34;: &#34;developers&#34;, &#34;recommendations&#34;: {&#34;sourcePage&#34;: &#34;&#34;, &#34;sourceType&#34;: 0, &#34;sourceRank&#34;: 0, &#34;sourceIdenticalDescriptions&#34;: 0, &#34;sourceTitleWords&#34;: 0, &#34;sourceDescriptionWords&#34;: 0, &#34;experiment&#34;: &#34;&#34;}, &#34;experiment&#34;: {&#34;ids&#34;: &#34;&#34;}}}</script>
+      
+    </devsite-analytics>
+    
+      <devsite-badger></devsite-badger>
+    
+    
+    
+    
+<script nonce="nYqwJG2m6F5r74/bRT/T8k2uxpE5lj">
+  
+  (function(d,e,v,s,i,t,E){d['GoogleDevelopersObject']=i;
+    t=e.createElement(v);t.async=1;t.src=s;E=e.getElementsByTagName(v)[0];
+    E.parentNode.insertBefore(t,E);})(window, document, 'script',
+    'https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/js/app_loader.js', '[1,"hi",null,"/js/devsite_app_module.js","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers","https://developers-dot-devsite-v2-prod.appspot.com",null,null,["/_pwa/developers/manifest.json","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/images/video-placeholder.svg","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/favicon-new.png","https://fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700&display=swap"],1,null,[1,6,8,12,14,17,21,25,50,52,63,70,75,76,80,87,91,92,93,97,98,100,101,102,103,104,105,107,108,109,110,112,113,117,118,120,122,124,125,126,127,129,130,131,132,133,134,135,136,138,140,141,147,148,149,151,152,156,157,158,159,161,163,164,168,169,170,179,180,182,183,186,191,193,196],"AIzaSyAP-jjEJBzmIyKR4F-3XITp8yM9T1gEEI8","AIzaSyB6xiKGDR5O3Ak2okS4rLkauxGUG7XP0hg","developers.google.com","AIzaSyAQk0fBONSGUqCNznf6Krs82Ap1-NV6J4o","AIzaSyCCxcqdrZ_7QMeLCRY20bh_SXdAYqy70KY",null,null,null,["Search__enable_page_map","DevPro__enable_developer_subscriptions","Significatio__enable_by_tenant","DevPro__enable_embed_profile_creation","Profiles__enable_recognition_badges","Profiles__enable_completecodelab_endpoint","DevPro__enable_enterprise","Analytics__enable_devpro_interaction_logging","Concierge__enable_actions_menu","Concierge__enable_key_takeaways_new_ui","DevPro__enable_code_assist","Concierge__enable_pushui","DevPro__enable_nvidia_credits_card","TpcFeatures__proxy_prod_host","Concierge__enable_concierge_restricted","DevPro__enable_vertex_credit_card","Profiles__enable_developer_profile_benefits_ui_redesign","Cloud__enable_llm_concierge_chat","Profiles__enable_user_type","DevPro__enable_g1_integration","DevPro__enable_firebase_workspaces_card","DevPro__enable_google_payments","Profiles__enable_auto_apply_credits","Profiles__enable_public_developer_profiles","MiscFeatureFlags__remove_cross_domain_tracking_params","Concierge__enable_key_takeaways","Concierge__enable_remove_info_panel_tags","Profiles__enable_playlist_community_acl","Analytics__enable_clearcut_logging","Search__enable_dynamic_content_confidential_banner","Profiles__enable_dashboard_curated_recommendations","DevPro__enable_google_payments_buyflow","Search__enable_ai_search_summaries","Profiles__enable_purchase_prompts","Profiles__enable_awarding_url","SignIn__enable_l1_signup_flow","DevPro__enable_devsite_captcha","DevPro__enable_cloud_innovators_plus","Profiles__enable_developer_profile_pages_as_content","Profiles__enable_callout_notifications","Cloud__enable_legacy_calculator_redirect","DevPro__enable_credits_banner","Cloud__enable_cloud_dlp_service","MiscFeatureFlags__enable_variable_operator","Search__enable_ai_search_summaries_restricted","Experiments__reqs_query_experiments","Profiles__enable_profile_collections","Profiles__enable_join_program_group_endpoint","DevPro__remove_eu_tax_intake_form","MiscFeatureFlags__fix_lower_breadcrumbs","MiscFeatureFlags__enable_project_variables","TpcFeatures__enable_unmirrored_page_left_nav","Cloud__enable_cloud_shell_fte_user_flow","MiscFeatureFlags__enable_framebox_badge_methods","MiscFeatureFlags__enable_firebase_utm","Profiles__enable_completequiz_endpoint","MiscFeatureFlags__gdp_dashboard_reskin_enabled","Cloud__cache_serialized_dynamic_content","Profiles__require_profile_eligibility_for_signin","MiscFeatureFlags__enable_appearance_cookies","MiscFeatureFlags__enable_explain_this_code","Cloud__enable_cloud_shell","BookNav__enable_tenant_cache_key","Search__enable_ai_search_summaries_for_all","DevPro__enable_google_one_card","MiscFeatureFlags__developers_footer_dark_image","Concierge__enable_concierge","Cloud__enable_cloudx_experiment_ids","Profiles__enable_release_notes_notifications","Profiles__enable_targeted_hero","Search__enable_suggestions_from_borg","Search__enable_ai_eligibility_checks","Cloud__fast_free_trial","MiscFeatureFlags__developers_footer_image","DevPro__enable_devpro_offers","Profiles__enable_page_saving","Profiles__enable_complete_playlist_endpoint","MiscFeatureFlags__enable_explicit_template_dependencies","CloudShell__cloud_code_overflow_menu","MiscFeatureFlags__enable_variable_operator_index_yaml","Profiles__enable_stripe_subscription_management","EngEduTelemetry__enable_engedu_telemetry","MiscFeatureFlags__enable_view_transitions","DevPro__enable_free_benefits","Concierge__enable_devsite_llm_tools","Cloud__enable_free_trial_server_call","CloudShell__cloud_shell_button","Profiles__enable_developer_profiles_callout"],null,null,"AIzaSyBLEMok-5suZ67qRPzx0qUtbnLmyT_kCVE","https://developerscontentserving-pa.clients6.google.com","AIzaSyCM4QpTRSqP5qI4Dvjt4OAScIN8sOUlO-k","https://developerscontentsearch-pa.clients6.google.com",1,4,null,"https://developerprofiles-pa.clients6.google.com",[1,"developers","Google for Developers","developers.google.com",null,"developers-dot-devsite-v2-prod.appspot.com",null,null,[1,1,[1],null,null,null,null,null,null,null,null,[1],null,null,null,null,null,null,[1],[1,null,null,[1,20],"/recommendations/information"],null,null,null,[1,1,1],[1,1,null,1,1,null,null,["/meridian"]],[1,null,null,null,null,null,null,["/admob","/ad-manager/mobile-ads-sdk","/ml-kit"]],null,[null,["/meridian","/youtube/devices/"]],1,null,[1]],null,[null,null,null,null,null,null,"/images/lockup-new.svg","/images/touchicon-180-new.png",null,null,null,null,1,null,null,null,null,null,null,null,null,1,null,null,null,"/images/lockup-dark-theme-new.svg",[]],[],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[6,1,14,15,20,22,23,29,32,36],null,[[null,null,null,[3,7,10,2,39,17,4,32,24,11,12,13,34,15,25],null,null,[1,[["docType","Choose a content type",[["Tutorial",null,null,null,null,null,null,null,null,"Tutorial"],["Guide",null,null,null,null,null,null,null,null,"Guide"],["Sample",null,null,null,null,null,null,null,null,"Sample"]]],["product","Choose a product",[["Android",null,null,null,null,null,null,null,null,"Android"],["ARCore",null,null,null,null,null,null,null,null,"ARCore"],["ChromeOS",null,null,null,null,null,null,null,null,"ChromeOS"],["Firebase",null,null,null,null,null,null,null,null,"Firebase"],["Flutter",null,null,null,null,null,null,null,null,"Flutter"],["Assistant",null,null,null,null,null,null,null,null,"Google Assistant"],["GoogleCloud",null,null,null,null,null,null,null,null,"Google Cloud"],["GoogleMapsPlatform",null,null,null,null,null,null,null,null,"Google Maps Platform"],["GooglePay",null,null,null,null,null,null,null,null,"Google Pay & Google Wallet"],["GooglePlay",null,null,null,null,null,null,null,null,"Google Play"],["Tensorflow",null,null,null,null,null,null,null,null,"TensorFlow"]]],["category","Choose a topic",[["AiAndMachineLearning",null,null,null,null,null,null,null,null,"AI and Machine Learning"],["Data",null,null,null,null,null,null,null,null,"Data"],["Enterprise",null,null,null,null,null,null,null,null,"Enterprise"],["Gaming",null,null,null,null,null,null,null,null,"Gaming"],["Mobile",null,null,null,null,null,null,null,null,"Mobile"],["Web",null,null,null,null,null,null,null,null,"Web"]]]]]],[1,1],null,1],[[["UA-24532603-1"],["UA-22084204-5"],null,null,["UA-24532603-5"],["GTM-T98GCPGN"],null,[["G-272J68FCRF"],null,null,[["G-272J68FCRF",2]]],[["UA-24532603-1",2]],null,[["UA-24532603-5",2]],[["GTM-T98GCPGN",2]],1],[[5,4],[3,2],[14,11],[15,12],[4,3],[6,5],[11,8],[13,10],[1,1],[12,9],[16,13]],[[2,2],[1,1]]],null,4,null,null,null,null,null,null,null,null,null,null,null,null,null,"developers.devsite.google",null,null,null,null,null,[]],null,"pk_live_5170syrHvgGVmSx9sBrnWtA5luvk9BwnVcvIi7HizpwauFG96WedXsuXh790rtij9AmGllqPtMLfhe2RSwD6Pn38V00uBCydV4m",1,1,"https://developerscontentinsights-pa.clients6.google.com","AIzaSyCg-ZUslalsEbXMfIo9ZP8qufZgo3LSBDU","AIzaSyDxT0vkxnY_KeINtA4LSePJO-4MAZPMRsE","https://developers.clients6.google.com",["https://codeassist.google.com","https://code-assist-free-tier.corp.google.com"],null,"AIzaSyBQom12tzI-rybN7Sf-KfeL4nwm-Rf7PmI\n",null,null,"https://developers.googleapis.com"]')
+  
+</script>
+
+    <devsite-a11y-announce></devsite-a11y-announce>
+  </body>
+</html>

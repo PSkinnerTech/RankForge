@@ -1,0 +1,4846 @@
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html 
+      lang="pl-x-mtfrom-en"
+      dir="ltr">
+  <head>
+    <meta name="google-signin-client-id" content="721724668570-nbkv1cfusk7kk4eni4pjvepaus73b13t.apps.googleusercontent.com"><meta name="google-signin-scope"
+          content="profile email https://www.googleapis.com/auth/developerprofiles https://www.googleapis.com/auth/developerprofiles.award https://www.googleapis.com/auth/devprofiles.full_control.firstparty"><meta property="og:site_name" content="Google for Developers">
+    <meta property="og:type" content="website"><meta name="theme-color" content="#fff"><meta charset="utf-8">
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+
+    <link rel="manifest" href="/_pwa/developers/manifest.json"
+          crossorigin="use-credentials">
+    <link rel="preconnect" href="//www.gstatic.com" crossorigin>
+    <link rel="preconnect" href="//fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="//www.google-analytics.com" crossorigin><link rel="stylesheet" href="//fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700&display=swap">
+      <link rel="stylesheet"
+            href="//fonts.googleapis.com/css2?family=Material+Icons&family=Material+Symbols+Outlined&display=block"><link rel="stylesheet" href="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/css/app.css">
+      <link rel="shortcut icon" href="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/favicon-new.png">
+    <link rel="apple-touch-icon" href="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/touchicon-180-new.png"><link rel="canonical" href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=pl"><link rel="search" type="application/opensearchdescription+xml"
+            title="Google for Developers" href="https://developers.google.com/s/opensearch.xml?hl=pl">
+      <link rel="alternate" hreflang="en"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide" /><link rel="alternate" hreflang="x-default" href="https://developers.google.com/search/docs/appearance/ranking-systems-guide" /><link rel="alternate" hreflang="ar"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=ar" /><link rel="alternate" hreflang="zh-Hans"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=zh-cn" /><link rel="alternate" hreflang="zh-Hant"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=zh-tw" /><link rel="alternate" hreflang="fr"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=fr" /><link rel="alternate" hreflang="de"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=de" /><link rel="alternate" hreflang="hi"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=hi" /><link rel="alternate" hreflang="id"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=id" /><link rel="alternate" hreflang="it"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=it" /><link rel="alternate" hreflang="ja"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=ja" /><link rel="alternate" hreflang="ko"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=ko" /><link rel="alternate" hreflang="pl"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=pl" /><link rel="alternate" hreflang="pt-BR"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=pt-br" /><link rel="alternate" hreflang="ru"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=ru" /><link rel="alternate" hreflang="es"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=es" /><link rel="alternate" hreflang="es-419"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=es-419" /><link rel="alternate" hreflang="th"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=th" /><link rel="alternate" hreflang="tr"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=tr" /><link rel="alternate" hreflang="vi"
+          href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=vi" /><title>Przewodnik po systemach rankingowych wyszukiwarki Google | Centrum wyszukiwarki Google &nbsp;|&nbsp; Documentation &nbsp;|&nbsp; Google for Developers</title>
+
+<meta property="og:title" content="Przewodnik po systemach rankingowych wyszukiwarki Google | Centrum wyszukiwarki Google &nbsp;|&nbsp; Documentation &nbsp;|&nbsp; Google for Developers"><meta name="description" content="Poznaj niektóre z bardziej znanych systemów rankingowych wyszukiwarki Google – w tym systemy będące częścią naszych podstawowych systemów rankingowych, czyli technologii generujących wyniki wyszukiwania w odpowiedzi na zapytania.">
+  <meta property="og:description" content="Poznaj niektóre z bardziej znanych systemów rankingowych wyszukiwarki Google – w tym systemy będące częścią naszych podstawowych systemów rankingowych, czyli technologii generujących wyniki wyszukiwania w odpowiedzi na zapytania."><meta property="og:url" content="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=pl"><meta property="og:image" content="https://developers.google.com/static/search/images/home-social-share-lockup.jpg?hl=pl">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="675"><meta property="og:locale" content="pl"><meta name="twitter:card" content="summary_large_image"><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Search Central",
+      "item": "https://developers.google.com/search"
+    },{
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Documentation",
+      "item": "https://developers.google.com/search/docs"
+    },{
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Przewodnik po systemach rankingowych wyszukiwarki Google | Centrum wyszukiwarki Google",
+      "item": "https://developers.google.com/search/docs/appearance/ranking-systems-guide"
+    }]
+  }
+  </script><link rel="alternate machine-translated-from" hreflang="en"
+        href="https://developers.google.com/search/docs/appearance/ranking-systems-guide?hl=en">
+  
+    
+    
+    
+    
+    
+    
+    
+    <meta name="apple-itunes-app" content="app-id=1512522198">
+    
+    
+  
+
+    </head>
+  <body class="color-scheme--light"
+        template="page"
+        theme="white"
+        type="lcat"
+        
+        
+        
+        layout="docs"
+        
+        
+        
+        
+        
+          
+            concierge='closed'
+          
+        
+        display-toc
+        pending>
+  
+    <devsite-progress type="indeterminate" id="app-progress"></devsite-progress>
+  
+  
+    <a href="#main-content" class="skip-link button">
+      
+      Przejdź do głównej treści
+    </a>
+    <section class="devsite-wrapper">
+      <devsite-cookie-notification-bar></devsite-cookie-notification-bar>
+        <devsite-header role="banner">
+  
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-header--inner" data-nosnippet>
+  <div class="devsite-top-logo-row-wrapper-wrapper">
+    <div class="devsite-top-logo-row-wrapper">
+      <div class="devsite-top-logo-row">
+        <button type="button" id="devsite-hamburger-menu"
+          class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+          data-category="Site-Wide Custom Events"
+          data-label="Navigation menu button"
+          visually-hidden
+          aria-label="Otwórz menu">
+        </button>
+        
+<div class="devsite-product-name-wrapper">
+
+  
+    
+  
+  <a href="https://developers.google.com/search?hl=pl">
+    
+  <div class="devsite-product-logo-container"
+       
+       
+       
+    size="medium"
+  >
+  
+    <picture>
+      
+      <img class="devsite-product-logo"
+           alt="Google Search Central"
+           src="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=pl"
+           srcset=" /static/search/images/google-search-central-logo.svg"
+           sizes="64px"
+           loading="lazy"
+           >
+    </picture>
+  
+  </div>
+  
+  </a>
+  
+
+  
+
+
+
+  
+  
+  <span class="devsite-product-name">
+    <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             devsite-has-google-wordmark">
+    
+    
+    
+      
+      
+        
+  <a href="https://developers.google.com/search?hl=pl"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Upper Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Google Search Central"
+      
+    >
+    
+          <svg class="devsite-google-wordmark"
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 148 48">
+    <title>Google</title>
+    <path class="devsite-google-wordmark-svg-path" d="M19.58,37.65c-9.87,0-18.17-8.04-18.17-17.91c0-9.87,8.3-17.91,18.17-17.91c5.46,0,9.35,2.14,12.27,4.94l-3.45,3.45c-2.1-1.97-4.93-3.49-8.82-3.49c-7.21,0-12.84,5.81-12.84,13.02c0,7.21,5.64,13.02,12.84,13.02c4.67,0,7.34-1.88,9.04-3.58c1.4-1.4,2.32-3.41,2.66-6.16H19.58v-4.89h16.47c0.18,0.87,0.26,1.92,0.26,3.06c0,3.67-1.01,8.21-4.24,11.44C28.93,35.9,24.91,37.65,19.58,37.65z M61.78,26.12c0,6.64-5.1,11.53-11.36,11.53s-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53S61.78,19.43,61.78,26.12z M56.8,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C53.84,33.11,56.8,30.22,56.8,26.12z M87.25,26.12c0,6.64-5.1,11.53-11.36,11.53c-6.26,0-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53C82.15,14.59,87.25,19.43,87.25,26.12zM82.28,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C79.32,33.11,82.28,30.22,82.28,26.12z M112.09,15.29v20.7c0,8.52-5.02,12.01-10.96,12.01c-5.59,0-8.95-3.76-10.22-6.81l4.41-1.83c0.79,1.88,2.71,4.1,5.81,4.1c3.8,0,6.16-2.36,6.16-6.77v-1.66h-0.18c-1.14,1.4-3.32,2.62-6.07,2.62c-5.76,0-11.05-5.02-11.05-11.49c0-6.51,5.28-11.57,11.05-11.57c2.75,0,4.93,1.22,6.07,2.58h0.18v-1.88H112.09z M107.64,26.16c0-4.06-2.71-7.03-6.16-7.03c-3.49,0-6.42,2.97-6.42,7.03c0,4.02,2.93,6.94,6.42,6.94C104.93,33.11,107.64,30.18,107.64,26.16z M120.97,3.06v33.89h-5.07V3.06H120.97z M140.89,29.92l3.93,2.62c-1.27,1.88-4.32,5.11-9.61,5.11c-6.55,0-11.28-5.07-11.28-11.53c0-6.86,4.77-11.53,10.71-11.53c5.98,0,8.91,4.76,9.87,7.34l0.52,1.31l-15.42,6.38c1.18,2.31,3.01,3.49,5.59,3.49C137.79,33.11,139.58,31.84,140.89,29.92zM128.79,25.77l10.31-4.28c-0.57-1.44-2.27-2.45-4.28-2.45C132.24,19.04,128.66,21.31,128.79,25.77z"/>
+  </svg>Search Central
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+  </span>
+
+</div>
+        <div class="devsite-top-logo-row-middle">
+          <div class="devsite-header-upper-tabs">
+            
+              
+              
+  <devsite-tabs class="upper-tabs">
+
+    <nav class="devsite-tabs-wrapper" aria-label="Górne karty">
+      
+        
+          <tab class="devsite-dropdown
+    devsite-dropdown-full
+    devsite-active
+    
+    ">
+  
+    <a href="https://developers.google.com/search/docs?hl=pl"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/docs?hl=pl"
+    
+       track-type="nav"
+       track-metadata-position="nav - dokumentacja"
+       track-metadata-module="primary nav"
+       aria-label="Dokumentacja, selected" 
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Dokumentacja"
+         
+           track-name="dokumentacja"
+         
+       >
+    Dokumentacja
+  
+    </a>
+    
+      <button
+         aria-haspopup="menu"
+         aria-expanded="false"
+         aria-label="Menu dla Dokumentacja"
+         track-type="nav"
+         track-metadata-eventdetail="https://developers.google.com/search/docs?hl=pl"
+         track-metadata-position="nav - dokumentacja"
+         track-metadata-module="primary nav"
+         
+          
+            data-category="Site-Wide Custom Events"
+          
+            data-label="Tab: Dokumentacja"
+          
+            track-name="dokumentacja"
+          
+        
+         class="devsite-tabs-dropdown-toggle devsite-icon devsite-icon-arrow-drop-down"></button>
+    
+  
+  <div class="devsite-tabs-dropdown" role="menu" aria-label="submenu" hidden>
+    <div class="devsite-tabs-dropdown-content">
+      
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Podstawy SEO</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="podstawy seo"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Wprowadzenie
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/essentials?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/essentials?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="podstawy seo"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      podstawowe zasady dotyczące wyszukiwarki
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/fundamentals/seo-starter-guide?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="podstawy seo"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      SEO – przewodnik dla początkujących
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/fundamentals/how-search-works?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/fundamentals/how-search-works?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="podstawy seo"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Jak działa wyszukiwarka Google
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/fundamentals/do-i-need-seo?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/fundamentals/do-i-need-seo?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="podstawy seo"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Czy potrzebujesz specjalisty ds. SEO?
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Skanowanie i indeksowanie</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/sitemaps/overview?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="skanowanie i indeksowanie"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Mapy witryn
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/robots/intro?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="skanowanie i indeksowanie"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      robots.txt
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/special-tags?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/special-tags?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="skanowanie i indeksowanie"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Metatagi
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="skanowanie i indeksowanie"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Zarządzanie robotami
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/control-what-you-share?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/control-what-you-share?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="skanowanie i indeksowanie"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Usunięcia
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="skanowanie i indeksowanie"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Konwertowanie kanoniczne
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/301-redirects?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/301-redirects?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="skanowanie i indeksowanie"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Przekierowania
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/crawling-indexing/javascript/javascript-seo-basics?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="skanowanie i indeksowanie"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      SEO JavaScriptu
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Ranking i wygląd w wyszukiwarce</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/visual-elements-gallery?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/visual-elements-gallery?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="ranking i wygląd w wyszukiwarce"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Galeria elementów wizualnych
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/title-link?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/title-link?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="ranking i wygląd w wyszukiwarce"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Linki z tytułami
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/snippet?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/snippet?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="ranking i wygląd w wyszukiwarce"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Fragmenty
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/google-images?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/google-images?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="ranking i wygląd w wyszukiwarce"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Grafika
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/video?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/video?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="ranking i wygląd w wyszukiwarce"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Pliki wideo
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/structured-data/search-gallery?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/structured-data/search-gallery?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="ranking i wygląd w wyszukiwarce"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Uporządkowane dane
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/appearance/favicon-in-search?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/appearance/favicon-in-search?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="ranking i wygląd w wyszukiwarce"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Favikony
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Przewodniki dotyczące poszczególnych witryn</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/specialty/ecommerce?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/specialty/ecommerce?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="przewodniki dotyczące poszczególnych witryn"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      E-commerce
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/specialty/international?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/specialty/international?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="przewodniki dotyczące poszczególnych witryn"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Witryny międzynarodowe i wielojęzyczne
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+                <li class="devsite-nav-title" role="heading" tooltip>Analiza danych</li>
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/search-console-start?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/search-console-start?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="przewodniki dotyczące poszczególnych witryn"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Zacznij korzystać z Search Console
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/debugging-search-traffic-drops?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="przewodniki dotyczące poszczególnych witryn"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Debugowanie spadków natężenia ruchu
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/google-analytics-search-console?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/google-analytics-search-console?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="przewodniki dotyczące poszczególnych witryn"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Korzystanie z danych Search Console i Google Analytics na potrzeby SEO
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/docs/monitor-debug/trends-start?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/docs/monitor-debug/trends-start?hl=pl"
+                     track-metadata-position="nav - dokumentacja"
+                     track-metadata-module="tertiary nav"
+                     
+                       track-metadata-module_headline="przewodniki dotyczące poszczególnych witryn"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Pierwsze kroki w Trendach Google
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+    </div>
+  </div>
+</tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/help?hl=pl"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/help?hl=pl"
+    
+       track-type="nav"
+       track-metadata-position="nav - pomoc"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Pomoc"
+         
+           track-name="pomoc"
+         
+       >
+    Pomoc
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/blog?hl=pl"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/blog?hl=pl"
+    
+       track-type="nav"
+       track-metadata-position="nav - blog"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Blog"
+         
+           track-name="blog"
+         
+       >
+    Blog
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab class="devsite-dropdown
+    
+    
+    
+    ">
+  
+    <a href="https://developers.google.com/search/news?hl=pl"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/news?hl=pl"
+    
+       track-type="nav"
+       track-metadata-position="nav - nowości"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Nowości"
+         
+           track-name="nowości"
+         
+       >
+    Nowości
+  
+    </a>
+    
+      <button
+         aria-haspopup="menu"
+         aria-expanded="false"
+         aria-label="Menu dla Nowości"
+         track-type="nav"
+         track-metadata-eventdetail="https://developers.google.com/search/news?hl=pl"
+         track-metadata-position="nav - nowości"
+         track-metadata-module="primary nav"
+         
+          
+            data-category="Site-Wide Custom Events"
+          
+            data-label="Tab: Nowości"
+          
+            track-name="nowości"
+          
+        
+         class="devsite-tabs-dropdown-toggle devsite-icon devsite-icon-arrow-drop-down"></button>
+    
+  
+  <div class="devsite-tabs-dropdown" role="menu" aria-label="submenu" hidden>
+    <div class="devsite-tabs-dropdown-content">
+      
+      
+        <div class="devsite-tabs-dropdown-column
+                    ">
+          
+            <ul class="devsite-tabs-dropdown-section
+                       ">
+              
+              
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/news?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/news?hl=pl"
+                     track-metadata-position="nav - nowości"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Wszystkie aktualizacje
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://developers.google.com/search/updates?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://developers.google.com/search/updates?hl=pl"
+                     track-metadata-position="nav - nowości"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Aktualizacje dokumentacji
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history?hl=pl"
+                     track-metadata-position="nav - nowości"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Aktualizacje rankingu
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA?hl=pl"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA?hl=pl"
+                     track-metadata-position="nav - nowości"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Nowe filmy w YouTube
+                    </div>
+                    
+                  </a>
+                </li>
+              
+                <li class="devsite-nav-item">
+                  <a href="https://pod.link/1512522198"
+                    
+                     track-type="nav"
+                     track-metadata-eventdetail="https://pod.link/1512522198"
+                     track-metadata-position="nav - nowości"
+                     track-metadata-module="tertiary nav"
+                     
+                     tooltip
+                  >
+                    
+                    <div class="devsite-nav-item-title">
+                      Najnowsze odcinki podcastów
+                    </div>
+                    
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </div>
+      
+    </div>
+  </div>
+</tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/events?hl=pl"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/events?hl=pl"
+    
+       track-type="nav"
+       track-metadata-position="nav - wydarzenia"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Wydarzenia"
+         
+           track-name="wydarzenia"
+         
+       >
+    Wydarzenia
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+        
+          <tab  >
+            
+    <a href="https://developers.google.com/search/case-studies?hl=pl"
+    class="devsite-tabs-content gc-analytics-event "
+      track-metadata-eventdetail="https://developers.google.com/search/case-studies?hl=pl"
+    
+       track-type="nav"
+       track-metadata-position="nav - studia przypadków"
+       track-metadata-module="primary nav"
+       
+       
+         
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Tab: Studia przypadków"
+         
+           track-name="studia przypadków"
+         
+       >
+    Studia przypadków
+  
+    </a>
+    
+  
+          </tab>
+        
+      
+    </nav>
+
+  </devsite-tabs>
+
+            
+           </div>
+          
+<devsite-search
+    enable-signin
+    enable-search
+    enable-suggestions
+      enable-query-completion
+    
+    enable-search-summaries
+    project-name="Documentation"
+    tenant-name="Google for Developers"
+    project-scope="/search/docs"
+    url-scoped="https://developers.google.com/s/results/search/docs?hl=pl"
+    
+    
+    
+    >
+  <form class="devsite-search-form" action="https://developers.google.com/s/results?hl=pl" method="GET">
+    <div class="devsite-search-container">
+      <button type="button"
+              search-open
+              class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+              
+              aria-label="Otwórz wyszukiwanie"></button>
+      <div class="devsite-searchbox">
+        <input
+          aria-activedescendant=""
+          aria-autocomplete="list"
+          
+          aria-label="Wyniki wyszukiwania"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+          autocomplete="off"
+          class="devsite-search-field devsite-search-query"
+          name="q"
+          
+          placeholder="Wyniki wyszukiwania"
+          role="combobox"
+          type="text"
+          value=""
+          >
+          <div class="devsite-search-image material-icons" aria-hidden="true">
+            
+              <svg class="devsite-search-ai-image" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_6641_386)">
+                    <path d="M19.6 21L13.3 14.7C12.8 15.1 12.225 15.4167 11.575 15.65C10.925 15.8833 10.2333 16 9.5 16C7.68333 16 6.14167 15.375 4.875 14.125C3.625 12.8583 3 11.3167 3 9.5C3 7.68333 3.625 6.15 4.875 4.9C6.14167 3.63333 7.68333 3 9.5 3C10.0167 3 10.5167 3.05833 11 3.175C11.4833 3.275 11.9417 3.43333 12.375 3.65L10.825 5.2C10.6083 5.13333 10.3917 5.08333 10.175 5.05C9.95833 5.01667 9.73333 5 9.5 5C8.25 5 7.18333 5.44167 6.3 6.325C5.43333 7.19167 5 8.25 5 9.5C5 10.75 5.43333 11.8167 6.3 12.7C7.18333 13.5667 8.25 14 9.5 14C10.6667 14 11.6667 13.625 12.5 12.875C13.35 12.1083 13.8417 11.15 13.975 10H15.975C15.925 10.6333 15.7833 11.2333 15.55 11.8C15.3333 12.3667 15.05 12.8667 14.7 13.3L21 19.6L19.6 21ZM17.5 12C17.5 10.4667 16.9667 9.16667 15.9 8.1C14.8333 7.03333 13.5333 6.5 12 6.5C13.5333 6.5 14.8333 5.96667 15.9 4.9C16.9667 3.83333 17.5 2.53333 17.5 0.999999C17.5 2.53333 18.0333 3.83333 19.1 4.9C20.1667 5.96667 21.4667 6.5 23 6.5C21.4667 6.5 20.1667 7.03333 19.1 8.1C18.0333 9.16667 17.5 10.4667 17.5 12Z" fill="#5F6368"/>
+                  </g>
+                <defs>
+                <clipPath id="clip0_6641_386">
+                <rect width="24" height="24" fill="white"/>
+                </clipPath>
+                </defs>
+              </svg>
+            
+          </div>
+          <div class="devsite-search-shortcut-icon-container" aria-hidden="true">
+            <kbd class="devsite-search-shortcut-icon">/</kbd>
+          </div>
+      </div>
+    </div>
+  </form>
+  <button type="button"
+          search-close
+          class="devsite-search-button devsite-header-icon-button button-flat material-icons"
+          
+          aria-label="Zamknij wyszukiwanie"></button>
+</devsite-search>
+
+        </div>
+
+        
+
+          
+
+          
+
+          
+
+          
+
+          
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es"
+        >Español</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+
+          
+
+        
+
+        
+          <devsite-user 
+                        
+                        
+                          enable-profiles
+                        
+                        
+                          fp-auth
+                        
+                        id="devsite-user">
+            
+              
+              <span class="button devsite-top-button" aria-hidden="true" visually-hidden>Zaloguj się</span>
+            
+          </devsite-user>
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="devsite-collapsible-section
+    
+      devsite-header-no-lower-tabs
+    ">
+    <div class="devsite-header-background">
+      
+        
+          <div class="devsite-product-id-row"
+           >
+            <div class="devsite-product-description-row">
+              
+                
+                <div class="devsite-product-id">
+                  
+                  
+                  
+                    <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/search/docs?hl=pl"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Lower Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Documentation"
+      
+    >
+    
+          Documentation
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+                </div>
+                
+              
+              
+            </div>
+            
+              <div class="devsite-product-button-row">
+  
+
+  
+  <a href="https://goo.gle/searchconsole"
+  
+    class="button button-primary
+      "
+    
+    
+      
+        data-category="Search docs"
+      
+        data-label="open search console header button"
+      
+    
+    >Search Console</a>
+
+</div>
+            
+          </div>
+          
+        
+      
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+  
+
+  
+</devsite-header>
+        <devsite-book-nav scrollbars >
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="devsite-book-nav-filter"
+     hidden>
+  <span class="filter-list-icon material-icons" aria-hidden="true"></span>
+  <input type="text"
+         placeholder="Filtr"
+         
+         aria-label="Wpisz, aby przefiltrować"
+         role="searchbox">
+  
+  <span class="filter-clear-button hidden"
+        data-title="Wyczyść filtr"
+        aria-label="Wyczyść filtr"
+        role="button"
+        tabindex="0"></span>
+</div>
+
+<nav class="devsite-book-nav devsite-nav nocontent" data-nosnippet
+     aria-label="Boczne menu">
+  <div class="devsite-mobile-header">
+    <button type="button"
+            id="devsite-close-nav"
+            class="devsite-header-icon-button button-flat material-icons gc-analytics-event"
+            data-category="Site-Wide Custom Events"
+            data-label="Close navigation"
+            aria-label="Zamknij nawigację">
+    </button>
+    <div class="devsite-product-name-wrapper">
+
+  
+    
+  
+  <a href="https://developers.google.com/search?hl=pl">
+    
+  <div class="devsite-product-logo-container"
+       
+       
+       
+    size="medium"
+  >
+  
+    <picture>
+      
+      <img class="devsite-product-logo"
+           alt="Google Search Central"
+           src="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=pl"
+           srcset=" /static/search/images/google-search-central-logo.svg"
+           sizes="64px"
+           loading="lazy"
+           >
+    </picture>
+  
+  </div>
+  
+  </a>
+  
+
+  
+
+
+  
+      <span class="devsite-product-name">
+        
+        
+        <ul class="devsite-breadcrumb-list"
+  >
+  
+  <li class="devsite-breadcrumb-item
+             devsite-has-google-wordmark">
+    
+    
+    
+      
+      
+        
+  <a href="https://developers.google.com/search?hl=pl"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Upper Header"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail="Google Search Central"
+      
+    >
+    
+          <svg class="devsite-google-wordmark"
+       xmlns="http://www.w3.org/2000/svg"
+       viewBox="0 0 148 48">
+    <title>Google</title>
+    <path class="devsite-google-wordmark-svg-path" d="M19.58,37.65c-9.87,0-18.17-8.04-18.17-17.91c0-9.87,8.3-17.91,18.17-17.91c5.46,0,9.35,2.14,12.27,4.94l-3.45,3.45c-2.1-1.97-4.93-3.49-8.82-3.49c-7.21,0-12.84,5.81-12.84,13.02c0,7.21,5.64,13.02,12.84,13.02c4.67,0,7.34-1.88,9.04-3.58c1.4-1.4,2.32-3.41,2.66-6.16H19.58v-4.89h16.47c0.18,0.87,0.26,1.92,0.26,3.06c0,3.67-1.01,8.21-4.24,11.44C28.93,35.9,24.91,37.65,19.58,37.65z M61.78,26.12c0,6.64-5.1,11.53-11.36,11.53s-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53S61.78,19.43,61.78,26.12z M56.8,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C53.84,33.11,56.8,30.22,56.8,26.12z M87.25,26.12c0,6.64-5.1,11.53-11.36,11.53c-6.26,0-11.36-4.89-11.36-11.53c0-6.68,5.1-11.53,11.36-11.53C82.15,14.59,87.25,19.43,87.25,26.12zM82.28,26.12c0-4.15-2.96-6.99-6.39-6.99c-3.43,0-6.39,2.84-6.39,6.99c0,4.11,2.96,6.99,6.39,6.99C79.32,33.11,82.28,30.22,82.28,26.12z M112.09,15.29v20.7c0,8.52-5.02,12.01-10.96,12.01c-5.59,0-8.95-3.76-10.22-6.81l4.41-1.83c0.79,1.88,2.71,4.1,5.81,4.1c3.8,0,6.16-2.36,6.16-6.77v-1.66h-0.18c-1.14,1.4-3.32,2.62-6.07,2.62c-5.76,0-11.05-5.02-11.05-11.49c0-6.51,5.28-11.57,11.05-11.57c2.75,0,4.93,1.22,6.07,2.58h0.18v-1.88H112.09z M107.64,26.16c0-4.06-2.71-7.03-6.16-7.03c-3.49,0-6.42,2.97-6.42,7.03c0,4.02,2.93,6.94,6.42,6.94C104.93,33.11,107.64,30.18,107.64,26.16z M120.97,3.06v33.89h-5.07V3.06H120.97z M140.89,29.92l3.93,2.62c-1.27,1.88-4.32,5.11-9.61,5.11c-6.55,0-11.28-5.07-11.28-11.53c0-6.86,4.77-11.53,10.71-11.53c5.98,0,8.91,4.76,9.87,7.34l0.52,1.31l-15.42,6.38c1.18,2.31,3.01,3.49,5.59,3.49C137.79,33.11,139.58,31.84,140.89,29.92zM128.79,25.77l10.31-4.28c-0.57-1.44-2.27-2.45-4.28-2.45C132.24,19.04,128.66,21.31,128.79,25.77z"/>
+  </svg>Search Central
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+      </span>
+    
+
+</div>
+  </div>
+
+  <div class="devsite-book-nav-wrapper">
+    <div class="devsite-mobile-nav-top">
+      
+        <ul class="devsite-nav-list">
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/docs"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              devsite-nav-active"
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Dokumentacja"
+      
+        track-name="dokumentacja"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Dokumentacja"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Dokumentacja
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+  
+    <ul class="devsite-nav-responsive-tabs devsite-nav-has-menu
+               ">
+      
+<li class="devsite-nav-item">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Dokumentacja"
+      
+        track-name="dokumentacja"
+      
+    >
+  
+    <span class="devsite-nav-text" tooltip menu="Dokumentacja">
+      Więcej
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          menu="Dokumentacja">
+    </span>
+    
+  
+  </span>
+  
+
+</li>
+
+    </ul>
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/help"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Pomoc"
+      
+        track-name="pomoc"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Pomoc"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Pomoc
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/blog"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Blog"
+      
+        track-name="blog"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Blog"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Blog
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/news"
+    
+       class="devsite-nav-title gc-analytics-event
+              devsite-nav-has-children
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Nowości"
+      
+        track-name="nowości"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Nowości"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Nowości
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          >
+    </span>
+    
+  
+  </a>
+  
+
+  
+    <ul class="devsite-nav-responsive-tabs devsite-nav-has-menu
+               ">
+      
+<li class="devsite-nav-item">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Nowości"
+      
+        track-name="nowości"
+      
+    >
+  
+    <span class="devsite-nav-text" tooltip menu="Nowości">
+      Więcej
+   </span>
+    
+    <span class="devsite-nav-icon material-icons" data-icon="forward"
+          menu="Nowości">
+    </span>
+    
+  
+  </span>
+  
+
+</li>
+
+    </ul>
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/events"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Wydarzenia"
+      
+        track-name="wydarzenia"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Wydarzenia"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Wydarzenia
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+            <li class="devsite-nav-item">
+              
+  
+  <a href="/search/case-studies"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Tab: Studia przypadków"
+      
+        track-name="studia przypadków"
+      
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Studia przypadków"
+     track-type="globalNav"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Studia przypadków
+   </span>
+    
+  
+  </a>
+  
+
+  
+              
+            </li>
+          
+          
+          
+        </ul>
+      
+    </div>
+    
+      <div class="devsite-mobile-nav-bottom">
+        
+          
+          <ul class="devsite-nav-list" menu="_book">
+            <li class="devsite-nav-item"><a href="/search/docs"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Wprowadzenie</span></a></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>podstawowe zasady dotyczące wyszukiwarki</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/essentials"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przegląd</span></a></li><li class="devsite-nav-item"><a href="/search/docs/essentials/technical"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Wymagania techniczne</span></a></li><li class="devsite-nav-item"><a href="/search/docs/essentials/spam-policies"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zasady dotyczące spamu</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Podstawy SEO</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/fundamentals/seo-starter-guide"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>SEO – przewodnik dla początkujących</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/how-search-works"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Jak działa wyszukiwarka Google</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/creating-helpful-content"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Tworzenie treści przydatnych, rzetelnych i ukierunkowanych na użytkowników</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/do-i-need-seo"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Czy potrzebujesz specjalisty ds. SEO?</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/get-started"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Utrzymywanie SEO witryny</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/get-started-developers"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przewodnik po wyszukiwarce dla deweloperów</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/get-on-google"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Wyświetlanie swojej witryny w Google</span></a></li><li class="devsite-nav-item"><a href="/search/docs/fundamentals/using-gen-ai-content"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Wskazówki dotyczące korzystania z generatywnej AI</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Skanowanie i indeksowanie</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przegląd</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/indexable-file-types"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Typy plików, które Google może indeksować</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/url-structure"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Struktura adresów URL</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/links-crawlable"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Linki</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Mapy witryn</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/overview"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Informacje o mapach witryn</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/build-sitemap"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przygotowywanie i przesyłanie mapy witryny</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/large-sitemaps"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zarządzanie mapami witryn za pomocą pliku indeksu map witryny</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Rozszerzenia map witryn</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/image-sitemaps"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Mapy witryn z obrazami</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/news-sitemap"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Mapy witryn dla Wiadomości Google</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/video-sitemaps"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Mapy witryn wideo i rozwiązania alternatywne</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/sitemaps/combine-sitemap-extensions"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Łączenie rozszerzeń map witryn</span></a></li></ul></div></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Zarządzanie robotami</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/ask-google-to-recrawl"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zgłaszanie do Google prośby o ponowne zindeksowanie adresów URL</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/troubleshoot-crawling-errors"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Rozwiązywanie problemów z błędami indeksowania</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Roboty Google</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/crawlers-fetchers/overview-google-crawlers"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Lista robotów Google</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="Witryna zewnętrzna"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/googlebot"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Googlebot</span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/crawlers-fetchers/reduce-crawl-rate"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zmniejszanie szybkości indeksowania przez Google</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="Witryna zewnętrzna"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/crawlers-fetchers/verifying-googlebot"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Weryfikowanie Googlebota i innych robotów Google</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="Witryna zewnętrzna"
+        aria-hidden="true"></span></a></li></ul></div></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>robots.txt</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/robots/intro"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Plik robots.txt – wprowadzenie</span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="/crawling/docs/robots-txt/robots-txt-spec"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Jak Google interpretuje specyfikację pliku robots.txt</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="Witryna zewnętrzna"
+        aria-hidden="true"></span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Konwertowanie kanoniczne</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/canonicalization"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Czym jest wybór strony kanonicznej</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/consolidate-duplicate-urls"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Jak określić kanoniczny URL za pomocą rel=&#34;canonical&#34; i innych metod</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/canonicalization-troubleshooting"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Rozwiązywanie problemów z wyborem strony kanonicznej</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/mobile/mobile-sites-mobile-first-indexing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Indeksowanie witryn mobilnych i indeksowanie zoptymalizowane pod kątem urządzeń mobilnych</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>AMP</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Wytyczne dotyczące stron AMP w wyszukiwarce Google</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/about-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Jak działają strony AMP w wynikach wyszukiwania</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/enhance-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Ulepszanie zawartości stron AMP</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/validate-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Sprawdzanie poprawności stron AMP</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/amp/remove-amp"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Usuwanie materiałów AMP</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>JavaScript</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>JavaScript a SEO – podstawy</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/javascript/fix-search-javascript"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Rozwiązywanie problemów z JavaScriptem związanych z wyszukiwarką</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/javascript/lazy-loading"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Naprawianie leniwie ładującej się zawartości</span></a></li><li class="devsite-nav-item
+           devsite-nav-deprecated"><a href="/search/docs/crawling-indexing/javascript/dynamic-rendering"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Renderowanie dynamiczne jako obejście problemu</span><span class="devsite-nav-icon material-icons"
+        data-icon="deprecated"
+        data-title="Sekcja wycofana"
+        aria-hidden="true"></span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Metadane strony i treści</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/valid-page-metadata"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Metadane strony</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Metatagi</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/special-tags"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Metatagi i atrybuty HTML obsługiwane przez Google</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/robots-meta-tag"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Metatag robots, atrybut data-nosnippet i nagłówek HTTP X-Robots-Tag</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/block-indexing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>noindex</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/qualify-outbound-links"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Atrybuty rel</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Usunięcia</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/control-what-you-share"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Kontrolowanie danych udostępnianych Google</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/remove-information"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Usuwanie stron</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/prevent-images-on-your-page"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Usuwanie obrazów</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/keep-redacted-information-out"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Usunięte informacje</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Przeniesienie witryny i inne zmiany</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/301-redirects"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przekierowania a wyszukiwarka Google</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Przeniesienie witryny</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/site-move-no-url-changes"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zmiana hostingu</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/site-move-with-url-changes"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przenoszenie witryny ze zmianą adresów URL</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/website-testing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Testy A/B</span></a></li><li class="devsite-nav-item"><a href="/search/docs/crawling-indexing/pause-online-business"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Tymczasowe wstrzymywanie i wyłączanie witryny</span></a></li></ul></div></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Ranking i wygląd w wyszukiwarce</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przegląd</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/ai-features"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Funkcje oparte na AI</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/publication-dates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Daty publikacji</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/favicon-in-search"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Favikony</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/featured-snippets"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Fragmenty z odpowiedzią</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/flexible-sampling"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Elastyczne udostępnianie treści</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/google-discover"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Google Discover</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/google-images"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Grafika</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Funkcje lokalne</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/establish-business-details"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Szczegóły firmy</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/top-places-list"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Lista najlepszych miejsc</span></a></li><li class="devsite-nav-item
+           devsite-nav-external"><a href="https://support.google.com/webmasters/answer/3035947"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Rezygnacja z wyników wyszukiwania lokalnego</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="Witryna zewnętrzna"
+        aria-hidden="true"></span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Jakość strony</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/page-experience"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Informacje o wyglądzie i działaniu stron</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/core-web-vitals"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Core Web Vitals</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/avoid-intrusive-interstitials"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Reklamy pełnoekranowe i okna</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/signed-exchange"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Pierwsze kroki z technologią Signed Exchange w wyszukiwarce Google</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/preferred-sources"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Preferowane źródła</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Systemy rankingowe</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/ranking-systems-guide"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przewodnik po systemach rankingowych wyszukiwarki Google</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/reviews-system"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>System opinii</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Aktualizacje rankingu</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-external"><a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Lista aktualizacji dotyczących rankingu</span><span class="devsite-nav-icon material-icons"
+        data-icon="external"
+        data-title="Witryna zewnętrzna"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/core-updates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Główne aktualizacje</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/spam-updates"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Aktualizacje dotyczące spamu</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/site-names"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Nazwy witryn</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/sitelinks"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Linki do podstron</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/snippet"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Fragmenty</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Uporządkowane dane</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/intro-structured-data"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Jak działają uporządkowane dane</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/sd-policies"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Ogólne wskazówki dotyczące uporządkowanych danych</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/enriched-search-results"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Wzbogacone wyniki wyszukiwania</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/generate-structured-data-with-javascript"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Generowanie uporządkowanych danych za pomocą kodu JavaScript</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Przewodniki po funkcjach</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/search-gallery"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Wszystkie funkcje uporządkowanych danych</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/article"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Artykuł</span></a></li><li class="devsite-nav-item
+           devsite-nav-limited"><a href="/search/docs/appearance/structured-data/book"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Czynności dotyczące książek</span><span class="devsite-nav-icon material-icons"
+        data-icon="limited"
+        data-title="Dostęp ograniczony"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/breadcrumb"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Menu nawigacyjne</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/carousel"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Karuzela</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/course"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Lista kursów</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/dataset"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zbiór danych</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/discussion-forum"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Forum dyskusyjne</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/education-qa"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>edukacyjne pytania i odpowiedzi</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/employer-rating"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zbiorcza ocena pracodawcy</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/factcheck"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Informacje zweryfikowane</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/event"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zdarzenie</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/faqpage"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Najczęstsze pytania</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/image-license-metadata"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Metadane obrazu</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/job-posting"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Oferta pracy</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/local-business"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Lokalna firma</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/math-solvers"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Rozwiązanie matematyczne</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/movie"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Karuzela filmów</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/organization"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Organizacja</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Zakupy</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/product"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przegląd</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/product-snippet"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Krótki opis produktu</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/merchant-listing"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Umieszczone przez sprzedawcę informacje o produkcie</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/product-variants"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Wersje</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/loyalty-program"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Program lojalnościowy</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/return-policy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zasady zwrotów dla sprzedawców</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/shipping-policy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zasady dostawy sprzedawcy</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/profile-page"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Strona profilu</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/qapage"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Pytania i odpowiedzi</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/recipe"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przepis</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/review-snippet"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Fragment opinii</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/software-app"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Aplikacja</span></a></li><li class="devsite-nav-item
+           devsite-nav-beta"><a href="/search/docs/appearance/structured-data/speakable"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Dostępne głosowo</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="Beta"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/paywalled-content"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Subskrypcja i treści płatne</span></a></li><li class="devsite-nav-item
+           devsite-nav-limited"><a href="/search/docs/appearance/structured-data/vacation-rental"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Kwatera wakacyjna</span><span class="devsite-nav-icon material-icons"
+        data-icon="limited"
+        data-title="Dostęp ograniczony"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/structured-data/video"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Wideo</span></a></li></ul></div></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/title-link"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Linki z tytułami</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Przetłumaczone funkcje</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/translated-results"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przetłumaczone wyniki</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/ad-network-and-translation"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Sieci reklamowe i funkcje wyszukiwarki Google związane z tłumaczeniem</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/appearance/video"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Pliki wideo</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/visual-elements-gallery"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Galeria elementów wizualnych</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Relacje internetowe</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/appearance/enable-web-stories"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Włączanie Relacji internetowych w Google</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/web-stories-creation-best-practices"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Sprawdzone metody tworzenia Relacji internetowych</span></a></li><li class="devsite-nav-item"><a href="/search/docs/appearance/web-stories-content-policy"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Polityka treści dotycząca Relacji internetowych</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Program wcześniejszego dostępu</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-beta"><a href="/search/docs/appearance/package-tracking"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Śledzenie przesyłki</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="Beta"
+        aria-hidden="true"></span></a></li><li class="devsite-nav-item
+           devsite-nav-beta"><a href="/search/docs/appearance/structured-data/carousels-beta"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Karuzele uporządkowanych danych (beta)</span><span class="devsite-nav-icon material-icons"
+        data-icon="beta"
+        data-title="Beta"
+        aria-hidden="true"></span></a></li></ul></div></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Monitorowanie i debugowanie</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/debugging-search-traffic-drops"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Debugowanie spadków natężenia ruchu z wyszukiwarki</span></a></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Monitorowanie w Search Console</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-console-start"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zacznij korzystać z Search Console</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/bubble-chart-analysis"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Poprawianie SEO za pomocą wykresu bąbelkowego</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/google-analytics-search-console"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Korzystanie z danych Search Console i Google Analytics na potrzeby SEO</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Debugowanie za pomocą operatorów wyszukiwania</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-operators"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przegląd</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-operators/all-search-site"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Operator wyszukiwania site:</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/search-operators/image-search"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Operatory wyszukiwania w Grafice Google</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Zapobieganie nadużyciom i ich monitorowanie</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przegląd</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/prevent-abuse"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Ochrona przed spamem użytkowników</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/malware"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Złośliwe i niechciane oprogramowanie</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/prevent-malware"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zapobieganie infekcjom złośliwym oprogramowaniem</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/social-engineering"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Inżynieria społeczna (wyłudzanie informacji i witryny wprowadzające w błąd)</span></a></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/security/safe-browsing-repeat-offenders"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Bezpieczne przeglądanie Google – zasady dotyczące sprawców wielokrotnych naruszeń</span></a></li></ul></div></li><li class="devsite-nav-item"><a href="/search/docs/monitor-debug/trends-start"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Pierwsze kroki w Trendach Google</span></a></li></ul></div></li>
+
+  <li class="devsite-nav-item
+           devsite-nav-expandable
+           devsite-nav-accordion"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Przewodniki dotyczące poszczególnych witryn</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>E-commerce</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przegląd</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/where-ecommerce-data-can-appear-on-google"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Gdzie mogą się wyświetlać treści</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/share-your-product-data-with-google"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Udostępnianie danych produktów</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/include-structured-data-relevant-to-ecommerce"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Dołączanie uporządkowanych danych</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/how-to-launch-an-ecommerce-website"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Uruchamianie nowej witryny</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/write-high-quality-reviews"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Twórz wysokiej jakości opinie</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/designing-a-url-structure-for-ecommerce-sites"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Projektowanie struktury adresu URL</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/help-google-understand-your-ecommerce-site-structure"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Struktura witryny e-commerce</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/ecommerce/pagination-and-incremental-page-loading"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Podział na strony i przyrostowe wczytywanie stron a wyszukiwarka</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Międzynarodowe i wielojęzyczne</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/specialty/international"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przegląd</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/international/managing-multi-regional-sites"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Zarządzanie witrynami multiregionalnymi i wielojęzycznymi</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/international/localized-versions"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Przekazywanie Google informacji o zlokalizowanych wersjach strony</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/international/locale-adaptive-pages"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Jak Google indeksuje strony o treści zależnej od języka</span></a></li></ul></div></li><li class="devsite-nav-item
+           devsite-nav-expandable"><div class="devsite-expandable-nav">
+      <a class="devsite-nav-toggle" aria-hidden="true"></a><div class="devsite-nav-title devsite-nav-title-no-path" tabindex="0" role="button">
+        <span class="devsite-nav-text" tooltip>Treści dla dorosłych</span>
+      </div><ul class="devsite-nav-section"><li class="devsite-nav-item"><a href="/search/docs/specialty/explicit/guidelines"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Wytyczne dotyczące witryn z treściami dla dorosłych</span></a></li><li class="devsite-nav-item"><a href="/search/docs/specialty/explicit/troubleshooting"
+        class="devsite-nav-title"
+      ><span class="devsite-nav-text" tooltip>Co zrobić, gdy witryna została błędnie oznaczona jako zawierająca treści dla dorosłych</span></a></li></ul></div></li></ul></div></li>
+          </ul>
+        
+        
+          
+    
+      
+      <ul class="devsite-nav-list" menu="Dokumentacja"
+          aria-label="Boczne menu" hidden>
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Podstawy SEO
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Wprowadzenie"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Wprowadzenie
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/essentials"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: podstawowe zasady dotyczące wyszukiwarki"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      podstawowe zasady dotyczące wyszukiwarki
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/fundamentals/seo-starter-guide"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: SEO – przewodnik dla początkujących"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      SEO – przewodnik dla początkujących
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/fundamentals/how-search-works"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Jak działa wyszukiwarka Google"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Jak działa wyszukiwarka Google
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/fundamentals/do-i-need-seo"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Czy potrzebujesz specjalisty ds. SEO?"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Czy potrzebujesz specjalisty ds. SEO?
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Skanowanie i indeksowanie
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/sitemaps/overview"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Mapy witryn"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Mapy witryn
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/robots/intro"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: robots.txt"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      robots.txt
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/special-tags"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Metatagi"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Metatagi
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/ask-google-to-recrawl"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Zarządzanie robotami"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Zarządzanie robotami
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/control-what-you-share"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Usunięcia"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Usunięcia
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/consolidate-duplicate-urls"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Konwertowanie kanoniczne"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Konwertowanie kanoniczne
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/301-redirects"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Przekierowania"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Przekierowania
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/crawling-indexing/javascript/javascript-seo-basics"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: SEO JavaScriptu"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      SEO JavaScriptu
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Ranking i wygląd w wyszukiwarce
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/visual-elements-gallery"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Galeria elementów wizualnych"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Galeria elementów wizualnych
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/title-link"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Linki z tytułami"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Linki z tytułami
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/snippet"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Fragmenty"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Fragmenty
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/google-images"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Grafika"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Grafika
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/video"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Pliki wideo"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Pliki wideo
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/structured-data/search-gallery"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Uporządkowane dane"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Uporządkowane dane
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/appearance/favicon-in-search"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Favikony"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Favikony
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Przewodniki dotyczące poszczególnych witryn
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/specialty/ecommerce"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: E-commerce"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      E-commerce
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/specialty/international"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Witryny międzynarodowe i wielojęzyczne"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Witryny międzynarodowe i wielojęzyczne
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+            
+              
+<li class="devsite-nav-item devsite-nav-heading">
+
+  
+  <span
+    
+       class="devsite-nav-title"
+       tooltip
+    
+    >
+  
+    <span class="devsite-nav-text" tooltip >
+      Analiza danych
+   </span>
+    
+  
+  </span>
+  
+
+</li>
+
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/search-console-start"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Zacznij korzystać z Search Console"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Zacznij korzystać z Search Console
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/debugging-search-traffic-drops"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Debugowanie spadków natężenia ruchu"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Debugowanie spadków natężenia ruchu
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/google-analytics-search-console"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Korzystanie z danych Search Console i Google Analytics na potrzeby SEO"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Korzystanie z danych Search Console i Google Analytics na potrzeby SEO
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/docs/monitor-debug/trends-start"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Pierwsze kroki w Trendach Google"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Pierwsze kroki w Trendach Google
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+      </ul>
+    
+  
+    
+  
+    
+  
+    
+      
+      <ul class="devsite-nav-list" menu="Nowości"
+          aria-label="Boczne menu" hidden>
+        
+          
+            
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/news"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Wszystkie aktualizacje"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Wszystkie aktualizacje
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="/search/updates"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Aktualizacje dokumentacji"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Aktualizacje dokumentacji
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Aktualizacje rankingu"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Aktualizacje rankingu
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Nowe filmy w YouTube"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Nowe filmy w YouTube
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+              
+<li class="devsite-nav-item">
+
+  
+  <a href="https://pod.link/1512522198"
+    
+       class="devsite-nav-title gc-analytics-event
+              
+              "
+    
+
+    
+     data-category="Site-Wide Custom Events"
+     data-label="Responsive Tab: Najnowsze odcinki podcastów"
+     track-type="navMenu"
+     track-metadata-eventDetail="globalMenu"
+     track-metadata-position="nav">
+  
+    <span class="devsite-nav-text" tooltip >
+      Najnowsze odcinki podcastów
+   </span>
+    
+  
+  </a>
+  
+
+</li>
+
+            
+          
+        
+      </ul>
+    
+  
+    
+  
+    
+  
+        
+        
+          
+    
+  
+        
+      </div>
+    
+  </div>
+</nav>
+          
+        </devsite-book-nav>
+      
+      <section id="gc-wrapper">
+        <main role="main" id="main-content" class="devsite-main-content"
+            
+              has-book-nav
+              has-sidebar
+            >
+          <div class="devsite-sidebar">
+            <div class="devsite-sidebar-content">
+                
+                <devsite-toc class="devsite-nav"
+                            role="navigation"
+                            aria-label="Na tej stronie"
+                            depth="2"
+                            scrollbars
+                            data-nosnippet
+                  ></devsite-toc>
+                <devsite-recommendations-sidebar class="nocontent devsite-nav" data-nosnippet>
+                </devsite-recommendations-sidebar>
+            </div>
+          </div>
+          <devsite-content>
+            
+              
+
+
+
+
+
+
+
+
+
+
+<article class="devsite-article"><style>
+      /* Styles inlined from /search/sitewide.css */
+/* Popped white box with shadow*/
+.sc-shadow-box-row .devsite-landing-row-inner {
+  background-color: #fff;
+  box-shadow: 0 13px 18px -8px rgba(0,0,0,0.15), 0 11px 55px 10px rgba(0,0,0,0.07);
+  border-radius: 8px;
+  margin-bottom: 55px;
+}
+
+/* Stat box for big numbers and description*/
+.big-stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 64px 32px;
+    text-align: center;
+}
+@media (min-width: 481px) {
+  .big-stats {
+      flex-direction: row;
+  }
+}
+.big-stat {
+    margin-bottom: 32px;
+}
+@media (min-width: 481px) {
+  .big-stat {
+      flex: 1;
+      margin: 0 8px;
+  }
+}
+.big-stat__figure {
+    font-size: 1.5em;
+    line-height: 1em;
+}
+@media (min-width: 241px) {
+  .big-stat__figure {
+      font-size: 4em;
+  }
+}
+@media (min-width: 1020px) {
+  .big-stat__figure {
+      font-size: 6em;
+  }
+}
+.big-stat__description,
+.big-stat__figure {
+    color: inherit;
+    font-family: "Google Sans",sans-serif;
+    margin: 0;
+    text-align: inherit;
+}
+.big-stat__description {
+    line-height: 1.5em;
+}
+.big-stat__description,
+.big-stat__figure {
+    color: inherit;
+    font-family: "Google Sans",sans-serif;
+    margin: 0;
+    text-align: inherit;
+}
+.big-stat__sub {
+    font-size: .5em;
+    line-height: 1em;
+    vertical-align: baseline;
+}
+
+/* Green background and text -- consistent style with devsite notices */
+.green {
+    background: #e0f2f1;
+    color: #00796b;
+}
+
+/* Color scheme of unconference for background and text */
+.unconference-yellow {
+  background: #fdd901;
+  color: #3a3a3a;
+}
+
+/* Publish date styling */
+.publish-date {
+  font-size: smaller;
+  font-style: italic
+}
+
+/*
+  Fixes SVG label spacing fix to avoid webkit (Safari et. al.) issues
+*/
+foreignObject p {
+  margin: 0 ;
+  padding: 1rem 0;
+}
+
+      </style>
+  
+  
+  
+  
+  
+
+  <div class="devsite-article-meta nocontent" role="navigation" data-nosnippet>
+    
+    
+    <ul class="devsite-breadcrumb-list"
+  
+    aria-label="Menu nawigacyjne">
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/?hl=pl"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="1"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="1"
+      
+        track-metadata-eventdetail=""
+      
+    >
+    
+          Strona główna
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/search?hl=pl"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="2"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="2"
+      
+        track-metadata-eventdetail="Google Search Central"
+      
+    >
+    
+          Search Central
+        
+  </a>
+  
+      
+    
+  </li>
+  
+  <li class="devsite-breadcrumb-item
+             ">
+    
+      
+      <div class="devsite-breadcrumb-guillemet material-icons" aria-hidden="true"></div>
+    
+    
+    
+      
+        
+  <a href="https://developers.google.com/search/docs?hl=pl"
+      
+        class="devsite-breadcrumb-link gc-analytics-event"
+      
+        data-category="Site-Wide Custom Events"
+      
+        data-label="Breadcrumbs"
+      
+        data-value="3"
+      
+        track-type="globalNav"
+      
+        track-name="breadcrumb"
+      
+        track-metadata-position="3"
+      
+        track-metadata-eventdetail="Documentation"
+      
+    >
+    
+          Documentation
+        
+  </a>
+  
+      
+    
+  </li>
+  
+</ul>
+    
+      
+    <devsite-thumb-rating position="header">
+    </devsite-thumb-rating>
+  
+    
+  </div>
+  
+    <devsite-feedback
+  position="header"
+  project-name="Documentation"
+  product-id="103417"
+  bucket="Search Docs"
+  context="DevSite feedback link"
+  version="t-devsite-webserver-20260507-r00-rc00.477408230701735660"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="header"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=pl"
+    
+  
+  
+    project-support-url="https://developers.google.com/search/help?hl=pl"
+  
+  
+  >
+
+  <button>
+  
+    
+    Prześlij opinię
+  
+  </button>
+</devsite-feedback>
+  <devsite-actions hidden data-nosnippet>
+    <devsite-llm-tools></devsite-llm-tools></devsite-actions>
+  
+    
+  
+
+  <devsite-toc class="devsite-nav"
+    depth="2"
+    devsite-toc-embedded
+    >
+  </devsite-toc>
+  <div class="devsite-article-body clearfix
+  devsite-no-page-title">
+
+  
+    
+    
+    
+  <h1 class="page-title" data-text="Przewodnik po systemach rankingowych wyszukiwarki Google" id="a-guide-to-google-search-ranking-systems" tabindex="-1">Przewodnik po systemach rankingowych wyszukiwarki Google</h1>
+  
+<p>
+  Google korzysta z automatycznych systemów rankingowych, które <a class="external-link" href="https://www.google.com/search/howsearchworks/how-search-works/ranking-results/?hl=pl" >uwzględniają wiele czynników i sygnałów</a> z setek miliardów stron internetowych i innych treści w naszym indeksie wyszukiwarki, aby w ułamku sekundy prezentować najbardziej trafne i przydatne wyniki.
+  Na tej stronie znajdziesz wskazówki, które pomogą Ci poznać niektóre z najbardziej wartościowych systemów rankingowych. Przedstawiamy tutaj niektóre systemy będące częścią naszych najważniejszych systemów rankingowych, które są podstawowymi technologiami generującymi wyniki wyszukiwania w odpowiedzi na zapytania. Omawiamy też niektóre systemy powiązane z określonymi potrzebami dotyczącymi rankingu.
+</p>
+<p>
+  Nasze systemy rankingowe zostały zaprojektowane tak, aby działały na poziomie strony i określały pozycję poszczególnych stron w rankingu, wykorzystując różne sygnały i systemy. Do lepszego rozumienia stron przez Google przyczyniają się również sygnały i klasyfikatory dotyczące całej witryny. Sygnały świadczące o dobrej jakości całej witryny nie oznaczają, że jej wszystkie treści będą zawsze zajmować wysokie pozycje. Z kolei słabe sygnały dotyczące całej witryny nie oznaczają, że jej wszystkie treści będą pojawiać się na niskich pozycjach.
+</p>
+<p>Ulepszając nasze systemy rankingowe, stale poddajemy je <a class="external-link" href="https://www.google.com/search/howsearchworks/how-search-works/rigorous-testing/?hl=pl" >rygorystycznym testom i ocenom</a>. Informujemy o <a class="external-link" href="https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history?hl=pl" >aktualizacjach naszych systemów rankingowych</a>, gdy wprowadzone zmiany mogą mieć znaczenie dla twórców treści i innych użytkowników.</p>
+<p>Możesz też odwiedzić stronę <a class="external-link" href="https://www.google.com/search/howsearchworks/?hl=pl" >Jak działa wyszukiwarka</a>, aby dowiedzieć się, jak nasze <a class="external-link" href="https://www.google.com/search/howsearchworks/how-search-works/ranking-results/?hl=pl" >systemy rankingowe</a> w połączeniu z innymi procesami współpracują ze sobą, aby wyszukiwarka Google mogła spełniać misję porządkowania informacji z całego świata oraz udostępniania ich do ogólnego użytku.</p>
+<h2 data-text="BERT" id="bert" tabindex="-1">BERT</h2>
+<p>
+  Dwukierunkowe reprezentacje enkodera z transformatorów (<a class="external-link" href="https://blog.google/products/search/how-ai-powers-great-search-results/?hl=pl" >BERT</a>) to system AI, który pozwala Google zrozumieć, jak kombinacje słów wyrażają różne znaczenia i intencje.
+</p>
+<h2 data-text="Systemy informacji kryzysowych" id="crisis-info" tabindex="-1">Systemy informacji kryzysowych</h2>
+<p>Opracowaliśmy systemy, które przekazują przydatne i aktualne informacje w czasie kryzysu – dotyczy to zarówno osobistych sytuacji kryzysowych, jak i klęsk żywiołowych czy innych sytuacji kryzysowych o dużym zasięgu.</p>
+<ul>
+  <li><b>Kryzys osobisty:</b> nasze systemy sprawdzają, czy użytkownicy szukają informacji o osobistych sytuacjach kryzysowych. W razie wykrycia zapytań związanych z samobójstwami, przemocą seksualną, otruciem, przemocą na tle tożsamości płciowej lub uzależnieniem od narkotyków wyświetlamy numery infolinii oraz treści od zaufanych organizacji. Dowiedz się więcej o <a class="external-link" href="https://support.google.com/websearch/answer/9988513?hl=pl" >wyświetlaniu w wyszukiwarce Google informacji o osobistych sytuacjach kryzysowych</a>.</li>
+  <li><b>Powiadomienia SOS:</b> w czasie klęsk żywiołowych i rozległych sytuacji kryzysowych nasz system powiadomień SOS wyświetla komunikaty od władz lokalnych, krajowych lub międzynarodowych. Te powiadomienia mogą obejmować np. alarmowe numery telefonów i strony internetowe, mapy, tłumaczenia przydatnych wyrażeń czy informacje o możliwościach przekazania darowizny. Dowiedz się więcej o tym, <a class="external-link" href="https://support.google.com/sosalerts/?hl=pl" >jak działają powiadomienia SOS</a> jako element <a class="external-link" href="https://crisisresponse.google/forecasting-and-alerts/?hl=pl" >ostrzeżeń o wydarzeniach kryzysowych</a> Google, które są przydatne w przypadku powodzi, pożarów, trzęsień ziemi, huraganów i innych katastrof.</li>
+</ul>
+<h2 data-text="Systemy deduplikacji" id="deduplication" tabindex="-1">Systemy deduplikacji</h2>
+<p>
+  W wyszukiwarce Google mogą znajdować się tysiące, a nawet miliony pasujących stron internetowych. Niektóre z nich mogą być do siebie bardzo podobne. Aby uniknąć niepotrzebnego powielania treści, nasze systemy w takich przypadkach wyświetlają tylko te wyniki, które są najbardziej trafne. Dowiedz się więcej o tym, <a class="external-link" href="https://support.google.com/websearch/answer/9603785?hl=pl" >jak działa deduplikacja i jak w razie potrzeby wyświetlić pominięte wyniki</a>.
+</p>
+<p>
+  Deduplikacja jest stosowana również w przypadku <a class="external-link" href="https://support.google.com/websearch/answer/9351707?hl=pl" >fragmentów z odpowiedzią</a>.
+  Jeśli strona internetowa zostaje użyta do wyświetlenia fragmentu z odpowiedzią, nie pojawia się równocześnie na pierwszej stronie wyników wyszukiwania. Zwiększa to przejrzystość wyników i ułatwia znajdowanie przydatnych informacji.
+</p>
+<h2 data-text="System domen o dopasowaniu ścisłym" id="exact-match" tabindex="-1">System domen o dopasowaniu ścisłym</h2>
+<p>
+  Jednym z wielu czynników uwzględnianych przez nasze systemy rankingowe i pomagających określić, czy treść pasuje do wyszukiwania, są słowa w nazwach domen. Nasz system domen o dopasowaniu ścisłym działa jednak tak, aby nie przypisywać zbyt dużego udziału treściom przechowywanym w domenach, które zostały zaprojektowane po to, aby dokładnie pasowały do określonych zapytań. Ktoś może np. utworzyć nazwę domeny zawierającą słowa „najlepsze-miejsca-na-obiad”, licząc na to, że w ten sposób uzyska wyższą pozycję treści w rankingu. Nasz system dostosowuje się do takich sytuacji.
+</p>
+<h2 data-text="Systemy aktualności" id="freshness" tabindex="-1">Systemy aktualności</h2>
+<p>
+  Stosujemy różne systemy typu „zapytanie zasługuje na aktualność”, zaprojektowane tak, aby dla zapytań, w przypadku których jest to oczekiwane, wyświetlać bardziej aktualne treści.  Jeśli na przykład ktoś szuka informacji o filmie, który właśnie wszedł na ekrany, najprawdopodobniej interesują go najnowsze recenzje, a nie starsze artykuły z czasu początku produkcji. Inny przykład: zwykłe wyszukanie hasła „trzęsienie ziemi” może zwrócić informacje o przygotowaniu i zasobach. Jeśli jednak trzęsienie ziemi miało miejsce niedawno, mogą pojawić się artykuły informacyjne i bardziej aktualne treści.
+</p>
+<h2 data-text="Systemy analizy linków i PageRank" id="link-analysis" tabindex="-1">Systemy analizy linków i PageRank</h2>
+<p>
+  Stosujemy różne systemy analizujące to, jak poszczególne strony się ze sobą łączą. Pozwala to określać, czego dotyczą poszczególne strony i które z nich mogą być najbardziej przydatne w odpowiedzi na dane zapytanie. Jednym z naszych podstawowych systemów rankingowych używanych od początku istnienia Google jest PageRank. Jeśli chcesz dowiedzieć się więcej, przeczytaj oryginalny <a class="external-link" href="http://infolab.stanford.edu/~backrub/google.html" >artykuł badawczy na temat PageRank</a> i zapoznaj się z <a class="external-link" href="https://patents.google.com/patent/US6285999?hl=pl" >patentem</a>.
+  Funkcja PageRank nieustannie się zmienia i nadal jest częścią naszych podstawowych systemów rankingowych.
+</p>
+<h2 data-text="Systemy wiadomości lokalnych" id="local-news" tabindex="-1">Systemy wiadomości lokalnych</h2>
+<p>
+  Mamy systemy, które identyfikują i wyświetlają lokalne źródła wiadomości, gdy wyniki z nich są trafne, np. <a class="external-link" href="https://blog.google/products/news/local-news-update-census-mapper/?hl=pl" >za pomocą</a> funkcji „Najważniejsze artykuły” i „Wiadomości lokalne”.
+</p>
+<h2 data-text="MUM" id="mum" tabindex="-1">MUM</h2>
+<p>
+  Wielozadaniowy Ujednolicony Model (<a class="external-link" href="https://blog.google/products/search/how-ai-powers-great-search-results/?hl=pl" >MUM</a>) to system AI, który rozumie i potrafi generować tekst. Obecnie nie używamy go do określania pozycji w rankingu w wyszukiwarce, ale do konkretnych zastosowań, takich jak <a class="external-link" href="https://blog.google/products/search/how-mum-improved-google-searches-vaccine-information/?hl=pl" >ulepszanie wyszukiwania informacji na temat szczepionek przeciw COVID-19</a> i <a class="external-link" href="https://blog.google/products/search/information-literacy/?hl=pl" >ulepszanie wyświetlanych przez nas objaśnień do fragmentów z odpowiedzią</a>.
+</p>
+<h2 data-text="Dopasowywanie neuronowe" id="neural-matching" tabindex="-1">Dopasowywanie neuronowe</h2>
+<p>
+  <a class="external-link" href="https://blog.google/products/search/how-ai-powers-great-search-results/?hl=pl" >Dopasowywanie neuronowe</a> to system AI, dzięki któremu Google interpretuje koncepcje w zapytaniach i na stronach oraz dopasowuje je do siebie.
+</p>
+<h2 data-text="Systemy treści oryginalnych" id="original-content" tabindex="-1">Systemy treści oryginalnych</h2>
+<p>
+  Mamy systemy pomagające wyświetlać na wyższych pozycjach wyników wyszukiwania oryginalne treści (<a class="external-link" href="https://blog.google/products/search/original-reporting/?hl=pl" >w tym materiały autorskie</a>), a nie strony, które je tylko cytują. Obejmuje to obsługę specjalnych <a href="https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls?hl=pl">znaczników strony kanonicznej</a>, których twórcy mogą użyć, aby wskazać wyszukiwarce, która strona jest stroną główną, jeśli została ona zduplikowana w kilku miejscach.
+</p>
+<h2 data-text="Systemy przesuwania w dół na podstawie usunięć" id="removals" tabindex="-1">Systemy przesuwania w dół na podstawie usunięć</h2>
+<p>
+  Nasze zasady zezwalają na usuwanie określonych typów treści. Jeśli przetwarzamy znaczną liczbę próśb o usunięcie treści z konkretnej witryny, wykorzystujemy to jako sygnał do ulepszenia wyników wyszukiwania. W szczególności:
+</p>
+<ul>
+  <li>
+    <b>Usuwanie treści ze względów prawnych:</b> 
+    
+    Gdy otrzymujemy znaczną liczbę <a class="external-link" href="https://support.google.com/transparencyreport/answer/7347743?hl=pl" >prawidłowych żądań usunięcia treści z powodu naruszenia praw autorskich</a> w danej witrynie, <a class="external-link" href="https://search.googleblog.com/2012/08/an-update-to-our-search-algorithms.html" >możemy to wykorzystać</a>, aby obniżyć pozycję innych treści z tej witryny w naszych wynikach. Dlatego w przypadku występowania innych treści naruszających prawo użytkownicy rzadziej będą mieli do nich dostęp. Podobne sygnały przesuwające stronę w dół stosujemy w przypadku skarg dotyczących zniesławienia, podróbek produktów i usunięć na podstawie orzeczenia sądowego. W przypadku materiałów przedstawiających wykorzystywanie seksualne dzieci (CSAM) zawsze usuwamy takie treści, gdy je zidentyfikujemy. Przesuwamy w dół wszystkie materiały ze stron, na których występuje znaczny odsetek CSAM.
+  
+  
+  </li>
+  <li>
+    <b>Usuwanie danych osobowych:</b> 
+    
+    Jeśli przetwarzamy usuwanie znacznych ilości danych osobowych z witryny z <a class="external-link" href="https://support.google.com/websearch/answer/9172218?hl=pl" >uciążliwymi zasadami usuwania treści</a>, inne treści z tej witryny w wynikach przesuwamy w dół.
+    <a class="external-link" href="https://blog.google/products/search/improving-search-better-protect-people-harassment/?hl=pl" >Sprawdzamy również</a>, czy ten sam schemat działania występuje w innych witrynach, a jeśli tak, przesuwamy w dół treści w tych witrynach. Podobne praktyki przesuwania w dół możemy stosować w przypadku witryn, w których występuje znaczna liczba usunięć treści takich jak
+    <a class="external-link" href="https://support.google.com/websearch/answer/9673730?hl=pl" >doxing</a>,
+    <a class="external-link" href="https://support.google.com/websearch/answer/6302812?hl=pl" >niecenzuralne zdjęcia osób zrobione lub udostępnione bez zgody</a>;
+    <a class="external-link" href="https://support.google.com/websearch/answer/9116649?hl=pl" >niecenzuralne
+      fałszywe treści publikowane bez zgody</a>.
+  
+  </li>
+</ul>
+<h2 data-text="System decydujący o pozycji fragmentu w rankingu" id="passage-ranking-system" tabindex="-1">System decydujący o pozycji fragmentu w rankingu</h2>
+<p>
+  <a class="external-link" href="https://www.blog.google/products/search/search-on/?hl=pl" >Ranking fragmentów</a> to system AI, który służy do identyfikowania poszczególnych sekcji („fragmentów”) na stronie w celu lepszego rozpoznania, jak trafna jest dana strona.
+</p>
+<h2 data-text="RankBrain" id="rankbrain" tabindex="-1">RankBrain</h2>
+<p>
+  <a class="external-link" href="https://blog.google/products/search/how-ai-powers-great-search-results/?hl=pl" >RankBrain</a> to system AI, który pomaga wyszukiwarce zrozumieć, jak słowa wiążą się z koncepcjami. Oznacza to, że wyszukiwarka może trafniej dopasowywać treści, nawet jeśli nie zawierają one dokładnie wszystkich słów użytych w wyszukiwaniu, ponieważ wie, że dane treści są powiązane z innymi słowami i pojęciami.
+</p>
+<h2 data-text="Systemy rzetelnych informacji" id="reliable-information-systems" tabindex="-1">Systemy rzetelnych informacji</h2>
+<p>
+  Aby pokazywać najbardziej wiarygodne informacje, korzystamy z kilku systemów działających na różne sposoby. <a class="external-link" href="https://blog.google/products/search/our-latest-quality-improvements-search/?hl=pl" >Pomagają one wyświetlać na czołowych miejscach bardziej wiarygodne strony i przesuwać treści o niskiej jakości w dół</a> oraz <a class="external-link" href="https://blog.google/outreach-initiatives/google-news-initiative/elevating-quality-journalism/?hl=pl" >promują dziennikarstwo wysokiej jakości</a>.
+  Gdy brak wiarygodnych informacji, nasze systemy automatycznie wyświetlają <a class="external-link" href="https://blog.google/products/search/information-literacy/?hl=pl" >ostrzeżenia dotyczące treści</a> w przypadku szybko zmieniających się tematów oraz wtedy, gdy nie mają pewności co do ogólnej jakości wyników wyszukiwania. Zawierają one wskazówki, jak uzyskać wyniki, które mogą być bardziej przydatne. Dowiedz się więcej o naszym <a class="external-link" href="https://blog.google/products/search/how-google-delivers-reliable-information-search/?hl=pl" >podejściu do udostępniania wysokiej jakości informacji w wyszukiwarce</a>.
+</p>
+<h2 data-text="System opinii" id="reviews-system" tabindex="-1">System opinii</h2>
+<p><a href="https://developers.google.com/search/updates/reviews-update?hl=pl">System opinii</a> ma na celu skuteczniejsze nagradzanie wysokiej jakości opinii, czyli treści, które zostały utworzone przez ekspertów lub entuzjastów dobrze znających dany temat i zawierają szczegółową analizę oraz wnioski z oryginalnych badań.</p>
+<h2 data-text="System różnorodności witryn" id="site-diversity-system" tabindex="-1">System różnorodności witryn</h2>
+<p>
+  System różnorodności witryn dba o to, aby żadna z witryn nie zdominowała naszych najważniejszych wyników wyszukiwania. Pozwala w nich wyświetlać maksymalnie 2 strony z tej samej witryny. Jeśli jednak nasze systemy określą, że jest to szczególnie istotne w przypadku danego wyszukiwania, możemy wyświetlić więcej niż 2 strony. Różnorodność witryn zasadniczo traktuje subdomeny jako część domeny głównej. IE: strony z subdomeny (subdomena.example.com) i domeny głównej (example.com) będą traktowane jako pochodzące z tej samej witryny. Czasami jednak ze względów związanych z różnorodnością traktujemy subdomeny jako osobne witryny.
+</p>
+<h2 data-text="Systemy wykrywania spamu" id="spam-detection-systems" tabindex="-1">Systemy wykrywania spamu</h2>
+<p>
+  Nikt nie chce, aby jego skrzynka odbiorcza była pełna spamu. Dlatego filtry spamu są tak przydatne.
+  Podobnie jest w wyszukiwarce. Ponieważ w internecie jest mnóstwo spamu, jeśli nie rozwiążemy tego problemu, nie będziemy mogli wyświetlać najbardziej przydatnych i trafnych wyników. Stosujemy szeroki zakres <a class="external-link" href="https://www.google.com/search/howsearchworks/how-search-works/detecting-spam/?hl=pl" >systemów wykrywania spamu</a>, w tym <a href="https://developers.google.com/search/blog/2022/04/webspam-report-2021?hl=pl">SpamBrain</a>, aby radzić sobie z treściami i zachowaniami, które naruszają nasze <a href="https://developers.google.com/search/docs/essentials/spam-policies?hl=pl">zasady dotyczące spamu</a>.
+  Te systemy są stale <a href="https://developers.google.com/search/updates/spam-updates?hl=pl">aktualizowane</a>, aby odzwierciedlać najnowsze trendy w rozwoju spamu.
+</p>
+<h2 data-text="Systemy wycofane" id="retired-systems" tabindex="-1">Systemy wycofane</h2>
+<p>
+  Systemy wymienione poniżej zostały podane w celach historycznych. Zostały one zintegrowane z nowszymi systemami lub stały się częścią naszych podstawowych systemów rankingowych.
+</p>
+<h3 data-text="System przydatnych treści" id="helpful-content" tabindex="-1">System przydatnych treści</h3>
+<p>
+  System „Aktualizacja dotycząca przydatnych treści” <a href="https://developers.google.com/search/blog/2022/08/helpful-content-update?hl=pl">ogłoszony w 2022 r.</a> pomaga wyświetlać w wynikach wyszukiwania oryginalne, pomocne treści napisane przez ludzi dla ludzi, a nie treści stworzone głównie po to, żeby zyskać ruch z wyszukiwarki. W marcu 2024 r. system ewoluował i <a href="https://developers.google.com/search/blog/2024/03/core-update-spam-policies?hl=pl">stał się częścią</a> naszych podstawowych systemów rankingowych, ponieważ korzystają one z różnych sygnałów i systemów, aby przedstawiać użytkownikom przydatne wyniki.
+</p>
+<h3 data-text="Koliber" id="hummingbird" tabindex="-1">Koliber</h3>
+<p>
+  Było to znaczące ulepszenie naszych ogólnych systemów rankingowych, które wprowadziliśmy w sierpniu 2013 r. Od tamtej pory nasze systemy rankingowe ewoluują, podobnie jak przedtem.
+</p>
+<h3 data-text="System Panda" id="panda-system" tabindex="-1">System Panda</h3>
+<p>
+  System ten został opracowany, aby zapewnić wyświetlanie w wynikach wyszukiwania treści oryginalnych i wysokiej jakości. <a class="external-link" href="https://googleblog.blogspot.com/2011/02/finding-more-high-quality-sites-in.html" >Ogłoszony w 2011 roku</a> i nazwany „Panda” ewoluował i stał się jednym z naszych podstawowych systemów rankingowych w 2015 roku.
+</p>
+<h3 data-text="System Pingwin" id="penguin-system" tabindex="-1">System Pingwin</h3>
+<p>
+  System ten został opracowany, aby zwalczać spamowanie linkami. <a href="https://developers.google.com/search/blog/2012/04/another-step-to-reward-high-quality?hl=pl">Ogłoszony w 2012 r.</a> i nazwany „aktualizacją Pingwin, został <a href="https://developers.google.com/search/blog/2016/09/penguin-is-now-part-of-our-core?hl=pl">zintegrowany</a> z naszymi podstawowymi systemami rankingowymi w 2016 roku.
+</p>
+
+ 
+    
+ 
+
+  
+  
+  
+  
+
+  
+    <devsite-hats-survey class="nocontent" data-nosnippet
+      hats-id="egUfosvgZ0gb2CML1jd0VMoBx2ec"
+      listnr-id="103417"></devsite-hats-survey>
+  
+</div>
+
+  
+    
+    
+      
+    <devsite-thumb-rating position="footer">
+    </devsite-thumb-rating>
+  
+       
+         <devsite-feedback
+  position="footer"
+  project-name="Documentation"
+  product-id="103417"
+  bucket="Search Docs"
+  context="DevSite feedback link"
+  version="t-devsite-webserver-20260507-r00-rc00.477408230701735660"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="footer"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=pl"
+    
+  
+  
+    project-support-url="https://developers.google.com/search/help?hl=pl"
+  
+  
+  >
+
+  <button>
+  
+    
+    Prześlij opinię
+  
+  </button>
+</devsite-feedback>
+       
+    
+    
+  
+
+  <div class="devsite-floating-action-buttons"></div></article>
+
+
+<devsite-content-footer class="nocontent" data-nosnippet>
+  <p>O ile nie stwierdzono inaczej, treść tej strony jest objęta <a href="https://creativecommons.org/licenses/by/4.0/">licencją Creative Commons – uznanie autorstwa 4.0</a>, a fragmenty kodu są dostępne na <a href="https://www.apache.org/licenses/LICENSE-2.0">licencji Apache 2.0</a>. Szczegółowe informacje na ten temat zawierają <a href="https://developers.google.com/site-policies?hl=pl">zasady dotyczące witryny Google Developers</a>. Java jest zastrzeżonym znakiem towarowym firmy Oracle i jej podmiotów stowarzyszonych.</p>
+  <p>Ostatnia aktualizacja: 2025-12-18 UTC.</p>
+</devsite-content-footer>
+
+
+<devsite-notification
+>
+</devsite-notification>
+
+
+  
+<div class="devsite-content-data">
+  
+    
+    
+    <template class="devsite-thumb-rating-feedback">
+      <devsite-feedback
+  position="thumb-rating"
+  project-name="Documentation"
+  product-id="103417"
+  bucket="Search Docs"
+  context="DevSite feedback link"
+  version="t-devsite-webserver-20260507-r00-rc00.477408230701735660"
+  data-label="Send Feedback Button"
+  track-type="feedback"
+  track-name="sendFeedbackLink"
+  track-metadata-position="thumb-rating"
+  class="nocontent"
+  data-nosnippet
+  
+    disable-product-feedback
+  
+  
+  
+    
+      project-icon="https://developers.google.com/static/search/images/google-search-central-logo.svg?hl=pl"
+    
+  
+  
+    project-support-url="https://developers.google.com/search/help?hl=pl"
+  
+  
+  >
+
+  <button>
+  
+    Chcesz przekazać coś jeszcze?
+  
+  </button>
+</devsite-feedback>
+    </template>
+  
+  
+    <template class="devsite-content-data-template">
+      [[["Łatwo zrozumieć","easyToUnderstand","thumb-up"],["Rozwiązało to mój problem","solvedMyProblem","thumb-up"],["Inne","otherUp","thumb-up"]],[["Brak potrzebnych mi informacji","missingTheInformationINeed","thumb-down"],["Zbyt skomplikowane / zbyt wiele czynności do wykonania","tooComplicatedTooManySteps","thumb-down"],["Nieaktualne treści","outOfDate","thumb-down"],["Problem z tłumaczeniem","translationIssue","thumb-down"],["Problem z przykładami/kodem","samplesCodeIssue","thumb-down"],["Inne","otherDown","thumb-down"]],["Ostatnia aktualizacja: 2025-12-18 UTC."],[],["Google's search ranking relies on automated systems that analyze numerous factors across web pages to deliver relevant results. These systems, including core systems and those for specific needs, use page-level and site-wide signals. Key actions involve continuous testing, updates, and specific systems like BERT, MUM, Neural matching, and RankBrain to understand language, intent, and concepts. Other systems address crises, deduplication, exact match domains, freshness, original content, local news, reliable information, and reviews. Spam and removals are addressed with detection and demotion systems.\n"]]
+    </template>
+  
+</div>
+            
+          </devsite-content>
+        </main>
+        <devsite-footer-promos class="devsite-footer">
+          
+            
+
+<nav class="devsite-footer-promos nocontent"
+     aria-label="Promocje"
+     data-nosnippet>
+  <ul class="devsite-footer-promos-list">
+    
+    <li class="devsite-footer-promo">
+      <a href="https://www.linkedin.com/showcase/googlesearchcentral/"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         data-label="linkedin footer promo"
+       
+         aria-label="LinkedIn feed for Google Search Central"
+       
+         data-category="Search docs"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/search/images/li.png?hl=pl"
+                loading="lazy"
+                alt="LinkedIn">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          LinkedIn
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">Dołącz do nas na LinkedIn</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://www.youtube.com/channel/UCWf2ZlNsCGDS89VBF_awNvA?hl=pl"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         aria-label="Google Search Central YouTube channel"
+       
+         data-category="Search docs"
+       
+         data-label="youtube footer promo"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/homepage-assets/images/yt.svg?hl=pl"
+                loading="lazy"
+                alt="YouTube">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          YouTube
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">Obejrzyj nasze filmy</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://feeds.feedburner.com/blogspot/amDG"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         aria-label="RSS feed for the Search Central Blog"
+       
+         data-category="Search docs"
+       
+         data-label="blog footer promo"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://fonts.gstatic.com/s/i/short-term/release/googlesymbols/rss_feed/default/24px.svg"
+                loading="lazy"
+                alt="Blog">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          Blog
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">Subskrybuj nasz kanał RSS</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://pod.link/1512522198"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         data-label="podcast footer promo"
+       
+         aria-label="Search Off the Record podcast episodes"
+       
+         data-category="Search docs"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/search/images/search-off-the-record-podcast-logo.png?hl=pl"
+                loading="lazy"
+                alt="Podcast">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          Podcast
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">Posłuchaj podcastu Wyszukiwarka – poza protokołem</div>
+    </li>
+    
+    <li class="devsite-footer-promo">
+      <a href="https://twitter.com/googlesearchc"
+         class="devsite-footer-promo-title gc-analytics-event"
+         data-category="Site-Wide Custom Events"
+       
+       
+         data-label="twitter footer promo"
+       
+         aria-label="Twitter feed for Google Search Central"
+       
+         data-category="Search docs"
+       >
+        
+        
+        <picture>
+          
+          <img class="devsite-footer-promo-icon"
+                src="https://developers.google.com/static/homepage-assets/images/x.svg?hl=pl"
+                loading="lazy"
+                alt="X (Twitter)">
+        </picture>
+        
+        <span class="devsite-footer-promo-label">
+          X (Twitter)
+        </span>
+      </a>
+      <div class="devsite-footer-promo-description">Dołącz do nas na X (Twitter)</div>
+    </li>
+    
+  </ul>
+</nav>
+
+          
+        </devsite-footer-promos>
+        <devsite-footer-linkboxes class="devsite-footer">
+          
+            
+<nav class="devsite-footer-linkboxes nocontent"
+     aria-label="Linki w stopce"
+     data-nosnippet>
+  
+  <ul class="devsite-footer-linkboxes-list">
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Skorzystaj z pomocy</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://support.google.com/webmasters/community"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            Otwórz Forum pomocy
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/help/office-hours"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            Prześlij pytanie do naszych konsultantów
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/help/report-quality-issues"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            Zgłaszanie spamu, phishingu i złośliwego oprogramowania
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/help"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+              
+              
+            
+          
+            Gdzie jeszcze można uzyskać pomoc
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Zasoby</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/docs/fundamentals/get-on-google"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            Czy potrzebujesz specjalisty ds. SEO?
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/docs/fundamentals/seo-starter-guide"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            SEO – przewodnik dla początkujących
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://status.search.google.com"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            Stan systemów wyszukiwania
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://support.google.com/webmasters"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+          
+            Dokumentacja Search Console
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="/search/case-studies/overview"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 5)"
+            >
+            
+              
+              
+            
+          
+            Studia przypadków
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+    <li class="devsite-footer-linkbox ">
+    <h3 class="devsite-footer-linkbox-heading no-link">Narzędzia</h3>
+      <ul class="devsite-footer-linkbox-list">
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://search.google.com/search-console"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 1)"
+            >
+            
+          
+            Search Console
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://search.google.com/test/rich-results"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 2)"
+            >
+            
+          
+            Test wyników z elementami rozszerzonymi
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://pagespeed.web.dev"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 3)"
+            >
+            
+          
+            PageSpeed Insights
+          
+          </a>
+          
+          
+        </li>
+        
+        <li class="devsite-footer-linkbox-item">
+          
+          <a href="https://search.google.com/test/amp"
+             class="devsite-footer-linkbox-link gc-analytics-event"
+             data-category="Site-Wide Custom Events"
+            
+             data-label="Footer Link (index 4)"
+            >
+            
+              
+              
+            
+          
+            Test AMP
+          
+          </a>
+          
+          
+        </li>
+        
+      </ul>
+    </li>
+    
+  </ul>
+  
+</nav>
+          
+        </devsite-footer-linkboxes>
+        <devsite-footer-utility class="devsite-footer">
+          
+            
+
+<div class="devsite-footer-utility nocontent" data-nosnippet>
+  
+  
+  <nav class="devsite-footer-sites" aria-label="Inne witryny Google Developers">
+    <a href="https://developers.google.com/?hl=pl"
+       class="devsite-footer-sites-logo-link gc-analytics-event"
+       data-category="Site-Wide Custom Events"
+       data-label="Footer Google Developers Link">
+      <picture>
+        
+        <img class="devsite-footer-sites-logo"
+             src="https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/lockup-google-for-developers.svg"
+             loading="lazy"
+             alt="Google Developers">
+      </picture>
+    </a>
+    <ul class="devsite-footer-sites-list">
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//developer.android.com?hl=pl"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Android Link"
+         
+         >
+          Android
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//developer.chrome.com/home?hl=pl"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Chrome Link"
+         
+         >
+          Chrome
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//firebase.google.com?hl=pl"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Firebase Link"
+         
+         >
+          Firebase
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//cloud.google.com?hl=pl"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Google Cloud Platform Link"
+         
+         >
+          Google Cloud Platform
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="//ai.google.dev/?hl=pl"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer Google AI Link"
+         
+         >
+          Google AI
+        </a>
+      </li>
+      
+      <li class="devsite-footer-sites-item">
+        <a href="https://developers.google.com/products?hl=pl"
+           class="devsite-footer-sites-link
+                  gc-analytics-event"
+           data-category="Site-Wide Custom Events"
+         
+           data-label="Footer All products Link"
+         
+         >
+          Wszystkie usługi
+        </a>
+      </li>
+      
+    </ul>
+  </nav>
+  
+
+  
+  <nav class="devsite-footer-utility-links" aria-label="Linki do narzędzi">
+    
+    <ul class="devsite-footer-utility-list">
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="https://developers.google.com/terms/site-terms?hl=pl"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Terms link"
+         >
+          Warunki
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 ">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="//policies.google.com/privacy?hl=pl"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Privacy link"
+         >
+          Prywatność
+        </a>
+        
+      </li>
+      
+      <li class="devsite-footer-utility-item
+                 glue-cookie-notification-bar-control">
+        
+        
+        <a class="devsite-footer-utility-link gc-analytics-event"
+           href="#"
+           data-category="Site-Wide Custom Events"
+           data-label="Footer Manage cookies link"
+         
+           aria-hidden="true"
+         >
+          Manage cookies
+        </a>
+        
+      </li>
+      
+    </ul>
+    
+    
+<devsite-language-selector>
+  <ul role="presentation">
+    
+    
+    <li role="presentation">
+      <a role="menuitem" lang="en"
+        >English</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="de"
+        >Deutsch</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es"
+        >Español</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="es_419"
+        >Español – América Latina</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="fr"
+        >Français</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="id"
+        >Indonesia</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="it"
+        >Italiano</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pl"
+        >Polski</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="pt_br"
+        >Português – Brasil</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="vi"
+        >Tiếng Việt</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="tr"
+        >Türkçe</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ru"
+        >Русский</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ar"
+        >العربيّة</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="hi"
+        >हिंदी</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="th"
+        >ภาษาไทย</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_cn"
+        >中文 – 简体</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="zh_tw"
+        >中文 – 繁體</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ja"
+        >日本語</a>
+    </li>
+    
+    <li role="presentation">
+      <a role="menuitem" lang="ko"
+        >한국어</a>
+    </li>
+    
+  </ul>
+</devsite-language-selector>
+
+  </nav>
+</div>
+          
+        </devsite-footer-utility>
+        <devsite-panel>
+          
+        </devsite-panel>
+        
+          <devsite-concierge
+  
+  
+    data-info-panel
+  
+  
+    data-ai-panel
+  
+  
+  
+  
+    data-api-explorer-panel
+  >
+</devsite-concierge>
+        
+      </section>
+      </section>
+    <devsite-sitemask></devsite-sitemask>
+    <devsite-snackbar></devsite-snackbar>
+    <devsite-tooltip ></devsite-tooltip>
+    <devsite-heading-link></devsite-heading-link>
+    <devsite-analytics>
+      
+        <script type="application/json" analytics>[{&#34;dimensions&#34;: {&#34;dimension4&#34;: &#34;Documentation&#34;, &#34;dimension3&#34;: false, &#34;dimension5&#34;: &#34;pl&#34;, &#34;dimension1&#34;: &#34;Signed out&#34;, &#34;dimension11&#34;: false, &#34;dimension6&#34;: &#34;pl&#34;}, &#34;gaid&#34;: &#34;UA-24532603-1&#34;, &#34;metrics&#34;: {&#34;ratings_value&#34;: &#34;metric1&#34;, &#34;ratings_count&#34;: &#34;metric2&#34;}, &#34;purpose&#34;: 1}, {&#34;dimensions&#34;: {&#34;dimension4&#34;: &#34;Documentation&#34;, &#34;dimension3&#34;: false, &#34;dimension5&#34;: &#34;pl&#34;, &#34;dimension1&#34;: &#34;Signed out&#34;, &#34;dimension11&#34;: false, &#34;dimension6&#34;: &#34;pl&#34;}, &#34;gaid&#34;: &#34;UA-24532603-6&#34;, &#34;metrics&#34;: {&#34;ratings_value&#34;: &#34;metric1&#34;, &#34;ratings_count&#34;: &#34;metric2&#34;}, &#34;purpose&#34;: 0}]</script>
+<script type="application/json" tag-management>{&#34;at&#34;: &#34;True&#34;, &#34;ga4&#34;: [{&#34;id&#34;: &#34;G-272J68FCRF&#34;, &#34;purpose&#34;: 1}, {&#34;id&#34;: &#34;G-Q04XXL6ZW2&#34;, &#34;purpose&#34;: 0}], &#34;ga4p&#34;: [{&#34;id&#34;: &#34;G-272J68FCRF&#34;, &#34;purpose&#34;: 1}], &#34;gtm&#34;: [{&#34;id&#34;: &#34;GTM-T98GCPGN&#34;, &#34;purpose&#34;: 1}], &#34;parameters&#34;: {&#34;internalUser&#34;: &#34;False&#34;, &#34;language&#34;: {&#34;machineTranslated&#34;: &#34;False&#34;, &#34;requested&#34;: &#34;pl&#34;, &#34;served&#34;: &#34;pl&#34;}, &#34;pageType&#34;: &#34;lcat&#34;, &#34;projectName&#34;: &#34;Documentation&#34;, &#34;signedIn&#34;: &#34;False&#34;, &#34;tenant&#34;: &#34;developers&#34;, &#34;recommendations&#34;: {&#34;sourcePage&#34;: &#34;&#34;, &#34;sourceType&#34;: 0, &#34;sourceRank&#34;: 0, &#34;sourceIdenticalDescriptions&#34;: 0, &#34;sourceTitleWords&#34;: 0, &#34;sourceDescriptionWords&#34;: 0, &#34;experiment&#34;: &#34;&#34;}, &#34;experiment&#34;: {&#34;ids&#34;: &#34;&#34;}}}</script>
+      
+    </devsite-analytics>
+    
+      <devsite-badger></devsite-badger>
+    
+    
+    
+    
+<script nonce="HwPlTP2vpRYAr+unmWDjeDHcbqrP2I">
+  
+  (function(d,e,v,s,i,t,E){d['GoogleDevelopersObject']=i;
+    t=e.createElement(v);t.async=1;t.src=s;E=e.getElementsByTagName(v)[0];
+    E.parentNode.insertBefore(t,E);})(window, document, 'script',
+    'https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/js/app_loader.js', '[1,"pl",null,"/js/devsite_app_module.js","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers","https://developers-dot-devsite-v2-prod.appspot.com",null,null,["/_pwa/developers/manifest.json","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/images/video-placeholder.svg","https://www.gstatic.com/devrel-devsite/prod/vb08cbdb02acf7f66ad9727ddfba9d81df8806422eb5dd63dba194c9c8c7997f7/developers/images/favicon-new.png","https://fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic,700,700italic|Roboto+Mono:400,500,700&display=swap"],1,null,[1,6,8,12,14,17,21,25,50,52,63,70,75,76,80,87,91,92,93,97,98,100,101,102,103,104,105,107,108,109,110,112,113,117,118,120,122,124,125,126,127,129,130,131,132,133,134,135,136,138,140,141,147,148,149,151,152,156,157,158,159,161,163,164,168,169,170,179,180,182,183,186,191,193,196],"AIzaSyAP-jjEJBzmIyKR4F-3XITp8yM9T1gEEI8","AIzaSyB6xiKGDR5O3Ak2okS4rLkauxGUG7XP0hg","developers.google.com","AIzaSyAQk0fBONSGUqCNznf6Krs82Ap1-NV6J4o","AIzaSyCCxcqdrZ_7QMeLCRY20bh_SXdAYqy70KY",null,null,null,["MiscFeatureFlags__developers_footer_image","DevPro__enable_google_payments_buyflow","Profiles__enable_completequiz_endpoint","DevPro__enable_nvidia_credits_card","BookNav__enable_tenant_cache_key","Profiles__enable_awarding_url","MiscFeatureFlags__fix_lower_breadcrumbs","DevPro__enable_cloud_innovators_plus","Concierge__enable_pushui","TpcFeatures__proxy_prod_host","Search__enable_ai_search_summaries","DevPro__enable_devpro_offers","CloudShell__cloud_shell_button","Profiles__enable_completecodelab_endpoint","DevPro__enable_free_benefits","Profiles__enable_page_saving","MiscFeatureFlags__enable_variable_operator","Profiles__enable_developer_profile_pages_as_content","SignIn__enable_l1_signup_flow","Cloud__fast_free_trial","DevPro__enable_google_payments","DevPro__enable_vertex_credit_card","DevPro__enable_enterprise","Search__enable_dynamic_content_confidential_banner","DevPro__enable_devsite_captcha","MiscFeatureFlags__enable_framebox_badge_methods","Profiles__enable_recognition_badges","Cloud__enable_cloud_dlp_service","DevPro__enable_firebase_workspaces_card","Profiles__enable_auto_apply_credits","Profiles__enable_join_program_group_endpoint","Profiles__enable_callout_notifications","Concierge__enable_concierge_restricted","EngEduTelemetry__enable_engedu_telemetry","Concierge__enable_concierge","MiscFeatureFlags__enable_appearance_cookies","Search__enable_ai_search_summaries_restricted","Profiles__enable_release_notes_notifications","Profiles__enable_public_developer_profiles","Cloud__enable_cloud_shell","MiscFeatureFlags__enable_explicit_template_dependencies","TpcFeatures__enable_unmirrored_page_left_nav","Profiles__enable_playlist_community_acl","MiscFeatureFlags__enable_firebase_utm","Search__enable_page_map","Profiles__enable_stripe_subscription_management","Profiles__enable_targeted_hero","DevPro__enable_developer_subscriptions","DevPro__enable_credits_banner","MiscFeatureFlags__enable_explain_this_code","Profiles__enable_profile_collections","Significatio__enable_by_tenant","DevPro__enable_code_assist","Concierge__enable_key_takeaways_new_ui","Profiles__require_profile_eligibility_for_signin","Search__enable_ai_search_summaries_for_all","Experiments__reqs_query_experiments","CloudShell__cloud_code_overflow_menu","Analytics__enable_clearcut_logging","Cloud__enable_cloudx_experiment_ids","Cloud__enable_free_trial_server_call","Search__enable_suggestions_from_borg","Concierge__enable_remove_info_panel_tags","Cloud__enable_cloud_shell_fte_user_flow","Concierge__enable_key_takeaways","MiscFeatureFlags__remove_cross_domain_tracking_params","Concierge__enable_devsite_llm_tools","Analytics__enable_devpro_interaction_logging","Concierge__enable_actions_menu","MiscFeatureFlags__gdp_dashboard_reskin_enabled","Profiles__enable_user_type","Search__enable_ai_eligibility_checks","DevPro__remove_eu_tax_intake_form","DevPro__enable_g1_integration","DevPro__enable_embed_profile_creation","Profiles__enable_complete_playlist_endpoint","Cloud__cache_serialized_dynamic_content","Profiles__enable_purchase_prompts","MiscFeatureFlags__enable_variable_operator_index_yaml","MiscFeatureFlags__enable_project_variables","DevPro__enable_google_one_card","MiscFeatureFlags__developers_footer_dark_image","Profiles__enable_developer_profile_benefits_ui_redesign","Cloud__enable_llm_concierge_chat","Profiles__enable_developer_profiles_callout","Cloud__enable_legacy_calculator_redirect","MiscFeatureFlags__enable_view_transitions","Profiles__enable_dashboard_curated_recommendations"],null,null,"AIzaSyBLEMok-5suZ67qRPzx0qUtbnLmyT_kCVE","https://developerscontentserving-pa.clients6.google.com","AIzaSyCM4QpTRSqP5qI4Dvjt4OAScIN8sOUlO-k","https://developerscontentsearch-pa.clients6.google.com",1,4,null,"https://developerprofiles-pa.clients6.google.com",[1,"developers","Google for Developers","developers.google.com",null,"developers-dot-devsite-v2-prod.appspot.com",null,null,[1,1,[1],null,null,null,null,null,null,null,null,[1],null,null,null,null,null,null,[1],[1,null,null,[1,20],"/recommendations/information"],null,null,null,[1,1,1],[1,1,null,1,1,null,null,["/meridian"]],[1,null,null,null,null,null,null,["/admob","/ad-manager/mobile-ads-sdk","/ml-kit"]],null,[null,["/meridian","/youtube/devices/"]],1,null,[1]],null,[null,null,null,null,null,null,"/images/lockup-new.svg","/images/touchicon-180-new.png",null,null,null,null,1,null,null,null,null,null,null,null,null,1,null,null,null,"/images/lockup-dark-theme-new.svg",[]],[],null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[6,1,14,15,20,22,23,29,32,36],null,[[null,null,null,[3,7,10,2,39,17,4,32,24,11,12,13,34,15,25],null,null,[1,[["docType","Choose a content type",[["Tutorial",null,null,null,null,null,null,null,null,"Tutorial"],["Guide",null,null,null,null,null,null,null,null,"Guide"],["Sample",null,null,null,null,null,null,null,null,"Sample"]]],["product","Choose a product",[["Android",null,null,null,null,null,null,null,null,"Android"],["ARCore",null,null,null,null,null,null,null,null,"ARCore"],["ChromeOS",null,null,null,null,null,null,null,null,"ChromeOS"],["Firebase",null,null,null,null,null,null,null,null,"Firebase"],["Flutter",null,null,null,null,null,null,null,null,"Flutter"],["Assistant",null,null,null,null,null,null,null,null,"Google Assistant"],["GoogleCloud",null,null,null,null,null,null,null,null,"Google Cloud"],["GoogleMapsPlatform",null,null,null,null,null,null,null,null,"Google Maps Platform"],["GooglePay",null,null,null,null,null,null,null,null,"Google Pay & Google Wallet"],["GooglePlay",null,null,null,null,null,null,null,null,"Google Play"],["Tensorflow",null,null,null,null,null,null,null,null,"TensorFlow"]]],["category","Choose a topic",[["AiAndMachineLearning",null,null,null,null,null,null,null,null,"AI and Machine Learning"],["Data",null,null,null,null,null,null,null,null,"Data"],["Enterprise",null,null,null,null,null,null,null,null,"Enterprise"],["Gaming",null,null,null,null,null,null,null,null,"Gaming"],["Mobile",null,null,null,null,null,null,null,null,"Mobile"],["Web",null,null,null,null,null,null,null,null,"Web"]]]]]],[1,1],null,1],[[["UA-24532603-1"],["UA-22084204-5"],null,null,["UA-24532603-5"],["GTM-T98GCPGN"],null,[["G-272J68FCRF"],null,null,[["G-272J68FCRF",2]]],[["UA-24532603-1",2]],null,[["UA-24532603-5",2]],[["GTM-T98GCPGN",2]],1],[[14,11],[3,2],[5,4],[4,3],[15,12],[13,10],[11,8],[6,5],[16,13],[1,1],[12,9]],[[2,2],[1,1]]],null,4,null,null,null,null,null,null,null,null,null,null,null,null,null,"developers.devsite.google",null,null,null,null,null,[]],null,"pk_live_5170syrHvgGVmSx9sBrnWtA5luvk9BwnVcvIi7HizpwauFG96WedXsuXh790rtij9AmGllqPtMLfhe2RSwD6Pn38V00uBCydV4m",1,1,"https://developerscontentinsights-pa.clients6.google.com","AIzaSyCg-ZUslalsEbXMfIo9ZP8qufZgo3LSBDU","AIzaSyDxT0vkxnY_KeINtA4LSePJO-4MAZPMRsE","https://developers.clients6.google.com",["https://codeassist.google.com","https://code-assist-free-tier.corp.google.com"],null,"AIzaSyBQom12tzI-rybN7Sf-KfeL4nwm-Rf7PmI\n",null,null,"https://developers.googleapis.com"]')
+  
+</script>
+
+    <devsite-a11y-announce></devsite-a11y-announce>
+  </body>
+</html>

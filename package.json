@@ -1,0 +1,14 @@
+{
+  "name": "openclaw-geo-seo-audit-skill",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "crawl:google": "node scripts/crawl-google-corpus.mjs",
+    "snapshot": "node scripts/collect-page-snapshot.mjs",
+    "validate": "node scripts/validate-skill.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
