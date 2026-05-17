@@ -1,0 +1,452 @@
+{
+  "schemaVersion": "1.0.0",
+  "toolVersion": "0.2.0",
+  "run": {
+    "target": "http://fixture.test/",
+    "mode": "full",
+    "crawl": {
+      "mode": "full",
+      "maxPages": 12,
+      "maxDepth": 1
+    },
+    "render": {
+      "mode": "never"
+    }
+  },
+  "site": {
+    "origin": "http://fixture.test",
+    "notes": [
+      "Audit output contains bounded same-origin crawl evidence."
+    ],
+    "skipped": [
+      {
+        "url": "http://fixture.test/blocked.html",
+        "reason": "robots_blocked"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "title": "OpenClaw Fixture Home",
+      "description": "A healthy fixture homepage for deterministic audit coverage.",
+      "canonicalPath": "/",
+      "robots": null,
+      "h1": [
+        "OpenClaw Fixture Co"
+      ],
+      "structuredDataBlocks": 1,
+      "links": 9,
+      "images": 0
+    },
+    {
+      "path": "/about.html",
+      "status": 200,
+      "title": "About OpenClaw Fixture Co",
+      "description": "About page for the deterministic fixture company.",
+      "canonicalPath": "/about.html",
+      "robots": null,
+      "h1": [
+        "About OpenClaw Fixture Co"
+      ],
+      "structuredDataBlocks": 0,
+      "links": 0,
+      "images": 0
+    },
+    {
+      "path": "/contact.html",
+      "status": 200,
+      "title": "Contact OpenClaw Fixture Co",
+      "description": "Contact page for the deterministic fixture company.",
+      "canonicalPath": "/contact.html",
+      "robots": null,
+      "h1": [
+        "Contact OpenClaw Fixture Co"
+      ],
+      "structuredDataBlocks": 0,
+      "links": 0,
+      "images": 0
+    },
+    {
+      "path": "/product.html",
+      "status": 200,
+      "title": "Fixture Analytics Product",
+      "description": "A product page with an intentional Product schema property gap.",
+      "canonicalPath": "/product.html",
+      "robots": null,
+      "h1": [
+        "Fixture Analytics"
+      ],
+      "structuredDataBlocks": 1,
+      "links": 0,
+      "images": 0
+    },
+    {
+      "path": "/duplicate-a.html",
+      "status": 200,
+      "title": "Duplicate Fixture Page",
+      "description": "Duplicate fixture description for regression coverage.",
+      "canonicalPath": "/duplicate-a.html",
+      "robots": null,
+      "h1": [
+        "Duplicate Fixture A"
+      ],
+      "structuredDataBlocks": 0,
+      "links": 0,
+      "images": 0
+    },
+    {
+      "path": "/duplicate-b.html",
+      "status": 200,
+      "title": "Duplicate Fixture Page",
+      "description": "Duplicate fixture description for regression coverage.",
+      "canonicalPath": "/duplicate-b.html",
+      "robots": null,
+      "h1": [
+        "Duplicate Fixture B"
+      ],
+      "structuredDataBlocks": 0,
+      "links": 0,
+      "images": 0
+    },
+    {
+      "path": "/thin.html",
+      "status": 200,
+      "title": "Thin Fixture",
+      "description": "A fixture page with intentionally thin visible content.",
+      "canonicalPath": "/thin.html",
+      "robots": null,
+      "h1": [
+        "Thin Fixture"
+      ],
+      "structuredDataBlocks": 0,
+      "links": 0,
+      "images": 0
+    },
+    {
+      "path": "/bad-json.html",
+      "status": 200,
+      "title": "Bad JSON-LD Fixture",
+      "description": "A fixture page with invalid JSON-LD and image alt coverage.",
+      "canonicalPath": "/bad-json.html",
+      "robots": null,
+      "h1": [
+        "Bad JSON-LD Fixture"
+      ],
+      "structuredDataBlocks": 1,
+      "links": 0,
+      "images": 1
+    },
+    {
+      "path": "/canonical-alt.html",
+      "status": 200,
+      "title": "Canonical Alternate Fixture",
+      "description": "A sitemap-listed page that canonicalizes to a different URL.",
+      "canonicalPath": "/canonical.html",
+      "robots": null,
+      "h1": [
+        "Canonical Alternate Fixture"
+      ],
+      "structuredDataBlocks": 0,
+      "links": 0,
+      "images": 0
+    }
+  ],
+  "findings": [
+    {
+      "ruleId": "technical.https_missing",
+      "severity": "P1",
+      "dimension": "technical",
+      "affectedPaths": [
+        "/"
+      ],
+      "evidence": [
+        "$.pages[0].finalUrl"
+      ],
+      "owner": "Engineering",
+      "effort": "M",
+      "task": "Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL."
+    },
+    {
+      "ruleId": "technical.https_missing",
+      "severity": "P1",
+      "dimension": "technical",
+      "affectedPaths": [
+        "/about.html"
+      ],
+      "evidence": [
+        "$.pages[1].finalUrl"
+      ],
+      "owner": "Engineering",
+      "effort": "M",
+      "task": "Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL."
+    },
+    {
+      "ruleId": "technical.https_missing",
+      "severity": "P1",
+      "dimension": "technical",
+      "affectedPaths": [
+        "/contact.html"
+      ],
+      "evidence": [
+        "$.pages[2].finalUrl"
+      ],
+      "owner": "Engineering",
+      "effort": "M",
+      "task": "Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL."
+    },
+    {
+      "ruleId": "technical.https_missing",
+      "severity": "P1",
+      "dimension": "technical",
+      "affectedPaths": [
+        "/product.html"
+      ],
+      "evidence": [
+        "$.pages[3].finalUrl"
+      ],
+      "owner": "Engineering",
+      "effort": "M",
+      "task": "Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL."
+    },
+    {
+      "ruleId": "structured_data.required_property_missing",
+      "severity": "P2",
+      "dimension": "structured_data",
+      "affectedPaths": [
+        "/product.html"
+      ],
+      "evidence": [
+        "$.pages[3].evidence.structuredData[0]"
+      ],
+      "owner": "Engineering",
+      "effort": "S",
+      "task": "Add the required properties for supported schema types when the page's visible content supports the markup."
+    },
+    {
+      "ruleId": "technical.https_missing",
+      "severity": "P1",
+      "dimension": "technical",
+      "affectedPaths": [
+        "/duplicate-a.html"
+      ],
+      "evidence": [
+        "$.pages[4].finalUrl"
+      ],
+      "owner": "Engineering",
+      "effort": "M",
+      "task": "Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL."
+    },
+    {
+      "ruleId": "technical.https_missing",
+      "severity": "P1",
+      "dimension": "technical",
+      "affectedPaths": [
+        "/duplicate-b.html"
+      ],
+      "evidence": [
+        "$.pages[5].finalUrl"
+      ],
+      "owner": "Engineering",
+      "effort": "M",
+      "task": "Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL."
+    },
+    {
+      "ruleId": "technical.https_missing",
+      "severity": "P1",
+      "dimension": "technical",
+      "affectedPaths": [
+        "/thin.html"
+      ],
+      "evidence": [
+        "$.pages[6].finalUrl"
+      ],
+      "owner": "Engineering",
+      "effort": "M",
+      "task": "Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL."
+    },
+    {
+      "ruleId": "content.thin_content",
+      "severity": "P2",
+      "dimension": "helpful_content",
+      "affectedPaths": [
+        "/thin.html"
+      ],
+      "evidence": [
+        "$.pages[6].evidence.counts.visibleTextCharacters"
+      ],
+      "owner": "Content",
+      "effort": "S",
+      "task": "Expand visible content to satisfy the visitor's task with original, helpful information."
+    },
+    {
+      "ruleId": "technical.https_missing",
+      "severity": "P1",
+      "dimension": "technical",
+      "affectedPaths": [
+        "/bad-json.html"
+      ],
+      "evidence": [
+        "$.pages[7].finalUrl"
+      ],
+      "owner": "Engineering",
+      "effort": "M",
+      "task": "Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL."
+    },
+    {
+      "ruleId": "appearance.image_alt_missing",
+      "severity": "P3",
+      "dimension": "search_appearance",
+      "affectedPaths": [
+        "/bad-json.html"
+      ],
+      "evidence": [
+        "$.pages[7].evidence.images"
+      ],
+      "owner": "SEO",
+      "effort": "S",
+      "task": "Add descriptive alt text for meaningful images."
+    },
+    {
+      "ruleId": "structured_data.invalid_jsonld",
+      "severity": "P1",
+      "dimension": "structured_data",
+      "affectedPaths": [
+        "/bad-json.html"
+      ],
+      "evidence": [
+        "$.pages[7].evidence.structuredData"
+      ],
+      "owner": "Engineering",
+      "effort": "M",
+      "task": "Fix JSON-LD syntax so structured data can be parsed reliably."
+    },
+    {
+      "ruleId": "technical.https_missing",
+      "severity": "P1",
+      "dimension": "technical",
+      "affectedPaths": [
+        "/canonical-alt.html"
+      ],
+      "evidence": [
+        "$.pages[8].finalUrl"
+      ],
+      "owner": "Engineering",
+      "effort": "M",
+      "task": "Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL."
+    },
+    {
+      "ruleId": "appearance.title_duplicate",
+      "severity": "P2",
+      "dimension": "search_appearance",
+      "affectedPaths": [
+        "/duplicate-a.html",
+        "/duplicate-b.html"
+      ],
+      "evidence": [
+        "$.pages[4].evidence.title",
+        "$.pages[5].evidence.title"
+      ],
+      "owner": "SEO",
+      "effort": "S",
+      "task": "Write unique titles that distinguish page purpose and topic."
+    },
+    {
+      "ruleId": "appearance.meta_description_duplicate",
+      "severity": "P3",
+      "dimension": "search_appearance",
+      "affectedPaths": [
+        "/duplicate-a.html",
+        "/duplicate-b.html"
+      ],
+      "evidence": [
+        "$.pages[4].evidence.description",
+        "$.pages[5].evidence.description"
+      ],
+      "owner": "SEO",
+      "effort": "S",
+      "task": "Write unique descriptions that summarize each page's specific purpose."
+    },
+    {
+      "ruleId": "indexability.noncanonical_in_sitemap",
+      "severity": "P2",
+      "dimension": "crawl_index",
+      "affectedPaths": [
+        "/canonical-alt.html"
+      ],
+      "evidence": [
+        "$.pages[8].evidence.canonical"
+      ],
+      "owner": "Engineering",
+      "effort": "S",
+      "task": "List only canonical, indexable URLs in sitemaps."
+    }
+  ],
+  "scores": {
+    "technical": {
+      "score": 0,
+      "findings": [
+        "technical.https_missing",
+        "technical.https_missing",
+        "technical.https_missing",
+        "technical.https_missing",
+        "technical.https_missing",
+        "technical.https_missing",
+        "technical.https_missing",
+        "technical.https_missing",
+        "technical.https_missing"
+      ],
+      "p0": 0,
+      "p1": 9,
+      "p2": 0,
+      "p3": 0
+    },
+    "structured_data": {
+      "score": 40,
+      "findings": [
+        "structured_data.required_property_missing",
+        "structured_data.invalid_jsonld"
+      ],
+      "p0": 0,
+      "p1": 1,
+      "p2": 1,
+      "p3": 0
+    },
+    "helpful_content": {
+      "score": 80,
+      "findings": [
+        "content.thin_content"
+      ],
+      "p0": 0,
+      "p1": 0,
+      "p2": 1,
+      "p3": 0
+    },
+    "search_appearance": {
+      "score": 60,
+      "findings": [
+        "appearance.image_alt_missing",
+        "appearance.title_duplicate",
+        "appearance.meta_description_duplicate"
+      ],
+      "p0": 0,
+      "p1": 0,
+      "p2": 1,
+      "p3": 2
+    },
+    "crawl_index": {
+      "score": 80,
+      "findings": [
+        "indexability.noncanonical_in_sitemap"
+      ],
+      "p0": 0,
+      "p1": 0,
+      "p2": 1,
+      "p3": 0
+    }
+  },
+  "evidenceGaps": [
+    "ranking.integrations_missing"
+  ]
+}

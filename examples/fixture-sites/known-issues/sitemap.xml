@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>http://fixture.test/</loc></url>
+  <url><loc>http://fixture.test/about.html</loc></url>
+  <url><loc>http://fixture.test/contact.html</loc></url>
+  <url><loc>http://fixture.test/product.html</loc></url>
+  <url><loc>http://fixture.test/duplicate-a.html</loc></url>
+  <url><loc>http://fixture.test/duplicate-b.html</loc></url>
+  <url><loc>http://fixture.test/thin.html</loc></url>
+  <url><loc>http://fixture.test/bad-json.html</loc></url>
+  <url><loc>http://fixture.test/canonical-alt.html</loc></url>
+  <url><loc>http://fixture.test/blocked.html</loc></url>
+</urlset>

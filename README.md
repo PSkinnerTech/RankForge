@@ -17,6 +17,7 @@ By default, the product reports SEO/GEO readiness. It does not claim measured ra
 - packages/cli/ - deterministic CLI package scaffold
 - scripts/collect-page-snapshot.mjs - lightweight URL/local HTML evidence collector
 - examples/ - sample local page and example audit output
+- examples/fixture-sites/known-issues/ and examples/golden/ - deterministic fixture site with golden JSON/Markdown regression outputs
 - references/source-manifest.md and references/source-manifest.json - crawled source manifest
 - references/source-corpus/ - preserved Google Search Central extracts and raw HTML
 
@@ -72,6 +73,8 @@ npm test
 ```
 
 The validation script checks that the required skill files, templates, examples, source manifest, citations, CLI scaffold, and snapshot script are present.
+
+The test suite includes a known-issues fixture site served through a local HTTP server. Its normalized audit summary and Markdown report are compared to golden files so rule, scoring, crawl, robots, sitemap, structured data, and report output changes are intentional.
 
 ## Source Scope
 
