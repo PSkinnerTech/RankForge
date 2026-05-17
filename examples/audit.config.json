@@ -1,0 +1,26 @@
+{
+  "project": "Example Learn",
+  "target": "https://example.com",
+  "brand": {
+    "name": "Example Learn",
+    "type": "SoftwareApplication",
+    "sameAs": ["https://www.linkedin.com/company/example-learn"]
+  },
+  "audience": ["school administrators", "math curriculum leads"],
+  "targetQueries": [
+    "ai tutoring platform for schools",
+    "mastery learning software"
+  ],
+  "competitors": ["https://competitor.example"],
+  "crawl": {
+    "mode": "sample",
+    "maxPages": 100,
+    "maxDepth": 3,
+    "include": ["^https://example.com/"],
+    "exclude": ["/login", "/cart"]
+  },
+  "render": {
+    "mode": "auto",
+    "viewports": ["mobile", "desktop"]
+  }
+}

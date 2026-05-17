@@ -5,12 +5,30 @@ const requiredFiles = [
   "LICENSE",
   "CHANGELOG.md",
   "package.json",
+  "docs/prd-deterministic-audit-cli.md",
+  "packages/cli/package.json",
+  "packages/cli/src/index.mjs",
+  "packages/cli/src/cli.mjs",
+  "packages/cli/src/config-schema.mjs",
+  "packages/cli/src/audit-output-schema.mjs",
+  "packages/cli/src/rules.mjs",
+  "packages/cli/src/url-utils.mjs",
+  "packages/cli/src/html-extract.mjs",
+  "packages/cli/src/robots.mjs",
+  "packages/cli/src/sitemap.mjs",
+  "packages/cli/src/snapshot.mjs",
+  "packages/cli/src/audit.mjs",
+  "packages/cli/src/crawl.mjs",
+  "packages/cli/src/rule-engine.mjs",
+  "packages/cli/src/report.mjs",
   "skill/geo-seo-audit/SKILL.md",
   "skill/geo-seo-audit/agents/openai.yaml",
   "skill/geo-seo-audit/references/audit-framework.md",
+  "skill/geo-seo-audit/source-map.json",
   "skill/geo-seo-audit/templates/audit-report.md",
   "skill/geo-seo-audit/templates/page-finding.md",
   "skill/geo-seo-audit/templates/redesign-brief.md",
+  "examples/audit.config.json",
   "examples/fixture-site/index.html",
   "examples/audits/example-audit.md",
   "references/source-manifest.json",
@@ -38,9 +56,30 @@ if (!manifest.pages.some((page) => page.url && page.url.includes("ai-optimizatio
 if (!manifest.pages.some((page) => page.url && page.url.includes("robots-meta-tag"))) errors.push("Robots meta tag guidance missing from manifest.");
 if (!manifest.pages.some((page) => page.url && page.url.includes("structured-data/intro-structured-data"))) errors.push("Structured data intro missing from manifest.");
 
+const sourceMap = JSON.parse(fs.readFileSync("skill/geo-seo-audit/source-map.json", "utf8"));
+for (const key of ["ai_optimization", "robots_meta", "structured_data_intro", "helpful_content"]) {
+  if (!sourceMap[key]) errors.push(`source-map.json missing required source: ${key}`);
+}
+
+const { rules } = await import("../packages/cli/src/rules.mjs");
+if (!Array.isArray(rules) || rules.length < 25) errors.push("CLI rule taxonomy must include at least 25 rules.");
+
 if (errors.length) {
   console.error(errors.join("\n"));
   process.exit(1);
 }
 
-console.log(JSON.stringify({ ok: true, requiredFiles: requiredFiles.length, sourcePages: manifest.pages.length, frameworkGoogleCitations: googleUrlCount }, null, 2));
+console.log(
+  JSON.stringify(
+    {
+      ok: true,
+      requiredFiles: requiredFiles.length,
+      sourcePages: manifest.pages.length,
+      frameworkGoogleCitations: googleUrlCount,
+      sourceMapEntries: Object.keys(sourceMap).length,
+      rules: rules.length,
+    },
+    null,
+    2,
+  ),
+);

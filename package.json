@@ -3,10 +3,15 @@
   "version": "0.1.0",
   "private": false,
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "crawl:google": "node scripts/crawl-google-corpus.mjs",
     "snapshot": "node scripts/collect-page-snapshot.mjs",
-    "validate": "node scripts/validate-skill.mjs"
+    "validate": "node scripts/validate-skill.mjs",
+    "test": "node --test packages/cli/test/*.test.mjs",
+    "cli": "node packages/cli/src/index.mjs"
   },
   "engines": {
     "node": ">=20"
