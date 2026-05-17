@@ -25,6 +25,9 @@ test("detects duplicate titles and descriptions", () => {
   const ids = findings.map((finding) => finding.ruleId);
   assert.ok(ids.includes("appearance.title_duplicate"));
   assert.ok(ids.includes("appearance.meta_description_duplicate"));
+  const titleFinding = findings.find((finding) => finding.ruleId === "appearance.title_duplicate");
+  assert.equal(titleFinding.implementationTask.owner, titleFinding.owner);
+  assert.ok(titleFinding.implementationTask.acceptanceCriteria.length > 0);
 });
 
 test("detects broken internal links and canonical target errors", () => {

@@ -1,3 +1,4 @@
+import { implementationTaskFor } from "./finding-task.mjs";
 import { getRule } from "./rules.mjs";
 import { validateStructuredData } from "./structured-data.mjs";
 
@@ -70,6 +71,8 @@ const hasAboutOrContactLink = (evidence) =>
 const createFinding = (ruleId, snapshot, evidence, pageIndex, impact = null) => {
   const rule = getRule(ruleId);
   if (!rule) throw new Error(`Unknown rule: ${ruleId}`);
+  const owner = ownerFor(rule.dimension);
+  const effort = effortFor(rule.defaultSeverity);
 
   return {
     ruleId: rule.id,
@@ -80,8 +83,9 @@ const createFinding = (ruleId, snapshot, evidence, pageIndex, impact = null) => 
     evidence,
     impact: impact || rule.title,
     recommendation: rule.recommendation,
-    owner: ownerFor(rule.dimension),
-    effort: effortFor(rule.defaultSeverity),
+    implementationTask: implementationTaskFor(rule, owner, effort),
+    owner,
+    effort,
     confidence: "high",
     sources: rule.sources,
     pageIndex,

@@ -12,6 +12,14 @@ test("generates a Markdown audit report from audit JSON", () => {
         title: "Important page has a noindex directive",
         impact: "Pages with noindex are not eligible for Google Search.",
         recommendation: "Remove noindex.",
+        owner: "Engineering",
+        effort: "M",
+        implementationTask: {
+          summary: "Remove noindex.",
+          owner: "Engineering",
+          effort: "M",
+          acceptanceCriteria: ["The noindex finding no longer appears."],
+        },
         affectedUrls: ["https://example.com"],
         sources: ["https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"],
       },
@@ -36,6 +44,8 @@ test("generates a Markdown audit report from audit JSON", () => {
   assert.match(markdown, /indexability\.noindex/);
   assert.match(markdown, /Lighthouse/);
   assert.match(markdown, /42\/100/);
+  assert.match(markdown, /Implementation Tasks/);
+  assert.match(markdown, /Engineering/);
   assert.match(markdown, /Evidence Gaps/);
   assert.match(markdown, /https:\/\/developers\.google\.com\/search\/docs\/crawling-indexing\/robots-meta-tag/);
 });

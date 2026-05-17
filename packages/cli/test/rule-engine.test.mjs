@@ -50,6 +50,10 @@ test("evaluates deterministic page findings", () => {
   assert.ok(noindex.recommendation);
   assert.ok(noindex.confidence);
   assert.ok(noindex.sources.length > 0);
+  assert.equal(noindex.implementationTask.owner, noindex.owner);
+  assert.equal(noindex.implementationTask.effort, noindex.effort);
+  assert.ok(noindex.implementationTask.summary);
+  assert.ok(noindex.implementationTask.acceptanceCriteria.length > 0);
 });
 
 test("evaluates HTTP and header findings", () => {

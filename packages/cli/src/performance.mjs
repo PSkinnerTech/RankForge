@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { implementationTaskFor } from "./finding-task.mjs";
 import { getRule } from "./rules.mjs";
 
 const numericAuditValue = (audits, id) => {
@@ -18,6 +19,8 @@ const effortFor = (severity) => (severity === "P0" || severity === "P1" ? "M" : 
 const createPerformanceFinding = (ruleId, lighthouse, evidence, impact) => {
   const rule = getRule(ruleId);
   if (!rule) throw new Error(`Unknown rule: ${ruleId}`);
+  const owner = "Engineering";
+  const effort = effortFor(rule.defaultSeverity);
 
   return {
     ruleId: rule.id,
@@ -28,8 +31,9 @@ const createPerformanceFinding = (ruleId, lighthouse, evidence, impact) => {
     evidence,
     impact,
     recommendation: rule.recommendation,
-    owner: "Engineering",
-    effort: effortFor(rule.defaultSeverity),
+    implementationTask: implementationTaskFor(rule, owner, effort),
+    owner,
+    effort,
     confidence: "high",
     sources: rule.sources,
   };

@@ -51,6 +51,21 @@ export const generateMarkdownReport = (audit) => {
     lines.push("No scored findings.");
   }
 
+  lines.push("", "## Implementation Tasks", "");
+  const taskFindings = findings.filter((finding) => finding.implementationTask);
+  if (taskFindings.length) {
+    lines.push("| Priority | Rule | Owner | Effort | Task | Acceptance Criteria |");
+    lines.push("|---|---|---|---|---|---|");
+    for (const finding of taskFindings) {
+      const task = finding.implementationTask;
+      lines.push(
+        `| ${escapeCell(finding.severity)} | ${escapeCell(finding.ruleId)} | ${escapeCell(task.owner || finding.owner)} | ${escapeCell(task.effort || finding.effort)} | ${escapeCell(task.summary || finding.recommendation)} | ${escapeCell((task.acceptanceCriteria || []).join("; "))} |`,
+      );
+    }
+  } else {
+    lines.push("No implementation tasks recorded.");
+  }
+
   lines.push("", "## Imported Evidence", "");
   if (audit.integrations?.lighthouse) {
     const lighthouse = audit.integrations.lighthouse;

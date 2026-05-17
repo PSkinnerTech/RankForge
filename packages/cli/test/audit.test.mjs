@@ -104,6 +104,9 @@ test("includes Lighthouse performance evidence and findings", async () => {
   assert.ok(ids.includes("performance.lighthouse_poor"));
   assert.ok(ids.includes("performance.lcp_poor"));
   assert.ok(ids.includes("performance.cls_poor"));
+  const performanceFinding = audit.findings.find((finding) => finding.ruleId === "performance.lighthouse_poor");
+  assert.equal(performanceFinding.implementationTask.owner, "Engineering");
+  assert.ok(performanceFinding.implementationTask.acceptanceCriteria.length > 0);
 });
 
 test("collects supplied URL-list pages", async () => {

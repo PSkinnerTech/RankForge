@@ -1,3 +1,4 @@
+import { implementationTaskFor } from "./finding-task.mjs";
 import { getRule } from "./rules.mjs";
 import { isHttpUrl, normalizeUrl, sameOrigin } from "./url-utils.mjs";
 
@@ -10,6 +11,8 @@ const effortFor = (severity) => (severity === "P1" ? "M" : "S");
 
 const finding = (ruleId, affectedUrls, evidence, impact) => {
   const rule = getRule(ruleId);
+  const owner = ownerFor(rule.dimension);
+  const effort = effortFor(rule.defaultSeverity);
   return {
     ruleId: rule.id,
     title: rule.title,
@@ -19,8 +22,9 @@ const finding = (ruleId, affectedUrls, evidence, impact) => {
     evidence,
     impact,
     recommendation: rule.recommendation,
-    owner: ownerFor(rule.dimension),
-    effort: effortFor(rule.defaultSeverity),
+    implementationTask: implementationTaskFor(rule, owner, effort),
+    owner,
+    effort,
     confidence: "high",
     sources: rule.sources,
   };

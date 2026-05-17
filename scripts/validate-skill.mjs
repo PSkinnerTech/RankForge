@@ -11,6 +11,7 @@ const requiredFiles = [
   "packages/cli/src/cli.mjs",
   "packages/cli/src/config-schema.mjs",
   "packages/cli/src/audit-output-schema.mjs",
+  "packages/cli/src/finding-task.mjs",
   "packages/cli/src/rules.mjs",
   "packages/cli/src/url-utils.mjs",
   "packages/cli/src/html-extract.mjs",
