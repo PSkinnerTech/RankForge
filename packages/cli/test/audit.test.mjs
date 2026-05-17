@@ -18,9 +18,11 @@ const withServer = async (handler, fn) => {
 };
 
 test("returns minimal versioned audit output for a local HTML target", async () => {
-  const audit = await runAudit({ target: "examples/fixture-site/index.html" });
+  const audit = await runAudit({ target: "examples/fixture-site/index.html", crawl: { mode: "single", maxPages: 1, maxDepth: 0 } });
   assert.equal(audit.schemaVersion, "1.0.0");
   assert.equal(audit.toolVersion, "0.2.0");
+  assert.match(audit.run.configHash, /^[a-f0-9]{64}$/);
+  assert.deepEqual(audit.run.crawl, { mode: "single", maxPages: 1, maxDepth: 0 });
   assert.equal(audit.pages.length, 1);
   assert.deepEqual(audit.findings, []);
   assert.ok(audit.sources.length > 0);
@@ -102,4 +104,29 @@ test("includes Lighthouse performance evidence and findings", async () => {
   assert.ok(ids.includes("performance.lighthouse_poor"));
   assert.ok(ids.includes("performance.lcp_poor"));
   assert.ok(ids.includes("performance.cls_poor"));
+});
+
+test("collects supplied URL-list pages", async () => {
+  await withServer((request, response) => {
+    response.setHeader("content-type", "text/html");
+    if (request.url === "/one") {
+      response.end("<title>One</title><meta name='description' content='One'><h1>One</h1><p>Enough content.</p>");
+      return;
+    }
+    if (request.url === "/two") {
+      response.end("<title>Two</title><meta name='description' content='Two'><h1>Two</h1><p>Enough content.</p>");
+      return;
+    }
+    response.end("<title>Home</title><meta name='description' content='Home'><h1>Home</h1><p>Enough content.</p>");
+  }, async (origin) => {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-url-list-"));
+    const urlList = path.join(dir, "urls.txt");
+    fs.writeFileSync(urlList, "/one\n/two\n");
+
+    const audit = await runAudit({ target: `${origin}/`, urlList, crawl: { mode: "single", maxPages: 5 } });
+    assert.deepEqual(
+      audit.pages.map((page) => new URL(page.finalUrl).pathname),
+      ["/one", "/two"],
+    );
+  });
 });

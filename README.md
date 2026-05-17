@@ -31,10 +31,12 @@ npm run cli -- validate-config examples/audit.config.json
 npm run cli -- explain-rule indexability.noindex
 npm run cli -- snapshot examples/fixture-site/index.html
 npm run cli -- audit examples/fixture-site/index.html --markdown audit-report.md
+npm run cli -- audit --config examples/audit.config.json --mode single
+npm run cli -- audit https://example.com --url-list urls.txt --markdown audit-report.md
 npm run cli -- audit https://example.com --mode full --max-pages 25 --max-depth 2 --respect-robots true --sitemap https://example.com/sitemap.xml
 ```
 
-The current `audit` command collects single-page or bounded same-origin crawl evidence, can seed from a sitemap, can enforce robots.txt, evaluates deterministic page and site rules, and can write JSON or Markdown. Browser rendering is available when Playwright is installed or when a renderer is injected by code; otherwise the CLI records rendering as unavailable.
+The current `audit` command collects single-page, supplied URL-list, or bounded same-origin crawl evidence, can read `audit.config.json`, can seed from a sitemap, can enforce robots.txt, can filter crawls with include/exclude patterns, evaluates deterministic page and site rules, and can write JSON or Markdown. Browser rendering is available when Playwright is installed or when a renderer is injected by code; otherwise the CLI records rendering as unavailable.
 
 Structured data checks currently validate JSON-LD parseability plus required-property gaps for Organization, Product, FAQPage, Article, BreadcrumbList, Event, VideoObject, and SoftwareApplication evidence.
 

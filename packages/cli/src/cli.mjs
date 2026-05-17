@@ -1,6 +1,7 @@
 import fs from "node:fs";
+import path from "node:path";
 import { runAudit } from "./audit.mjs";
-import { readAuditConfig, validateAuditConfig } from "./config-schema.mjs";
+import { readAuditConfig, resolveAuditConfigPaths, validateAuditConfig } from "./config-schema.mjs";
 import { generateMarkdownReport } from "./report.mjs";
 import { getRule } from "./rules.mjs";
 import { collectSnapshot } from "./snapshot.mjs";
@@ -16,10 +17,12 @@ Commands:
   explain-rule <rule-id>         Print rule metadata and citations as JSON
 
 Audit options:
+  --config <file>                Read audit options from an audit.config.json file
   --mode full|sample|single      Crawl mode
   --max-pages <n>                Maximum pages to crawl
   --max-depth <n>                Maximum crawl depth
   --sitemap <url>                Seed crawl with a sitemap URL
+  --url-list <file>              Audit URLs listed one per line
   --respect-robots true|false    Skip robots-disallowed URLs when true
   --render auto|always|never     Render pages when Playwright or a renderer is available
   --search-console <file>        Import Google Search Console CSV evidence
@@ -39,6 +42,104 @@ const writeJson = (io, value) => {
 const optionValue = (options, name) => {
   const index = options.indexOf(name);
   return index === -1 ? null : options[index + 1] || null;
+};
+
+const auditOptionsWithValues = new Set([
+  "--config",
+  "--mode",
+  "--max-pages",
+  "--max-depth",
+  "--sitemap",
+  "--url-list",
+  "--respect-robots",
+  "--render",
+  "--search-console",
+  "--serp",
+  "--ai-answers",
+  "--lighthouse",
+  "--out",
+  "--markdown",
+]);
+
+const splitAuditArgs = (args) => {
+  const options = [];
+  let target = null;
+
+  for (let index = 0; index < args.length; index++) {
+    const arg = args[index];
+    if (auditOptionsWithValues.has(arg)) {
+      options.push(arg);
+      if (index + 1 < args.length) options.push(args[++index]);
+      continue;
+    }
+    if (arg.startsWith("--")) {
+      options.push(arg);
+      continue;
+    }
+    if (!target) target = arg;
+    else options.push(arg);
+  }
+
+  return { target, options };
+};
+
+const numberOption = (options, name, fallback) => {
+  const value = optionValue(options, name);
+  return value ? Number(value) : fallback;
+};
+
+const mergeAuditConfig = (target, options) => {
+  const configPath = optionValue(options, "--config");
+  const baseDir = configPath ? path.dirname(path.resolve(configPath)) : process.cwd();
+  const fileConfig = configPath ? resolveAuditConfigPaths(readAuditConfig(configPath), baseDir) : {};
+  const merged = {
+    ...fileConfig,
+    target: target || fileConfig.target,
+  };
+
+  const mode = optionValue(options, "--mode");
+  const maxPages = optionValue(options, "--max-pages");
+  const maxDepth = optionValue(options, "--max-depth");
+  const sitemap = optionValue(options, "--sitemap");
+  const urlList = optionValue(options, "--url-list");
+  const respectRobots = optionValue(options, "--respect-robots");
+  const render = optionValue(options, "--render");
+  const searchConsole = optionValue(options, "--search-console");
+  const serp = optionValue(options, "--serp");
+  const aiAnswers = optionValue(options, "--ai-answers");
+  const lighthouse = optionValue(options, "--lighthouse");
+
+  merged.crawl = {
+    ...(fileConfig.crawl || {}),
+    mode: mode || fileConfig.crawl?.mode || "single",
+    maxPages: numberOption(options, "--max-pages", fileConfig.crawl?.maxPages),
+    maxDepth: numberOption(options, "--max-depth", fileConfig.crawl?.maxDepth),
+  };
+  if (maxPages === null && fileConfig.crawl?.maxPages === undefined) delete merged.crawl.maxPages;
+  if (maxDepth === null && fileConfig.crawl?.maxDepth === undefined) delete merged.crawl.maxDepth;
+
+  merged.render = {
+    ...(fileConfig.render || {}),
+    mode: render || fileConfig.render?.mode || "never",
+  };
+
+  merged.integrations = {
+    ...(fileConfig.integrations || {}),
+    searchConsole: searchConsole || fileConfig.integrations?.searchConsole || null,
+    serp: serp || fileConfig.integrations?.serp || null,
+    aiAnswers: aiAnswers || fileConfig.integrations?.aiAnswers || null,
+    lighthouse: lighthouse || fileConfig.integrations?.lighthouse || null,
+  };
+
+  if (sitemap) merged.sitemap = sitemap;
+  if (urlList) merged.urlList = urlList;
+  if (respectRobots === "true") merged.respectRobots = true;
+  if (respectRobots === "false") merged.respectRobots = false;
+
+  const validation = validateAuditConfig(merged, { baseDir, checkFiles: Boolean(configPath) });
+  if (!validation.ok) throw new Error(validation.errors.join("\n"));
+
+  return merged;
 };
 
 export const runCli = async (args, io = { stdout: process.stdout, stderr: process.stderr }) => {
@@ -62,8 +163,9 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
     }
 
     try {
-      const config = readAuditConfig(filePath);
-      writeJson(io, validateAuditConfig(config));
+      const baseDir = path.dirname(path.resolve(filePath));
+      const config = resolveAuditConfigPaths(readAuditConfig(filePath), baseDir);
+      writeJson(io, validateAuditConfig(config, { baseDir, checkFiles: true }));
       return 0;
     } catch (error) {
       writeJson(io, { ok: false, errors: [error.message] });
@@ -88,42 +190,15 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
   }
 
   if (command === "audit") {
-    const [target, ...options] = rest;
-    if (!target) {
+    const { target, options } = splitAuditArgs(rest);
+    const configPath = optionValue(options, "--config");
+    if (!target && !configPath) {
       io.stderr.write("audit requires a target URL or file path.\n");
       return 1;
     }
 
     try {
-      const mode = optionValue(options, "--mode");
-      const maxPages = optionValue(options, "--max-pages");
-      const maxDepth = optionValue(options, "--max-depth");
-      const sitemap = optionValue(options, "--sitemap");
-      const respectRobots = optionValue(options, "--respect-robots");
-      const render = optionValue(options, "--render");
-      const searchConsole = optionValue(options, "--search-console");
-      const serp = optionValue(options, "--serp");
-      const aiAnswers = optionValue(options, "--ai-answers");
-      const lighthouse = optionValue(options, "--lighthouse");
-      const output = await runAudit({
-        target,
-        sitemap: sitemap || undefined,
-        respectRobots: respectRobots === "true" ? true : respectRobots === "false" ? false : undefined,
-        crawl: {
-          mode: mode || "single",
-          maxPages: maxPages ? Number(maxPages) : undefined,
-          maxDepth: maxDepth ? Number(maxDepth) : undefined,
-        },
-        render: {
-          mode: render || "never",
-        },
-        integrations: {
-          searchConsole,
-          serp,
-          aiAnswers,
-          lighthouse,
-        },
-      });
+      const output = await runAudit(mergeAuditConfig(target, options));
       const outIndex = options.indexOf("--out");
       const markdownIndex = options.indexOf("--markdown");
       const result = { ok: true };

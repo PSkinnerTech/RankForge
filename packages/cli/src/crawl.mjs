@@ -46,6 +46,20 @@ const loadSitemap = async (url) => {
   }
 };
 
+const compilePatterns = (patterns = []) => patterns.map((pattern) => new RegExp(pattern));
+
+const createFilter = (config, target) => {
+  const include = compilePatterns(config.include || config.crawl?.include || []);
+  const exclude = compilePatterns(config.exclude || config.crawl?.exclude || []);
+
+  return (url) => {
+    if (normalizeUrl(url) === target) return null;
+    if (exclude.some((pattern) => pattern.test(url))) return "excluded";
+    if (include.length && !include.some((pattern) => pattern.test(url))) return "not_included";
+    return null;
+  };
+};
+
 export const crawlSite = async (config) => {
   const target = normalizeUrl(config.target);
   const maxPages = config.maxPages || config.crawl?.maxPages || 50;
@@ -55,18 +69,30 @@ export const crawlSite = async (config) => {
   const robots = await loadRobots(target, respectRobots);
   const sitemaps = [];
   const queue = [{ url: target, depth: 0 }];
+  const filterReason = createFilter(config, target);
+  const skipped = [];
 
   if (sitemapUrl) {
     const sitemap = await loadSitemap(sitemapUrl);
     sitemaps.push(sitemap);
     for (const url of sitemap.parsed.urls || []) {
-      if (isHttpUrl(url) && sameOrigin(target, url)) queue.push({ url: normalizeUrl(url), depth: 0, source: "sitemap" });
+      const normalized = normalizeUrl(url);
+      if (!isHttpUrl(normalized)) {
+        skipped.push({ url: normalized, reason: "not_http" });
+        continue;
+      }
+      if (!sameOrigin(target, normalized)) {
+        skipped.push({ url: normalized, reason: "cross_origin" });
+        continue;
+      }
+      const reason = filterReason(normalized);
+      if (reason) skipped.push({ url: normalized, reason });
+      else queue.push({ url: normalized, depth: 0, source: "sitemap" });
     }
   }
 
   const seen = new Set();
   const pages = [];
-  const skipped = [];
 
   while (queue.length && pages.length < maxPages) {
     const item = queue.shift();
@@ -83,6 +109,12 @@ export const crawlSite = async (config) => {
       continue;
     }
 
+    const reason = filterReason(item.url);
+    if (reason) {
+      skipped.push({ url: item.url, reason });
+      continue;
+    }
+
     if (respectRobots && robots?.parsed && !isAllowedByRobots(robots.parsed, item.url, userAgent)) {
       skipped.push({ url: item.url, reason: "robots_blocked" });
       continue;
@@ -94,17 +126,24 @@ export const crawlSite = async (config) => {
     if (item.depth >= maxDepth) continue;
 
     for (const link of snapshot.evidence.links || []) {
-      if (!link.href || seen.has(link.href)) continue;
-      if (!isHttpUrl(link.href)) {
-        skipped.push({ url: link.href, reason: "not_http" });
+      if (!link.href) continue;
+      const normalized = normalizeUrl(link.href);
+      if (seen.has(normalized)) continue;
+      if (!isHttpUrl(normalized)) {
+        skipped.push({ url: normalized, reason: "not_http" });
         continue;
       }
-      if (!sameOrigin(target, link.href)) {
-        skipped.push({ url: link.href, reason: "cross_origin" });
+      if (!sameOrigin(target, normalized)) {
+        skipped.push({ url: normalized, reason: "cross_origin" });
         continue;
       }
-      if (!queue.some((queued) => queued.url === link.href)) {
-        queue.push({ url: link.href, depth: item.depth + 1 });
+      const reason = filterReason(normalized);
+      if (reason) {
+        skipped.push({ url: normalized, reason });
+        continue;
+      }
+      if (!queue.some((queued) => queued.url === normalized)) {
+        queue.push({ url: normalized, depth: item.depth + 1 });
       }
     }
   }

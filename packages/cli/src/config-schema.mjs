@@ -12,6 +12,7 @@ export const auditConfigSchema = {
     project: { type: "string" },
     target: { type: "string", minLength: 1 },
     sitemap: { type: "string" },
+    urlList: { type: "string" },
     respectRobots: { type: "boolean" },
     brand: {
       type: "object",
@@ -62,6 +63,35 @@ export const auditConfigSchema = {
 
 const isObject = (value) => value !== null && typeof value === "object" && !Array.isArray(value);
 
+const isUrlOrLocalhost = (value) =>
+  /^https?:\/\//i.test(value) || /^localhost(?::\d+)?(?:\/|$)/i.test(value) || /^127\.0\.0\.1(?::\d+)?/i.test(value);
+
+const resolveMaybePath = (value, baseDir) => {
+  if (typeof value !== "string" || !value || !baseDir) return value;
+  if (isUrlOrLocalhost(value) || path.isAbsolute(value)) return value;
+  return path.resolve(baseDir, value);
+};
+
+export const resolveAuditConfigPaths = (config, baseDir) => {
+  if (!isObject(config)) return config;
+  const resolved = {
+    ...config,
+    target: resolveMaybePath(config.target, baseDir),
+    urlList: resolveMaybePath(config.urlList, baseDir),
+    integrations: config.integrations
+      ? {
+          ...config.integrations,
+          searchConsole: resolveMaybePath(config.integrations.searchConsole, baseDir),
+          serp: resolveMaybePath(config.integrations.serp, baseDir),
+          aiAnswers: resolveMaybePath(config.integrations.aiAnswers, baseDir),
+          lighthouse: resolveMaybePath(config.integrations.lighthouse, baseDir),
+        }
+      : config.integrations,
+  };
+
+  return resolved;
+};
+
 const isTargetLike = (value) => {
   if (typeof value !== "string" || !value.trim()) return false;
   if (/^https?:\/\//i.test(value)) {
@@ -96,7 +126,17 @@ const validateRegexList = (errors, key, value) => {
   }
 };
 
-export const validateAuditConfig = (config) => {
+const validateExistingFile = (errors, key, filePath, baseDir) => {
+  if (filePath === undefined || filePath === null || filePath === "") return;
+  if (typeof filePath !== "string") {
+    errors.push(`${key} must be a string`);
+    return;
+  }
+  const resolved = path.isAbsolute(filePath) ? filePath : path.resolve(baseDir || process.cwd(), filePath);
+  if (!fs.existsSync(resolved)) errors.push(`${key} file does not exist: ${filePath}`);
+};
+
+export const validateAuditConfig = (config, options = {}) => {
   const errors = [];
 
   if (!isObject(config)) {
@@ -145,6 +185,22 @@ export const validateAuditConfig = (config) => {
     } else if (config.render.mode !== undefined && !["auto", "always", "never"].includes(config.render.mode)) {
       errors.push("render.mode must be one of: auto, always, never");
     }
+  }
+
+  if (config.urlList !== undefined && typeof config.urlList !== "string") {
+    errors.push("urlList must be a string");
+  }
+
+  if (config.integrations !== undefined && !isObject(config.integrations)) {
+    errors.push("integrations must be an object");
+  }
+
+  if (options.checkFiles) {
+    validateExistingFile(errors, "urlList", config.urlList, options.baseDir);
+    validateExistingFile(errors, "integrations.searchConsole", config.integrations?.searchConsole, options.baseDir);
+    validateExistingFile(errors, "integrations.serp", config.integrations?.serp, options.baseDir);
+    validateExistingFile(errors, "integrations.aiAnswers", config.integrations?.aiAnswers, options.baseDir);
+    validateExistingFile(errors, "integrations.lighthouse", config.integrations?.lighthouse, options.baseDir);
   }
 
   return { ok: errors.length === 0, errors };

@@ -1,5 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { runCli } from "../src/cli.mjs";
 
 const capture = async (args) => {
@@ -39,4 +42,34 @@ test("returns a non-zero exit for unknown commands", async () => {
   const result = await capture(["unknown-command"]);
   assert.equal(result.exitCode, 1);
   assert.match(result.stderr, /Unknown command/);
+});
+
+test("runs audit from a config file with config-relative paths", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-config-"));
+  const html = path.join(dir, "index.html");
+  const config = path.join(dir, "audit.config.json");
+  fs.writeFileSync(html, "<title>Config Target</title><meta name='description' content='Config'><h1>Config Target</h1><p>Enough content.</p>");
+  fs.writeFileSync(config, JSON.stringify({ target: "index.html", crawl: { mode: "single" } }));
+
+  const result = await capture(["audit", "--config", config]);
+  assert.equal(result.exitCode, 0);
+  const audit = JSON.parse(result.stdout);
+  assert.equal(audit.pages[0].evidence.title, "Config Target");
+  assert.match(audit.run.configHash, /^[a-f0-9]{64}$/);
+});
+
+test("lets positional audit target override config target", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-config-override-"));
+  const configTarget = path.join(dir, "config.html");
+  const overrideTarget = path.join(dir, "override.html");
+  const config = path.join(dir, "audit.config.json");
+  fs.writeFileSync(configTarget, "<title>Config Target</title><meta name='description' content='Config'><h1>Config Target</h1><p>Enough content.</p>");
+  fs.writeFileSync(overrideTarget, "<title>Override Target</title><meta name='description' content='Override'><h1>Override Target</h1><p>Enough content.</p>");
+  fs.writeFileSync(config, JSON.stringify({ target: "config.html", crawl: { mode: "single" } }));
+
+  const result = await capture(["audit", overrideTarget, "--config", config]);
+  assert.equal(result.exitCode, 0);
+  const audit = JSON.parse(result.stdout);
+  assert.equal(audit.run.target, overrideTarget);
+  assert.equal(audit.pages[0].evidence.title, "Override Target");
 });

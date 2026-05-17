@@ -1,5 +1,8 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { validateAuditConfig } from "../src/config-schema.mjs";
 
 test("accepts a minimal URL target config", () => {
@@ -21,4 +24,21 @@ test("rejects invalid crawl mode", () => {
   });
   assert.equal(result.ok, false);
   assert.match(result.errors.join("\n"), /crawl.mode/);
+});
+
+test("rejects missing referenced files when file checks are enabled", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-config-validation-"));
+  const result = validateAuditConfig(
+    {
+      target: "https://example.com",
+      urlList: "urls.txt",
+      integrations: {
+        lighthouse: "missing-lighthouse.json",
+      },
+    },
+    { baseDir: dir, checkFiles: true },
+  );
+  assert.equal(result.ok, false);
+  assert.match(result.errors.join("\n"), /urlList file does not exist/);
+  assert.match(result.errors.join("\n"), /integrations\.lighthouse file does not exist/);
 });

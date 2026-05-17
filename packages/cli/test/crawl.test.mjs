@@ -111,3 +111,40 @@ test("seeds crawl queue with sitemap URLs", async () => {
     assert.equal(result.sitemaps[0].url, `${origin}/sitemap.xml`);
   });
 });
+
+test("applies include and exclude crawl filters to discovered URLs", async () => {
+  await withServer((request, response) => {
+    response.setHeader("content-type", "text/html");
+    if (request.url === "/docs/a") {
+      response.end("<title>Docs A</title><meta name='description' content='Docs'><h1>Docs A</h1><p>Docs content.</p>");
+      return;
+    }
+    if (request.url === "/docs/private") {
+      response.end("<title>Private</title><h1>Private</h1>");
+      return;
+    }
+    if (request.url === "/blog/a") {
+      response.end("<title>Blog A</title><h1>Blog A</h1>");
+      return;
+    }
+    response.end(`
+      <title>Home</title>
+      <meta name="description" content="Home">
+      <h1>Home</h1>
+      <a href="/docs/a">Docs A</a>
+      <a href="/docs/private">Private docs</a>
+      <a href="/blog/a">Blog A</a>
+    `);
+  }, async (origin) => {
+    const result = await crawlSite({
+      target: `${origin}/`,
+      crawl: { mode: "full", maxPages: 5, maxDepth: 1, include: ["/docs"], exclude: ["/private"] },
+    });
+    assert.deepEqual(
+      result.pages.map((page) => new URL(page.finalUrl).pathname),
+      ["/", "/docs/a"],
+    );
+    assert.ok(result.skipped.some((item) => item.url.endsWith("/docs/private") && item.reason === "excluded"));
+    assert.ok(result.skipped.some((item) => item.url.endsWith("/blog/a") && item.reason === "not_included"));
+  });
+});
