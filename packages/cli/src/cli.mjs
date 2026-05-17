@@ -25,6 +25,7 @@ Audit options:
   --search-console <file>        Import Google Search Console CSV evidence
   --serp <file>                  Import SERP JSON evidence
   --ai-answers <file>            Import AI answer JSON evidence
+  --lighthouse <file>            Import Lighthouse JSON performance evidence
   --out <file>                   Write audit JSON
   --markdown <file>              Write Markdown report
   --help                         Show this help
@@ -103,6 +104,7 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
       const searchConsole = optionValue(options, "--search-console");
       const serp = optionValue(options, "--serp");
       const aiAnswers = optionValue(options, "--ai-answers");
+      const lighthouse = optionValue(options, "--lighthouse");
       const output = await runAudit({
         target,
         sitemap: sitemap || undefined,
@@ -119,6 +121,7 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
           searchConsole,
           serp,
           aiAnswers,
+          lighthouse,
         },
       });
       const outIndex = options.indexOf("--out");

@@ -36,13 +36,15 @@ npm run cli -- audit https://example.com --mode full --max-pages 25 --max-depth 
 
 The current `audit` command collects single-page or bounded same-origin crawl evidence, can seed from a sitemap, can enforce robots.txt, evaluates deterministic page and site rules, and can write JSON or Markdown. Browser rendering is available when Playwright is installed or when a renderer is injected by code; otherwise the CLI records rendering as unavailable.
 
+Structured data checks currently validate JSON-LD parseability plus required-property gaps for Organization, Product, FAQPage, Article, BreadcrumbList, Event, VideoObject, and SoftwareApplication evidence.
+
 Optional evidence imports:
 
 ```bash
-npm run cli -- audit https://example.com --search-console gsc.csv --serp serp.json --ai-answers ai-answers.json
+npm run cli -- audit https://example.com --search-console gsc.csv --serp serp.json --ai-answers ai-answers.json --lighthouse lighthouse.json
 ```
 
-Ranking, SERP, and AI answer visibility are reported only from supplied evidence files.
+Ranking, SERP, and AI answer visibility are reported only from supplied evidence files. Lighthouse performance findings are reported only when a Lighthouse JSON export is supplied.
 
 ## Use
 

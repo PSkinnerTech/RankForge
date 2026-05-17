@@ -54,6 +54,7 @@ export const auditConfigSchema = {
         searchConsole: { type: "string" },
         serp: { type: "string" },
         aiAnswers: { type: "string" },
+        lighthouse: { type: "string" },
       },
     },
   },

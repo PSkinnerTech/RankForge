@@ -78,3 +78,28 @@ test("includes supplied ranking evidence and removes ranking evidence gap", asyn
   assert.equal(audit.integrations.searchConsole.rows[0].query, "ai tutor");
   assert.equal(audit.evidenceGaps.some((gap) => gap.id === "ranking.integrations_missing"), false);
 });
+
+test("includes Lighthouse performance evidence and findings", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-performance-"));
+  const html = path.join(dir, "index.html");
+  const lighthouse = path.join(dir, "lighthouse.json");
+  fs.writeFileSync(html, "<title>Home</title><meta name='description' content='Home'><h1>Home</h1><p>Enough content for audit evidence.</p>");
+  fs.writeFileSync(
+    lighthouse,
+    JSON.stringify({
+      lighthouseVersion: "12.0.0",
+      categories: { performance: { score: 0.3 } },
+      audits: {
+        "largest-contentful-paint": { numericValue: 4300 },
+        "cumulative-layout-shift": { numericValue: 0.3 },
+      },
+    }),
+  );
+
+  const audit = await runAudit({ target: html, integrations: { lighthouse } });
+  assert.equal(audit.integrations.lighthouse.performanceScore, 30);
+  const ids = audit.findings.map((finding) => finding.ruleId);
+  assert.ok(ids.includes("performance.lighthouse_poor"));
+  assert.ok(ids.includes("performance.lcp_poor"));
+  assert.ok(ids.includes("performance.cls_poor"));
+});

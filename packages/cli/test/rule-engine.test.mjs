@@ -103,3 +103,24 @@ test("evaluates homepage GEO and entity readiness gaps", () => {
   assert.ok(ids.includes("structured_data.organization_missing"));
   assert.ok(ids.includes("entity.about_contact_missing"));
 });
+
+test("flags structured data required property gaps", () => {
+  const findings = evaluatePage(
+    snapshotFor(`
+      <html>
+        <head>
+          <title>Product</title>
+          <meta name="description" content="Product description">
+          <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Widget"}</script>
+        </head>
+        <body>
+          <h1>Widget</h1>
+          <p>${"Useful product context ".repeat(40)}</p>
+        </body>
+      </html>
+    `),
+  );
+  const finding = findings.find((item) => item.ruleId === "structured_data.required_property_missing");
+  assert.ok(finding);
+  assert.match(finding.impact, /offers/);
+});

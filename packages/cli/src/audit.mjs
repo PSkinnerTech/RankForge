@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import { crawlSite } from "./crawl.mjs";
 import { readIntegrations } from "./integrations.mjs";
+import { evaluatePerformance } from "./performance.mjs";
 import { evaluatePage, scoreFindings } from "./rule-engine.mjs";
 import { evaluateSite } from "./site-rule-engine.mjs";
 import { collectSnapshot } from "./snapshot.mjs";
@@ -44,6 +45,7 @@ export const runAudit = async (config) => {
   const findings = [
     ...pages.flatMap((item, index) => evaluatePage(item, index)),
     ...evaluateSite(pages, { sitemapUrls }),
+    ...evaluatePerformance(integrations.lighthouse),
   ];
 
   return {

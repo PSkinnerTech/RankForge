@@ -4,6 +4,8 @@ const priorityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };
 
 const formatSources = (sources = []) => sources.join(", ");
 
+const formatMetric = (value, suffix = "") => (Number.isFinite(value) ? `${value}${suffix}` : "n/a");
+
 export const generateMarkdownReport = (audit) => {
   const findings = [...(audit.findings || [])].sort(
     (a, b) => (priorityRank[a.severity] ?? 9) - (priorityRank[b.severity] ?? 9),
@@ -47,6 +49,17 @@ export const generateMarkdownReport = (audit) => {
     }
   } else {
     lines.push("No scored findings.");
+  }
+
+  lines.push("", "## Imported Evidence", "");
+  if (audit.integrations?.lighthouse) {
+    const lighthouse = audit.integrations.lighthouse;
+    const metrics = lighthouse.metrics || {};
+    lines.push(
+      `- Lighthouse: ${formatMetric(lighthouse.performanceScore, "/100")} performance score${lighthouse.formFactor ? ` (${lighthouse.formFactor})` : ""}; LCP ${formatMetric(metrics.lcpMs, " ms")}; CLS ${formatMetric(metrics.cls)}; TBT ${formatMetric(metrics.tbtMs, " ms")}.`,
+    );
+  } else {
+    lines.push("No imported performance evidence.");
   }
 
   lines.push("", "## Evidence Gaps", "");

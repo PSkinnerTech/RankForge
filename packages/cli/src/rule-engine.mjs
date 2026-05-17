@@ -1,4 +1,5 @@
 import { getRule } from "./rules.mjs";
+import { validateStructuredData } from "./structured-data.mjs";
 
 const severityImpact = {
   P0: 60,
@@ -8,7 +9,14 @@ const severityImpact = {
 };
 
 const ownerFor = (dimension) => {
-  if (dimension === "structured_data" || dimension === "technical" || dimension === "crawl_index") return "Engineering";
+  if (
+    dimension === "structured_data" ||
+    dimension === "technical" ||
+    dimension === "crawl_index" ||
+    dimension === "performance"
+  ) {
+    return "Engineering";
+  }
   if (dimension === "helpful_content" || dimension === "geo_readiness" || dimension === "entity_clarity") {
     return "Content";
   }
@@ -213,6 +221,18 @@ export const evaluatePage = (snapshot, pageIndex = 0) => {
         [`$.pages[${pageIndex}].evidence.structuredData`],
         pageIndex,
         "Invalid JSON-LD cannot be parsed reliably for structured data eligibility.",
+      ),
+    );
+  }
+
+  for (const issue of validateStructuredData(evidence.structuredData || [])) {
+    findings.push(
+      createFinding(
+        "structured_data.required_property_missing",
+        snapshot,
+        [`$.pages[${pageIndex}].evidence.structuredData[${issue.blockIndex}]`],
+        pageIndex,
+        `${issue.type} structured data is missing required properties: ${issue.missing.join(", ")}.`,
       ),
     );
   }

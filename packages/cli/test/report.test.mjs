@@ -19,6 +19,13 @@ test("generates a Markdown audit report from audit JSON", () => {
     scores: {
       crawl_index: { score: 60, findings: ["indexability.noindex"], p0: 0, p1: 1, p2: 0, p3: 0 },
     },
+    integrations: {
+      lighthouse: {
+        performanceScore: 42,
+        metrics: { lcpMs: 4100, cls: 0.22, tbtMs: 500 },
+        formFactor: "mobile",
+      },
+    },
     evidenceGaps: [{ id: "ranking.integrations_missing", message: "Ranking evidence missing." }],
     sources: [{ id: "robots_meta", url: "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag" }],
   });
@@ -27,6 +34,8 @@ test("generates a Markdown audit report from audit JSON", () => {
   assert.match(markdown, /Target: https:\/\/example\.com/);
   assert.match(markdown, /Priority Findings/);
   assert.match(markdown, /indexability\.noindex/);
+  assert.match(markdown, /Lighthouse/);
+  assert.match(markdown, /42\/100/);
   assert.match(markdown, /Evidence Gaps/);
   assert.match(markdown, /https:\/\/developers\.google\.com\/search\/docs\/crawling-indexing\/robots-meta-tag/);
 });

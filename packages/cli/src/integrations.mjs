@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { readLighthouseReport } from "./performance.mjs";
 
 const parseCsvLine = (line) => {
   const cells = [];
@@ -57,4 +58,5 @@ export const readIntegrations = (integrations = {}) => ({
   searchConsole: integrations.searchConsole ? readSearchConsoleCsv(integrations.searchConsole) : null,
   serp: integrations.serp ? readSerpExport(integrations.serp) : null,
   aiAnswers: integrations.aiAnswers ? readAiAnswers(integrations.aiAnswers) : null,
+  lighthouse: integrations.lighthouse ? readLighthouseReport(integrations.lighthouse) : null,
 });

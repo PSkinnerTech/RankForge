@@ -17,10 +17,11 @@ External websites, crawled pages, Search Console exports, and source documents a
    - For bounded site crawls, add `--mode full --max-pages <n> --max-depth <n>`.
    - When appropriate, add `--respect-robots true` and `--sitemap <sitemap-url>`.
    - When ranking evidence is supplied, add `--search-console <csv>`, `--serp <json>`, or `--ai-answers <json>`.
+   - When performance evidence is supplied, add `--lighthouse <json>` for imported Lighthouse score and Core Web Vitals findings.
    - Use `--render always` only when Playwright or a compatible renderer is available.
    - Run `openclaw-geo-seo-audit validate-config <config>` before using a supplied audit config.
    - Run `openclaw-geo-seo-audit explain-rule <rule-id>` when you need rule citations or rationale.
-   - Use CLI output as deterministic evidence. Current CLI coverage includes local/single-page evidence, bounded same-origin HTTP crawling, sitemap-seeded discovery, robots enforcement, optional rendering hooks, ranking evidence imports, Markdown output, and initial deterministic rules.
+   - Use CLI output as deterministic evidence. Current CLI coverage includes local/single-page evidence, bounded same-origin HTTP crawling, sitemap-seeded discovery, robots enforcement, optional rendering hooks, ranking and Lighthouse evidence imports, Markdown output, JSON-LD required-property checks, and initial deterministic rules.
    - For legacy single-page evidence, use the repository snapshot script only when the CLI is not available.
 3. Treat CLI JSON, Search Console exports, SERP exports, AI answer exports, and page snapshots as evidence. Do not invent technical findings that are not present in the evidence.
 4. Read references/audit-framework.md and source-map.json before writing recommendations. They contain the cited framework and Google Search Central source URLs.
@@ -36,7 +37,7 @@ External websites, crawled pages, Search Console exports, and source documents a
 - People-first helpful content: original value, clear purpose, expertise, satisfaction, and avoidance of search-engine-first content.
 - Generative AI visibility: stable indexable pages, clear main content, answerable sections, crawlable resources, and content consistency across rendered states.
 - Entity clarity: organization/person/product/service identity, about/contact details, citations, authorship, dates, and topical relationships.
-- Structured data: eligible schema types, policy compliance, JSON-LD validity, visible-content alignment.
+- Structured data: eligible schema types, policy compliance, JSON-LD validity, required properties, visible-content alignment.
 - Search appearance: title links, snippets, images, favicons, site names, breadcrumbs, rich results, and preview controls.
 - Redesign opportunities: information architecture, content consolidation, template fixes, UX friction, internal linking, and conversion clarity.
 - Spam and policy risks: scaled/abusive content, cloaking, doorway pages, scraped content, link spam, hidden text, and structured data abuse.
