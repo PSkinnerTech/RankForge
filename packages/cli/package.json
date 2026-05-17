@@ -6,8 +6,20 @@
   "bin": {
     "openclaw-geo-seo-audit": "./src/index.mjs"
   },
+  "files": [
+    "src",
+    "package.json"
+  ],
   "scripts": {
     "test": "node --test test/*.test.mjs"
+  },
+  "peerDependencies": {
+    "playwright": ">=1.40.0"
+  },
+  "peerDependenciesMeta": {
+    "playwright": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=20"

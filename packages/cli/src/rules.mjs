@@ -168,6 +168,14 @@ export const rules = [
     [sources.snippets],
   ),
   rule(
+    "appearance.meta_description_duplicate",
+    "search_appearance",
+    "P3",
+    "Multiple pages use the same meta description",
+    "Write unique descriptions that summarize each page's specific purpose.",
+    [sources.snippets],
+  ),
+  rule(
     "appearance.h1_missing",
     "search_appearance",
     "P2",

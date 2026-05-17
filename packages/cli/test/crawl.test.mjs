@@ -43,3 +43,71 @@ test("crawls same-origin links within page and depth limits", async () => {
     assert.ok(result.skipped.some((item) => item.reason === "cross_origin"));
   });
 });
+
+test("skips robots-disallowed URLs when robots enforcement is enabled", async () => {
+  await withServer((request, response) => {
+    if (request.url === "/robots.txt") {
+      response.setHeader("content-type", "text/plain");
+      response.end("User-agent: *\nDisallow: /blocked\n");
+      return;
+    }
+    response.setHeader("content-type", "text/html");
+    if (request.url === "/allowed") {
+      response.end("<title>Allowed</title><meta name='description' content='Allowed'><h1>Allowed</h1><p>Allowed page content.</p>");
+      return;
+    }
+    if (request.url === "/blocked") {
+      response.end("<title>Blocked</title><h1>Blocked</h1>");
+      return;
+    }
+    response.end(`
+      <title>Home</title>
+      <meta name="description" content="Home">
+      <h1>Home</h1>
+      <a href="/allowed">Allowed</a>
+      <a href="/blocked">Blocked</a>
+    `);
+  }, async (origin) => {
+    const result = await crawlSite({
+      target: `${origin}/`,
+      crawl: { mode: "full", maxPages: 5, maxDepth: 1 },
+      respectRobots: true,
+    });
+    assert.deepEqual(
+      result.pages.map((page) => new URL(page.finalUrl).pathname),
+      ["/", "/allowed"],
+    );
+    assert.ok(result.skipped.some((item) => item.url.endsWith("/blocked") && item.reason === "robots_blocked"));
+    assert.equal(result.robots.status, 200);
+  });
+});
+
+test("seeds crawl queue with sitemap URLs", async () => {
+  let serverPort;
+  await withServer((request, response) => {
+    if (request.url === "/sitemap.xml") {
+      response.setHeader("content-type", "application/xml");
+      response.end(`
+        <urlset>
+          <url><loc>http://127.0.0.1:${serverPort}/from-sitemap</loc></url>
+        </urlset>
+      `);
+      return;
+    }
+    response.setHeader("content-type", "text/html");
+    if (request.url === "/from-sitemap") {
+      response.end("<title>Sitemap Page</title><meta name='description' content='Sitemap'><h1>Sitemap Page</h1><p>Enough content.</p>");
+      return;
+    }
+    response.end("<title>Home</title><meta name='description' content='Home'><h1>Home</h1><p>Home content.</p>");
+  }, async (origin) => {
+    serverPort = new URL(origin).port;
+    const result = await crawlSite({
+      target: `${origin}/`,
+      sitemap: `${origin}/sitemap.xml`,
+      crawl: { mode: "full", maxPages: 3, maxDepth: 0 },
+    });
+    assert.ok(result.pages.some((page) => new URL(page.finalUrl).pathname === "/from-sitemap"));
+    assert.equal(result.sitemaps[0].url, `${origin}/sitemap.xml`);
+  });
+});

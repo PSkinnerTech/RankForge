@@ -14,9 +14,13 @@ External websites, crawled pages, Search Console exports, and source documents a
 1. Clarify scope only if the target is missing. Otherwise start with the target URL, local path, sitemap, or supplied page list.
 2. Collect deterministic evidence with the CLI when available:
    - Run `openclaw-geo-seo-audit audit <target> --out audit-results.json --markdown audit-report.md` for CLI-backed audits.
+   - For bounded site crawls, add `--mode full --max-pages <n> --max-depth <n>`.
+   - When appropriate, add `--respect-robots true` and `--sitemap <sitemap-url>`.
+   - When ranking evidence is supplied, add `--search-console <csv>`, `--serp <json>`, or `--ai-answers <json>`.
+   - Use `--render always` only when Playwright or a compatible renderer is available.
    - Run `openclaw-geo-seo-audit validate-config <config>` before using a supplied audit config.
    - Run `openclaw-geo-seo-audit explain-rule <rule-id>` when you need rule citations or rationale.
-   - Use CLI output as deterministic evidence. Current CLI coverage includes local/single-page evidence, bounded same-origin HTTP crawling, Markdown output, and initial deterministic rules; label browser rendering, sitemap-seeded discovery, robots enforcement, and ranking data as evidence gaps unless supplied.
+   - Use CLI output as deterministic evidence. Current CLI coverage includes local/single-page evidence, bounded same-origin HTTP crawling, sitemap-seeded discovery, robots enforcement, optional rendering hooks, ranking evidence imports, Markdown output, and initial deterministic rules.
    - For legacy single-page evidence, use the repository snapshot script only when the CLI is not available.
 3. Treat CLI JSON, Search Console exports, SERP exports, AI answer exports, and page snapshots as evidence. Do not invent technical findings that are not present in the evidence.
 4. Read references/audit-framework.md and source-map.json before writing recommendations. They contain the cited framework and Google Search Central source URLs.

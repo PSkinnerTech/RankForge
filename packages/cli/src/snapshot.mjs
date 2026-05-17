@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { extractHtmlEvidence } from "./html-extract.mjs";
+import { renderHtml } from "./render.mjs";
 import { isHttpUrl } from "./url-utils.mjs";
 
 const userAgent = "OpenClaw GEO SEO audit snapshot";
@@ -63,6 +64,30 @@ const readFile = (target) => {
 export const collectSnapshot = async (target, options = {}) => {
   const raw = isHttpUrl(target) ? await fetchRaw(target, options.maxRedirects) : readFile(target);
   const baseUrl = raw.sourceType === "url" ? raw.finalUrl : null;
+  const evidence = extractHtmlEvidence(raw.html, baseUrl);
+  const shouldRender = options.render === "always" || options.render === "auto" || options.renderer;
+
+  let render = { status: "not_requested" };
+  if (shouldRender) {
+    const rendered = await renderHtml(raw.finalUrl, {
+      ...options,
+      html: raw.html,
+      finalUrl: raw.finalUrl,
+    });
+    if (rendered.status === "rendered") {
+      const renderedEvidence = extractHtmlEvidence(rendered.html, baseUrl);
+      render = {
+        status: "rendered",
+        renderedHash: hash(rendered.html),
+        evidence: renderedEvidence,
+        textDeltaCharacters: Math.abs(
+          (renderedEvidence.counts?.visibleTextCharacters || 0) - (evidence.counts?.visibleTextCharacters || 0),
+        ),
+      };
+    } else {
+      render = rendered;
+    }
+  }
 
   return {
     target,
@@ -73,9 +98,7 @@ export const collectSnapshot = async (target, options = {}) => {
     headers: raw.headers,
     redirectChain: raw.redirectChain,
     rawHash: hash(raw.html),
-    evidence: extractHtmlEvidence(raw.html, baseUrl),
-    render: {
-      status: "not_requested",
-    },
+    evidence,
+    render,
   };
 };

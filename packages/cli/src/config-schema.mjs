@@ -11,6 +11,8 @@ export const auditConfigSchema = {
   properties: {
     project: { type: "string" },
     target: { type: "string", minLength: 1 },
+    sitemap: { type: "string" },
+    respectRobots: { type: "boolean" },
     brand: {
       type: "object",
       additionalProperties: true,
@@ -43,6 +45,15 @@ export const auditConfigSchema = {
           type: "array",
           items: { enum: ["mobile", "desktop"] },
         },
+      },
+    },
+    integrations: {
+      type: "object",
+      additionalProperties: true,
+      properties: {
+        searchConsole: { type: "string" },
+        serp: { type: "string" },
+        aiAnswers: { type: "string" },
       },
     },
   },
@@ -118,6 +129,12 @@ export const validateAuditConfig = (config) => {
       }
       validateRegexList(errors, "crawl.include", config.crawl.include);
       validateRegexList(errors, "crawl.exclude", config.crawl.exclude);
+      if (config.crawl.sitemap !== undefined && typeof config.crawl.sitemap !== "string") {
+        errors.push("crawl.sitemap must be a string");
+      }
+      if (config.crawl.respectRobots !== undefined && typeof config.crawl.respectRobots !== "boolean") {
+        errors.push("crawl.respectRobots must be a boolean");
+      }
     }
   }
 

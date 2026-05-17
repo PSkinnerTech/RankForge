@@ -109,6 +109,30 @@ export const evaluatePage = (snapshot, pageIndex = 0) => {
     );
   }
 
+  if (snapshot.sourceType === "url" && !evidence.canonical && !noindexPattern.test(evidence.robots || "")) {
+    findings.push(
+      createFinding(
+        "indexability.canonical_missing",
+        snapshot,
+        [`$.pages[${pageIndex}].evidence.canonical`],
+        pageIndex,
+        "Canonical signals help consolidate duplicate or alternate URL signals.",
+      ),
+    );
+  }
+
+  if (snapshot.render?.status === "rendered" && snapshot.render.textDeltaCharacters > 300) {
+    findings.push(
+      createFinding(
+        "technical.raw_rendered_mismatch",
+        snapshot,
+        [`$.pages[${pageIndex}].evidence.counts.visibleTextCharacters`, `$.pages[${pageIndex}].render.textDeltaCharacters`],
+        pageIndex,
+        "Large raw and rendered text differences can indicate JavaScript SEO risk.",
+      ),
+    );
+  }
+
   if (noindexPattern.test(evidence.robots || "")) {
     findings.push(
       createFinding(

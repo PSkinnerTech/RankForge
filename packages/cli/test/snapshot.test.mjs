@@ -15,3 +15,16 @@ test("collects local HTML page evidence", async () => {
   assert.equal(snapshot.evidence.images.length, 1);
   assert.equal(snapshot.evidence.structuredData[0].data["@type"], "Organization");
 });
+
+test("collects rendered evidence with an injected renderer", async () => {
+  const snapshot = await collectSnapshot("examples/fixture-site/index.html", {
+    render: "always",
+    renderer: async () => `<!doctype html><title>Rendered</title><h1>Rendered heading</h1><p>${"Rendered text ".repeat(40)}</p>`,
+  });
+
+  assert.equal(snapshot.render.status, "rendered");
+  assert.match(snapshot.render.renderedHash, /^[a-f0-9]{64}$/);
+  assert.equal(snapshot.render.evidence.title, "Rendered");
+  assert.equal(snapshot.render.evidence.h1[0], "Rendered heading");
+  assert.ok(snapshot.render.textDeltaCharacters > 0);
+});

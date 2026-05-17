@@ -19,6 +19,12 @@ Audit options:
   --mode full|sample|single      Crawl mode
   --max-pages <n>                Maximum pages to crawl
   --max-depth <n>                Maximum crawl depth
+  --sitemap <url>                Seed crawl with a sitemap URL
+  --respect-robots true|false    Skip robots-disallowed URLs when true
+  --render auto|always|never     Render pages when Playwright or a renderer is available
+  --search-console <file>        Import Google Search Console CSV evidence
+  --serp <file>                  Import SERP JSON evidence
+  --ai-answers <file>            Import AI answer JSON evidence
   --out <file>                   Write audit JSON
   --markdown <file>              Write Markdown report
   --help                         Show this help
@@ -91,12 +97,28 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
       const mode = optionValue(options, "--mode");
       const maxPages = optionValue(options, "--max-pages");
       const maxDepth = optionValue(options, "--max-depth");
+      const sitemap = optionValue(options, "--sitemap");
+      const respectRobots = optionValue(options, "--respect-robots");
+      const render = optionValue(options, "--render");
+      const searchConsole = optionValue(options, "--search-console");
+      const serp = optionValue(options, "--serp");
+      const aiAnswers = optionValue(options, "--ai-answers");
       const output = await runAudit({
         target,
+        sitemap: sitemap || undefined,
+        respectRobots: respectRobots === "true" ? true : respectRobots === "false" ? false : undefined,
         crawl: {
           mode: mode || "single",
           maxPages: maxPages ? Number(maxPages) : undefined,
           maxDepth: maxDepth ? Number(maxDepth) : undefined,
+        },
+        render: {
+          mode: render || "never",
+        },
+        integrations: {
+          searchConsole,
+          serp,
+          aiAnswers,
         },
       });
       const outIndex = options.indexOf("--out");

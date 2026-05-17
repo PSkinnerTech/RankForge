@@ -66,3 +66,15 @@ test("uses crawler for full HTTP audits", async () => {
     );
   });
 });
+
+test("includes supplied ranking evidence and removes ranking evidence gap", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-integrations-"));
+  const html = path.join(dir, "index.html");
+  const gsc = path.join(dir, "gsc.csv");
+  fs.writeFileSync(html, "<title>Home</title><meta name='description' content='Home'><h1>Home</h1><p>Enough content for audit evidence.</p>");
+  fs.writeFileSync(gsc, "Query,Page,Clicks,Impressions,CTR,Position\nai tutor,https://example.com,10,100,10%,4.2\n");
+
+  const audit = await runAudit({ target: html, integrations: { searchConsole: gsc } });
+  assert.equal(audit.integrations.searchConsole.rows[0].query, "ai tutor");
+  assert.equal(audit.evidenceGaps.some((gap) => gap.id === "ranking.integrations_missing"), false);
+});

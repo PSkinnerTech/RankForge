@@ -31,9 +31,18 @@ npm run cli -- validate-config examples/audit.config.json
 npm run cli -- explain-rule indexability.noindex
 npm run cli -- snapshot examples/fixture-site/index.html
 npm run cli -- audit examples/fixture-site/index.html --markdown audit-report.md
+npm run cli -- audit https://example.com --mode full --max-pages 25 --max-depth 2 --respect-robots true --sitemap https://example.com/sitemap.xml
 ```
 
-The current `audit` command collects single-page or bounded same-origin crawl evidence, evaluates initial deterministic rules, and can write JSON or Markdown. Browser rendering, richer rules, sitemap-seeded discovery, robots enforcement, and ranking integrations are planned follow-up milestones.
+The current `audit` command collects single-page or bounded same-origin crawl evidence, can seed from a sitemap, can enforce robots.txt, evaluates deterministic page and site rules, and can write JSON or Markdown. Browser rendering is available when Playwright is installed or when a renderer is injected by code; otherwise the CLI records rendering as unavailable.
+
+Optional evidence imports:
+
+```bash
+npm run cli -- audit https://example.com --search-console gsc.csv --serp serp.json --ai-answers ai-answers.json
+```
+
+Ranking, SERP, and AI answer visibility are reported only from supplied evidence files.
 
 ## Use
 
@@ -55,6 +64,7 @@ bun run snapshot -- examples/fixture-site/index.html
 
 ```bash
 bun run validate
+npm test
 ```
 
 The validation script checks that the required skill files, templates, examples, source manifest, citations, CLI scaffold, and snapshot script are present.
