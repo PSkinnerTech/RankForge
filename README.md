@@ -37,7 +37,7 @@ npm run cli -- audit https://example.com --url-list urls.txt --markdown audit-re
 npm run cli -- audit https://example.com --mode full --max-pages 25 --max-depth 2 --respect-robots true --sitemap https://example.com/sitemap.xml
 ```
 
-The current `audit` command collects single-page, supplied URL-list, or bounded same-origin crawl evidence, can read `audit.config.json`, can seed from a sitemap, can enforce robots.txt, can filter crawls with include/exclude patterns, evaluates deterministic page and site rules, and can write JSON or Markdown. Browser rendering is available when Playwright is installed or when a renderer is injected by code; otherwise the CLI records rendering as unavailable.
+The current `audit` command collects single-page, supplied URL-list, or bounded same-origin crawl evidence, can read `audit.config.json`, can seed from a sitemap, can enforce robots.txt, can filter crawls with include/exclude patterns, evaluates deterministic page and site rules, and can write JSON or Markdown. Extracted page evidence includes metadata, canonicals, hreflang, favicon and site-name signals, preview directives, headings, links, image inventory, JSON-LD blocks, schema types, author/date signals, and internal/external link counts. Browser rendering is available when Playwright is installed or when a renderer is injected by code; otherwise the CLI records rendering as unavailable.
 
 Structured data checks currently validate JSON-LD parseability plus required-property gaps for Organization, Product, FAQPage, Article, BreadcrumbList, Event, VideoObject, and SoftwareApplication evidence.
 

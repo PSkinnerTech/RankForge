@@ -1,4 +1,4 @@
-import { resolveUrl } from "./url-utils.mjs";
+import { isHttpUrl, resolveUrl, sameOrigin } from "./url-utils.mjs";
 
 const decodeEntities = (value) =>
   String(value || "")
@@ -28,6 +28,8 @@ const allMatches = (html, pattern, mapper) => {
   return results;
 };
 
+const unique = (values) => [...new Set(values.filter(Boolean))];
+
 const firstTagContent = (html, tagName) => {
   const pattern = new RegExp(`<${tagName}\\b[^>]*>([\\s\\S]*?)<\\/${tagName}>`, "i");
   const match = html.match(pattern);
@@ -40,23 +42,100 @@ const metaByName = (html, name) => {
   return tag ? cleanText(attr(tag, "content") || "") : null;
 };
 
+const metaByProperty = (html, property) => {
+  const tags = allMatches(html, /<meta\b[^>]*>/gi, (match) => match[0]);
+  const tag = tags.find((item) => attr(item, "property")?.toLowerCase() === property.toLowerCase());
+  return tag ? cleanText(attr(tag, "content") || "") : null;
+};
+
+const metaContents = (html, selectors) => {
+  const tags = allMatches(html, /<meta\b[^>]*>/gi, (match) => match[0]);
+  return unique(
+    tags.flatMap((tag) => {
+      const content = cleanText(attr(tag, "content") || "");
+      if (!content) return [];
+      return selectors.some(({ key, value }) => attr(tag, key)?.toLowerCase() === value.toLowerCase()) ? [content] : [];
+    }),
+  );
+};
+
+const linkTags = (html) => allMatches(html, /<link\b[^>]*>/gi, (match) => match[0]);
+
+const relParts = (tag) =>
+  String(attr(tag, "rel") || "")
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean);
+
 const linkByRel = (html, rel, baseUrl) => {
-  const tags = allMatches(html, /<link\b[^>]*>/gi, (match) => match[0]);
+  const tags = linkTags(html);
   const tag = tags.find((item) =>
-    String(attr(item, "rel") || "")
-      .toLowerCase()
-      .split(/\s+/)
-      .includes(rel.toLowerCase()),
+    relParts(item).includes(rel.toLowerCase()),
   );
   const href = tag ? attr(tag, "href") : null;
   return href && baseUrl ? resolveUrl(href, baseUrl) : href;
+};
+
+const favicon = (html, baseUrl) => {
+  const tag = linkTags(html).find((item) => {
+    const rel = relParts(item);
+    return rel.includes("icon") || rel.includes("shortcut") || rel.includes("apple-touch-icon");
+  });
+  const href = tag ? attr(tag, "href") : null;
+  return href && baseUrl ? resolveUrl(href, baseUrl) : href;
+};
+
+const hreflangLinks = (html, baseUrl) =>
+  linkTags(html)
+    .filter((tag) => relParts(tag).includes("alternate") && attr(tag, "hreflang") && attr(tag, "href"))
+    .map((tag) => ({
+      hreflang: attr(tag, "hreflang"),
+      href: baseUrl ? resolveUrl(attr(tag, "href"), baseUrl) : attr(tag, "href"),
+    }))
+    .filter((item) => item.href);
+
+const previewDirectives = (values) =>
+  unique(
+    values
+      .filter(Boolean)
+      .flatMap((value) => String(value).split(","))
+      .map((item) => item.trim())
+      .filter((item) => /^(?:nosnippet|noarchive|noimageindex|max-(?:snippet|image-preview|video-preview):)/i.test(item)),
+  );
+
+const structuredDataTypes = (value) => {
+  if (!value) return [];
+  if (Array.isArray(value)) return value.flatMap(structuredDataTypes);
+  if (typeof value !== "object") return [];
+
+  const types = [];
+  if (value["@type"]) {
+    if (Array.isArray(value["@type"])) types.push(...value["@type"].map(String));
+    else types.push(String(value["@type"]));
+  }
+  if (value["@graph"]) types.push(...structuredDataTypes(value["@graph"]));
+  return types;
+};
+
+const linkCounts = (links, baseUrl) => {
+  const counts = { internal: 0, external: 0 };
+  for (const link of links) {
+    if (!isHttpUrl(link.href)) continue;
+    if (baseUrl && sameOrigin(baseUrl, link.href)) counts.internal += 1;
+    else counts.external += 1;
+  }
+  return counts;
 };
 
 export const extractHtmlEvidence = (html, baseUrl = null) => {
   const title = firstTagContent(html, "title");
   const description = metaByName(html, "description");
   const robots = metaByName(html, "robots");
+  const googlebot = metaByName(html, "googlebot");
   const canonical = linkByRel(html, "canonical", baseUrl);
+  const siteName = metaByProperty(html, "og:site_name") || metaByName(html, "application-name");
+  const alternates = hreflangLinks(html, baseUrl);
+  const faviconUrl = favicon(html, baseUrl);
 
   const h1 = allMatches(html, /<h1\b[^>]*>([\s\S]*?)<\/h1>/gi, (match) => cleanText(match[1]));
   const headings = allMatches(html, /<h([2-6])\b[^>]*>([\s\S]*?)<\/h\1>/gi, (match) => ({
@@ -68,6 +147,7 @@ export const extractHtmlEvidence = (html, baseUrl = null) => {
     href: baseUrl ? resolveUrl(match[1], baseUrl) : match[1],
     text: cleanText(match[2]),
   })).filter((link) => link.href);
+  const countsByLinkType = linkCounts(links, baseUrl);
 
   const images = allMatches(html, /<img\b[^>]*>/gi, (match) => {
     const tag = match[0];
@@ -90,6 +170,21 @@ export const extractHtmlEvidence = (html, baseUrl = null) => {
       }
     },
   );
+  const schemaTypes = unique(structuredData.flatMap((item) => structuredDataTypes(item.data)));
+
+  const authors = metaContents(html, [
+    { key: "name", value: "author" },
+    { key: "property", value: "article:author" },
+  ]);
+  const dates = unique([
+    ...metaContents(html, [
+      { key: "name", value: "date" },
+      { key: "property", value: "article:published_time" },
+      { key: "property", value: "article:modified_time" },
+      { key: "name", value: "dc.date" },
+    ]),
+    ...allMatches(html, /<time\b[^>]*>/gi, (match) => attr(match[0], "datetime")),
+  ]);
 
   const visibleText = cleanText(
     html
@@ -102,15 +197,26 @@ export const extractHtmlEvidence = (html, baseUrl = null) => {
     description,
     robots,
     canonical,
+    favicon: faviconUrl,
+    siteName,
+    hreflang: alternates,
+    previewDirectives: previewDirectives([robots, googlebot]),
     h1,
     headings,
     links,
     images,
     structuredData,
+    schemaTypes,
+    entitySignals: {
+      authors,
+      dates,
+    },
     counts: {
       h1: h1.length,
       headings: headings.length,
       links: links.length,
+      internalLinks: countsByLinkType.internal,
+      externalLinks: countsByLinkType.external,
       images: images.length,
       structuredData: structuredData.length,
       visibleTextCharacters: visibleText.length,
