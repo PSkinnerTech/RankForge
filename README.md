@@ -35,6 +35,7 @@ npm run cli -- audit examples/fixture-site/index.html --markdown audit-report.md
 npm run cli -- audit --config examples/audit.config.json --mode single
 npm run cli -- audit https://example.com --url-list urls.txt --markdown audit-report.md
 npm run cli -- audit https://example.com --mode full --max-pages 25 --max-depth 2 --respect-robots true --sitemap https://example.com/sitemap.xml
+npm run cli -- audit https://example.com --mode full --fail-on P1 --out audit.json --markdown audit.md
 ```
 
 The current `audit` command collects single-page, supplied URL-list, or bounded same-origin crawl evidence, can read `audit.config.json`, can seed from a sitemap, can enforce robots.txt, can filter crawls with include/exclude patterns, evaluates deterministic page and site rules, and can write JSON or Markdown. Extracted page evidence includes metadata, canonicals, hreflang, favicon and site-name signals, preview directives, headings, links, image inventory, JSON-LD blocks, schema types, author/date signals, and internal/external link counts. Browser rendering is available when Playwright is installed or when a renderer is injected by code; otherwise the CLI records rendering as unavailable.
@@ -77,6 +78,8 @@ npm test
 The validation script checks that the required skill files, templates, examples, source manifest, citations, CLI scaffold, and snapshot script are present.
 
 The test suite includes a known-issues fixture site served through a local HTTP server. Its normalized audit summary and Markdown report are compared to golden files so rule, scoring, crawl, robots, sitemap, structured data, and report output changes are intentional.
+
+Release and CI publishing steps are documented in `docs/release-checklist.md`.
 
 ## Source Scope
 

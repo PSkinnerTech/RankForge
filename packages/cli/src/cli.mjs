@@ -29,6 +29,7 @@ Audit options:
   --serp <file>                  Import SERP JSON evidence
   --ai-answers <file>            Import AI answer JSON evidence
   --lighthouse <file>            Import Lighthouse JSON performance evidence
+  --fail-on <severity>           Return exit code 2 when findings include P0, P1, P2, or P3 threshold
   --out <file>                   Write audit JSON
   --markdown <file>              Write Markdown report
   --help                         Show this help
@@ -57,9 +58,18 @@ const auditOptionsWithValues = new Set([
   "--serp",
   "--ai-answers",
   "--lighthouse",
+  "--fail-on",
   "--out",
   "--markdown",
 ]);
+
+const severityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };
+
+const failsThreshold = (findings, threshold) => {
+  if (!threshold) return false;
+  if (!(threshold in severityRank)) throw new Error("--fail-on must be one of: P0, P1, P2, P3");
+  return (findings || []).some((finding) => severityRank[finding.severity] <= severityRank[threshold]);
+};
 
 const splitAuditArgs = (args) => {
   const options = [];
@@ -201,6 +211,8 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
       const output = await runAudit(mergeAuditConfig(target, options));
       const outIndex = options.indexOf("--out");
       const markdownIndex = options.indexOf("--markdown");
+      const failOn = optionValue(options, "--fail-on");
+      const failedThreshold = failsThreshold(output.findings, failOn);
       const result = { ok: true };
 
       if (outIndex !== -1) {
@@ -224,12 +236,13 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
       }
 
       if (outIndex !== -1 || markdownIndex !== -1) {
+        if (failedThreshold) result.failedThreshold = failOn;
         writeJson(io, result);
-        return 0;
+        return failedThreshold ? 2 : 0;
       }
 
       writeJson(io, output);
-      return 0;
+      return failedThreshold ? 2 : 0;
     } catch (error) {
       io.stderr.write(`${error.message}\n`);
       return 1;

@@ -73,3 +73,23 @@ test("lets positional audit target override config target", async () => {
   assert.equal(audit.run.target, overrideTarget);
   assert.equal(audit.pages[0].evidence.title, "Override Target");
 });
+
+test("returns CI failure code when findings meet fail-on threshold", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-fail-on-"));
+  const html = path.join(dir, "bad.html");
+  fs.writeFileSync(html, "<html><head><meta name='robots' content='noindex'></head><body><h1>Bad</h1><p>Short.</p></body></html>");
+
+  const result = await capture(["audit", html, "--fail-on", "P1"]);
+  assert.equal(result.exitCode, 2);
+  const audit = JSON.parse(result.stdout);
+  assert.ok(audit.findings.some((finding) => finding.severity === "P1"));
+});
+
+test("does not fail CI when findings are below fail-on threshold", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-no-fail-on-"));
+  const html = path.join(dir, "minor.html");
+  fs.writeFileSync(html, "<html><head><title>Minor</title><meta name='description' content='Minor'></head><body><h1>Minor</h1><p>Short.</p></body></html>");
+
+  const result = await capture(["audit", html, "--fail-on", "P0"]);
+  assert.equal(result.exitCode, 0);
+});

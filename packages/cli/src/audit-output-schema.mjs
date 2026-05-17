@@ -29,3 +29,56 @@ export const auditOutputSchema = {
     sources: { type: "array" },
   },
 };
+
+const requiredTopLevelFields = [
+  "schemaVersion",
+  "toolVersion",
+  "run",
+  "site",
+  "pages",
+  "integrations",
+  "scores",
+  "findings",
+  "evidenceGaps",
+  "sources",
+];
+
+const requiredFindingFields = [
+  "ruleId",
+  "title",
+  "severity",
+  "dimension",
+  "affectedUrls",
+  "evidence",
+  "impact",
+  "recommendation",
+  "owner",
+  "effort",
+  "confidence",
+  "sources",
+];
+
+export const validateAuditOutput = (audit) => {
+  const errors = [];
+
+  if (!audit || typeof audit !== "object" || Array.isArray(audit)) {
+    return { ok: false, errors: ["audit output must be an object"] };
+  }
+
+  for (const field of requiredTopLevelFields) {
+    if (!(field in audit)) errors.push(`${field} is required`);
+  }
+
+  if ("pages" in audit && !Array.isArray(audit.pages)) errors.push("pages must be an array");
+  if ("findings" in audit && !Array.isArray(audit.findings)) {
+    errors.push("findings must be an array");
+  } else {
+    for (const [index, finding] of (audit.findings || []).entries()) {
+      for (const field of requiredFindingFields) {
+        if (!(field in finding)) errors.push(`findings[${index}].${field} is required`);
+      }
+    }
+  }
+
+  return { ok: errors.length === 0, errors };
+};

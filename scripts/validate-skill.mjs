@@ -6,6 +6,7 @@ const requiredFiles = [
   "CHANGELOG.md",
   "package.json",
   "docs/prd-deterministic-audit-cli.md",
+  "docs/release-checklist.md",
   "packages/cli/package.json",
   "packages/cli/src/index.mjs",
   "packages/cli/src/cli.mjs",
