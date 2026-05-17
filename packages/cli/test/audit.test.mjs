@@ -133,3 +133,18 @@ test("collects supplied URL-list pages", async () => {
     );
   });
 });
+
+test("restricted mode allows supplied URL-list files as bounded evidence inputs", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-restricted-url-list-"));
+  const urlList = path.join(dir, "urls.txt");
+  fs.writeFileSync(urlList, "# intentionally empty\n");
+
+  const audit = await runAudit({
+    target: "https://example.com",
+    urlList,
+    security: { mode: "restricted" },
+  });
+
+  assert.equal(audit.pages.length, 0);
+  assert.equal(audit.run.security.mode, "restricted");
+});

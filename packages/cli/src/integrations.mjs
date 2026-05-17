@@ -1,4 +1,4 @@
-import fs from "node:fs";
+import { readTextFileLimited, resolveLimits } from "./io-guards.mjs";
 import { readLighthouseReport } from "./performance.mjs";
 
 const parseCsvLine = (line) => {
@@ -27,8 +27,16 @@ const number = (value) => {
   return Number.isFinite(parsed) ? parsed : null;
 };
 
-export const readSearchConsoleCsv = (filePath) => {
-  const [headerLine, ...lines] = fs.readFileSync(filePath, "utf8").trim().split(/\r?\n/);
+export const readSearchConsoleCsv = (filePath, options = {}) => {
+  const limits = resolveLimits(options.limits);
+  const [headerLine, ...lines] = readTextFileLimited(filePath, {
+    security: options.security,
+    allowRestricted: true,
+    limits,
+    maxBytes: limits.maxIntegrationBytes,
+  })
+    .trim()
+    .split(/\r?\n/);
   const headers = parseCsvLine(headerLine).map((header) => header.trim().toLowerCase());
   const rows = lines.filter(Boolean).map((line) => {
     const cells = parseCsvLine(line);
@@ -45,18 +53,26 @@ export const readSearchConsoleCsv = (filePath) => {
   return { type: "search_console_csv", source: filePath, rows };
 };
 
-const readJsonRows = (filePath, type) => {
-  const parsed = JSON.parse(fs.readFileSync(filePath, "utf8"));
+const readJsonRows = (filePath, type, options = {}) => {
+  const limits = resolveLimits(options.limits);
+  const parsed = JSON.parse(
+    readTextFileLimited(filePath, {
+      security: options.security,
+      allowRestricted: true,
+      limits,
+      maxBytes: limits.maxIntegrationBytes,
+    }),
+  );
   return { type, source: filePath, rows: Array.isArray(parsed) ? parsed : parsed.rows || [] };
 };
 
-export const readSerpExport = (filePath) => readJsonRows(filePath, "serp_export");
+export const readSerpExport = (filePath, options = {}) => readJsonRows(filePath, "serp_export", options);
 
-export const readAiAnswers = (filePath) => readJsonRows(filePath, "ai_answer_export");
+export const readAiAnswers = (filePath, options = {}) => readJsonRows(filePath, "ai_answer_export", options);
 
-export const readIntegrations = (integrations = {}) => ({
-  searchConsole: integrations.searchConsole ? readSearchConsoleCsv(integrations.searchConsole) : null,
-  serp: integrations.serp ? readSerpExport(integrations.serp) : null,
-  aiAnswers: integrations.aiAnswers ? readAiAnswers(integrations.aiAnswers) : null,
-  lighthouse: integrations.lighthouse ? readLighthouseReport(integrations.lighthouse) : null,
+export const readIntegrations = (integrations = {}, options = {}) => ({
+  searchConsole: integrations.searchConsole ? readSearchConsoleCsv(integrations.searchConsole, options) : null,
+  serp: integrations.serp ? readSerpExport(integrations.serp, options) : null,
+  aiAnswers: integrations.aiAnswers ? readAiAnswers(integrations.aiAnswers, options) : null,
+  lighthouse: integrations.lighthouse ? readLighthouseReport(integrations.lighthouse, options) : null,
 });

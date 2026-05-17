@@ -7,6 +7,8 @@ Use this checklist before publishing `openclaw-geo-seo-audit`.
 Run from the repository root:
 
 ```bash
+npm ci
+npm audit --omit=dev
 npm test
 npm run validate
 npm pack --dry-run --workspace packages/cli

@@ -29,6 +29,12 @@ Audit options:
   --serp <file>                  Import SERP JSON evidence
   --ai-answers <file>            Import AI answer JSON evidence
   --lighthouse <file>            Import Lighthouse JSON performance evidence
+  --security local|restricted    Apply local CLI or restricted wrapper network/file policy
+  --timeout-ms <n>               Per-request timeout in milliseconds
+  --max-html-bytes <n>           Maximum HTML bytes to read per page
+  --max-text-bytes <n>           Maximum robots/sitemap text bytes to read
+  --max-file-bytes <n>           Maximum URL-list file bytes to read
+  --max-integration-bytes <n>    Maximum imported evidence file bytes to read
   --fail-on <severity>           Return exit code 2 when findings include P0, P1, P2, or P3 threshold
   --out <file>                   Write audit JSON
   --markdown <file>              Write Markdown report
@@ -58,6 +64,12 @@ const auditOptionsWithValues = new Set([
   "--serp",
   "--ai-answers",
   "--lighthouse",
+  "--security",
+  "--timeout-ms",
+  "--max-html-bytes",
+  "--max-text-bytes",
+  "--max-file-bytes",
+  "--max-integration-bytes",
   "--fail-on",
   "--out",
   "--markdown",
@@ -118,6 +130,12 @@ const mergeAuditConfig = (target, options) => {
   const serp = optionValue(options, "--serp");
   const aiAnswers = optionValue(options, "--ai-answers");
   const lighthouse = optionValue(options, "--lighthouse");
+  const security = optionValue(options, "--security");
+  const timeoutMs = optionValue(options, "--timeout-ms");
+  const maxHtmlBytes = optionValue(options, "--max-html-bytes");
+  const maxTextBytes = optionValue(options, "--max-text-bytes");
+  const maxFileBytes = optionValue(options, "--max-file-bytes");
+  const maxIntegrationBytes = optionValue(options, "--max-integration-bytes");
 
   merged.crawl = {
     ...(fileConfig.crawl || {}),
@@ -140,6 +158,27 @@ const mergeAuditConfig = (target, options) => {
     aiAnswers: aiAnswers || fileConfig.integrations?.aiAnswers || null,
     lighthouse: lighthouse || fileConfig.integrations?.lighthouse || null,
   };
+
+  merged.security = {
+    ...(fileConfig.security || {}),
+    mode: security || fileConfig.security?.mode || "local",
+  };
+
+  merged.limits = {
+    ...(fileConfig.limits || {}),
+    timeoutMs: numberOption(options, "--timeout-ms", fileConfig.limits?.timeoutMs),
+    maxHtmlBytes: numberOption(options, "--max-html-bytes", fileConfig.limits?.maxHtmlBytes),
+    maxTextBytes: numberOption(options, "--max-text-bytes", fileConfig.limits?.maxTextBytes),
+    maxFileBytes: numberOption(options, "--max-file-bytes", fileConfig.limits?.maxFileBytes),
+    maxIntegrationBytes: numberOption(options, "--max-integration-bytes", fileConfig.limits?.maxIntegrationBytes),
+  };
+  if (timeoutMs === null && fileConfig.limits?.timeoutMs === undefined) delete merged.limits.timeoutMs;
+  if (maxHtmlBytes === null && fileConfig.limits?.maxHtmlBytes === undefined) delete merged.limits.maxHtmlBytes;
+  if (maxTextBytes === null && fileConfig.limits?.maxTextBytes === undefined) delete merged.limits.maxTextBytes;
+  if (maxFileBytes === null && fileConfig.limits?.maxFileBytes === undefined) delete merged.limits.maxFileBytes;
+  if (maxIntegrationBytes === null && fileConfig.limits?.maxIntegrationBytes === undefined) {
+    delete merged.limits.maxIntegrationBytes;
+  }
 
   if (sitemap) merged.sitemap = sitemap;
   if (urlList) merged.urlList = urlList;

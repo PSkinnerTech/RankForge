@@ -1,7 +1,7 @@
 import crypto from "node:crypto";
-import fs from "node:fs";
 import path from "node:path";
 import { extractHtmlEvidence } from "./html-extract.mjs";
+import { fetchWithGuards, readResponseTextLimited, readTextFileLimited, resolveLimits } from "./io-guards.mjs";
 import { renderHtml } from "./render.mjs";
 import { isHttpUrl } from "./url-utils.mjs";
 
@@ -15,14 +15,20 @@ const headersToObject = (headers) => {
   return result;
 };
 
-const fetchRaw = async (target, maxRedirects = 5) => {
+const fetchRaw = async (target, options = {}) => {
   let current = target;
   const redirectChain = [];
+  const maxRedirects = options.maxRedirects ?? 5;
+  const limits = resolveLimits(options.limits);
 
   for (let attempt = 0; attempt <= maxRedirects; attempt++) {
-    const response = await fetch(current, {
-      headers: { "user-agent": userAgent },
-      redirect: "manual",
+    const response = await fetchWithGuards(current, {
+      security: options.security,
+      limits,
+      fetchOptions: {
+        headers: { "user-agent": userAgent },
+        redirect: "manual",
+      },
     });
 
     const headers = headersToObject(response.headers);
@@ -41,15 +47,20 @@ const fetchRaw = async (target, maxRedirects = 5) => {
       ok: response.ok,
       headers,
       redirectChain,
-      html: await response.text(),
+      html: await readResponseTextLimited(response, {
+        limits,
+        maxBytes: limits.maxHtmlBytes,
+        label: current,
+      }),
     };
   }
 
   throw new Error(`Too many redirects while fetching ${target}`);
 };
 
-const readFile = (target) => {
+const readFile = (target, options = {}) => {
   const fullPath = path.resolve(target);
+  const limits = resolveLimits(options.limits);
   return {
     sourceType: "file",
     finalUrl: fullPath,
@@ -57,12 +68,16 @@ const readFile = (target) => {
     ok: true,
     headers: {},
     redirectChain: [],
-    html: fs.readFileSync(fullPath, "utf8"),
+    html: readTextFileLimited(fullPath, {
+      security: options.security,
+      limits,
+      maxBytes: limits.maxHtmlBytes,
+    }),
   };
 };
 
 export const collectSnapshot = async (target, options = {}) => {
-  const raw = isHttpUrl(target) ? await fetchRaw(target, options.maxRedirects) : readFile(target);
+  const raw = isHttpUrl(target) ? await fetchRaw(target, options) : readFile(target, options);
   const baseUrl = raw.sourceType === "url" ? raw.finalUrl : null;
   const evidence = extractHtmlEvidence(raw.html, baseUrl);
   const shouldRender = options.render === "always" || options.render === "auto" || options.renderer;

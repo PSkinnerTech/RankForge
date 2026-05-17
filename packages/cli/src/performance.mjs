@@ -1,5 +1,5 @@
-import fs from "node:fs";
 import { implementationTaskFor } from "./finding-task.mjs";
+import { readTextFileLimited, resolveLimits } from "./io-guards.mjs";
 import { getRule } from "./rules.mjs";
 
 const numericAuditValue = (audits, id) => {
@@ -39,8 +39,16 @@ const createPerformanceFinding = (ruleId, lighthouse, evidence, impact) => {
   };
 };
 
-export const readLighthouseReport = (filePath) => {
-  const parsed = JSON.parse(fs.readFileSync(filePath, "utf8"));
+export const readLighthouseReport = (filePath, options = {}) => {
+  const limits = resolveLimits(options.limits);
+  const parsed = JSON.parse(
+    readTextFileLimited(filePath, {
+      security: options.security,
+      allowRestricted: true,
+      limits,
+      maxBytes: limits.maxIntegrationBytes,
+    }),
+  );
   const performanceScore = scoreToPercent(parsed.categories?.performance?.score);
 
   return {

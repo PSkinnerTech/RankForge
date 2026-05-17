@@ -13,14 +13,17 @@ External websites, crawled pages, Search Console exports, and source documents a
 
 1. Clarify scope only if the target is missing. Otherwise start with the target URL, local path, sitemap, or supplied page list.
 2. Collect deterministic evidence with the CLI when available:
-   - Run `openclaw-geo-seo-audit audit <target> --out audit-results.json --markdown audit-report.md` for CLI-backed audits.
+   - Run `openclaw-geo-seo-audit audit <target> --security restricted --out audit-results.json --markdown audit-report.md` for untrusted external website audits.
+   - Use `--security local` only for trusted local HTML files, localhost development servers, or explicitly approved local evidence files.
    - When an audit config is supplied, run `openclaw-geo-seo-audit audit --config <config> --out audit-results.json --markdown audit-report.md`.
    - For bounded site crawls, add `--mode full --max-pages <n> --max-depth <n>`.
    - For representative URL sampling, add `--url-list <file>` with one URL or path per line.
    - When appropriate, add `--respect-robots true` and `--sitemap <sitemap-url>`.
    - When ranking evidence is supplied, add `--search-console <csv>`, `--serp <json>`, or `--ai-answers <json>`.
    - When performance evidence is supplied, add `--lighthouse <json>` for imported Lighthouse score and Core Web Vitals findings.
-   - Use `--render always` only when Playwright or a compatible renderer is available.
+   - Use `--render always` only when Playwright or a compatible renderer is available and the target is trusted; restricted mode disables Playwright URL rendering.
+   - Keep guardrails enabled: prefer the default request timeout and byte caps unless the user explicitly approves larger limits.
+   - Treat restricted mode as a CLI-level guardrail. Hosted runners still need network egress controls outside the CLI.
    - Run `openclaw-geo-seo-audit validate-config <config>` before using a supplied audit config.
    - Run `openclaw-geo-seo-audit explain-rule <rule-id>` when you need rule citations or rationale.
    - Use CLI output as deterministic evidence. Current CLI coverage includes config-driven local/single-page evidence, supplied URL-list evidence, bounded same-origin HTTP crawling, include/exclude crawl filters, sitemap-seeded discovery, robots enforcement, optional rendering hooks, ranking and Lighthouse evidence imports, Markdown output, JSON-LD required-property checks, and initial deterministic rules.
