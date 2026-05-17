@@ -5,7 +5,7 @@ Generated: <generated>
 
 ## Executive Summary
 
-Found 16 deterministic findings across 5 scored dimensions.
+Found 17 deterministic findings across 5 scored dimensions.
 
 ## Priority Findings
 
@@ -21,6 +21,7 @@ Found 16 deterministic findings across 5 scored dimensions.
 | P1 | technical.https_missing | Page is not available over HTTPS | Important pages should be available over HTTPS. | Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL. | https://developers.google.com/search/docs/essentials |
 | P1 | structured_data.invalid_jsonld | JSON-LD structured data is invalid | Invalid JSON-LD cannot be parsed reliably for structured data eligibility. | Fix JSON-LD syntax so structured data can be parsed reliably. | https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data |
 | P1 | technical.https_missing | Page is not available over HTTPS | Important pages should be available over HTTPS. | Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL. | https://developers.google.com/search/docs/essentials |
+| P1 | crawl.robots_blocked | robots.txt blocks an important page or resource | robots.txt blocks a URL discovered during crawl evidence collection. | Update robots.txt rules so important pages and resources needed for rendering can be crawled. | https://developers.google.com/search/docs/crawling-indexing/robots/intro, https://developers.google.com/search/docs/essentials/technical |
 | P2 | structured_data.required_property_missing | Structured data is missing required properties | Product structured data is missing required properties: offers. | Add the required properties for supported schema types when the page's visible content supports the markup. | https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data, https://developers.google.com/search/docs/appearance/structured-data/sd-policies |
 | P2 | content.thin_content | Page has limited useful main content | Thin pages are less likely to satisfy visitor tasks or support AI/search answerability. | Expand visible content to satisfy the visitor's task with original, helpful information. | https://developers.google.com/search/docs/fundamentals/creating-helpful-content |
 | P2 | appearance.title_duplicate | Multiple pages use the same title | Duplicate titles make it harder to distinguish page purpose in search results. | Write unique titles that distinguish page purpose and topic. | https://developers.google.com/search/docs/appearance/title-link |
@@ -36,7 +37,7 @@ Found 16 deterministic findings across 5 scored dimensions.
 | structured_data | 40 | structured_data.required_property_missing, structured_data.invalid_jsonld |
 | helpful_content | 80 | content.thin_content |
 | search_appearance | 60 | appearance.image_alt_missing, appearance.title_duplicate, appearance.meta_description_duplicate |
-| crawl_index | 80 | indexability.noncanonical_in_sitemap |
+| crawl_index | 40 | crawl.robots_blocked, indexability.noncanonical_in_sitemap |
 
 ## Implementation Tasks
 
@@ -52,6 +53,7 @@ Found 16 deterministic findings across 5 scored dimensions.
 | P1 | technical.https_missing | Engineering | M | Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL. | The technical.https_missing finding is no longer triggered for the affected evidence.; Updated evidence remains crawlable, visible, and aligned with the cited guidance. |
 | P1 | structured_data.invalid_jsonld | Engineering | M | Fix JSON-LD syntax so structured data can be parsed reliably. | The structured_data.invalid_jsonld finding is no longer triggered for the affected evidence.; Updated evidence remains crawlable, visible, and aligned with the cited guidance. |
 | P1 | technical.https_missing | Engineering | M | Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL. | The technical.https_missing finding is no longer triggered for the affected evidence.; Updated evidence remains crawlable, visible, and aligned with the cited guidance. |
+| P1 | crawl.robots_blocked | Engineering | M | Update robots.txt rules so important pages and resources needed for rendering can be crawled. | The crawl.robots_blocked finding is no longer triggered for the affected evidence.; Updated evidence remains crawlable, visible, and aligned with the cited guidance. |
 | P2 | structured_data.required_property_missing | Engineering | S | Add the required properties for supported schema types when the page's visible content supports the markup. | The structured_data.required_property_missing finding is no longer triggered for the affected evidence.; Updated evidence remains crawlable, visible, and aligned with the cited guidance. |
 | P2 | content.thin_content | Content | S | Expand visible content to satisfy the visitor's task with original, helpful information. | The content.thin_content finding is no longer triggered for the affected evidence.; Updated evidence remains crawlable, visible, and aligned with the cited guidance. |
 | P2 | appearance.title_duplicate | SEO | S | Write unique titles that distinguish page purpose and topic. | The appearance.title_duplicate finding is no longer triggered for the affected evidence.; Updated evidence remains crawlable, visible, and aligned with the cited guidance. |

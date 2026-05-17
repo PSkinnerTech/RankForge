@@ -41,6 +41,8 @@ The current `audit` command collects single-page, supplied URL-list, or bounded 
 
 Structured data checks currently validate JSON-LD parseability plus required-property gaps for Organization, Product, FAQPage, Article, BreadcrumbList, Event, VideoObject, and SoftwareApplication evidence.
 
+Current deterministic findings cover HTTP/HTTPS issues, redirect chains, robots/noindex controls, noindex/canonical conflicts, canonical and sitemap consistency, missing favicons, metadata and heading gaps, duplicate titles/descriptions, image alt text, structured data parse/property gaps, thin content, answerability/entity gaps, broken internal links, robots-blocked crawl skips, and imported Lighthouse performance issues.
+
 Optional evidence imports:
 
 ```bash

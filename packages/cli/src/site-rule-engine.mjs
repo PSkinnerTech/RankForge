@@ -68,6 +68,29 @@ export const evaluateSite = (pages, context = {}) => {
   const findings = [];
   const byUrl = pageMap(pages);
 
+  if (context.crawled && (context.sitemaps || []).length === 0) {
+    findings.push(
+      finding(
+        "crawl.sitemap_missing",
+        [pages[0]?.finalUrl || context.origin || "site"],
+        ["$.site.sitemaps"],
+        "No sitemap evidence was discovered or supplied for this crawled audit.",
+      ),
+    );
+  }
+
+  for (const skipped of context.skipped || []) {
+    if (skipped.reason !== "robots_blocked") continue;
+    findings.push(
+      finding(
+        "crawl.robots_blocked",
+        [skipped.url],
+        ["$.site.skipped"],
+        "robots.txt blocks a URL discovered during crawl evidence collection.",
+      ),
+    );
+  }
+
   for (const group of groupBy(pages, (page) => page.evidence?.title)) {
     findings.push(
       finding(

@@ -101,7 +101,13 @@ export const runAudit = async (config) => {
   );
   const findings = [
     ...pages.flatMap((item, index) => evaluatePage(item, index)),
-    ...evaluateSite(pages, { sitemapUrls }),
+    ...evaluateSite(pages, {
+      crawled: shouldCrawl,
+      origin: originFor(pages[0]?.finalUrl || config.target),
+      sitemapUrls,
+      sitemaps: crawlResult.sitemaps,
+      skipped: crawlResult.skipped,
+    }),
     ...evaluatePerformance(integrations.lighthouse),
   ];
 

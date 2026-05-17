@@ -337,6 +337,20 @@
       "task": "Serve important pages over HTTPS and redirect HTTP variants to the HTTPS canonical URL."
     },
     {
+      "ruleId": "crawl.robots_blocked",
+      "severity": "P1",
+      "dimension": "crawl_index",
+      "affectedPaths": [
+        "/blocked.html"
+      ],
+      "evidence": [
+        "$.site.skipped"
+      ],
+      "owner": "Engineering",
+      "effort": "M",
+      "task": "Update robots.txt rules so important pages and resources needed for rendering can be crawled."
+    },
+    {
       "ruleId": "appearance.title_duplicate",
       "severity": "P2",
       "dimension": "search_appearance",
@@ -436,12 +450,13 @@
       "p3": 2
     },
     "crawl_index": {
-      "score": 80,
+      "score": 40,
       "findings": [
+        "crawl.robots_blocked",
         "indexability.noncanonical_in_sitemap"
       ],
       "p0": 0,
-      "p1": 0,
+      "p1": 1,
       "p2": 1,
       "p3": 0
     }

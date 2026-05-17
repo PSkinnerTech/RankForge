@@ -71,6 +71,57 @@ test("evaluates HTTP and header findings", () => {
   assert.ok(ids.includes("indexability.x_robots_noindex"));
 });
 
+test("evaluates redirect chain and noindex canonical conflicts", () => {
+  const findings = evaluatePage(
+    snapshotFor(
+      `
+        <html>
+          <head>
+            <title>Conflict</title>
+            <meta name="description" content="Conflict page">
+            <meta name="robots" content="noindex">
+            <link rel="canonical" href="https://example.com/preferred">
+          </head>
+          <body><h1>Conflict</h1><p>${"Useful content ".repeat(30)}</p></body>
+        </html>
+      `,
+      {
+        redirectChain: [
+          { url: "https://example.com/a", status: 301, location: "https://example.com/b" },
+          { url: "https://example.com/b", status: 302, location: "https://example.com/conflict" },
+        ],
+      },
+    ),
+  );
+  const ids = findings.map((finding) => finding.ruleId);
+  assert.ok(ids.includes("technical.redirect_chain"));
+  assert.ok(ids.includes("indexability.noindex_canonical_conflict"));
+});
+
+test("flags missing favicon on homepage-like URL pages", () => {
+  const findings = evaluatePage(
+    snapshotFor(
+      `
+        <html>
+          <head>
+            <title>Home</title>
+            <meta name="description" content="Home page">
+            <link rel="canonical" href="https://example.com/">
+          </head>
+          <body>
+            <h1>Home</h1>
+            <h2>Section</h2>
+            <p>${"Useful homepage content ".repeat(30)}</p>
+            <a href="/about">About</a>
+          </body>
+        </html>
+      `,
+      { finalUrl: "https://example.com/" },
+    ),
+  );
+  assert.ok(findings.map((finding) => finding.ruleId).includes("appearance.favicon_missing"));
+});
+
 test("scores findings by dimension", () => {
   const scores = scoreFindings([
     { dimension: "crawl_index", severity: "P1", ruleId: "indexability.noindex" },

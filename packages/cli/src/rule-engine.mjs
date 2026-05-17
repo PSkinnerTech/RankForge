@@ -97,6 +97,18 @@ export const evaluatePage = (snapshot, pageIndex = 0) => {
   const evidence = snapshot.evidence || {};
   const visibleTextCharacters = evidence.counts?.visibleTextCharacters || 0;
 
+  if ((snapshot.redirectChain || []).length > 1) {
+    findings.push(
+      createFinding(
+        "technical.redirect_chain",
+        snapshot,
+        [`$.pages[${pageIndex}].redirectChain`],
+        pageIndex,
+        "Long redirect chains slow crawling and make canonical URL resolution less predictable.",
+      ),
+    );
+  }
+
   if (Number.isInteger(snapshot.status) && snapshot.status >= 400) {
     findings.push(
       createFinding(
@@ -157,6 +169,18 @@ export const evaluatePage = (snapshot, pageIndex = 0) => {
     );
   }
 
+  if (noindexPattern.test(evidence.robots || "") && evidence.canonical) {
+    findings.push(
+      createFinding(
+        "indexability.noindex_canonical_conflict",
+        snapshot,
+        [`$.pages[${pageIndex}].evidence.robots`, `$.pages[${pageIndex}].evidence.canonical`],
+        pageIndex,
+        "Combining noindex with a canonical signal creates an ambiguous indexing strategy.",
+      ),
+    );
+  }
+
   if (noindexPattern.test(headerValue(snapshot.headers, "x-robots-tag"))) {
     findings.push(
       createFinding(
@@ -213,6 +237,18 @@ export const evaluatePage = (snapshot, pageIndex = 0) => {
         [`$.pages[${pageIndex}].evidence.images`],
         pageIndex,
         "Images without alt text provide weaker context for accessibility and image search.",
+      ),
+    );
+  }
+
+  if (snapshot.sourceType === "url" && isHomepageLike(snapshot) && !evidence.favicon) {
+    findings.push(
+      createFinding(
+        "appearance.favicon_missing",
+        snapshot,
+        [`$.pages[${pageIndex}].evidence.favicon`],
+        pageIndex,
+        "A missing favicon weakens brand presentation in search appearance surfaces.",
       ),
     );
   }

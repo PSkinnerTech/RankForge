@@ -55,3 +55,23 @@ test("detects non-canonical URLs listed in sitemaps", () => {
   );
   assert.ok(findings.map((finding) => finding.ruleId).includes("indexability.noncanonical_in_sitemap"));
 });
+
+test("detects missing sitemap and robots-blocked crawl skips", () => {
+  const findings = evaluateSite(
+    [
+      page(
+        "https://example.com/",
+        "<title>Home</title><meta name='description' content='Home'><link rel='canonical' href='https://example.com/'><h1>Home</h1>",
+      ),
+    ],
+    {
+      crawled: true,
+      sitemapUrls: [],
+      sitemaps: [],
+      skipped: [{ url: "https://example.com/private", reason: "robots_blocked" }],
+    },
+  );
+  const ids = findings.map((finding) => finding.ruleId);
+  assert.ok(ids.includes("crawl.sitemap_missing"));
+  assert.ok(ids.includes("crawl.robots_blocked"));
+});
