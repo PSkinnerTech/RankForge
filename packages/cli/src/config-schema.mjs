@@ -38,6 +38,19 @@ export const auditConfigSchema = {
         exclude: { type: "array", items: { type: "string" } },
       },
     },
+    repo: {
+      type: "object",
+      additionalProperties: true,
+      properties: {
+        buildCommand: { type: "string" },
+        previewCommand: { type: "string" },
+        previewUrl: { type: "string" },
+        staticDir: { type: "string" },
+        routeList: { type: "string" },
+        maxBuildMs: { type: "integer", minimum: 1 },
+        maxPreviewMs: { type: "integer", minimum: 1 },
+      },
+    },
     render: {
       type: "object",
       additionalProperties: true,
@@ -97,6 +110,13 @@ export const resolveAuditConfigPaths = (config, baseDir) => {
     ...config,
     target: resolveMaybePath(config.target, baseDir),
     urlList: resolveMaybePath(config.urlList, baseDir),
+    repo: config.repo
+      ? {
+          ...config.repo,
+          staticDir: resolveMaybePath(config.repo.staticDir, baseDir),
+          routeList: resolveMaybePath(config.repo.routeList, baseDir),
+        }
+      : config.repo,
     integrations: config.integrations
       ? {
           ...config.integrations,
@@ -207,6 +227,20 @@ export const validateAuditConfig = (config, options = {}) => {
     }
   }
 
+  if (config.repo !== undefined) {
+    if (!isObject(config.repo)) {
+      errors.push("repo must be an object");
+    } else {
+      for (const key of ["buildCommand", "previewCommand", "previewUrl", "staticDir", "routeList"]) {
+        if (config.repo[key] !== undefined && typeof config.repo[key] !== "string") {
+          errors.push(`repo.${key} must be a string`);
+        }
+      }
+      validatePositiveInteger(errors, "repo.maxBuildMs", config.repo.maxBuildMs);
+      validatePositiveInteger(errors, "repo.maxPreviewMs", config.repo.maxPreviewMs);
+    }
+  }
+
   if (config.render !== undefined) {
     if (!isObject(config.render)) {
       errors.push("render must be an object");
@@ -245,6 +279,7 @@ export const validateAuditConfig = (config, options = {}) => {
 
   if (options.checkFiles) {
     validateExistingFile(errors, "urlList", config.urlList, options.baseDir);
+    validateExistingFile(errors, "repo.routeList", config.repo?.routeList, options.baseDir);
     validateExistingFile(errors, "integrations.searchConsole", config.integrations?.searchConsole, options.baseDir);
     validateExistingFile(errors, "integrations.serp", config.integrations?.serp, options.baseDir);
     validateExistingFile(errors, "integrations.aiAnswers", config.integrations?.aiAnswers, options.baseDir);

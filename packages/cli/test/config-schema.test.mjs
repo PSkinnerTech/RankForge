@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { validateAuditConfig } from "../src/config-schema.mjs";
+import { resolveAuditConfigPaths, validateAuditConfig } from "../src/config-schema.mjs";
 
 test("accepts a minimal URL target config", () => {
   const result = validateAuditConfig({ target: "https://example.com" });
@@ -75,4 +75,57 @@ test("rejects missing referenced files when file checks are enabled", () => {
   assert.equal(result.ok, false);
   assert.match(result.errors.join("\n"), /urlList file does not exist/);
   assert.match(result.errors.join("\n"), /integrations\.lighthouse file does not exist/);
+});
+
+test("accepts valid repo audit config", () => {
+  const result = validateAuditConfig({
+    target: "https://example.com",
+    repo: {
+      buildCommand: "npm run build",
+      staticDir: "dist",
+      routeList: "routes.txt",
+      maxBuildMs: 120000,
+      maxPreviewMs: 30000,
+    },
+  });
+
+  assert.equal(result.ok, true);
+});
+
+test("rejects invalid repo audit config values", () => {
+  const result = validateAuditConfig({
+    target: "https://example.com",
+    repo: {
+      buildCommand: 42,
+      routeList: 42,
+      maxBuildMs: 0,
+      maxPreviewMs: 1.5,
+    },
+  });
+
+  assert.equal(result.ok, false);
+  assert.ok(result.errors.includes("repo.buildCommand must be a string"));
+  assert.ok(result.errors.includes("repo.routeList must be a string"));
+  assert.ok(result.errors.includes("repo.maxBuildMs must be a positive integer"));
+  assert.ok(result.errors.includes("repo.maxPreviewMs must be a positive integer"));
+});
+
+test("resolves repo config paths relative to config file", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-repo-config-"));
+  fs.mkdirSync(path.join(dir, "dist"));
+  fs.writeFileSync(path.join(dir, "routes.txt"), "/\n");
+
+  const resolved = resolveAuditConfigPaths(
+    {
+      target: "https://example.com",
+      repo: {
+        staticDir: "dist",
+        routeList: "routes.txt",
+      },
+    },
+    dir,
+  );
+
+  assert.equal(resolved.repo.staticDir, path.join(dir, "dist"));
+  assert.equal(resolved.repo.routeList, path.join(dir, "routes.txt"));
 });
