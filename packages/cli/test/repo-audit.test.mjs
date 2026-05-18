@@ -317,6 +317,24 @@ test("repo audit reports missing route-list entries", async () => {
   assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_entry_missing");
 });
 
+test("repo audit reports existing relative route-list entries with non-HTML extensions as not HTML", async () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-route-list-not-html-"));
+  const staticDir = path.join(repoPath, "dist");
+  const routeList = path.join(repoPath, "routes.txt");
+  fs.mkdirSync(staticDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(staticDir, "index.html"),
+    "<title>Home</title><meta name='description' content='Home'><h1>Home</h1><p>Enough generated content.</p>",
+  );
+  fs.writeFileSync(path.join(staticDir, "feed.xml"), "<feed></feed>");
+  fs.writeFileSync(routeList, "feed.xml\n");
+
+  const audit = await runRepoAudit({ repoPath, staticDir, routeList });
+
+  assert.equal(audit.pages.length, 0);
+  assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_entry_not_html");
+});
+
 test("static repo audit reports missing generated robots and sitemap files", async () => {
   const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-static-source-findings-"));
   const staticDir = path.join(repoPath, "dist");

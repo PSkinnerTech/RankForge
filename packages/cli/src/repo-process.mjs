@@ -208,6 +208,9 @@ export const startPreview = async ({ command, cwd, previewUrl, timeoutMs = 30000
   if (!previewUrl) {
     throw new Error("--preview-url is required for preview repo audits.");
   }
+  if (security?.mode === "restricted") {
+    throw commandExecutionDisabledError();
+  }
 
   let previewUrlAlreadyReachable = false;
   try {

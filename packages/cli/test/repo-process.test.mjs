@@ -163,7 +163,7 @@ test("rejects before spawning when another process already serves the preview UR
   }
 });
 
-test("restricted preview startup rejects private targets before spawning", async () => {
+test("restricted preview startup rejects private targets before spawning commands", async () => {
   const port = await freePort();
   const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-preview-guard-")), "spawned");
 
@@ -176,7 +176,24 @@ test("restricted preview startup rejects private targets before spawning", async
         timeoutMs: 5000,
         security: { mode: "restricted" },
       }),
-    /Restricted security mode blocks private network target/,
+    /Restricted security mode disables local command execution for repo audits/,
+  );
+  assert.equal(fs.existsSync(marker), false);
+});
+
+test("restricted preview startup rejects command execution before non-private preflight", async () => {
+  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-preview-restricted-")), "spawned");
+
+  await assert.rejects(
+    () =>
+      startPreview({
+        command: `node -e "require('node:fs').writeFileSync('${marker}', 'spawned')"`,
+        cwd: ".",
+        previewUrl: "https://example.invalid",
+        timeoutMs: 5000,
+        security: { mode: "restricted" },
+      }),
+    /Restricted security mode disables local command execution for repo audits/,
   );
   assert.equal(fs.existsSync(marker), false);
 });

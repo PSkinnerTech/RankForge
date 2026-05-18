@@ -110,6 +110,7 @@ const htmlPathForRoute = (staticDir, route) => {
   const normalized = cleanRoute.startsWith("/") ? cleanRoute.slice(1) : cleanRoute;
   if (!normalized || normalized.endsWith("/")) return path.join(staticDir, normalized, "index.html");
   if (normalized.endsWith(".html")) return path.join(staticDir, normalized);
+  if (path.extname(normalized)) return path.join(staticDir, normalized);
   return path.join(staticDir, normalized, "index.html");
 };
 
