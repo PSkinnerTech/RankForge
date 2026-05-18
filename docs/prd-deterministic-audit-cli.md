@@ -21,7 +21,7 @@ The production direction remains a deterministic SEO/GEO readiness auditor. Actu
 
 As of `openclaw-geo-seo-audit@0.2.0` plus the merged repo-audit branch, the repository contains a working deterministic CLI and OpenClaw skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON and Markdown, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets.
 
-The next approved product target is developer-focused repo audit completion: make repository audits easier to run in local development and CI by adding explicit build support, route-list/config parity, richer framework fixtures, and deterministic source-level findings without overclaiming rankings.
+The latest completed product target is developer-focused repo audit completion: repository audits now support explicit build commands, route lists, repo config, CI threshold failures, and deterministic source-level findings without overclaiming rankings.
 
 ## 2. Problem
 
@@ -851,13 +851,19 @@ Delivered on main after `0.2.0`:
 - `repo` evidence section in JSON output.
 - Source-level findings that remain separate from rendered-page findings.
 
+Delivered developer-focused repo audit completion work:
+
+- Explicit build command support with bounded execution, captured evidence, timeout cleanup, and restricted-mode blocking.
+- Route-list support for repository audits, including missing, empty, non-HTML, missing-entry, and outside-static findings.
+- Repo config support through `audit.config.json` for repeatable CI workflows.
+- Vite fixture coverage for deterministic build-and-static-output audits.
+- Source-level findings for generated sitemap/robots availability, static output availability, route-list issues, build failures, and preview startup failures.
+
 Remaining developer-focused repo audit work:
 
-- Explicit build command support.
-- Route-list support for repository audits.
-- Repo config support for repeatable CI workflows.
-- Vite, Next.js, and Astro fixture coverage.
-- Source-level findings for generated sitemap/robots availability, framework metadata usage, route discoverability, and rendered/source mismatches where deterministic.
+- Next.js and Astro fixture coverage.
+- Deeper deterministic source-level findings for framework metadata usage and rendered/source mismatches where stable.
+- Optional framework-specific route manifest parsing when it can be done without brittle heuristics.
 
 ## 20. Risks and Mitigations
 
@@ -897,11 +903,11 @@ Resolved for `0.2.0`:
 - Raw Google source corpus remains a repository asset. The CLI package ships source code and compact citation behavior, not the full raw corpus.
 - CI severity gating is configured with explicit `--fail-on P0|P1|P2|P3`.
 
-Planning questions for developer repo audit completion:
+Resolved for developer repo audit completion:
 
-- Should explicit build support run before static route discovery by default, or only when `--build-command` is supplied?
-- Should repo audit configuration live inside `audit.config.json` or use a separate `repo-audit.config.json`?
-- Which source-level findings provide the highest value for developer CI without requiring brittle source parsing?
+- Explicit build support runs only when `--build-command` or `repo.buildCommand` is supplied.
+- Repo audit configuration extends `audit.config.json` through a `repo` object.
+- First high-value source findings cover build execution, static output availability, route-list validity, preview startup, and generated `robots.txt`/`sitemap.xml`.
 
 ## 22. Release Stabilization And v1.5 Readiness Checklist
 
@@ -913,11 +919,10 @@ Before publishing or tagging `0.2.0`:
 - Confirm readiness language remains separate from measured ranking or AI-answer visibility claims.
 - Push and merge the guardrail branch through the repository review workflow.
 
-Before starting developer repo audit completion:
+Before extending developer repo audit beyond the completed build/config/route-list layer:
 
-- Decide whether Vite is the first framework fixture for build-and-preview coverage.
-- Decide whether repo audit config extends `audit.config.json` or remains command-line only for one more phase.
-- Define the first deterministic source-level findings and keep them separate from rendered-page evidence.
+- Add Next.js and Astro fixtures only with deterministic local build scripts and no automatic dependency installation.
+- Expand deterministic source-level findings only where source evidence can be parsed without brittle framework assumptions.
 - Keep repo-to-audit implementation separate from external API integrations.
 
 ## 23. Implemented Baseline And v1.5 Scope

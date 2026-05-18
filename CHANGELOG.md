@@ -13,8 +13,12 @@
 - Added release-gate coverage for packed CLI contents and an installed-style packed tarball smoke check that verifies source citations are present.
 - Added repo fixture projects and golden summary coverage for static output audits and preview-server audits.
 - Updated README, skill wrapper guidance, and skill validation so repository audit mode is documented while keeping ranking claims limited to supplied evidence.
-- Added developer-focused repo audit planning for explicit build commands, route lists, config-driven CI audits, and repo source findings.
-- Preserved explicit preview precedence over auto-detected static output so callers can audit live preview servers even when a stale `dist` directory exists.
+- Added developer-focused repo audits with explicit `--build-command`, bounded build timeouts, captured build evidence, and build failure/timeout source findings.
+- Added repo audit config support through `audit.config.json` `repo` settings, including config-relative static output and route-list paths.
+- Added `--route-list` support so repository audits can constrain generated static routes and report missing, empty, non-HTML, or outside-static route-list entries deterministically.
+- Added repo CI gating with `audit-repo --fail-on P0|P1|P2|P3`, including early option validation before build or preview side effects.
+- Added static output source findings for missing generated `robots.txt` and `sitemap.xml`.
+- Hardened repo command guardrails so restricted mode blocks local build and preview command execution before spawning, and explicit preview options take precedence over static output so callers can audit live preview servers even when a stale `dist` directory exists.
 - Expanded the test suite to cover repo detection, static route discovery, repo audit orchestration, preview lifecycle behavior, CLI validation, report/schema compatibility, packaging, and release-gate hardening.
 
 ## 0.2.0 - 2026-05-18
