@@ -56,6 +56,33 @@ test("static output audit uses detected static dir when none is configured", asy
   assert.deepEqual(audit.repo.sourceFindings, []);
 });
 
+test("explicit preview audit takes precedence over detected static output", async () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-repo-preview-precedence-"));
+  fs.mkdirSync(path.join(repoPath, "dist"), { recursive: true });
+  fs.mkdirSync(path.join(repoPath, "site"), { recursive: true });
+  fs.writeFileSync(
+    path.join(repoPath, "dist", "index.html"),
+    "<title>Static Output</title><meta name='description' content='Static'><h1>Static Output</h1><p>Static output content.</p>",
+  );
+  fs.writeFileSync(
+    path.join(repoPath, "site", "index.html"),
+    "<title>Preview Server</title><meta name='description' content='Preview'><h1>Preview Server</h1><p>Preview server content.</p>",
+  );
+  fs.copyFileSync(path.join(fixture("npm-preview"), "server.mjs"), path.join(repoPath, "server.mjs"));
+  const port = await freePort();
+  const previewUrl = `http://127.0.0.1:${port}`;
+
+  const audit = await runRepoAudit({
+    repoPath,
+    previewCommand: `node server.mjs ${port}`,
+    previewUrl,
+  });
+
+  assert.equal(audit.repo.previewUrl, previewUrl);
+  assert.equal(audit.pages[0].evidence.title, "Preview Server");
+  await assert.rejects(() => waitForHttp(previewUrl, { timeoutMs: 250 }), /Preview server did not become reachable/);
+});
+
 test("explicit preview audit starts and stops fixture server", async () => {
   const port = await freePort();
   const previewUrl = `http://127.0.0.1:${port}`;
