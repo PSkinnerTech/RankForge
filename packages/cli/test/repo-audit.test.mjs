@@ -316,3 +316,20 @@ test("repo audit reports missing route-list entries", async () => {
   assert.equal(audit.pages.length, 0);
   assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_entry_missing");
 });
+
+test("static repo audit reports missing generated robots and sitemap files", async () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-static-source-findings-"));
+  const staticDir = path.join(repoPath, "dist");
+  fs.mkdirSync(staticDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(staticDir, "index.html"),
+    "<title>No Files</title><meta name='description' content='No files'><h1>No Files</h1><p>Enough generated content.</p>",
+  );
+
+  const audit = await runRepoAudit({ repoPath, staticDir });
+  const ids = audit.repo.sourceFindings.map((finding) => finding.id);
+
+  assert.ok(ids.includes("repo.robots_missing"));
+  assert.ok(ids.includes("repo.sitemap_missing"));
+  assert.equal(audit.pages.length, 1);
+});

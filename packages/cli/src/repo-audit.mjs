@@ -59,6 +59,35 @@ const buildFindingFor = (error, command) => {
   });
 };
 
+const generatedOutputFindings = (staticDir) => {
+  const findings = [];
+  if (!fs.existsSync(path.join(staticDir, "robots.txt"))) {
+    findings.push(
+      sourceFinding({
+        id: "repo.robots_missing",
+        severity: "P3",
+        message: "Static output does not include robots.txt.",
+        evidence: path.join(staticDir, "robots.txt"),
+        recommendation: "Generate robots.txt in static output when the deployed site should expose crawler directives.",
+        confidence: "medium",
+      }),
+    );
+  }
+  if (!fs.existsSync(path.join(staticDir, "sitemap.xml"))) {
+    findings.push(
+      sourceFinding({
+        id: "repo.sitemap_missing",
+        severity: "P3",
+        message: "Static output does not include sitemap.xml.",
+        evidence: path.join(staticDir, "sitemap.xml"),
+        recommendation: "Generate sitemap.xml in static output so important URLs can be discovered consistently.",
+        confidence: "medium",
+      }),
+    );
+  }
+  return findings;
+};
+
 const repoEvidence = (detected, overrides = {}) => ({
   path: detected.repoRoot,
   detectedFramework: detected.detectedFramework,
@@ -304,6 +333,7 @@ export const runRepoAudit = async (options = {}) => {
       });
     }
 
+    const outputSourceFindings = generatedOutputFindings(staticDir);
     const audit = await runAudit({
       ...options,
       target: routes[0].path,
@@ -318,7 +348,7 @@ export const runRepoAudit = async (options = {}) => {
       staticDirRelative,
       routeList,
       routeSources: routes,
-      sourceFindings: [],
+      sourceFindings: outputSourceFindings,
       notes: ["Audited static output directory."],
     });
     return audit;
