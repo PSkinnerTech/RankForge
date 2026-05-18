@@ -449,10 +449,10 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
       const markdownPath = markdownRequested
         ? repoOptionValue(options, "--markdown", null, "--markdown requires a file path.")
         : null;
-
-      const output = await runRepoAudit(mergeRepoConfig(repoPath, options));
       const failOn = repoOptionValue(options, "--fail-on");
       if (failOn && !(failOn in severityRank)) throw new Error("--fail-on must be one of: P0, P1, P2, P3");
+
+      const output = await runRepoAudit(mergeRepoConfig(repoPath, options));
       const failedThreshold =
         failsThreshold(output.findings, failOn) || failsThreshold(output.repo?.sourceFindings || [], failOn);
 

@@ -398,6 +398,47 @@ test("audit-repo fail-on returns CI failure for rendered findings", async () => 
   assert.ok(body.findings.some((finding) => finding.severity === "P2" || finding.severity === "P1"));
 });
 
+test("audit-repo rejects invalid fail-on before running build command", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-repo-invalid-fail-on-"));
+  const marker = path.join(dir, "build-marker");
+  const buildCommand = `node -e "require('node:fs').writeFileSync(process.argv[1], 'ran')" ${JSON.stringify(marker)}`;
+
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/vite-basic",
+    "--build-command",
+    buildCommand,
+    "--static-dir",
+    "dist",
+    "--fail-on",
+    "PX",
+  ]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--fail-on must be one of: P0, P1, P2, P3/);
+  assert.equal(fs.existsSync(marker), false);
+});
+
+test("audit-repo rejects missing fail-on before running build command", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-repo-missing-fail-on-"));
+  const marker = path.join(dir, "build-marker");
+  const buildCommand = `node -e "require('node:fs').writeFileSync(process.argv[1], 'ran')" ${JSON.stringify(marker)}`;
+
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/vite-basic",
+    "--build-command",
+    buildCommand,
+    "--static-dir",
+    "dist",
+    "--fail-on",
+  ]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--fail-on requires a value/);
+  assert.equal(fs.existsSync(marker), false);
+});
+
 test("audit-repo rejects missing build command value", async () => {
   const result = await capture(["audit-repo", "examples/fixture-repos/vite-basic", "--build-command"]);
 
