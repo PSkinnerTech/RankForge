@@ -228,3 +228,45 @@ test("repo audit blocks command execution in restricted mode", async () => {
   assert.equal(audit.pages.length, 0);
   assert.equal(audit.repo.sourceFindings[0].id, "repo.build_unavailable");
 });
+
+test("repo audit constrains static routes with route list", async () => {
+  const audit = await runRepoAudit({
+    repoPath: fixture("vite-basic"),
+    buildCommand: "npm run build",
+    staticDir: "dist",
+    routeList: path.join(fixture("vite-basic"), "routes.txt"),
+  });
+
+  assert.deepEqual(
+    audit.repo.routeSources.map((route) => route.route),
+    ["/", "/about/"],
+  );
+  assert.equal(audit.pages.length, 2);
+});
+
+test("repo audit reports missing route-list files", async () => {
+  const audit = await runRepoAudit({
+    repoPath: fixture("vite-basic"),
+    staticDir: "dist",
+    routeList: path.join(fixture("vite-basic"), "missing-routes.txt"),
+  });
+
+  assert.equal(audit.pages.length, 0);
+  assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_missing");
+});
+
+test("repo audit reports missing route-list entries", async () => {
+  const repoPath = fixture("vite-basic");
+  const routeList = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-routes-")), "routes.txt");
+  fs.writeFileSync(routeList, "/missing/\n");
+
+  const audit = await runRepoAudit({
+    repoPath,
+    buildCommand: "npm run build",
+    staticDir: "dist",
+    routeList,
+  });
+
+  assert.equal(audit.pages.length, 0);
+  assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_entry_missing");
+});

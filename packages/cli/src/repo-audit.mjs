@@ -74,6 +74,89 @@ const repoEvidence = (detected, overrides = {}) => ({
   ...overrides,
 });
 
+const htmlPathForRoute = (staticDir, route) => {
+  const cleanRoute = route.trim();
+  if (!cleanRoute || cleanRoute.startsWith("#")) return null;
+  if (path.isAbsolute(cleanRoute) && fs.existsSync(cleanRoute) && fs.statSync(cleanRoute).isFile()) return cleanRoute;
+  const normalized = cleanRoute.startsWith("/") ? cleanRoute.slice(1) : cleanRoute;
+  if (!normalized || normalized.endsWith("/")) return path.join(staticDir, normalized, "index.html");
+  if (normalized.endsWith(".html")) return path.join(staticDir, normalized);
+  return path.join(staticDir, normalized, "index.html");
+};
+
+const routeForEntry = (entry) => {
+  const clean = entry.trim();
+  if (!clean || clean.startsWith("#")) return null;
+  if (path.isAbsolute(clean)) return clean;
+  return clean.startsWith("/") ? clean : `/${clean}`;
+};
+
+const readRouteListRoutes = (routeListPath, staticDir) => {
+  if (!fs.existsSync(routeListPath) || !fs.statSync(routeListPath).isFile()) {
+    return {
+      routes: [],
+      sourceFindings: [
+        sourceFinding({
+          id: "repo.route_list_missing",
+          message: "Configured route list file does not exist.",
+          evidence: routeListPath,
+          recommendation: "Create the route list file or remove the route-list option.",
+        }),
+      ],
+    };
+  }
+
+  const entries = fs
+    .readFileSync(routeListPath, "utf8")
+    .split(/\r?\n/)
+    .filter((line) => line.trim() && !line.trim().startsWith("#"));
+  if (!entries.length) {
+    return {
+      routes: [],
+      sourceFindings: [
+        sourceFinding({
+          id: "repo.route_list_empty",
+          message: "Configured route list does not contain any routes.",
+          evidence: routeListPath,
+          recommendation: "Add at least one route to audit.",
+        }),
+      ],
+    };
+  }
+
+  const routes = [];
+  const sourceFindings = [];
+  for (const entry of entries) {
+    const filePath = htmlPathForRoute(staticDir, entry);
+    const route = routeForEntry(entry);
+    if (!filePath || !fs.existsSync(filePath)) {
+      sourceFindings.push(
+        sourceFinding({
+          id: "repo.route_list_entry_missing",
+          message: "Route list entry does not resolve to a generated HTML file.",
+          evidence: entry,
+          recommendation: "Build the route or remove it from the route list.",
+        }),
+      );
+      continue;
+    }
+    if (!filePath.endsWith(".html")) {
+      sourceFindings.push(
+        sourceFinding({
+          id: "repo.route_list_entry_not_html",
+          message: "Route list entry does not resolve to an HTML file.",
+          evidence: entry,
+          recommendation: "Route-list entries must point to generated HTML pages.",
+        }),
+      );
+      continue;
+    }
+    routes.push({ type: "route_list", route, path: filePath });
+  }
+
+  return { routes, sourceFindings };
+};
+
 const emptyAudit = (detected, repoOverrides = {}) => {
   const now = new Date().toISOString();
 
@@ -171,7 +254,20 @@ export const runRepoAudit = async (options = {}) => {
       });
     }
 
-    const routes = discoverStaticRoutes(staticDir);
+    const routeList = options.routeList ? path.resolve(repoPath, options.routeList) : null;
+    const routeListResult = routeList ? readRouteListRoutes(routeList, staticDir) : null;
+    const routes = routeListResult ? routeListResult.routes : discoverStaticRoutes(staticDir);
+    const routeSourceFindings = routeListResult?.sourceFindings || [];
+    if (routeSourceFindings.length) {
+      return emptyAudit(detected, {
+        ...staticRepoFields,
+        buildCommand: options.buildCommand || detected.buildCommand,
+        build,
+        routeList,
+        sourceFindings: routeSourceFindings,
+      });
+    }
+
     if (!routes.length) {
       return emptyAudit(detected, {
         ...staticRepoFields,
@@ -198,6 +294,7 @@ export const runRepoAudit = async (options = {}) => {
       build,
       staticDir,
       staticDirRelative,
+      routeList,
       routeSources: routes,
       sourceFindings: [],
       notes: ["Audited static output directory."],
