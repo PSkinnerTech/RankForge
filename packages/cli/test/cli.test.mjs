@@ -27,6 +27,18 @@ test("prints help", async () => {
   assert.match(result.stdout, /Usage:/);
   assert.match(result.stdout, /validate-config/);
   assert.match(result.stdout, /explain-rule/);
+  assert.match(result.stdout, /detect-repo/);
+  assert.match(result.stdout, /audit-repo/);
+  assert.match(result.stdout, /detect-repo \[path\]/);
+  assert.match(result.stdout, /defaults to current directory/);
+  assert.match(result.stdout, /--static-dir <dir>/);
+  assert.match(result.stdout, /--preview-command <command>/);
+  assert.match(result.stdout, /--preview-url <url>/);
+  assert.match(result.stdout, /--max-preview-ms <n>/);
+  assert.match(result.stdout, /--mode full\|sample\|single/);
+  assert.match(result.stdout, /--max-pages <n>/);
+  assert.match(result.stdout, /--max-depth <n>/);
+  assert.match(result.stdout, /--security local\|restricted/);
 });
 
 test("explains a known rule as JSON", async () => {
@@ -92,4 +104,241 @@ test("does not fail CI when findings are below fail-on threshold", async () => {
 
   const result = await capture(["audit", html, "--fail-on", "P0"]);
   assert.equal(result.exitCode, 0);
+});
+
+test("detects repository audit metadata", async () => {
+  const result = await capture(["detect-repo", "examples/fixture-repos/static-basic"]);
+
+  assert.equal(result.exitCode, 0);
+  const body = JSON.parse(result.stdout);
+  assert.equal(body.detectedFramework, "generic-static");
+  assert.equal(body.staticDirRelative, "dist");
+});
+
+test("audits static repository output from CLI", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "dist"]);
+
+  assert.equal(result.exitCode, 0);
+  const body = JSON.parse(result.stdout);
+  assert.equal(body.repo.detectedFramework, "generic-static");
+  assert.equal(body.pages.length, 2);
+});
+
+test("audit-repo missing repo path returns helpful error", async () => {
+  const result = await capture(["audit-repo"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /audit-repo requires a repository path/);
+});
+
+test("audit-repo with missing static dir returns source finding failure code", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "missing"]);
+
+  assert.equal(result.exitCode, 2);
+  const body = JSON.parse(result.stdout);
+  assert.equal(body.repo.sourceFindings[0].id, "repo.static_dir_missing");
+});
+
+test("audit-repo writes JSON and Markdown reports", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-repo-cli-"));
+  const out = path.join(dir, "audit.json");
+  const markdown = path.join(dir, "audit.md");
+
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/static-basic",
+    "--static-dir",
+    "dist",
+    "--out",
+    out,
+    "--markdown",
+    markdown,
+  ]);
+
+  assert.equal(result.exitCode, 0);
+  assert.deepEqual(JSON.parse(result.stdout), { ok: true, out, markdown });
+  assert.equal(JSON.parse(fs.readFileSync(out, "utf8")).repo.detectedFramework, "generic-static");
+  assert.match(fs.readFileSync(markdown, "utf8"), /GEO\/SEO Audit Report/);
+});
+
+test("audit-repo rejects missing out path", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "dist", "--out"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--out requires a file path/);
+});
+
+test("audit-repo rejects missing markdown path", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "dist", "--markdown"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--markdown requires a file path/);
+});
+
+test("audit-repo rejects option token as out path", async () => {
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/static-basic",
+    "--static-dir",
+    "dist",
+    "--out",
+    "--markdown",
+    path.join(os.tmpdir(), "audit.md"),
+  ]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--out requires a file path/);
+});
+
+test("audit-repo rejects invalid numeric options", async () => {
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/static-basic",
+    "--static-dir",
+    "dist",
+    "--max-pages",
+    "not-a-number",
+  ]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--max-pages must be a number/);
+});
+
+test("audit-repo rejects missing numeric option values", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "dist", "--max-pages"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--max-pages requires a value/);
+});
+
+test("audit-repo rejects option token as numeric option value", async () => {
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/static-basic",
+    "--static-dir",
+    "dist",
+    "--max-pages",
+    "--out",
+    path.join(os.tmpdir(), "audit.json"),
+  ]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--max-pages requires a value/);
+});
+
+test("audit-repo accepts valid numeric option values", async () => {
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/static-basic",
+    "--static-dir",
+    "dist",
+    "--max-pages",
+    "2",
+  ]);
+
+  assert.equal(result.exitCode, 0);
+  const body = JSON.parse(result.stdout);
+  assert.equal(body.pages.length, 2);
+});
+
+test("audit-repo rejects option token as static dir value", async () => {
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/static-basic",
+    "--static-dir",
+    "--out",
+    path.join(os.tmpdir(), "audit.json"),
+  ]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--static-dir requires a value/);
+});
+
+test("audit-repo rejects option token as mode value", async () => {
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/static-basic",
+    "--static-dir",
+    "dist",
+    "--mode",
+    "--max-pages",
+    "2",
+  ]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--mode requires a value/);
+});
+
+test("audit-repo rejects option token as security value", async () => {
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/static-basic",
+    "--static-dir",
+    "dist",
+    "--security",
+    "--out",
+    path.join(os.tmpdir(), "audit.json"),
+  ]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--security requires a value/);
+});
+
+test("audit-repo rejects invalid mode values", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "dist", "--mode", "bogus"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--mode must be one of: full, sample, single/);
+});
+
+test("audit-repo rejects invalid security values", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "dist", "--security", "bogus"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--security must be one of: local, restricted/);
+});
+
+test("audit-repo accepts valid enum option values", async () => {
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/static-basic",
+    "--static-dir",
+    "dist",
+    "--mode",
+    "single",
+    "--security",
+    "local",
+  ]);
+
+  assert.equal(result.exitCode, 0);
+  const body = JSON.parse(result.stdout);
+  assert.equal(body.repo.detectedFramework, "generic-static");
+});
+
+test("audit-repo rejects max-pages below minimum", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "dist", "--max-pages", "0"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--max-pages must be a positive integer/);
+});
+
+test("audit-repo rejects fractional max-pages", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "dist", "--max-pages", "1.5"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--max-pages must be a positive integer/);
+});
+
+test("audit-repo rejects max-depth below minimum", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "dist", "--max-depth", "-1"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--max-depth must be a non-negative integer/);
+});
+
+test("audit-repo rejects max-preview-ms below minimum", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "dist", "--max-preview-ms", "0"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--max-preview-ms must be a positive integer/);
 });

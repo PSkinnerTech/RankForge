@@ -13,13 +13,21 @@ import { isHttpUrl } from "./url-utils.mjs";
 const toolVersion = "0.2.0";
 
 const readSourceMap = () => {
-  try {
-    const file = new URL("../../../skill/geo-seo-audit/source-map.json", import.meta.url);
-    const sourceMap = JSON.parse(fs.readFileSync(file, "utf8"));
-    return Object.entries(sourceMap).map(([id, url]) => ({ id, url }));
-  } catch {
-    return [];
+  const candidates = [
+    new URL("./source-map.json", import.meta.url),
+    new URL("../../../skill/geo-seo-audit/source-map.json", import.meta.url),
+  ];
+
+  for (const file of candidates) {
+    try {
+      const sourceMap = JSON.parse(fs.readFileSync(file, "utf8"));
+      return Object.entries(sourceMap).map(([id, url]) => ({ id, url }));
+    } catch {
+      // Try the next source-map location.
+    }
   }
+
+  return [];
 };
 
 const originFor = (target) => {
@@ -51,23 +59,36 @@ const crawlSettings = (config) => ({
 });
 
 const readUrlList = (config) => {
+  const normalizeEntries = (entries, baseDir) =>
+    entries
+      .map((line) => line.trim())
+      .filter((line) => line && !line.startsWith("#"))
+      .map((line) => {
+        if (isHttpUrl(line)) return line;
+        if (path.isAbsolute(line) && fs.existsSync(line)) return line;
+        if (isHttpUrl(config.target)) return new URL(line, config.target).href;
+        if (path.isAbsolute(line)) return line;
+        return path.resolve(baseDir, line);
+      });
+
+  if (Array.isArray(config.urlListEntries)) {
+    return normalizeEntries(
+      config.urlListEntries.map((entry) => String(entry)),
+      process.cwd(),
+    );
+  }
   if (!config.urlList) return [];
   const baseDir = path.dirname(config.urlList);
   const limits = resolveLimits(config.limits);
-  return readTextFileLimited(config.urlList, {
-    security: config.security,
-    allowRestricted: true,
-    limits,
-    maxBytes: limits.maxFileBytes,
-  })
-    .split(/\r?\n/)
-    .map((line) => line.trim())
-    .filter((line) => line && !line.startsWith("#"))
-    .map((line) => {
-      if (isHttpUrl(line)) return line;
-      if (isHttpUrl(config.target)) return new URL(line, config.target).href;
-      return path.resolve(baseDir, line);
-    });
+  return normalizeEntries(
+    readTextFileLimited(config.urlList, {
+      security: config.security,
+      allowRestricted: true,
+      limits,
+      maxBytes: limits.maxFileBytes,
+    }).split(/\r?\n/),
+    baseDir,
+  );
 };
 
 const collectUrlList = async (config) => {
@@ -95,7 +116,8 @@ export const runAudit = async (config) => {
   const startedAt = new Date().toISOString();
   const settings = crawlSettings(config);
   const shouldCrawl = isHttpUrl(config.target) && (settings.mode === "full" || settings.mode === "sample");
-  const crawlResult = config.urlList
+  const hasUrlList = config.urlList || Array.isArray(config.urlListEntries);
+  const crawlResult = hasUrlList
     ? await collectUrlList(config)
     : shouldCrawl
       ? await crawlSite(config)
@@ -156,7 +178,7 @@ export const runAudit = async (config) => {
       robots: crawlResult.robots,
       sitemaps: crawlResult.sitemaps,
       skipped: crawlResult.skipped,
-      notes: config.urlList
+      notes: hasUrlList
         ? ["Audit output contains supplied URL-list evidence."]
         : shouldCrawl
           ? ["Audit output contains bounded same-origin crawl evidence."]

@@ -3,6 +3,8 @@ import path from "node:path";
 import { runAudit } from "./audit.mjs";
 import { readAuditConfig, resolveAuditConfigPaths, validateAuditConfig } from "./config-schema.mjs";
 import { generateMarkdownReport } from "./report.mjs";
+import { runRepoAudit } from "./repo-audit.mjs";
+import { detectRepo } from "./repo-detect.mjs";
 import { getRule } from "./rules.mjs";
 import { collectSnapshot } from "./snapshot.mjs";
 
@@ -13,6 +15,8 @@ const help = `Usage: openclaw-geo-seo-audit <command> [options]
 Commands:
   audit <target>                 Run a deterministic GEO/SEO readiness audit
   snapshot <target>              Capture single-page audit evidence
+  detect-repo [path]             Inspect source repository audit metadata; defaults to current directory
+  audit-repo <path>              Audit static output or explicit preview server from a source repo
   validate-config <file>         Validate an audit.config.json file
   explain-rule <rule-id>         Print rule metadata and citations as JSON
 
@@ -40,6 +44,18 @@ Audit options:
   --markdown <file>              Write Markdown report
   --help                         Show this help
   --version                      Show CLI version
+
+Repo audit options:
+  --static-dir <dir>             Audit prebuilt static HTML output relative to repo path
+  --preview-command <command>    Start an explicit local preview server command
+  --preview-url <url>            URL to wait for and audit after preview startup
+  --max-preview-ms <n>           Maximum time to wait for preview startup
+  --mode full|sample|single      Crawl mode for preview audits
+  --max-pages <n>                Maximum pages to crawl for preview audits
+  --max-depth <n>                Maximum crawl depth for preview audits
+  --security local|restricted    Apply local CLI or restricted wrapper network/file policy
+  --out <file>                   Write repository audit JSON
+  --markdown <file>              Write repository audit Markdown report
 `;
 
 const writeJson = (io, value) => {
@@ -75,6 +91,19 @@ const auditOptionsWithValues = new Set([
   "--markdown",
 ]);
 
+const repoOptionsWithValues = new Set([
+  "--static-dir",
+  "--preview-command",
+  "--preview-url",
+  "--max-preview-ms",
+  "--mode",
+  "--max-pages",
+  "--max-depth",
+  "--security",
+  "--out",
+  "--markdown",
+]);
+
 const severityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };
 
 const failsThreshold = (findings, threshold) => {
@@ -105,9 +134,57 @@ const splitAuditArgs = (args) => {
   return { target, options };
 };
 
+const splitRepoArgs = (args) => {
+  const options = [];
+  let repoPath = null;
+
+  for (let index = 0; index < args.length; index++) {
+    const arg = args[index];
+    if (repoOptionsWithValues.has(arg)) {
+      options.push(arg);
+      if (index + 1 < args.length && !args[index + 1].startsWith("--")) options.push(args[++index]);
+      continue;
+    }
+    if (arg.startsWith("--")) {
+      options.push(arg);
+      continue;
+    }
+    if (!repoPath) repoPath = arg;
+    else options.push(arg);
+  }
+
+  return { repoPath, options };
+};
+
 const numberOption = (options, name, fallback) => {
   const value = optionValue(options, name);
   return value ? Number(value) : fallback;
+};
+
+const repoOptionValue = (options, name, fallback = null, errorMessage = `${name} requires a value.`) => {
+  const index = options.indexOf(name);
+  if (index === -1) return fallback;
+  const value = options[index + 1];
+  if (!value || value.startsWith("--")) throw new Error(errorMessage);
+  return value;
+};
+
+const repoEnumOption = (options, name, fallback, allowedValues) => {
+  const value = repoOptionValue(options, name, fallback);
+  if (!allowedValues.includes(value)) throw new Error(`${name} must be one of: ${allowedValues.join(", ")}`);
+  return value;
+};
+
+const repoNumberOption = (options, name, fallback, { minimum, minimumDescription }) => {
+  const index = options.indexOf(name);
+  if (index === -1) return fallback;
+  const value = repoOptionValue(options, name);
+  const number = Number(value);
+  if (!Number.isFinite(number)) throw new Error(`${name} must be a number.`);
+  if (!Number.isInteger(number) || number < minimum) {
+    throw new Error(`${name} must be a ${minimumDescription}.`);
+  }
+  return number;
 };
 
 const mergeAuditConfig = (target, options) => {
@@ -190,6 +267,31 @@ const mergeAuditConfig = (target, options) => {
 
   return merged;
 };
+
+const mergeRepoConfig = (repoPath, options) => ({
+  repoPath,
+  staticDir: repoOptionValue(options, "--static-dir"),
+  previewCommand: repoOptionValue(options, "--preview-command"),
+  previewUrl: repoOptionValue(options, "--preview-url"),
+  maxPreviewMs: repoNumberOption(options, "--max-preview-ms", 30000, {
+    minimum: 1,
+    minimumDescription: "positive integer",
+  }),
+  crawl: {
+    mode: repoEnumOption(options, "--mode", "full", ["full", "sample", "single"]),
+    maxPages: repoNumberOption(options, "--max-pages", 25, {
+      minimum: 1,
+      minimumDescription: "positive integer",
+    }),
+    maxDepth: repoNumberOption(options, "--max-depth", 2, {
+      minimum: 0,
+      minimumDescription: "non-negative integer",
+    }),
+  },
+  security: {
+    mode: repoEnumOption(options, "--security", "local", ["local", "restricted"]),
+  },
+});
 
 export const runCli = async (args, io = { stdout: process.stdout, stderr: process.stderr }) => {
   const [command, ...rest] = args;
@@ -282,6 +384,47 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
 
       writeJson(io, output);
       return failedThreshold ? 2 : 0;
+    } catch (error) {
+      io.stderr.write(`${error.message}\n`);
+      return 1;
+    }
+  }
+
+  if (command === "detect-repo") {
+    const [repoPath = "."] = rest;
+    try {
+      writeJson(io, detectRepo(repoPath));
+      return 0;
+    } catch (error) {
+      io.stderr.write(`${error.message}\n`);
+      return 1;
+    }
+  }
+
+  if (command === "audit-repo") {
+    const { repoPath, options } = splitRepoArgs(rest);
+    if (!repoPath) {
+      io.stderr.write("audit-repo requires a repository path.\n");
+      return 1;
+    }
+
+    try {
+      const outRequested = options.includes("--out");
+      const markdownRequested = options.includes("--markdown");
+      const outPath = outRequested ? repoOptionValue(options, "--out", null, "--out requires a file path.") : null;
+      const markdownPath = markdownRequested
+        ? repoOptionValue(options, "--markdown", null, "--markdown requires a file path.")
+        : null;
+
+      const output = await runRepoAudit(mergeRepoConfig(repoPath, options));
+      if (outPath) fs.writeFileSync(outPath, `${JSON.stringify(output, null, 2)}\n`);
+      if (markdownPath) fs.writeFileSync(markdownPath, generateMarkdownReport(output));
+      if (outPath || markdownPath) {
+        writeJson(io, { ok: true, out: outPath || null, markdown: markdownPath || null });
+      } else {
+        writeJson(io, output);
+      }
+      return output.repo?.sourceFindings?.length ? 2 : 0;
     } catch (error) {
       io.stderr.write(`${error.message}\n`);
       return 1;

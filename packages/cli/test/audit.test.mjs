@@ -148,3 +148,42 @@ test("restricted mode allows supplied URL-list files as bounded evidence inputs"
   assert.equal(audit.pages.length, 0);
   assert.equal(audit.run.security.mode, "restricted");
 });
+
+test("audits internal URL list entries without a URL-list file", async () => {
+  const index = path.resolve("examples/fixture-repos/static-basic/dist/index.html");
+  const about = path.resolve("examples/fixture-repos/static-basic/dist/about/index.html");
+  const audit = await runAudit({
+    target: index,
+    urlListEntries: [index, about],
+  });
+
+  assert.equal(audit.pages.length, 2);
+  assert.ok(audit.pages.some((page) => page.finalUrl.endsWith("index.html")));
+  assert.ok(audit.pages.some((page) => page.finalUrl.endsWith(path.join("about", "index.html"))));
+});
+
+test("normalizes internal URL list entries like URL-list file lines", async () => {
+  await withServer((request, response) => {
+    response.setHeader("content-type", "text/html");
+    if (request.url === "/one") {
+      response.end("<title>One</title><meta name='description' content='One'><h1>One</h1><p>Enough content.</p>");
+      return;
+    }
+    if (request.url === "/two") {
+      response.end("<title>Two</title><meta name='description' content='Two'><h1>Two</h1><p>Enough content.</p>");
+      return;
+    }
+    response.statusCode = 404;
+    response.end("<title>Missing</title><h1>Missing</h1>");
+  }, async (origin) => {
+    const audit = await runAudit({
+      target: `${origin}/`,
+      urlListEntries: ["/one", "# comment", "", "/two"],
+    });
+
+    assert.deepEqual(
+      audit.pages.map((page) => new URL(page.finalUrl).pathname),
+      ["/one", "/two"],
+    );
+  });
+});

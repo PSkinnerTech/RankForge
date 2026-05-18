@@ -6,6 +6,41 @@ const formatSources = (sources = []) => sources.join(", ");
 
 const formatMetric = (value, suffix = "") => (Number.isFinite(value) ? `${value}${suffix}` : "n/a");
 
+const formatRepoValue = (value) => (value === null || value === undefined || value === "" ? "n/a" : String(value));
+
+const formatBulletValue = (value) => escapeCell(formatRepoValue(value));
+
+const appendRepositoryEvidence = (lines, repo) => {
+  if (!repo) return;
+
+  lines.push("", "## Repository Evidence", "");
+  lines.push(`- Path: ${formatBulletValue(repo.path)}`);
+  lines.push(`- Framework: ${formatBulletValue(repo.detectedFramework)}`);
+  lines.push(`- Package manager: ${formatBulletValue(repo.packageManager)}`);
+  lines.push(`- Static dir: ${formatBulletValue(repo.staticDirRelative || repo.staticDir)}`);
+  lines.push(`- Preview command: ${formatBulletValue(repo.previewCommand)}`);
+  lines.push(`- Preview URL: ${formatBulletValue(repo.previewUrl)}`);
+
+  lines.push("", "Repository routes:");
+  if (repo.routeSources?.length) {
+    for (const route of repo.routeSources) {
+      const routeLabel = route.route || route.path;
+      lines.push(`- ${formatBulletValue(route.type)}: ${formatBulletValue(routeLabel)}`);
+    }
+  } else {
+    lines.push("- None recorded.");
+  }
+
+  lines.push("", "Repository source findings:");
+  if (repo.sourceFindings?.length) {
+    for (const finding of repo.sourceFindings) {
+      lines.push(`- ${formatBulletValue(finding.id)}: ${formatBulletValue(finding.message)}`);
+    }
+  } else {
+    lines.push("- None recorded.");
+  }
+};
+
 export const generateMarkdownReport = (audit) => {
   const findings = [...(audit.findings || [])].sort(
     (a, b) => (priorityRank[a.severity] ?? 9) - (priorityRank[b.severity] ?? 9),
@@ -65,6 +100,8 @@ export const generateMarkdownReport = (audit) => {
   } else {
     lines.push("No implementation tasks recorded.");
   }
+
+  appendRepositoryEvidence(lines, audit.repo);
 
   lines.push("", "## Imported Evidence", "");
   if (audit.integrations?.lighthouse) {

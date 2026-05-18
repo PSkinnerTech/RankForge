@@ -1,0 +1,15 @@
+{
+  "repo": {
+    "detectedFramework": "generic-static",
+    "packageManager": null,
+    "staticDirRelative": "dist",
+    "routeSources": [
+      { "type": "static_html", "route": "/" },
+      { "type": "static_html", "route": "/about/" }
+    ]
+  },
+  "pageCount": 2,
+  "pageTitles": ["Static Basic Home", "About Static Basic"],
+  "sourceFindingIds": [],
+  "evidenceGapIds": ["ranking.integrations_missing"]
+}

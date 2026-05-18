@@ -49,3 +49,38 @@ test("generates a Markdown audit report from audit JSON", () => {
   assert.match(markdown, /Evidence Gaps/);
   assert.match(markdown, /https:\/\/developers\.google\.com\/search\/docs\/crawling-indexing\/robots-meta-tag/);
 });
+
+test("includes repository evidence when audit repo evidence exists", () => {
+  const markdown = generateMarkdownReport({
+    run: { target: "repo" },
+    findings: [],
+    scores: {},
+    integrations: {},
+    evidenceGaps: [],
+    sources: [],
+    repo: {
+      path: "/repo",
+      detectedFramework: "generic-static",
+      packageManager: null,
+      staticDirRelative: "dist\nwith pipe | value",
+      previewCommand: null,
+      previewUrl: null,
+      routeSources: [{ type: "static_html", route: "/", path: "/repo/dist/index.html" }],
+      sourceFindings: [
+        {
+          id: "repo.static_dir_missing",
+          severity: "P1",
+          message: "Static directory\nis missing | invalid.",
+          evidence: "dist",
+          recommendation: "Build the repository or pass an existing static directory.",
+          confidence: "high",
+        },
+      ],
+    },
+  });
+
+  assert.match(markdown, /## Repository Evidence/);
+  assert.match(markdown, /Framework: generic-static/);
+  assert.match(markdown, /Static dir: dist with pipe \\| value/);
+  assert.match(markdown, /repo\.static_dir_missing: Static directory is missing \\| invalid\./);
+});
