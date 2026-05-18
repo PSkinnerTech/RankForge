@@ -270,6 +270,26 @@ test("repo audit normalizes absolute route-list entries under static dir", async
   assert.equal(audit.pages.length, 2);
 });
 
+test("repo audit rejects absolute route-list entries outside static dir without exposing machine paths as routes", async () => {
+  const repoPath = fixture("vite-basic");
+  const routeListDir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-routes-"));
+  const externalPath = path.join(routeListDir, "external.html");
+  const routeList = path.join(routeListDir, "routes.txt");
+  fs.writeFileSync(externalPath, "<title>External</title><h1>External</h1>");
+  fs.writeFileSync(routeList, `${externalPath}\n`);
+
+  const audit = await runRepoAudit({
+    repoPath,
+    buildCommand: "npm run build",
+    staticDir: "dist",
+    routeList,
+  });
+
+  assert.equal(audit.pages.length, 0);
+  assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_entry_outside_static_dir");
+  assert.ok(!audit.repo.routeSources.some((source) => source.route === externalPath));
+});
+
 test("repo audit reports missing route-list files", async () => {
   const audit = await runRepoAudit({
     repoPath: fixture("vite-basic"),
