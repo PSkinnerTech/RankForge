@@ -1,0 +1,8 @@
+{
+  "name": "openclaw-preview-fixture",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preview": "node server.mjs"
+  }
+}
