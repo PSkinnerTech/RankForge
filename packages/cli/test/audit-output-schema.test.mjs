@@ -41,3 +41,44 @@ test("rejects findings missing required fields", () => {
   assert.equal(result.ok, false);
   assert.match(result.errors.join("\n"), /findings\[0\]\.severity is required/);
 });
+
+test("accepts optional repo evidence section", () => {
+  const audit = {
+    schemaVersion: "1.0.0",
+    toolVersion: "0.2.0",
+    run: {},
+    site: {},
+    pages: [],
+    integrations: {},
+    scores: {},
+    findings: [],
+    evidenceGaps: [],
+    sources: [],
+    repo: {
+      path: "/repo",
+      detectedFramework: "generic-static",
+      sourceFindings: [],
+    },
+  };
+
+  assert.deepEqual(validateAuditOutput(audit), { ok: true, errors: [] });
+});
+
+test("rejects optional repo evidence section when it is not an object", () => {
+  const result = validateAuditOutput({
+    schemaVersion: "1.0.0",
+    toolVersion: "0.2.0",
+    run: {},
+    site: {},
+    pages: [],
+    integrations: {},
+    scores: {},
+    findings: [],
+    evidenceGaps: [],
+    sources: [],
+    repo: [],
+  });
+
+  assert.equal(result.ok, false);
+  assert.match(result.errors.join("\n"), /repo must be an object/);
+});

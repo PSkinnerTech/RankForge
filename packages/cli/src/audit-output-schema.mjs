@@ -27,6 +27,7 @@ export const auditOutputSchema = {
     findings: { type: "array" },
     evidenceGaps: { type: "array" },
     sources: { type: "array" },
+    repo: { type: "object" },
   },
 };
 
@@ -70,6 +71,9 @@ export const validateAuditOutput = (audit) => {
   }
 
   if ("pages" in audit && !Array.isArray(audit.pages)) errors.push("pages must be an array");
+  if ("repo" in audit && (!audit.repo || typeof audit.repo !== "object" || Array.isArray(audit.repo))) {
+    errors.push("repo must be an object");
+  }
   if ("findings" in audit && !Array.isArray(audit.findings)) {
     errors.push("findings must be an array");
   } else {
