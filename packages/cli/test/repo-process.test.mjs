@@ -10,6 +10,8 @@ import { runCommand, startPreview, stopPreview, waitForHttp } from "../src/repo-
 
 const outputCaptureLimitBytes = 64 * 1024;
 
+const shellQuote = (value) => `'${String(value).replaceAll("'", "'\\''")}'`;
+
 const freePort = async () => {
   const server = net.createServer();
   server.listen(0, "127.0.0.1");
@@ -284,6 +286,38 @@ test("reports build command timeout and stops process", async () => {
       return true;
     },
   );
+});
+
+test("waits for build timeout cleanup before rejecting", async () => {
+  const pidFile = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-build-timeout-")), "pid");
+  const script = `
+    process.on("SIGTERM", () => {});
+    require("node:fs").writeFileSync(${JSON.stringify(pidFile)}, String(process.pid));
+    setInterval(() => {}, 1000);
+  `;
+  const command = [
+    `printf %s $$ > ${shellQuote(pidFile)}`,
+    `exec ${shellQuote(process.execPath)} -e ${shellQuote(script)}`,
+  ].join("; ");
+
+  let error;
+  try {
+    await runCommand({
+      command,
+      cwd: ".",
+      timeoutMs: 100,
+      label: "Build",
+    });
+  } catch (caught) {
+    error = caught;
+  }
+
+  assert.ok(error);
+  assert.match(error.message, /Build command timed out after 100 ms/);
+  assert.equal(error.commandResult.timedOut, true);
+
+  const pid = Number(fs.readFileSync(pidFile, "utf8"));
+  assert.throws(() => process.kill(pid, 0), { code: "ESRCH" });
 });
 
 test("restricted mode blocks build command before spawning", async () => {
