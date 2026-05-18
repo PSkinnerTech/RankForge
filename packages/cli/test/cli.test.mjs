@@ -342,3 +342,65 @@ test("audit-repo rejects max-preview-ms below minimum", async () => {
   assert.equal(result.exitCode, 1);
   assert.match(result.stderr, /--max-preview-ms must be a positive integer/);
 });
+
+test("audit-repo runs build command from CLI", async () => {
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/vite-basic",
+    "--build-command",
+    "npm run build",
+    "--static-dir",
+    "dist",
+  ]);
+
+  assert.equal(result.exitCode, 0);
+  const body = JSON.parse(result.stdout);
+  assert.equal(body.repo.build.executed, true);
+  assert.equal(body.pages.length, 2);
+});
+
+test("audit-repo reads repo options from config file", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-repo-config-cli-"));
+  const config = path.join(dir, "audit.config.json");
+  fs.writeFileSync(
+    config,
+    JSON.stringify({
+      target: "https://example.com",
+      crawl: { mode: "single", maxPages: 1 },
+      repo: {
+        buildCommand: "npm run build",
+        staticDir: path.resolve("examples/fixture-repos/vite-basic/dist"),
+        maxBuildMs: 5000,
+      },
+    }),
+  );
+
+  const result = await capture(["audit-repo", "examples/fixture-repos/vite-basic", "--config", config]);
+
+  assert.equal(result.exitCode, 0);
+  const body = JSON.parse(result.stdout);
+  assert.equal(body.run.crawl.maxPages, 1);
+  assert.equal(body.repo.buildCommand, "npm run build");
+});
+
+test("audit-repo fail-on returns CI failure for rendered findings", async () => {
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/static-basic",
+    "--static-dir",
+    "dist",
+    "--fail-on",
+    "P2",
+  ]);
+
+  assert.equal(result.exitCode, 2);
+  const body = JSON.parse(result.stdout);
+  assert.ok(body.findings.some((finding) => finding.severity === "P2" || finding.severity === "P1"));
+});
+
+test("audit-repo rejects missing build command value", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/vite-basic", "--build-command"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--build-command requires a value/);
+});

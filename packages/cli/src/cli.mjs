@@ -46,14 +46,19 @@ Audit options:
   --version                      Show CLI version
 
 Repo audit options:
+  --config <file>                Read repo audit options from an audit.config.json file
   --static-dir <dir>             Audit prebuilt static HTML output relative to repo path
+  --build-command <command>      Run an explicit local build command before auditing static output
+  --max-build-ms <n>             Maximum time to wait for build command completion
   --preview-command <command>    Start an explicit local preview server command
   --preview-url <url>            URL to wait for and audit after preview startup
   --max-preview-ms <n>           Maximum time to wait for preview startup
+  --route-list <file>            Audit generated routes listed one per line
   --mode full|sample|single      Crawl mode for preview audits
   --max-pages <n>                Maximum pages to crawl for preview audits
   --max-depth <n>                Maximum crawl depth for preview audits
   --security local|restricted    Apply local CLI or restricted wrapper network/file policy
+  --fail-on <severity>           Return exit code 2 when repo or page findings meet P0, P1, P2, or P3 threshold
   --out <file>                   Write repository audit JSON
   --markdown <file>              Write repository audit Markdown report
 `;
@@ -92,14 +97,19 @@ const auditOptionsWithValues = new Set([
 ]);
 
 const repoOptionsWithValues = new Set([
+  "--config",
   "--static-dir",
+  "--build-command",
+  "--max-build-ms",
   "--preview-command",
   "--preview-url",
   "--max-preview-ms",
+  "--route-list",
   "--mode",
   "--max-pages",
   "--max-depth",
   "--security",
+  "--fail-on",
   "--out",
   "--markdown",
 ]);
@@ -268,30 +278,54 @@ const mergeAuditConfig = (target, options) => {
   return merged;
 };
 
-const mergeRepoConfig = (repoPath, options) => ({
-  repoPath,
-  staticDir: repoOptionValue(options, "--static-dir"),
-  previewCommand: repoOptionValue(options, "--preview-command"),
-  previewUrl: repoOptionValue(options, "--preview-url"),
-  maxPreviewMs: repoNumberOption(options, "--max-preview-ms", 30000, {
-    minimum: 1,
-    minimumDescription: "positive integer",
-  }),
-  crawl: {
-    mode: repoEnumOption(options, "--mode", "full", ["full", "sample", "single"]),
-    maxPages: repoNumberOption(options, "--max-pages", 25, {
+const mergeRepoConfig = (repoPath, options) => {
+  const configPath = repoOptionValue(options, "--config");
+  const baseDir = configPath ? path.dirname(path.resolve(configPath)) : process.cwd();
+  const fileConfig = configPath ? resolveAuditConfigPaths(readAuditConfig(configPath), baseDir) : {};
+  const repoConfig = fileConfig.repo && typeof fileConfig.repo === "object" && !Array.isArray(fileConfig.repo) ? fileConfig.repo : {};
+  const securityMode = repoEnumOption(options, "--security", fileConfig.security?.mode || "local", ["local", "restricted"]);
+
+  const merged = {
+    ...fileConfig,
+    repoPath,
+    staticDir: repoOptionValue(options, "--static-dir", repoConfig.staticDir),
+    routeList: repoOptionValue(options, "--route-list", repoConfig.routeList),
+    buildCommand: repoOptionValue(options, "--build-command", repoConfig.buildCommand),
+    previewCommand: repoOptionValue(options, "--preview-command", repoConfig.previewCommand),
+    previewUrl: repoOptionValue(options, "--preview-url", repoConfig.previewUrl),
+    maxBuildMs: repoNumberOption(options, "--max-build-ms", repoConfig.maxBuildMs ?? 120000, {
       minimum: 1,
       minimumDescription: "positive integer",
     }),
-    maxDepth: repoNumberOption(options, "--max-depth", 2, {
-      minimum: 0,
-      minimumDescription: "non-negative integer",
+    maxPreviewMs: repoNumberOption(options, "--max-preview-ms", repoConfig.maxPreviewMs ?? 30000, {
+      minimum: 1,
+      minimumDescription: "positive integer",
     }),
-  },
-  security: {
-    mode: repoEnumOption(options, "--security", "local", ["local", "restricted"]),
-  },
-});
+    crawl: {
+      ...(fileConfig.crawl || {}),
+      mode: repoEnumOption(options, "--mode", fileConfig.crawl?.mode || "full", ["full", "sample", "single"]),
+      maxPages: repoNumberOption(options, "--max-pages", fileConfig.crawl?.maxPages ?? 25, {
+        minimum: 1,
+        minimumDescription: "positive integer",
+      }),
+      maxDepth: repoNumberOption(options, "--max-depth", fileConfig.crawl?.maxDepth ?? 2, {
+        minimum: 0,
+        minimumDescription: "non-negative integer",
+      }),
+    },
+    security: {
+      ...(fileConfig.security || {}),
+      mode: securityMode,
+    },
+  };
+
+  if (configPath) {
+    const validation = validateAuditConfig(fileConfig, { baseDir, checkFiles: true });
+    if (!validation.ok) throw new Error(validation.errors.join("\n"));
+  }
+
+  return merged;
+};
 
 export const runCli = async (args, io = { stdout: process.stdout, stderr: process.stderr }) => {
   const [command, ...rest] = args;
@@ -417,14 +451,21 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
         : null;
 
       const output = await runRepoAudit(mergeRepoConfig(repoPath, options));
+      const failOn = repoOptionValue(options, "--fail-on");
+      if (failOn && !(failOn in severityRank)) throw new Error("--fail-on must be one of: P0, P1, P2, P3");
+      const failedThreshold =
+        failsThreshold(output.findings, failOn) || failsThreshold(output.repo?.sourceFindings || [], failOn);
+
       if (outPath) fs.writeFileSync(outPath, `${JSON.stringify(output, null, 2)}\n`);
       if (markdownPath) fs.writeFileSync(markdownPath, generateMarkdownReport(output));
       if (outPath || markdownPath) {
-        writeJson(io, { ok: true, out: outPath || null, markdown: markdownPath || null });
+        const result = { ok: true, out: outPath || null, markdown: markdownPath || null };
+        if (failedThreshold) result.failedThreshold = failOn;
+        writeJson(io, result);
       } else {
         writeJson(io, output);
       }
-      return output.repo?.sourceFindings?.length ? 2 : 0;
+      return failedThreshold || output.repo?.sourceFindings?.length ? 2 : 0;
     } catch (error) {
       io.stderr.write(`${error.message}\n`);
       return 1;
