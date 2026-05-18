@@ -76,6 +76,87 @@ const earlyExitError = (preview, code, signal) =>
     preview,
   );
 
+const commandExecutionDisabledError = () =>
+  new Error("Restricted security mode disables local command execution for repo audits.");
+
+const commandError = (message, commandResult) => {
+  const error = new Error(message);
+  error.commandResult = commandResult;
+  return error;
+};
+
+export const runCommand = async ({ command, cwd, timeoutMs = 120000, label = "Command", security }) => {
+  if (!command) {
+    throw new Error(`${label} command is required.`);
+  }
+  if (security?.mode === "restricted") {
+    throw commandExecutionDisabledError();
+  }
+
+  const child = spawn(command, {
+    cwd,
+    shell: true,
+    detached: process.platform !== "win32",
+    stdio: ["ignore", "pipe", "pipe"],
+  });
+
+  const startedAt = Date.now();
+  const commandResult = {
+    command,
+    stdout: [],
+    stderr: [],
+    exitCode: null,
+    signal: null,
+    durationMs: 0,
+    timedOut: false,
+  };
+
+  child.stdout?.on("data", (chunk) => appendCappedChunk(commandResult.stdout, chunk));
+  child.stderr?.on("data", (chunk) => appendCappedChunk(commandResult.stderr, chunk));
+
+  let timeout;
+  const timeoutPromise = new Promise((_, reject) => {
+    timeout = setTimeout(async () => {
+      commandResult.timedOut = true;
+      try {
+        await stopPreview({ child });
+      } catch {
+        // Keep the timeout error as the actionable failure.
+      }
+      commandResult.durationMs = Date.now() - startedAt;
+      reject(commandError(`${label} command timed out after ${timeoutMs} ms.`, commandResult));
+    }, timeoutMs);
+  });
+
+  const exitPromise = new Promise((resolve, reject) => {
+    child.once("error", (error) => {
+      commandResult.durationMs = Date.now() - startedAt;
+      reject(commandError(`${label} command failed to start: ${error.message}`, commandResult));
+    });
+    child.once("close", (code, signal) => {
+      commandResult.exitCode = code;
+      commandResult.signal = signal;
+      commandResult.durationMs = Date.now() - startedAt;
+      if (code === 0) {
+        resolve(commandResult);
+        return;
+      }
+      reject(
+        commandError(
+          `${label} command exited with ${code === null ? `signal ${signal}` : `code ${code}`}.`,
+          commandResult,
+        ),
+      );
+    });
+  });
+
+  try {
+    return await Promise.race([exitPromise, timeoutPromise]);
+  } finally {
+    clearTimeout(timeout);
+  }
+};
+
 const isSecurityGuardError = (error) => String(error?.message || "").startsWith("Restricted security mode ");
 
 export const waitForHttp = async (url, options = {}) => {

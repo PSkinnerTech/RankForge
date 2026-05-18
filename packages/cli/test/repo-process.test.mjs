@@ -6,7 +6,7 @@ import net from "node:net";
 import os from "node:os";
 import path from "node:path";
 import { once } from "node:events";
-import { startPreview, stopPreview, waitForHttp } from "../src/repo-process.mjs";
+import { runCommand, startPreview, stopPreview, waitForHttp } from "../src/repo-process.mjs";
 
 const outputCaptureLimitBytes = 64 * 1024;
 
@@ -222,4 +222,71 @@ test("requires preview URL", async () => {
       }),
     /--preview-url is required for preview repo audits\./,
   );
+});
+
+test("runs build command and captures bounded output", async () => {
+  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-build-")), "built");
+
+  const result = await runCommand({
+    command: `node -e "require('node:fs').writeFileSync('${marker}', 'built'); console.log('build ok')"`,
+    cwd: ".",
+    timeoutMs: 5000,
+    label: "Build",
+  });
+
+  assert.equal(result.exitCode, 0);
+  assert.equal(fs.readFileSync(marker, "utf8"), "built");
+  assert.match(result.stdout.join(""), /build ok/);
+  assert.equal(result.timedOut, false);
+});
+
+test("reports non-zero build command exits with stderr", async () => {
+  await assert.rejects(
+    () =>
+      runCommand({
+        command: "node -e \"console.error('build failed'); process.exit(7)\"",
+        cwd: ".",
+        timeoutMs: 5000,
+        label: "Build",
+      }),
+    (error) => {
+      assert.match(error.message, /Build command exited with code 7/);
+      assert.match(error.commandResult.stderr.join(""), /build failed/);
+      return true;
+    },
+  );
+});
+
+test("reports build command timeout and stops process", async () => {
+  await assert.rejects(
+    () =>
+      runCommand({
+        command: "node -e \"setTimeout(() => {}, 5000)\"",
+        cwd: ".",
+        timeoutMs: 100,
+        label: "Build",
+      }),
+    (error) => {
+      assert.match(error.message, /Build command timed out after 100 ms/);
+      assert.equal(error.commandResult.timedOut, true);
+      return true;
+    },
+  );
+});
+
+test("restricted mode blocks build command before spawning", async () => {
+  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-build-restricted-")), "spawned");
+
+  await assert.rejects(
+    () =>
+      runCommand({
+        command: `node -e "require('node:fs').writeFileSync('${marker}', 'spawned')"`,
+        cwd: ".",
+        timeoutMs: 5000,
+        label: "Build",
+        security: { mode: "restricted" },
+      }),
+    /Restricted security mode disables local command execution for repo audits/,
+  );
+  assert.equal(fs.existsSync(marker), false);
 });
