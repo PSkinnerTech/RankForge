@@ -20,6 +20,15 @@ const appendRepositoryEvidence = (lines, repo) => {
   lines.push(`- Static dir: ${formatBulletValue(repo.staticDirRelative || repo.staticDir)}`);
   lines.push(`- Preview command: ${formatBulletValue(repo.previewCommand)}`);
   lines.push(`- Preview URL: ${formatBulletValue(repo.previewUrl)}`);
+  if (repo.buildCommand) lines.push(`- Build command: ${formatBulletValue(repo.buildCommand)}`);
+  if (repo.build) {
+    lines.push(`- Build executed: ${repo.build.executed ? "yes" : "no"}`);
+    if (repo.build.exitCode !== undefined && repo.build.exitCode !== null) {
+      lines.push(`- Build exit code: ${formatBulletValue(repo.build.exitCode)}`);
+    }
+    if (repo.build.durationMs !== undefined) lines.push(`- Build duration: ${formatBulletValue(repo.build.durationMs)} ms`);
+  }
+  if (repo.routeList) lines.push(`- Route list: ${formatBulletValue(repo.routeList)}`);
 
   lines.push("", "Repository routes:");
   if (repo.routeSources?.length) {

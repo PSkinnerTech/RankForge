@@ -84,3 +84,33 @@ test("includes repository evidence when audit repo evidence exists", () => {
   assert.match(markdown, /Static dir: dist with pipe \\| value/);
   assert.match(markdown, /repo\.static_dir_missing: Static directory is missing \\| invalid\./);
 });
+
+test("includes repository build evidence when present", () => {
+  const markdown = generateMarkdownReport({
+    schemaVersion: "1.0.0",
+    toolVersion: "0.2.0",
+    run: { id: "run", startedAt: "now", endedAt: "now", target: "repo", mode: "repo" },
+    site: { notes: [] },
+    pages: [],
+    integrations: {},
+    scores: {},
+    findings: [],
+    evidenceGaps: [],
+    sources: [],
+    repo: {
+      path: "/repo",
+      detectedFramework: "vite",
+      buildCommand: "npm run build",
+      build: { executed: true, exitCode: 0, durationMs: 1234 },
+      staticDirRelative: "dist",
+      routeList: "/repo/routes.txt",
+      routeSources: [],
+      sourceFindings: [],
+      notes: [],
+    },
+  });
+
+  assert.match(markdown, /Build command: npm run build/);
+  assert.match(markdown, /Build exit code: 0/);
+  assert.match(markdown, /Route list: \/repo\/routes.txt/);
+});

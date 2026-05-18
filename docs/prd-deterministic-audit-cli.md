@@ -258,6 +258,7 @@ Implemented behavior:
 - Crawl generated output with the existing audit engine.
 - Emit existing page/site evidence plus a `repo` evidence section.
 - Emit repo source findings for missing audit paths, missing static directories, empty static outputs, and unreachable preview servers.
+- Developer repo audit mode now supports explicit build commands, route lists, repo config, and CI threshold failures.
 
 ## 10. Configuration
 

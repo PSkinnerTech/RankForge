@@ -7,6 +7,8 @@ const requiredFiles = [
   "package.json",
   "docs/prd-deterministic-audit-cli.md",
   "docs/release-checklist.md",
+  "docs/superpowers/plans/2026-05-18-developer-repo-audit-completion.md",
+  "docs/superpowers/specs/2026-05-18-developer-repo-audit-completion-design.md",
   "packages/cli/package.json",
   "packages/cli/src/index.mjs",
   "packages/cli/src/cli.mjs",

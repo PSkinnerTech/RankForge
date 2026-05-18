@@ -40,6 +40,9 @@ npm run cli -- audit https://example.com --mode full --fail-on P1 --out audit.js
 npm run cli -- detect-repo .
 npm run cli -- audit-repo . --static-dir dist --out repo-audit.json --markdown repo-audit.md
 npm run cli -- audit-repo . --preview-command "npm run preview -- --host 127.0.0.1" --preview-url http://127.0.0.1:4173 --max-pages 25
+npm run cli -- audit-repo . --build-command "npm run build" --static-dir dist --fail-on P1 --out audit.json --markdown audit.md
+npm run cli -- audit-repo . --config audit.config.json
+npm run cli -- audit-repo . --static-dir dist --route-list routes.txt
 ```
 
 The current `audit` command collects single-page, supplied URL-list, or bounded same-origin crawl evidence, can read `audit.config.json`, can seed from a sitemap, can enforce robots.txt, can filter crawls with include/exclude patterns, evaluates deterministic page and site rules, and can write JSON or Markdown. Extracted page evidence includes metadata, canonicals, hreflang, favicon and site-name signals, preview directives, headings, links, image inventory, JSON-LD blocks, schema types, author/date signals, and internal/external link counts. Browser rendering is available when Playwright is installed or when a renderer is injected by code; otherwise the CLI records rendering as unavailable. The `detect-repo [path]` command reports repository framework, package-manager, route, and build-output signals and defaults to the current directory when no path is supplied. The `audit-repo` command exits 2 when repo source findings are present.
