@@ -2,6 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { crawlSite } from "./crawl.mjs";
+import { readTextFileLimited, resolveLimits } from "./io-guards.mjs";
 import { readIntegrations } from "./integrations.mjs";
 import { evaluatePerformance } from "./performance.mjs";
 import { evaluatePage, scoreFindings } from "./rule-engine.mjs";
@@ -52,8 +53,13 @@ const crawlSettings = (config) => ({
 const readUrlList = (config) => {
   if (!config.urlList) return [];
   const baseDir = path.dirname(config.urlList);
-  return fs
-    .readFileSync(config.urlList, "utf8")
+  const limits = resolveLimits(config.limits);
+  return readTextFileLimited(config.urlList, {
+    security: config.security,
+    allowRestricted: true,
+    limits,
+    maxBytes: limits.maxFileBytes,
+  })
     .split(/\r?\n/)
     .map((line) => line.trim())
     .filter((line) => line && !line.startsWith("#"))
@@ -70,7 +76,14 @@ const collectUrlList = async (config) => {
   const pages = [];
 
   for (const url of urls) {
-    pages.push(await collectSnapshot(url, { render: config.render?.mode, renderer: config.renderer }));
+    pages.push(
+      await collectSnapshot(url, {
+        render: config.render?.mode,
+        renderer: config.renderer,
+        security: config.security,
+        limits: config.limits,
+      }),
+    );
   }
 
   return { pages, skipped: [], robots: null, sitemaps: [] };
@@ -87,7 +100,14 @@ export const runAudit = async (config) => {
     : shouldCrawl
       ? await crawlSite(config)
       : {
-          pages: [await collectSnapshot(config.target, { render: config.render?.mode, renderer: config.renderer })],
+          pages: [
+            await collectSnapshot(config.target, {
+              render: config.render?.mode,
+              renderer: config.renderer,
+              security: config.security,
+              limits: config.limits,
+            }),
+          ],
           skipped: [],
           robots: null,
           sitemaps: [],
@@ -95,7 +115,7 @@ export const runAudit = async (config) => {
   const endedAt = new Date().toISOString();
   const pages = crawlResult.pages;
   const sitemapUrls = (crawlResult.sitemaps || []).flatMap((sitemap) => sitemap.parsed?.urls || []);
-  const integrations = readIntegrations(config.integrations);
+  const integrations = readIntegrations(config.integrations, { security: config.security, limits: config.limits });
   const hasRankingEvidence = Boolean(
     integrations.searchConsole?.rows?.length || integrations.serp?.rows?.length || integrations.aiAnswers?.rows?.length,
   );
@@ -123,6 +143,8 @@ export const runAudit = async (config) => {
       mode: settings.mode,
       crawl: settings,
       render: config.render || { mode: "never" },
+      security: config.security || { mode: "local" },
+      limits: config.limits || {},
       userAgent: "OpenClaw GEO SEO audit snapshot",
       environment: {
         node: process.version,

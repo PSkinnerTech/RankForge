@@ -148,3 +148,39 @@ test("applies include and exclude crawl filters to discovered URLs", async () =>
     assert.ok(result.skipped.some((item) => item.url.endsWith("/blog/a") && item.reason === "not_included"));
   });
 });
+
+test("rejects unsafe crawl regex patterns before crawling", async () => {
+  await withServer((request, response) => {
+    response.setHeader("content-type", "text/html");
+    response.end("<title>Home</title><h1>Home</h1>");
+  }, async (origin) => {
+    await assert.rejects(
+      () =>
+        crawlSite({
+          target: `${origin}/`,
+          crawl: { mode: "full", include: ["(a+)+$"] },
+        }),
+      /unsafe regular expression/,
+    );
+  });
+});
+
+test("rejects unsafe crawl regex patterns before robots fetches", async () => {
+  let robotsRequests = 0;
+  await withServer((request, response) => {
+    if (request.url === "/robots.txt") robotsRequests++;
+    response.setHeader("content-type", "text/plain");
+    response.end("User-agent: *\nAllow: /\n");
+  }, async (origin) => {
+    await assert.rejects(
+      () =>
+        crawlSite({
+          target: `${origin}/`,
+          respectRobots: true,
+          crawl: { mode: "full", include: ["(a+)+$"] },
+        }),
+      /unsafe regular expression/,
+    );
+  });
+  assert.equal(robotsRequests, 0);
+});

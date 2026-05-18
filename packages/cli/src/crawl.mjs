@@ -1,26 +1,55 @@
 import { collectSnapshot } from "./snapshot.mjs";
+import { fetchWithGuards, readResponseTextLimited, resolveLimits } from "./io-guards.mjs";
 import { parseRobotsTxt, isAllowedByRobots } from "./robots.mjs";
 import { parseSitemap } from "./sitemap.mjs";
+import { compileSafeRegex } from "./regex-guards.mjs";
 import { isHttpUrl, normalizeUrl, sameOrigin } from "./url-utils.mjs";
 
 const userAgent = "OpenClawBot";
 
-const fetchText = async (url) => {
-  const response = await fetch(url, { headers: { "user-agent": userAgent } });
-  return {
-    url,
-    status: response.status,
-    ok: response.ok,
-    text: response.ok ? await response.text() : "",
-  };
+const fetchText = async (url, options = {}) => {
+  const limits = resolveLimits(options.limits);
+  const maxRedirects = options.maxRedirects ?? 5;
+  let current = url;
+
+  for (let attempt = 0; attempt <= maxRedirects; attempt++) {
+    const response = await fetchWithGuards(current, {
+      security: options.security,
+      limits,
+      fetchOptions: {
+        headers: { "user-agent": userAgent },
+        redirect: "manual",
+      },
+    });
+    const location = response.headers.get("location");
+    if ([301, 302, 303, 307, 308].includes(response.status) && location) {
+      current = new URL(location, current).href;
+      continue;
+    }
+
+    return {
+      url: current,
+      status: response.status,
+      ok: response.ok,
+      text: response.ok
+        ? await readResponseTextLimited(response, {
+            limits,
+            maxBytes: limits.maxTextBytes,
+            label: current,
+          })
+        : "",
+    };
+  }
+
+  throw new Error(`Too many redirects while fetching ${url}`);
 };
 
 const robotsUrlFor = (target) => new URL("/robots.txt", target).href;
 
-const loadRobots = async (target, enabled) => {
+const loadRobots = async (target, enabled, options = {}) => {
   if (!enabled) return null;
   try {
-    const response = await fetchText(robotsUrlFor(target));
+    const response = await fetchText(robotsUrlFor(target), options);
     return {
       url: response.url,
       status: response.status,
@@ -32,9 +61,9 @@ const loadRobots = async (target, enabled) => {
   }
 };
 
-const loadSitemap = async (url) => {
+const loadSitemap = async (url, options = {}) => {
   try {
-    const response = await fetchText(url);
+    const response = await fetchText(url, options);
     return {
       url,
       status: response.status,
@@ -46,11 +75,12 @@ const loadSitemap = async (url) => {
   }
 };
 
-const compilePatterns = (patterns = []) => patterns.map((pattern) => new RegExp(pattern));
+const compilePatterns = (patterns = [], key = "pattern") =>
+  patterns.map((pattern, index) => compileSafeRegex(pattern, `${key}[${index}]`));
 
 const createFilter = (config, target) => {
-  const include = compilePatterns(config.include || config.crawl?.include || []);
-  const exclude = compilePatterns(config.exclude || config.crawl?.exclude || []);
+  const include = compilePatterns(config.include || config.crawl?.include || [], "crawl.include");
+  const exclude = compilePatterns(config.exclude || config.crawl?.exclude || [], "crawl.exclude");
 
   return (url) => {
     if (normalizeUrl(url) === target) return null;
@@ -66,14 +96,15 @@ export const crawlSite = async (config) => {
   const maxDepth = config.maxDepth ?? config.crawl?.maxDepth ?? 2;
   const respectRobots = config.respectRobots ?? config.crawl?.respectRobots ?? false;
   const sitemapUrl = config.sitemap || config.crawl?.sitemap || null;
-  const robots = await loadRobots(target, respectRobots);
+  const guardOptions = { security: config.security, limits: config.limits };
+  const filterReason = createFilter(config, target);
+  const robots = await loadRobots(target, respectRobots, guardOptions);
   const sitemaps = [];
   const queue = [{ url: target, depth: 0 }];
-  const filterReason = createFilter(config, target);
   const skipped = [];
 
   if (sitemapUrl) {
-    const sitemap = await loadSitemap(sitemapUrl);
+    const sitemap = await loadSitemap(sitemapUrl, guardOptions);
     sitemaps.push(sitemap);
     for (const url of sitemap.parsed.urls || []) {
       const normalized = normalizeUrl(url);
@@ -120,7 +151,12 @@ export const crawlSite = async (config) => {
       continue;
     }
 
-    const snapshot = await collectSnapshot(item.url, { render: config.render?.mode, renderer: config.renderer });
+    const snapshot = await collectSnapshot(item.url, {
+      render: config.render?.mode,
+      renderer: config.renderer,
+      security: config.security,
+      limits: config.limits,
+    });
     pages.push(snapshot);
 
     if (item.depth >= maxDepth) continue;

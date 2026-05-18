@@ -26,6 +26,40 @@ test("rejects invalid crawl mode", () => {
   assert.match(result.errors.join("\n"), /crawl.mode/);
 });
 
+test("rejects unsafe crawl regex patterns", () => {
+  const result = validateAuditConfig({
+    target: "https://example.com",
+    crawl: { include: ["(a+)+$"] },
+  });
+  assert.equal(result.ok, false);
+  assert.match(result.errors.join("\n"), /unsafe regular expression/);
+});
+
+test("rejects overlapping alternation crawl regex patterns", () => {
+  const result = validateAuditConfig({
+    target: "https://example.com",
+    crawl: { exclude: ["^(a|aa)+$"] },
+  });
+  assert.equal(result.ok, false);
+  assert.match(result.errors.join("\n"), /overlapping alternation/);
+});
+
+test("rejects additional unsafe crawl regex forms", () => {
+  const nestedOptional = validateAuditConfig({
+    target: "https://example.com",
+    crawl: { include: ["^([a-z]?)+$"] },
+  });
+  const nonCapturingOverlap = validateAuditConfig({
+    target: "https://example.com",
+    crawl: { include: ["^(?:a|aa)+$"] },
+  });
+
+  assert.equal(nestedOptional.ok, false);
+  assert.match(nestedOptional.errors.join("\n"), /nested quantifiers/);
+  assert.equal(nonCapturingOverlap.ok, false);
+  assert.match(nonCapturingOverlap.errors.join("\n"), /overlapping alternation/);
+});
+
 test("rejects missing referenced files when file checks are enabled", () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-config-validation-"));
   const result = validateAuditConfig(

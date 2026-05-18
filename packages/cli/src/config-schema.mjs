@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { unsafeRegexReason } from "./regex-guards.mjs";
 
 export const auditConfigSchema = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
@@ -46,6 +47,24 @@ export const auditConfigSchema = {
           type: "array",
           items: { enum: ["mobile", "desktop"] },
         },
+      },
+    },
+    security: {
+      type: "object",
+      additionalProperties: true,
+      properties: {
+        mode: { enum: ["local", "restricted"] },
+      },
+    },
+    limits: {
+      type: "object",
+      additionalProperties: true,
+      properties: {
+        timeoutMs: { type: "integer", minimum: 1 },
+        maxHtmlBytes: { type: "integer", minimum: 1 },
+        maxTextBytes: { type: "integer", minimum: 1 },
+        maxFileBytes: { type: "integer", minimum: 1 },
+        maxIntegrationBytes: { type: "integer", minimum: 1 },
       },
     },
     integrations: {
@@ -122,7 +141,16 @@ const validateRegexList = (errors, key, value) => {
       new RegExp(pattern);
     } catch {
       errors.push(`${key}[${index}] must be a valid regular expression`);
+      continue;
     }
+    const unsafeReason = unsafeRegexReason(pattern);
+    if (unsafeReason) errors.push(`${key}[${index}] contains an unsafe regular expression: ${unsafeReason}`);
+  }
+};
+
+const validatePositiveInteger = (errors, key, value) => {
+  if (value !== undefined && (!Number.isInteger(value) || value < 1)) {
+    errors.push(`${key} must be a positive integer`);
   }
 };
 
@@ -184,6 +212,26 @@ export const validateAuditConfig = (config, options = {}) => {
       errors.push("render must be an object");
     } else if (config.render.mode !== undefined && !["auto", "always", "never"].includes(config.render.mode)) {
       errors.push("render.mode must be one of: auto, always, never");
+    }
+  }
+
+  if (config.security !== undefined) {
+    if (!isObject(config.security)) {
+      errors.push("security must be an object");
+    } else if (config.security.mode !== undefined && !["local", "restricted"].includes(config.security.mode)) {
+      errors.push("security.mode must be one of: local, restricted");
+    }
+  }
+
+  if (config.limits !== undefined) {
+    if (!isObject(config.limits)) {
+      errors.push("limits must be an object");
+    } else {
+      validatePositiveInteger(errors, "limits.timeoutMs", config.limits.timeoutMs);
+      validatePositiveInteger(errors, "limits.maxHtmlBytes", config.limits.maxHtmlBytes);
+      validatePositiveInteger(errors, "limits.maxTextBytes", config.limits.maxTextBytes);
+      validatePositiveInteger(errors, "limits.maxFileBytes", config.limits.maxFileBytes);
+      validatePositiveInteger(errors, "limits.maxIntegrationBytes", config.limits.maxIntegrationBytes);
     }
   }
 
