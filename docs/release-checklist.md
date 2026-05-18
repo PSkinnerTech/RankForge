@@ -2,6 +2,15 @@
 
 Use this checklist before publishing `openclaw-geo-seo-audit`.
 
+## Documentation Alignment
+
+Before publishing:
+
+- Confirm `docs/prd-deterministic-audit-cli.md` describes the current CLI package version and the next roadmap target.
+- Confirm `CHANGELOG.md` contains the package version being released.
+- Confirm `README.md` and `skill/geo-seo-audit/SKILL.md` describe readiness versus measured rankings accurately.
+- Confirm raw source corpus files remain repository assets and are not included in the CLI package dry run.
+
 ## Verification
 
 Run from the repository root:
@@ -33,6 +42,29 @@ The audit command returns exit code `2` when findings meet or exceed the configu
 - Confirm `npm pack --dry-run --workspace packages/cli` includes only intended package files.
 - Confirm optional Playwright support remains optional.
 - Confirm fixture/golden files remain repository test assets and are not shipped in the CLI package.
+
+## Post-Merge Verification
+
+After merging release-stabilization work to `main`, run:
+
+```bash
+git checkout main
+git pull --ff-only origin main
+npm ci
+npm audit --omit=dev
+npm test
+npm run validate
+npm pack --dry-run --workspace packages/cli
+git status --short --branch
+```
+
+Expected result:
+
+- Audit reports `found 0 vulnerabilities`.
+- Tests pass.
+- Validation reports `ok: true`.
+- Package dry run lists only intended CLI package files.
+- Git status shows a clean `main` branch.
 
 ## GitHub Release Workflow
 
