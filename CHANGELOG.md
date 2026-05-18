@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased - 2026-05-18
+
+- Added Phase B repository audit mode so the CLI can inspect a source repository and audit either detected static output or an explicit preview server.
+- Added `detect-repo [path]` to report repository metadata including package manager, framework signal, build command, preview command, static output directory, and discovered route sources.
+- Added `audit-repo <path>` with `--static-dir`, `--preview-command`, `--preview-url`, preview startup timeout, crawl limits, security mode, JSON output, and Markdown output support.
+- Added static output route discovery for HTML builds, including deterministic route normalization for root pages, nested `index.html` routes, and extension routes.
+- Added repo-aware audit orchestration with optional `repo` evidence in JSON and Markdown reports, plus source findings for missing audit paths, missing static directories, empty static outputs, and unreachable preview servers.
+- Added managed preview process handling with startup polling, preflight checks for already-running URLs, process-group shutdown, repeated-stop safety, early-exit errors, and capped stdout/stderr capture.
+- Hardened preview probing so restricted security mode uses the same guarded fetch path as audits and rejects private-network preview URLs before spawning commands.
+- Added packaged CLI source-map support so installed-package audits retain top-level source citations instead of silently emitting an empty `sources` array.
+- Added release-gate coverage for packed CLI contents and an installed-style packed tarball smoke check that verifies source citations are present.
+- Added repo fixture projects and golden summary coverage for static output audits and preview-server audits.
+- Updated README, skill wrapper guidance, and skill validation so repository audit mode is documented while keeping ranking claims limited to supplied evidence.
+- Preserved explicit preview precedence over auto-detected static output so callers can audit live preview servers even when a stale `dist` directory exists.
+- Expanded the test suite to cover repo detection, static route discovery, repo audit orchestration, preview lifecycle behavior, CLI validation, report/schema compatibility, packaging, and release-gate hardening.
+
 ## 0.2.0 - 2026-05-18
 
 - Added the deterministic `openclaw-geo-seo-audit` CLI package with `audit`, `snapshot`, `validate-config`, and `explain-rule` commands.
