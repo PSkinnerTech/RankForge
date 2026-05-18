@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { runAudit } from "./audit.mjs";
 import { detectRepo } from "./repo-detect.mjs";
-import { startPreview, stopPreview } from "./repo-process.mjs";
+import { runCommand, startPreview, stopPreview } from "./repo-process.mjs";
 import { discoverStaticRoutes } from "./repo-routes.mjs";
 
 const toolVersion = "0.2.0";
@@ -28,6 +28,36 @@ const previewErrorDetails = (error) => ({
   stdout: error?.preview?.stdout?.join("").trim() || undefined,
   stderr: error?.preview?.stderr?.join("").trim() || undefined,
 });
+
+const commandText = (chunks) => chunks?.join("").trim() || undefined;
+
+const buildErrorDetails = (error) => ({
+  message: error?.message || "Build command failed.",
+  stdout: commandText(error?.commandResult?.stdout),
+  stderr: commandText(error?.commandResult?.stderr),
+  exitCode: error?.commandResult?.exitCode ?? undefined,
+  signal: error?.commandResult?.signal ?? undefined,
+  timedOut: error?.commandResult?.timedOut || undefined,
+  durationMs: error?.commandResult?.durationMs,
+});
+
+const buildFindingFor = (error, command) => {
+  const timedOut = Boolean(error?.commandResult?.timedOut);
+  const restricted = /Restricted security mode disables local command execution/.test(error?.message || "");
+  return sourceFinding({
+    id: restricted ? "repo.build_unavailable" : timedOut ? "repo.build_timeout" : "repo.build_failed",
+    message: restricted
+      ? "Build command execution is disabled in restricted security mode."
+      : timedOut
+        ? "Build command timed out before repository audit could collect page evidence."
+        : "Build command failed before repository audit could collect page evidence.",
+    evidence: command,
+    recommendation: restricted
+      ? "Use local security mode for trusted repository builds, or audit prebuilt static output."
+      : "Run the build command locally, fix the failure, and rerun the repository audit.",
+    details: buildErrorDetails(error),
+  });
+};
 
 const repoEvidence = (detected, overrides = {}) => ({
   path: detected.repoRoot,
@@ -77,6 +107,40 @@ const emptyAudit = (detected, repoOverrides = {}) => {
 export const runRepoAudit = async (options = {}) => {
   const repoPath = path.resolve(options.repoPath || ".");
   const detected = detectRepo(repoPath);
+  const buildCommand = options.buildCommand || detected.buildCommand;
+  let build;
+
+  if (options.buildCommand) {
+    try {
+      const result = await runCommand({
+        command: options.buildCommand,
+        cwd: repoPath,
+        timeoutMs: options.maxBuildMs ?? 120000,
+        label: "Build",
+        security: options.security,
+      });
+      build = {
+        executed: true,
+        durationMs: result.durationMs,
+        exitCode: result.exitCode,
+        stdout: commandText(result.stdout),
+        stderr: commandText(result.stderr),
+      };
+    } catch (error) {
+      return emptyAudit(detected, {
+        buildCommand: options.buildCommand,
+        build: {
+          executed: true,
+          durationMs: error?.commandResult?.durationMs,
+          exitCode: error?.commandResult?.exitCode ?? null,
+          stdout: commandText(error?.commandResult?.stdout),
+          stderr: commandText(error?.commandResult?.stderr),
+          timedOut: error?.commandResult?.timedOut || undefined,
+        },
+        sourceFindings: [buildFindingFor(error, options.buildCommand)],
+      });
+    }
+  }
 
   const hasExplicitPreview = Boolean(options.previewCommand && options.previewUrl);
   const staticDir = options.staticDir ? path.resolve(repoPath, options.staticDir) : hasExplicitPreview ? null : detected.staticDir;
@@ -84,6 +148,8 @@ export const runRepoAudit = async (options = {}) => {
   if (staticDir) {
     const staticDirRelative = options.staticDir ? relativePath(repoPath, staticDir) : detected.staticDirRelative;
     const staticRepoFields = {
+      buildCommand,
+      build,
       staticDir,
       staticDirRelative,
       routeSources: [],
@@ -128,6 +194,8 @@ export const runRepoAudit = async (options = {}) => {
     });
 
     audit.repo = repoEvidence(detected, {
+      buildCommand,
+      build,
       staticDir,
       staticDirRelative,
       routeSources: routes,
@@ -150,6 +218,8 @@ export const runRepoAudit = async (options = {}) => {
       });
     } catch (error) {
       return emptyAudit(detected, {
+        buildCommand,
+        build,
         previewCommand: options.previewCommand,
         previewUrl: options.previewUrl,
         sourceFindings: [
@@ -177,6 +247,8 @@ export const runRepoAudit = async (options = {}) => {
       });
 
       audit.repo = repoEvidence(detected, {
+        buildCommand,
+        build,
         previewCommand: options.previewCommand,
         previewUrl: options.previewUrl,
         sourceFindings: [],
@@ -189,6 +261,8 @@ export const runRepoAudit = async (options = {}) => {
   }
 
   return emptyAudit(detected, {
+    buildCommand,
+    build,
     sourceFindings: [
       sourceFinding({
         id: "repo.audit_path_missing",

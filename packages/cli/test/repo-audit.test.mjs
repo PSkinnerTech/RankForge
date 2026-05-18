@@ -183,3 +183,48 @@ test("static repo golden summary matches fixture", async () => {
 
   assert.deepEqual(repoStaticSummary(audit), expected);
 });
+
+test("repo audit runs explicit build command before static output audit", async () => {
+  const repoPath = fixture("vite-basic");
+  fs.rmSync(path.join(repoPath, "dist"), { recursive: true, force: true });
+
+  const audit = await runRepoAudit({
+    repoPath,
+    buildCommand: "npm run build",
+    staticDir: "dist",
+    maxBuildMs: 5000,
+  });
+
+  assert.equal(audit.repo.detectedFramework, "vite");
+  assert.equal(audit.repo.buildCommand, "npm run build");
+  assert.equal(audit.repo.build.executed, true);
+  assert.equal(audit.repo.build.exitCode, 0);
+  assert.equal(audit.repo.staticDirRelative, "dist");
+  assert.equal(audit.pages.length, 2);
+  assert.ok(audit.pages.some((page) => page.evidence.title === "Vite Fixture Home"));
+});
+
+test("repo audit reports build failures as source findings", async () => {
+  const audit = await runRepoAudit({
+    repoPath: fixture("vite-basic"),
+    buildCommand: "node -e \"console.error('compile failed'); process.exit(7)\"",
+    staticDir: "dist",
+    maxBuildMs: 5000,
+  });
+
+  assert.equal(audit.pages.length, 0);
+  assert.equal(audit.repo.sourceFindings[0].id, "repo.build_failed");
+  assert.match(audit.repo.sourceFindings[0].details.stderr, /compile failed/);
+});
+
+test("repo audit blocks command execution in restricted mode", async () => {
+  const audit = await runRepoAudit({
+    repoPath: fixture("vite-basic"),
+    buildCommand: "npm run build",
+    staticDir: "dist",
+    security: { mode: "restricted" },
+  });
+
+  assert.equal(audit.pages.length, 0);
+  assert.equal(audit.repo.sourceFindings[0].id, "repo.build_unavailable");
+});
