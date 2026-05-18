@@ -244,6 +244,32 @@ test("repo audit constrains static routes with route list", async () => {
   assert.equal(audit.pages.length, 2);
 });
 
+test("repo audit normalizes absolute route-list entries under static dir", async () => {
+  const repoPath = fixture("vite-basic");
+  const routeList = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-routes-")), "routes.txt");
+  fs.rmSync(path.join(repoPath, "dist"), { recursive: true, force: true });
+  fs.writeFileSync(
+    routeList,
+    [
+      path.join(repoPath, "dist", "index.html"),
+      path.join(repoPath, "dist", "about", "index.html"),
+    ].join("\n"),
+  );
+
+  const audit = await runRepoAudit({
+    repoPath,
+    buildCommand: "npm run build",
+    staticDir: "dist",
+    routeList,
+  });
+
+  assert.deepEqual(
+    audit.repo.routeSources.map((route) => route.route),
+    ["/", "/about/"],
+  );
+  assert.equal(audit.pages.length, 2);
+});
+
 test("repo audit reports missing route-list files", async () => {
   const audit = await runRepoAudit({
     repoPath: fixture("vite-basic"),

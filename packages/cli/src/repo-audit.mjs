@@ -84,10 +84,21 @@ const htmlPathForRoute = (staticDir, route) => {
   return path.join(staticDir, normalized, "index.html");
 };
 
-const routeForEntry = (entry) => {
+const routeForStaticFile = (staticDir, filePath) => {
+  const relative = path.relative(staticDir, filePath);
+  if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) return null;
+
+  const parsed = path.parse(relative);
+  const routePath = relative.split(path.sep).join("/");
+  if (routePath === "index.html") return "/";
+  if (parsed.base === "index.html") return `/${parsed.dir.split(path.sep).join("/")}/`;
+  return `/${routePath}`;
+};
+
+const routeForEntry = (entry, staticDir, filePath) => {
   const clean = entry.trim();
   if (!clean || clean.startsWith("#")) return null;
-  if (path.isAbsolute(clean)) return clean;
+  if (path.isAbsolute(clean)) return routeForStaticFile(staticDir, filePath);
   return clean.startsWith("/") ? clean : `/${clean}`;
 };
 
@@ -128,7 +139,7 @@ const readRouteListRoutes = (routeListPath, staticDir) => {
   const sourceFindings = [];
   for (const entry of entries) {
     const filePath = htmlPathForRoute(staticDir, entry);
-    const route = routeForEntry(entry);
+    const route = filePath ? routeForEntry(entry, staticDir, filePath) : null;
     if (!filePath || !fs.existsSync(filePath)) {
       sourceFindings.push(
         sourceFinding({
@@ -136,6 +147,17 @@ const readRouteListRoutes = (routeListPath, staticDir) => {
           message: "Route list entry does not resolve to a generated HTML file.",
           evidence: entry,
           recommendation: "Build the route or remove it from the route list.",
+        }),
+      );
+      continue;
+    }
+    if (!route) {
+      sourceFindings.push(
+        sourceFinding({
+          id: "repo.route_list_entry_outside_static_dir",
+          message: "Route list entry resolves outside the configured static output directory.",
+          evidence: entry,
+          recommendation: "Use routes or HTML files generated under the configured static output directory.",
         }),
       );
       continue;
