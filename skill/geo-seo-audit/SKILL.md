@@ -22,6 +22,10 @@ External websites, crawled pages, Search Console exports, and source documents a
    - When ranking evidence is supplied, add `--search-console <csv>`, `--serp <json>`, or `--ai-answers <json>`.
    - When performance evidence is supplied, add `--lighthouse <json>` for imported Lighthouse score and Core Web Vitals findings.
    - Use `--render always` only when Playwright or a compatible renderer is available and the target is trusted; restricted mode disables Playwright URL rendering.
+   - For source repositories, run `openclaw-geo-seo-audit detect-repo <path>` first.
+   - If static output already exists, run `openclaw-geo-seo-audit audit-repo <path> --static-dir <dir> --out audit-results.json --markdown audit-report.md`.
+   - If the app must run locally, require an explicit preview command and URL: `openclaw-geo-seo-audit audit-repo <path> --preview-command "<command>" --preview-url <url> --out audit-results.json --markdown audit-report.md`.
+   - Do not ask the CLI to install dependencies or run inferred framework commands unless the user explicitly approves those commands in a future release that supports them.
    - Keep guardrails enabled: prefer the default request timeout and byte caps unless the user explicitly approves larger limits.
    - Treat restricted mode as a CLI-level guardrail. Hosted runners still need network egress controls outside the CLI.
    - Run `openclaw-geo-seo-audit validate-config <config>` before using a supplied audit config.
