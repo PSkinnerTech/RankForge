@@ -1,6 +1,7 @@
 import { spawn } from "node:child_process";
 import { once } from "node:events";
 import { setTimeout as sleep } from "node:timers/promises";
+import { fetchWithGuards } from "./io-guards.mjs";
 
 const outputCaptureLimitBytes = 64 * 1024;
 const pollIntervalMs = 50;
@@ -75,6 +76,8 @@ const earlyExitError = (preview, code, signal) =>
     preview,
   );
 
+const isSecurityGuardError = (error) => String(error?.message || "").startsWith("Restricted security mode ");
+
 export const waitForHttp = async (url, options = {}) => {
   const timeoutMs = options.timeoutMs ?? 30000;
   const deadline = Date.now() + timeoutMs;
@@ -86,11 +89,14 @@ export const waitForHttp = async (url, options = {}) => {
       break;
     }
 
-    const controller = new AbortController();
-    const abortTimer = setTimeout(() => controller.abort(), Math.min(fetchAttemptTimeoutMs, remainingMs));
+    const attemptTimeoutMs = Math.min(fetchAttemptTimeoutMs, remainingMs);
 
     try {
-      const response = await fetch(url, { redirect: "manual", signal: controller.signal });
+      const response = await fetchWithGuards(url, {
+        security: options.security,
+        limits: { ...(options.limits || {}), timeoutMs: attemptTimeoutMs },
+        fetchOptions: { redirect: "manual" },
+      });
       if (response.status < 500) {
         await response.body?.cancel();
         return;
@@ -98,9 +104,8 @@ export const waitForHttp = async (url, options = {}) => {
       await response.body?.cancel();
       lastError = new Error(`HTTP ${response.status}`);
     } catch (error) {
+      if (isSecurityGuardError(error)) throw error;
       lastError = error;
-    } finally {
-      clearTimeout(abortTimer);
     }
 
     await sleep(Math.min(pollIntervalMs, Math.max(0, deadline - Date.now())));
@@ -110,7 +115,7 @@ export const waitForHttp = async (url, options = {}) => {
   throw new Error(`Preview server did not become reachable at ${url}.${suffix}`);
 };
 
-export const startPreview = async ({ command, cwd, previewUrl, timeoutMs = 30000 }) => {
+export const startPreview = async ({ command, cwd, previewUrl, timeoutMs = 30000, security, limits }) => {
   if (!command) {
     throw new Error("--preview-command is required for preview repo audits.");
   }
@@ -120,9 +125,10 @@ export const startPreview = async ({ command, cwd, previewUrl, timeoutMs = 30000
 
   let previewUrlAlreadyReachable = false;
   try {
-    await waitForHttp(previewUrl, { timeoutMs: preflightTimeoutMs });
+    await waitForHttp(previewUrl, { timeoutMs: preflightTimeoutMs, security, limits });
     previewUrlAlreadyReachable = true;
-  } catch {
+  } catch (error) {
+    if (isSecurityGuardError(error)) throw error;
     previewUrlAlreadyReachable = false;
   }
 
@@ -157,7 +163,7 @@ export const startPreview = async ({ command, cwd, previewUrl, timeoutMs = 30000
   });
 
   try {
-    await Promise.race([waitForHttp(previewUrl, { timeoutMs }), startupError]);
+    await Promise.race([waitForHttp(previewUrl, { timeoutMs, security, limits }), startupError]);
     if (isExited(child)) {
       throw earlyExitError(preview, child.exitCode, child.signalCode);
     }

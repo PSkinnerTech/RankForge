@@ -1,7 +1,10 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import http from "node:http";
 import net from "node:net";
+import os from "node:os";
+import path from "node:path";
 import { once } from "node:events";
 import { startPreview, stopPreview, waitForHttp } from "../src/repo-process.mjs";
 
@@ -156,6 +159,24 @@ test("rejects before spawning when another process already serves the preview UR
     server.close();
     await once(server, "close");
   }
+});
+
+test("restricted preview startup rejects private targets before spawning", async () => {
+  const port = await freePort();
+  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-preview-guard-")), "spawned");
+
+  await assert.rejects(
+    () =>
+      startPreview({
+        command: `node -e "require('node:fs').writeFileSync('${marker}', 'spawned'); process.exit(7)"`,
+        cwd: ".",
+        previewUrl: `http://127.0.0.1:${port}`,
+        timeoutMs: 5000,
+        security: { mode: "restricted" },
+      }),
+    /Restricted security mode blocks private network target/,
+  );
+  assert.equal(fs.existsSync(marker), false);
 });
 
 test("caps captured preview stdout and stderr", async () => {

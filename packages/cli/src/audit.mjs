@@ -13,13 +13,21 @@ import { isHttpUrl } from "./url-utils.mjs";
 const toolVersion = "0.2.0";
 
 const readSourceMap = () => {
-  try {
-    const file = new URL("../../../skill/geo-seo-audit/source-map.json", import.meta.url);
-    const sourceMap = JSON.parse(fs.readFileSync(file, "utf8"));
-    return Object.entries(sourceMap).map(([id, url]) => ({ id, url }));
-  } catch {
-    return [];
+  const candidates = [
+    new URL("./source-map.json", import.meta.url),
+    new URL("../../../skill/geo-seo-audit/source-map.json", import.meta.url),
+  ];
+
+  for (const file of candidates) {
+    try {
+      const sourceMap = JSON.parse(fs.readFileSync(file, "utf8"));
+      return Object.entries(sourceMap).map(([id, url]) => ({ id, url }));
+    } catch {
+      // Try the next source-map location.
+    }
   }
+
+  return [];
 };
 
 const originFor = (target) => {

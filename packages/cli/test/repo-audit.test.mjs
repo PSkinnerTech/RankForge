@@ -46,6 +46,16 @@ test("static output audit records repo evidence and audits discovered routes", a
   assert.deepEqual(audit.repo.sourceFindings, []);
 });
 
+test("static output audit uses detected static dir when none is configured", async () => {
+  const audit = await runRepoAudit({ repoPath: fixture("static-basic") });
+
+  assert.equal(audit.repo.detectedFramework, "generic-static");
+  assert.equal(audit.repo.staticDirRelative, "dist");
+  assert.equal(audit.pages.length, 2);
+  assert.ok(audit.repo.routeSources.some((route) => route.route === "/about/"));
+  assert.deepEqual(audit.repo.sourceFindings, []);
+});
+
 test("explicit preview audit starts and stops fixture server", async () => {
   const port = await freePort();
   const previewUrl = `http://127.0.0.1:${port}`;

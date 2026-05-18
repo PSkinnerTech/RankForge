@@ -78,9 +78,10 @@ export const runRepoAudit = async (options = {}) => {
   const repoPath = path.resolve(options.repoPath || ".");
   const detected = detectRepo(repoPath);
 
-  if (options.staticDir) {
-    const staticDir = path.resolve(repoPath, options.staticDir);
-    const staticDirRelative = relativePath(repoPath, staticDir);
+  const staticDir = options.staticDir ? path.resolve(repoPath, options.staticDir) : detected.staticDir;
+
+  if (staticDir) {
+    const staticDirRelative = options.staticDir ? relativePath(repoPath, staticDir) : detected.staticDirRelative;
     const staticRepoFields = {
       staticDir,
       staticDirRelative,
@@ -143,6 +144,8 @@ export const runRepoAudit = async (options = {}) => {
         cwd: repoPath,
         previewUrl: options.previewUrl,
         timeoutMs: options.maxPreviewMs,
+        security: options.security,
+        limits: options.limits,
       });
     } catch (error) {
       return emptyAudit(detected, {
