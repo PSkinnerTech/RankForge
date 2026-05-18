@@ -110,7 +110,7 @@ export const resolveAuditConfigPaths = (config, baseDir) => {
     ...config,
     target: resolveMaybePath(config.target, baseDir),
     urlList: resolveMaybePath(config.urlList, baseDir),
-    repo: config.repo
+    repo: isObject(config.repo)
       ? {
           ...config.repo,
           staticDir: resolveMaybePath(config.repo.staticDir, baseDir),

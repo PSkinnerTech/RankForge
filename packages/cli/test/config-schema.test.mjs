@@ -110,6 +110,15 @@ test("rejects invalid repo audit config values", () => {
   assert.ok(result.errors.includes("repo.maxPreviewMs must be a positive integer"));
 });
 
+test("preserves invalid repo config shape during path resolution", () => {
+  const resolved = resolveAuditConfigPaths({ target: "https://example.com", repo: "bad" }, process.cwd());
+  const result = validateAuditConfig(resolved);
+
+  assert.equal(resolved.repo, "bad");
+  assert.equal(result.ok, false);
+  assert.ok(result.errors.includes("repo must be an object"));
+});
+
 test("resolves repo config paths relative to config file", () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-repo-config-"));
   fs.mkdirSync(path.join(dir, "dist"));
