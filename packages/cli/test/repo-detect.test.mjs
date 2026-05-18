@@ -42,6 +42,11 @@ test("converts static HTML files to exact route source objects", () => {
   assert.deepEqual(result.routeSources, [
     {
       type: "static_html",
+      path: path.join(distDir, "index.html"),
+      route: "/",
+    },
+    {
+      type: "static_html",
       path: path.join(distDir, "about", "index.html"),
       route: "/about/",
     },
@@ -49,11 +54,6 @@ test("converts static HTML files to exact route source objects", () => {
       type: "static_html",
       path: path.join(distDir, "contact.html"),
       route: "/contact.html",
-    },
-    {
-      type: "static_html",
-      path: path.join(distDir, "index.html"),
-      route: "/",
     },
   ]);
 });
