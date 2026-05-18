@@ -1,9 +1,11 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import net from "node:net";
 import os from "node:os";
 import path from "node:path";
 import { runCli } from "../src/cli.mjs";
+import { waitForHttp } from "../src/repo-process.mjs";
 
 const capture = async (args) => {
   const writes = [];
@@ -14,6 +16,16 @@ const capture = async (args) => {
   });
   return { exitCode, stdout: writes.join(""), stderr: errors.join("") };
 };
+
+const freePort = async () =>
+  new Promise((resolve, reject) => {
+    const server = net.createServer();
+    server.once("error", reject);
+    server.listen(0, "127.0.0.1", () => {
+      const { port } = server.address();
+      server.close((error) => (error ? reject(error) : resolve(port)));
+    });
+  });
 
 test("prints version", async () => {
   const result = await capture(["--version"]);
@@ -31,14 +43,19 @@ test("prints help", async () => {
   assert.match(result.stdout, /audit-repo/);
   assert.match(result.stdout, /detect-repo \[path\]/);
   assert.match(result.stdout, /defaults to current directory/);
+  assert.match(result.stdout, /--config <file>/);
   assert.match(result.stdout, /--static-dir <dir>/);
+  assert.match(result.stdout, /--build-command <command>/);
+  assert.match(result.stdout, /--max-build-ms <n>/);
   assert.match(result.stdout, /--preview-command <command>/);
   assert.match(result.stdout, /--preview-url <url>/);
   assert.match(result.stdout, /--max-preview-ms <n>/);
+  assert.match(result.stdout, /--route-list <file>/);
   assert.match(result.stdout, /--mode full\|sample\|single/);
   assert.match(result.stdout, /--max-pages <n>/);
   assert.match(result.stdout, /--max-depth <n>/);
   assert.match(result.stdout, /--security local\|restricted/);
+  assert.match(result.stdout, /--fail-on <severity>/);
 });
 
 test("explains a known rule as JSON", async () => {
@@ -417,6 +434,26 @@ test("audit-repo rejects invalid fail-on before running build command", async ()
   assert.equal(result.exitCode, 1);
   assert.match(result.stderr, /--fail-on must be one of: P0, P1, P2, P3/);
   assert.equal(fs.existsSync(marker), false);
+});
+
+test("audit-repo rejects invalid fail-on before starting preview command", async () => {
+  const port = await freePort();
+  const previewUrl = `http://127.0.0.1:${port}`;
+
+  const result = await capture([
+    "audit-repo",
+    "examples/fixture-repos/npm-preview",
+    "--preview-command",
+    `node server.mjs ${port}`,
+    "--preview-url",
+    previewUrl,
+    "--fail-on",
+    "PX",
+  ]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--fail-on must be one of: P0, P1, P2, P3/);
+  await assert.rejects(waitForHttp(previewUrl, { timeoutMs: 250 }), /Preview server did not become reachable/);
 });
 
 test("audit-repo rejects missing fail-on before running build command", async () => {
