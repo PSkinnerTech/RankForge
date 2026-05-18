@@ -118,13 +118,13 @@ export const runCommand = async ({ command, cwd, timeoutMs = 120000, label = "Co
   const timeoutPromise = new Promise((_, reject) => {
     timeout = setTimeout(async () => {
       commandResult.timedOut = true;
+      commandResult.durationMs = Date.now() - startedAt;
+      reject(commandError(`${label} command timed out after ${timeoutMs} ms.`, commandResult));
       try {
         await stopPreview({ child });
       } catch {
         // Keep the timeout error as the actionable failure.
       }
-      commandResult.durationMs = Date.now() - startedAt;
-      reject(commandError(`${label} command timed out after ${timeoutMs} ms.`, commandResult));
     }, timeoutMs);
   });
 
@@ -137,6 +137,9 @@ export const runCommand = async ({ command, cwd, timeoutMs = 120000, label = "Co
       commandResult.exitCode = code;
       commandResult.signal = signal;
       commandResult.durationMs = Date.now() - startedAt;
+      if (commandResult.timedOut) {
+        return;
+      }
       if (code === 0) {
         resolve(commandResult);
         return;

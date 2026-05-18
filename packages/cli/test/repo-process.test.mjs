@@ -240,6 +240,18 @@ test("runs build command and captures bounded output", async () => {
   assert.equal(result.timedOut, false);
 });
 
+test("caps captured build stdout and stderr", async () => {
+  const result = await runCommand({
+    command: "node -e \"process.stdout.write('o'.repeat(70000)); process.stderr.write('e'.repeat(70000))\"",
+    cwd: ".",
+    timeoutMs: 5000,
+    label: "Build",
+  });
+
+  assert.ok(result.stdout.join("").length <= outputCaptureLimitBytes);
+  assert.ok(result.stderr.join("").length <= outputCaptureLimitBytes);
+});
+
 test("reports non-zero build command exits with stderr", async () => {
   await assert.rejects(
     () =>
