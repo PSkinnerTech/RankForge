@@ -278,7 +278,7 @@ export const runRepoAudit = async (options = {}) => {
   }
 
   const hasExplicitPreview = Boolean(options.previewCommand && options.previewUrl);
-  const staticDir = options.staticDir ? path.resolve(repoPath, options.staticDir) : hasExplicitPreview ? null : detected.staticDir;
+  const staticDir = hasExplicitPreview ? null : options.staticDir ? path.resolve(repoPath, options.staticDir) : detected.staticDir;
 
   if (staticDir) {
     const staticDirRelative = options.staticDir ? relativePath(repoPath, staticDir) : detected.staticDirRelative;

@@ -29,7 +29,7 @@ The current repository contains a working deterministic CLI, an OpenClaw skill w
 
 Current remaining gaps:
 
-- The CLI can audit static output and explicit preview-server repositories, but it does not yet support explicit build commands, route-list parity, repo config files, or framework-specific fixture coverage beyond generic static/npm preview workflows.
+- The CLI can audit static output and explicit preview-server repositories with explicit build commands, route-list parity, and repo config files; remaining repo-audit work focuses on broader framework fixture coverage and deeper deterministic source-level findings.
 - Release documentation and changelog entries must stay aligned with the implemented `0.2.0` baseline plus unreleased repo-audit work before publishing the next package version.
 - Some rule IDs exist in the taxonomy before full trigger coverage, especially deeper entity clarity, hidden text risk, duplicate content clusters, and structured-data visible-content mismatch.
 - Ranking and GEO visibility measurement still depends on supplied exports. API-backed Search Console, SERP provider, and AI-answer probes are future integrations.

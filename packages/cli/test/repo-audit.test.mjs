@@ -74,11 +74,15 @@ test("explicit preview audit takes precedence over detected static output", asyn
 
   const audit = await runRepoAudit({
     repoPath,
+    buildCommand: "node -e \"console.log('built preview')\"",
+    staticDir: "dist",
     previewCommand: `node server.mjs ${port}`,
     previewUrl,
   });
 
   assert.equal(audit.repo.previewUrl, previewUrl);
+  assert.equal(audit.repo.build.executed, true);
+  assert.equal(audit.repo.build.exitCode, 0);
   assert.equal(audit.pages[0].evidence.title, "Preview Server");
   await assert.rejects(() => waitForHttp(previewUrl, { timeoutMs: 250 }), /Preview server did not become reachable/);
 });
