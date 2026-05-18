@@ -1,0 +1,12 @@
+{
+  "name": "openclaw-vite-basic-fixture",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "preview": "node ../npm-preview/server.mjs"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  }
+}
