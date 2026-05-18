@@ -1,8 +1,9 @@
 # Product Requirements Document: Deterministic GEO/SEO Audit CLI + Skill Wrapper
 
-Status: Draft for review  
-Date: 2026-05-17  
-Repository: openclaw-geo-seo-audit-skill  
+Status: Current implementation baseline plus v1.5 roadmap
+Date: 2026-05-18
+Repository: openclaw-geo-seo-audit-skill
+Current CLI package: openclaw-geo-seo-audit@0.2.0
 Primary users: technical SEOs, growth teams, content strategists, frontend engineers, agency auditors, and AI agents running OpenClaw skills
 
 ## 1. Summary
@@ -14,19 +15,25 @@ OpenClaw GEO/SEO Audit should evolve from a prompt-guided audit skill into a det
 
 The CLI is responsible for facts. The skill is responsible for interpretation, prioritization, citations, and communication. This separation prevents the agent from inventing technical findings and makes audits repeatable, testable, and useful in CI or local workflows.
 
-The first production version should be a deterministic SEO/GEO readiness auditor. Actual ranking measurement requires optional evidence integrations such as Google Search Console, compliant SERP APIs, manually supplied query exports, or AI answer probes.
+The production direction remains a deterministic SEO/GEO readiness auditor. Actual ranking measurement requires optional evidence integrations such as Google Search Console, compliant SERP APIs, manually supplied query exports, or AI answer probes.
+
+### Current baseline
+
+As of `openclaw-geo-seo-audit@0.2.0`, the repository contains a working deterministic CLI and OpenClaw skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, and bounded same-origin crawls. It emits JSON and Markdown, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, and includes restricted-mode guardrails for untrusted targets.
+
+The next approved product target is v1.5 repo-to-audit mode: the CLI should inspect a website source repository, detect how to build or preview it, audit the generated site through the existing evidence engine, and add source-level findings where deterministic.
 
 ## 2. Problem
 
-The current repository contains a strong audit framework, Google Search Central citation corpus, templates, and a lightweight page snapshot script. It does not yet perform end-to-end website audits.
+The current repository contains a working deterministic CLI, an OpenClaw skill wrapper, a Google Search Central citation corpus, report templates, fixtures, golden-output tests, and release workflows. The remaining problem is no longer whether deterministic auditing exists; it is how to stabilize the current beta and extend it to source-repository audits without overclaiming ranking or AI-answer measurement.
 
-Current gaps:
+Current remaining gaps:
 
-- The skill depends on repo-root scripts and references that are not available if only the skill folder is copied.
-- Evidence collection is single-page and static HTML focused.
-- The tool does not crawl sites, render JavaScript, inspect robots.txt, parse sitemaps, inspect HTTP headers, validate structured data rules, run performance checks, ingest Search Console, or measure query/ranking visibility.
-- The skill can guide an expert audit, but cannot reliably produce deterministic findings by itself.
-- Ranking and GEO claims are not evidence-backed unless external ranking/search data is supplied.
+- The CLI audits live URLs, local files, localhost apps, URL lists, and bounded crawls, but it does not yet treat a source repository as a first-class audit target.
+- Release documentation and changelog entries must stay aligned with the implemented `0.2.0` baseline before publishing.
+- Some rule IDs exist in the taxonomy before full trigger coverage, especially deeper entity clarity, hidden text risk, duplicate content clusters, and structured-data visible-content mismatch.
+- Ranking and GEO visibility measurement still depends on supplied exports. API-backed Search Console, SERP provider, and AI-answer probes are future integrations.
+- The product needs a repo-to-audit mode that can safely build or preview common web apps, crawl the generated site, and connect source-level evidence to rendered output.
 
 Users need a tool that can inspect a site from discovery through report generation, identify concrete implementation issues, distinguish known evidence from uncertainty, and produce actionable tasks with cited rationale.
 
@@ -37,6 +44,7 @@ The product must:
 - Provide a deterministic CLI for end-to-end SEO/GEO readiness audits.
 - Produce a stable JSON evidence model that can be consumed by humans, agents, CI, and downstream tools.
 - Support live URLs and local web apps.
+- Support website source repositories through a dedicated repo-to-audit mode that can detect framework/build signals, run bounded local build or preview commands, crawl the generated site, and report source-level evidence.
 - Crawl representative site pages through sitemaps, internal links, supplied URL lists, or template sampling.
 - Compare raw HTML and rendered DOM for JavaScript SEO risk.
 - Evaluate crawlability, indexability, search appearance, structured data, entity clarity, content answerability, and GEO readiness.
@@ -112,7 +120,7 @@ Run the CLI, inspect structured results, and generate a clear report without fab
 
 ## 8. Architecture
 
-The system has two layers.
+The system has two implemented layers, plus a planned repo-to-audit extension.
 
 ### 8.1 CLI Layer
 
@@ -150,6 +158,12 @@ Responsibilities:
 
 The skill should not be the source of deterministic analysis.
 
+### 8.3 Repo-To-Audit Layer
+
+The repo-to-audit layer is the approved v1.5 extension. It should inspect a website source repository, detect supported framework and package-manager signals, choose a static-output or preview-server path, run bounded commands, and feed the generated site into the existing CLI audit engine.
+
+This layer should add a `repo` evidence section to the JSON output. Source-level evidence must remain separate from rendered-page evidence so reports can distinguish build/configuration problems from observed website output.
+
 ## 9. CLI Commands
 
 ### 9.1 Audit
@@ -174,8 +188,6 @@ Important options:
 --max-depth 3
 --mode full|sample|single
 --render auto|always|never
---mobile
---desktop
 --respect-robots true|false
 --include <pattern>
 --exclude <pattern>
@@ -184,6 +196,7 @@ Important options:
 --search-console gsc-export.csv
 --serp serp-export.json
 --ai-answers ai-answer-export.json
+--lighthouse lighthouse-report.json
 ```
 
 ### 9.2 Snapshot
@@ -217,6 +230,33 @@ openclaw-geo-seo-audit explain-rule indexability.noindex_canonical_conflict
 Required behavior:
 
 - Print rule purpose, severity logic, evidence inputs, recommendation text, and source citations.
+
+### 9.5 Detect Repo (Planned)
+
+```bash
+openclaw-geo-seo-audit detect-repo .
+```
+
+Planned behavior:
+
+- Inspect a repository path.
+- Report detected framework, package manager, likely build command, likely preview command, static output candidates, route sources, and confidence.
+- Avoid executing repository scripts.
+
+### 9.6 Audit Repo (Planned)
+
+```bash
+openclaw-geo-seo-audit audit-repo .
+```
+
+Planned behavior:
+
+- Inspect a repository path.
+- Use explicit commands when supplied.
+- Use conservative auto-detection only when framework signals are clear.
+- Build or preview the app within configured timeouts.
+- Crawl generated output with the existing audit engine.
+- Emit existing page/site evidence plus a `repo` evidence section.
 
 ## 10. Configuration
 
@@ -358,9 +398,9 @@ Required fields:
 - evidence paths
 - impact
 - recommendation
-- implementation task
-- owner suggestion
-- effort estimate
+- implementationTask
+- owner
+- effort
 - confidence
 - source citations
 - related evidence gaps
@@ -380,6 +420,17 @@ Example:
   ],
   "impact": "Google may be unable to consolidate indexable canonical signals as intended.",
   "recommendation": "Decide whether this page should be indexed. If yes, remove noindex. If no, canonical and internal links should reflect the preferred indexable URL strategy.",
+  "implementationTask": {
+    "title": "Resolve noindex and canonical conflict",
+    "owner": "Engineering",
+    "effort": "M",
+    "acceptanceCriteria": [
+      "The page has a single intended indexing strategy.",
+      "Canonical and robots directives no longer conflict."
+    ]
+  },
+  "owner": "Engineering",
+  "effort": "M",
   "confidence": "high",
   "sources": [
     "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
@@ -591,7 +642,7 @@ Report sections:
 - Structured data.
 - Search appearance.
 - Ranking evidence, if supplied.
-- Redesign recommendations.
+- Technical and content recommendations.
 - Implementation tasks.
 - Evidence gaps.
 - Appendix with raw evidence references.
@@ -699,9 +750,9 @@ Quality targets:
 
 ## 19. Milestones
 
-### Milestone 1: Product Restructure and Schema
+### Milestone 1: Product Restructure and Schema - Completed in `0.2.0`
 
-Deliverables:
+Delivered:
 
 - Self-contained skill layout.
 - CLI package scaffold.
@@ -711,15 +762,9 @@ Deliverables:
 - Compact source citation map.
 - Updated README.
 
-Acceptance criteria:
+### Milestone 2: Crawl and Snapshot Engine - Completed in `0.2.0`
 
-- CLI can print version and validate config.
-- Skill can locate required local assets.
-- JSON schema is documented.
-
-### Milestone 2: Crawl and Snapshot Engine
-
-Deliverables:
+Delivered:
 
 - URL normalization.
 - Raw fetch.
@@ -731,14 +776,9 @@ Deliverables:
 - Optional Playwright rendering.
 - Single-page snapshot command.
 
-Acceptance criteria:
+### Milestone 3: Deterministic Rule Engine - Completed in `0.2.0`
 
-- Fixture pages produce stable snapshots.
-- Raw vs rendered evidence is captured when rendering is enabled.
-
-### Milestone 3: Deterministic Rule Engine
-
-Deliverables:
+Delivered:
 
 - Rule registry.
 - Severity model.
@@ -747,54 +787,67 @@ Deliverables:
 - Crawl/index rules.
 - Search appearance rules.
 - Structured data rules.
+- Site-level duplicate metadata, canonical, sitemap, robots, and broken-link rules.
 
-Acceptance criteria:
+### Milestone 4: GEO and Entity Readiness - Initial baseline completed in `0.2.0`
 
-- Known bad fixtures trigger expected rule IDs.
-- Healthy baseline fixture avoids false P0/P1 findings.
-
-### Milestone 4: GEO and Entity Readiness
-
-Deliverables:
+Delivered:
 
 - Helpful content heuristics.
 - Answerability checks.
-- Entity clarity checks.
+- Homepage organization-structured-data checks.
+- About/contact entity-signal checks.
+- Conservative policy-risk taxonomy.
+
+Remaining rule-depth work:
+
+- Entity clarity beyond about/contact links.
+- Hidden text and policy risk indicators.
+- Duplicate content clusters beyond duplicate metadata.
+- Structured-data visible-content mismatch.
 - Internal linking and topic relationship checks.
-- Policy risk indicators.
+- More nuanced answerability and helpful-content heuristics.
 
-Acceptance criteria:
+### Milestone 5: Reporting, Skill Wrapper, Guardrails, And Release Readiness - Completed in `0.2.0`
 
-- Fixture pages generate expected readiness findings.
-- Findings include confidence and evidence snippets.
-
-### Milestone 5: Reporting and Skill Wrapper
-
-Deliverables:
+Delivered:
 
 - Markdown report generator.
-- Updated `SKILL.md`.
-- Templates aligned to CLI schema.
-- Example full audit.
+- Updated `SKILL.md` that treats CLI output as deterministic evidence.
+- JSON and Markdown golden fixture coverage.
+- Implementation-task metadata on findings.
+- CI severity threshold support with `--fail-on`.
+- Restricted security mode with network, file, timeout, redirect, byte-cap, and rendering guardrails.
+- GitHub CI and release workflow scaffolding.
 
-Acceptance criteria:
+### Milestone 6: Optional Evidence Imports - Initial baseline completed in `0.2.0`
 
-- Skill runs the CLI and produces a cited report from JSON.
-- Skill does not invent findings absent from CLI output.
-
-### Milestone 6: Optional Ranking Evidence
-
-Deliverables:
+Delivered:
 
 - Search Console CSV ingestion.
 - SERP export ingestion.
 - AI answer export ingestion.
-- Ranking evidence section.
+- Lighthouse JSON ingestion.
+- Evidence gaps when ranking or AI-answer evidence is missing.
 
-Acceptance criteria:
+Deferred integrations:
 
-- Reports distinguish readiness from observed ranking evidence.
-- Missing integrations produce evidence gaps, not false negatives.
+- Search Console API support.
+- SERP provider API support.
+- Configured AI-answer visibility probes.
+- Optional Lighthouse execution.
+
+### Milestone 7: Repo-To-Audit Mode - Planned v1.5
+
+Planned:
+
+- `detect-repo <path>` framework and package-manager detection.
+- `audit-repo <path>` source-repository audit workflow.
+- Static-output and preview-server audit paths.
+- Bounded local command execution.
+- Route discovery from generated output, sitemap, framework conventions, or supplied route list.
+- `repo` evidence section in JSON output.
+- Source-level findings that remain separate from rendered-page findings.
 
 ## 20. Risks and Mitigations
 
@@ -822,33 +875,44 @@ Mitigation: Use confidence labels, evidence snippets, and conservative severity.
 
 Mitigation: Make v1 bounded and configurable. Support representative sampling before exhaustive crawling.
 
-## 21. Open Decisions
+## 21. Resolved Decisions And Remaining Planning Questions
 
-- Should the CLI live in the same npm package as the skill or a separate package under `packages/cli`?
-- Should Playwright be a required dependency or optional install?
-- Should the default audit mode be `sample` or `full`?
-- What severity threshold should produce a non-zero CLI exit code in CI?
-- Which schema validator should be used for JSON output and config?
-- How much of the Google source corpus should ship by default?
-- Which SERP provider, if any, should be supported first?
-- Should Search Console API support be in v1 or wait until CSV ingestion is stable?
+Resolved for `0.2.0`:
 
-## 22. Implementation Readiness Checklist
+- The CLI lives as a separate npm workspace package under `packages/cli`.
+- Playwright remains optional through peer dependency and dynamic import.
+- The CLI reports readiness by default and requires supplied evidence for measured rankings or AI answer visibility.
+- The default audit mode remains conservative; users opt into broader crawls with `--mode full` or `--mode sample`.
+- JSON output is versioned with `schemaVersion: "1.0.0"`.
+- Raw Google source corpus remains a repository asset. The CLI package ships source code and compact citation behavior, not the full raw corpus.
+- CI severity gating is configured with explicit `--fail-on P0|P1|P2|P3`.
 
-Before implementation starts:
+Planning questions for repo-to-audit mode:
 
-- Approve this PRD.
-- Decide package layout.
-- Decide Playwright dependency strategy.
-- Decide v1 audit mode defaults.
-- Define the first 25 rule IDs.
-- Define the JSON schema in code.
-- Select fixture site structure.
-- Decide whether raw source corpus remains in the default package.
+- Which fixture framework should be implemented first: Vite, Next.js, or Astro?
+- Should the first `audit-repo` release require explicit build and preview commands, or allow high-confidence auto-detected commands?
+- Should repo-to-audit internals start as one module or split detection, process management, route discovery, and source evidence into separate modules?
 
-## 23. Recommended V1 Scope
+## 22. Release Stabilization And v1.5 Readiness Checklist
 
-V1 should include:
+Before publishing or tagging `0.2.0`:
+
+- Verify the PRD, README, skill wrapper, changelog, and release checklist describe the same shipped CLI baseline.
+- Run `npm ci`, `npm audit --omit=dev`, `npm test`, `npm run validate`, and `npm pack --dry-run --workspace packages/cli`.
+- Confirm the dry-run package includes only intended CLI files and excludes the raw source corpus, fixtures, golden outputs, and docs.
+- Confirm readiness language remains separate from measured ranking or AI-answer visibility claims.
+- Push and merge the guardrail branch through the repository review workflow.
+
+Before starting repo-to-audit mode:
+
+- Choose the first fixture framework for source-repository audits.
+- Decide when explicit build and preview commands are required versus when high-confidence auto-detected commands are allowed.
+- Define module boundaries for repo detection, process management, route discovery, source evidence, and unified output.
+- Keep repo-to-audit implementation separate from external API integrations.
+
+## 23. Implemented Baseline And v1.5 Scope
+
+The implemented `0.2.0` baseline includes:
 
 - Self-contained skill wrapper.
 - Deterministic CLI.
@@ -861,7 +925,9 @@ V1 should include:
 - JSON and Markdown output.
 - Fixture tests and golden outputs.
 
-V1 should defer:
+The approved v1.5 scope adds repo-to-audit mode after `0.2.0` release stabilization. Repo-to-audit mode should be treated as a focused extension of the current CLI rather than a replacement for URL, local app, static file, or URL-list audits.
+
+The roadmap still defers:
 
 - Search Console API.
 - SERP API.
