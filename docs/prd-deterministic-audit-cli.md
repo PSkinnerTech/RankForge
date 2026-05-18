@@ -1,9 +1,9 @@
 # Product Requirements Document: Deterministic GEO/SEO Audit CLI + Skill Wrapper
 
-Status: Current implementation baseline plus v1.5 roadmap
+Status: Current implementation baseline plus developer repo-audit roadmap
 Date: 2026-05-18
 Repository: openclaw-geo-seo-audit-skill
-Current CLI package: openclaw-geo-seo-audit@0.2.0
+Current CLI package: openclaw-geo-seo-audit@0.2.0; main includes unreleased repo audit mode
 Primary users: technical SEOs, growth teams, content strategists, frontend engineers, agency auditors, and AI agents running OpenClaw skills
 
 ## 1. Summary
@@ -19,21 +19,21 @@ The production direction remains a deterministic SEO/GEO readiness auditor. Actu
 
 ### Current baseline
 
-As of `openclaw-geo-seo-audit@0.2.0`, the repository contains a working deterministic CLI and OpenClaw skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, and bounded same-origin crawls. It emits JSON and Markdown, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, and includes restricted-mode guardrails for untrusted targets.
+As of `openclaw-geo-seo-audit@0.2.0` plus the merged repo-audit branch, the repository contains a working deterministic CLI and OpenClaw skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON and Markdown, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets.
 
-The next approved product target is v1.5 repo-to-audit mode: the CLI should inspect a website source repository, detect how to build or preview it, audit the generated site through the existing evidence engine, and add source-level findings where deterministic.
+The next approved product target is developer-focused repo audit completion: make repository audits easier to run in local development and CI by adding explicit build support, route-list/config parity, richer framework fixtures, and deterministic source-level findings without overclaiming rankings.
 
 ## 2. Problem
 
-The current repository contains a working deterministic CLI, an OpenClaw skill wrapper, a Google Search Central citation corpus, report templates, fixtures, golden-output tests, and release workflows. The remaining problem is no longer whether deterministic auditing exists; it is how to stabilize the current beta and extend it to source-repository audits without overclaiming ranking or AI-answer measurement.
+The current repository contains a working deterministic CLI, an OpenClaw skill wrapper, a Google Search Central citation corpus, report templates, fixtures, golden-output tests, release workflows, and initial source-repository audit mode. The remaining problem is no longer whether deterministic auditing exists; it is how to make developer repo audits practical enough for repeated local and CI use without overclaiming ranking or AI-answer measurement.
 
 Current remaining gaps:
 
-- The CLI audits live URLs, local files, localhost apps, URL lists, and bounded crawls, but it does not yet treat a source repository as a first-class audit target.
-- Release documentation and changelog entries must stay aligned with the implemented `0.2.0` baseline before publishing.
+- The CLI can audit static output and explicit preview-server repositories, but it does not yet support explicit build commands, route-list parity, repo config files, or framework-specific fixture coverage beyond generic static/npm preview workflows.
+- Release documentation and changelog entries must stay aligned with the implemented `0.2.0` baseline plus unreleased repo-audit work before publishing the next package version.
 - Some rule IDs exist in the taxonomy before full trigger coverage, especially deeper entity clarity, hidden text risk, duplicate content clusters, and structured-data visible-content mismatch.
 - Ranking and GEO visibility measurement still depends on supplied exports. API-backed Search Console, SERP provider, and AI-answer probes are future integrations.
-- The product needs a repo-to-audit mode that can safely build or preview common web apps, crawl the generated site, and connect source-level evidence to rendered output.
+- The product needs developer-optimized repo audit workflows that can safely build or preview common web apps, crawl generated output, connect source-level evidence to rendered output, and produce CI-friendly failure semantics.
 
 Users need a tool that can inspect a site from discovery through report generation, identify concrete implementation issues, distinguish known evidence from uncertainty, and produce actionable tasks with cited rationale.
 
@@ -160,9 +160,9 @@ The skill should not be the source of deterministic analysis.
 
 ### 8.3 Repo-To-Audit Layer
 
-The repo-to-audit layer is the approved v1.5 extension. It should inspect a website source repository, detect supported framework and package-manager signals, choose a static-output or preview-server path, run bounded commands, and feed the generated site into the existing CLI audit engine.
+The repo-to-audit layer is now an initial implemented extension. It inspects a website source repository, detects framework and package-manager signals, chooses a static-output or explicit preview-server path, runs bounded preview commands when supplied, and feeds generated or served pages into the existing CLI audit engine.
 
-This layer should add a `repo` evidence section to the JSON output. Source-level evidence must remain separate from rendered-page evidence so reports can distinguish build/configuration problems from observed website output.
+This layer adds a `repo` evidence section to the JSON output. Source-level evidence must remain separate from rendered-page evidence so reports can distinguish build/configuration problems from observed website output.
 
 ## 9. CLI Commands
 
@@ -231,32 +231,33 @@ Required behavior:
 
 - Print rule purpose, severity logic, evidence inputs, recommendation text, and source citations.
 
-### 9.5 Detect Repo (Planned)
+### 9.5 Detect Repo
 
 ```bash
 openclaw-geo-seo-audit detect-repo .
 ```
 
-Planned behavior:
+Implemented behavior:
 
 - Inspect a repository path.
 - Report detected framework, package manager, likely build command, likely preview command, static output candidates, route sources, and confidence.
 - Avoid executing repository scripts.
 
-### 9.6 Audit Repo (Planned)
+### 9.6 Audit Repo
 
 ```bash
 openclaw-geo-seo-audit audit-repo .
 ```
 
-Planned behavior:
+Implemented behavior:
 
 - Inspect a repository path.
-- Use explicit commands when supplied.
-- Use conservative auto-detection only when framework signals are clear.
-- Build or preview the app within configured timeouts.
+- Use detected static output when available unless explicit preview options are supplied.
+- Use explicit `--preview-command` and `--preview-url` when supplied.
+- Wait for preview startup within configured timeouts and stop the preview process after the audit.
 - Crawl generated output with the existing audit engine.
 - Emit existing page/site evidence plus a `repo` evidence section.
+- Emit repo source findings for missing audit paths, missing static directories, empty static outputs, and unreachable preview servers.
 
 ## 10. Configuration
 
@@ -837,17 +838,25 @@ Deferred integrations:
 - Configured AI-answer visibility probes.
 - Optional Lighthouse execution.
 
-### Milestone 7: Repo-To-Audit Mode - Planned v1.5
+### Milestone 7: Repo-To-Audit Mode - Initial baseline merged
 
-Planned:
+Delivered on main after `0.2.0`:
 
 - `detect-repo <path>` framework and package-manager detection.
 - `audit-repo <path>` source-repository audit workflow.
 - Static-output and preview-server audit paths.
-- Bounded local command execution.
-- Route discovery from generated output, sitemap, framework conventions, or supplied route list.
+- Bounded explicit preview command execution.
+- Route discovery from generated static output.
 - `repo` evidence section in JSON output.
 - Source-level findings that remain separate from rendered-page findings.
+
+Remaining developer-focused repo audit work:
+
+- Explicit build command support.
+- Route-list support for repository audits.
+- Repo config support for repeatable CI workflows.
+- Vite, Next.js, and Astro fixture coverage.
+- Source-level findings for generated sitemap/robots availability, framework metadata usage, route discoverability, and rendered/source mismatches where deterministic.
 
 ## 20. Risks and Mitigations
 
@@ -887,11 +896,11 @@ Resolved for `0.2.0`:
 - Raw Google source corpus remains a repository asset. The CLI package ships source code and compact citation behavior, not the full raw corpus.
 - CI severity gating is configured with explicit `--fail-on P0|P1|P2|P3`.
 
-Planning questions for repo-to-audit mode:
+Planning questions for developer repo audit completion:
 
-- Which fixture framework should be implemented first: Vite, Next.js, or Astro?
-- Should the first `audit-repo` release require explicit build and preview commands, or allow high-confidence auto-detected commands?
-- Should repo-to-audit internals start as one module or split detection, process management, route discovery, and source evidence into separate modules?
+- Should explicit build support run before static route discovery by default, or only when `--build-command` is supplied?
+- Should repo audit configuration live inside `audit.config.json` or use a separate `repo-audit.config.json`?
+- Which source-level findings provide the highest value for developer CI without requiring brittle source parsing?
 
 ## 22. Release Stabilization And v1.5 Readiness Checklist
 
@@ -903,11 +912,11 @@ Before publishing or tagging `0.2.0`:
 - Confirm readiness language remains separate from measured ranking or AI-answer visibility claims.
 - Push and merge the guardrail branch through the repository review workflow.
 
-Before starting repo-to-audit mode:
+Before starting developer repo audit completion:
 
-- Choose the first fixture framework for source-repository audits.
-- Decide when explicit build and preview commands are required versus when high-confidence auto-detected commands are allowed.
-- Define module boundaries for repo detection, process management, route discovery, source evidence, and unified output.
+- Decide whether Vite is the first framework fixture for build-and-preview coverage.
+- Decide whether repo audit config extends `audit.config.json` or remains command-line only for one more phase.
+- Define the first deterministic source-level findings and keep them separate from rendered-page evidence.
 - Keep repo-to-audit implementation separate from external API integrations.
 
 ## 23. Implemented Baseline And v1.5 Scope
@@ -925,7 +934,7 @@ The implemented `0.2.0` baseline includes:
 - JSON and Markdown output.
 - Fixture tests and golden outputs.
 
-The approved v1.5 scope adds repo-to-audit mode after `0.2.0` release stabilization. Repo-to-audit mode should be treated as a focused extension of the current CLI rather than a replacement for URL, local app, static file, or URL-list audits.
+The merged repo-to-audit baseline adds source-repository audits after `0.2.0` release stabilization. Repo-to-audit mode remains a focused extension of the current CLI rather than a replacement for URL, local app, static file, or URL-list audits. The next phase should optimize this mode for developer local and CI workflows.
 
 The roadmap still defers:
 
