@@ -89,6 +89,40 @@ test("reads Astro manifest routes when present", () => {
   assert.deepEqual(result.sourceFindings, []);
 });
 
+test("ignores Astro endpoint routes when checking generated HTML", () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-astro-endpoint-manifest-"));
+  const staticDir = path.join(repoPath, "dist");
+  const manifestDir = path.join(repoPath, ".astro");
+  writeHtml(path.join(staticDir, "index.html"), "Home");
+  fs.mkdirSync(manifestDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(manifestDir, "manifest.json"),
+    JSON.stringify({
+      routes: [
+        { route: "/", type: "page" },
+        { route: "/rss.xml", type: "endpoint" },
+        { route: "/api/data.json", type: "endpoint" }
+      ]
+    }),
+  );
+
+  const result = analyzeFrameworkRouteManifests({
+    repoPath,
+    staticDir,
+    detectedFramework: "astro",
+    staticRoutes: [{ type: "static_html", route: "/", path: path.join(staticDir, "index.html") }]
+  });
+
+  assert.deepEqual(result.frameworkManifests, [
+    {
+      type: "astro_manifest",
+      path: path.join(manifestDir, "manifest.json"),
+      routes: ["/"]
+    }
+  ]);
+  assert.deepEqual(result.sourceFindings, []);
+});
+
 test("matches extensionless manifest routes to generated html files", () => {
   const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-extensionless-route-"));
   const staticDir = path.join(repoPath, "out");
