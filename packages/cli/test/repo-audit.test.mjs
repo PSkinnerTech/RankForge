@@ -208,6 +208,56 @@ test("repo audit runs explicit build command before static output audit", async 
   assert.ok(audit.pages.some((page) => page.evidence.title === "Vite Fixture Home"));
 });
 
+test("Next.js static build audit records framework manifest evidence and route parity findings", async () => {
+  const repoPath = fixture("next-basic");
+  fs.rmSync(path.join(repoPath, "out"), { recursive: true, force: true });
+  fs.rmSync(path.join(repoPath, ".next"), { recursive: true, force: true });
+
+  const audit = await runRepoAudit({
+    repoPath,
+    buildCommand: "npm run build",
+    staticDir: "out",
+    maxBuildMs: 5000,
+  });
+
+  assert.equal(audit.repo.detectedFramework, "next");
+  assert.equal(audit.repo.staticDirRelative, "out");
+  assert.equal(audit.pages.length, 2);
+  assert.deepEqual(audit.repo.frameworkManifests, [
+    {
+      type: "next_prerender_manifest",
+      path: path.join(repoPath, ".next", "prerender-manifest.json"),
+      routes: ["/", "/about/", "/missing/"],
+    },
+  ]);
+  assert.ok(audit.repo.sourceFindings.some((finding) => finding.id === "repo.manifest_route_missing"));
+});
+
+test("Astro static build audit records framework manifest evidence", async () => {
+  const repoPath = fixture("astro-basic");
+  fs.rmSync(path.join(repoPath, "dist"), { recursive: true, force: true });
+  fs.rmSync(path.join(repoPath, ".astro"), { recursive: true, force: true });
+
+  const audit = await runRepoAudit({
+    repoPath,
+    buildCommand: "npm run build",
+    staticDir: "dist",
+    maxBuildMs: 5000,
+  });
+
+  assert.equal(audit.repo.detectedFramework, "astro");
+  assert.equal(audit.repo.staticDirRelative, "dist");
+  assert.equal(audit.pages.length, 2);
+  assert.deepEqual(audit.repo.frameworkManifests, [
+    {
+      type: "astro_manifest",
+      path: path.join(repoPath, ".astro", "manifest.json"),
+      routes: ["/", "/services/"],
+    },
+  ]);
+  assert.ok(!audit.repo.sourceFindings.some((finding) => finding.id === "repo.manifest_route_missing"));
+});
+
 test("repo audit reports build failures as source findings", async () => {
   const audit = await runRepoAudit({
     repoPath: fixture("vite-basic"),
