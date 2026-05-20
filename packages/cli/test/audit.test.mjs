@@ -238,9 +238,9 @@ test("includes render parity findings when an injected renderer changes SEO sign
 test("includes deterministic rule depth findings in audit output", async () => {
   await withServer((request, response) => {
     response.setHeader("content-type", "text/html");
-    const copy = "Detailed repeated service description with operational evidence and implementation context. ".repeat(25);
+    const copy = "Detailed repeated service description with operational evidence and implementation context. ".repeat(8);
     if (request.url === "/a") {
-      response.end(`<title>Alpha Page</title><meta name="description" content="A"><h1>Alpha Page</h1><p>${copy}</p><a href="/b">B</a><a href="/c">C</a>`);
+      response.end(`<title>Alpha Page</title><meta name="description" content="A"><h1>Alpha Page</h1><p>${copy}</p>`);
       return;
     }
     if (request.url === "/b") {
@@ -262,13 +262,15 @@ test("includes deterministic rule depth findings in audit output", async () => {
           <h1>Consulting Services</h1>
           <p>${"Implementation support for operational teams. ".repeat(45)}</p>
           <a href="/a">A</a>
+          <a href="/b">B</a>
+          <a href="/c">C</a>
         </body>
       </html>
     `);
   }, async (origin) => {
     const audit = await runAudit({
       target: `${origin}/`,
-      crawl: { mode: "full", maxPages: 4, maxDepth: 2 },
+      crawl: { mode: "full", maxPages: 4, maxDepth: 1 },
     });
 
     const ids = audit.findings.map((finding) => finding.ruleId);
