@@ -40,6 +40,17 @@ const appendRepositoryEvidence = (lines, repo) => {
     lines.push("- None recorded.");
   }
 
+  lines.push("", "Framework route manifests:");
+  if (repo.frameworkManifests?.length) {
+    for (const manifest of repo.frameworkManifests) {
+      lines.push(
+        `- ${formatBulletValue(manifest.type)}: ${formatBulletValue((manifest.routes || []).length)} routes from ${formatBulletValue(manifest.path)}`,
+      );
+    }
+  } else {
+    lines.push("- None recorded.");
+  }
+
   lines.push("", "Repository source findings:");
   if (repo.sourceFindings?.length) {
     for (const finding of repo.sourceFindings) {
