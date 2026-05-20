@@ -1,4 +1,5 @@
 import { implementationTaskFor } from "./finding-task.mjs";
+import { duplicateContentClusterFacts } from "./rule-depth.mjs";
 import { getRule } from "./rules.mjs";
 import { isHttpUrl, normalizeUrl, sameOrigin } from "./url-utils.mjs";
 
@@ -159,6 +160,17 @@ export const evaluateSite = (pages, context = {}) => {
         );
       }
     }
+  }
+
+  for (const clusterFact of duplicateContentClusterFacts(pages)) {
+    findings.push(
+      finding(
+        clusterFact.ruleId,
+        clusterFact.affectedUrls,
+        clusterFact.evidence,
+        clusterFact.impact,
+      ),
+    );
   }
 
   return findings;
