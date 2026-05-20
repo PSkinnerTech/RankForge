@@ -1,0 +1,11 @@
+{
+  "name": "openclaw-astro-basic-fixture",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.0.0"
+  }
+}

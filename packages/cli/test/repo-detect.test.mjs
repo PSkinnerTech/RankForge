@@ -82,3 +82,21 @@ test("detects declared framework signals without executing scripts", () => {
   assert.equal(result.buildCommand, "npm run build");
   assert.equal(result.previewCommand, "npm run preview");
 });
+
+test("detects Next.js and Astro fixture repositories without executing scripts", () => {
+  const next = detectRepo(fixture("next-basic"));
+  assert.equal(next.packageManager, "npm");
+  assert.equal(next.detectedFramework, "next");
+  assert.equal(next.confidence, "high");
+  assert.equal(next.buildCommand, "npm run build");
+  assert.equal(next.previewCommand, null);
+  assert.equal(next.staticDir, null);
+
+  const astro = detectRepo(fixture("astro-basic"));
+  assert.equal(astro.packageManager, "npm");
+  assert.equal(astro.detectedFramework, "astro");
+  assert.equal(astro.confidence, "high");
+  assert.equal(astro.buildCommand, "npm run build");
+  assert.equal(astro.previewCommand, null);
+  assert.equal(astro.staticDir, null);
+});
