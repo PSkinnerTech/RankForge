@@ -213,24 +213,29 @@ test("Next.js static build audit records framework manifest evidence and route p
   fs.rmSync(path.join(repoPath, "out"), { recursive: true, force: true });
   fs.rmSync(path.join(repoPath, ".next"), { recursive: true, force: true });
 
-  const audit = await runRepoAudit({
-    repoPath,
-    buildCommand: "npm run build",
-    staticDir: "out",
-    maxBuildMs: 5000,
-  });
+  try {
+    const audit = await runRepoAudit({
+      repoPath,
+      buildCommand: "npm run build",
+      staticDir: "out",
+      maxBuildMs: 5000,
+    });
 
-  assert.equal(audit.repo.detectedFramework, "next");
-  assert.equal(audit.repo.staticDirRelative, "out");
-  assert.equal(audit.pages.length, 2);
-  assert.deepEqual(audit.repo.frameworkManifests, [
-    {
-      type: "next_prerender_manifest",
-      path: path.join(repoPath, ".next", "prerender-manifest.json"),
-      routes: ["/", "/about/", "/missing/"],
-    },
-  ]);
-  assert.ok(audit.repo.sourceFindings.some((finding) => finding.id === "repo.manifest_route_missing"));
+    assert.equal(audit.repo.detectedFramework, "next");
+    assert.equal(audit.repo.staticDirRelative, "out");
+    assert.equal(audit.pages.length, 2);
+    assert.deepEqual(audit.repo.frameworkManifests, [
+      {
+        type: "next_prerender_manifest",
+        path: path.join(repoPath, ".next", "prerender-manifest.json"),
+        routes: ["/", "/about/", "/missing/"],
+      },
+    ]);
+    assert.ok(audit.repo.sourceFindings.some((finding) => finding.id === "repo.manifest_route_missing"));
+  } finally {
+    fs.rmSync(path.join(repoPath, "out"), { recursive: true, force: true });
+    fs.rmSync(path.join(repoPath, ".next"), { recursive: true, force: true });
+  }
 });
 
 test("Astro static build audit records framework manifest evidence", async () => {
@@ -238,24 +243,29 @@ test("Astro static build audit records framework manifest evidence", async () =>
   fs.rmSync(path.join(repoPath, "dist"), { recursive: true, force: true });
   fs.rmSync(path.join(repoPath, ".astro"), { recursive: true, force: true });
 
-  const audit = await runRepoAudit({
-    repoPath,
-    buildCommand: "npm run build",
-    staticDir: "dist",
-    maxBuildMs: 5000,
-  });
+  try {
+    const audit = await runRepoAudit({
+      repoPath,
+      buildCommand: "npm run build",
+      staticDir: "dist",
+      maxBuildMs: 5000,
+    });
 
-  assert.equal(audit.repo.detectedFramework, "astro");
-  assert.equal(audit.repo.staticDirRelative, "dist");
-  assert.equal(audit.pages.length, 2);
-  assert.deepEqual(audit.repo.frameworkManifests, [
-    {
-      type: "astro_manifest",
-      path: path.join(repoPath, ".astro", "manifest.json"),
-      routes: ["/", "/services/"],
-    },
-  ]);
-  assert.ok(!audit.repo.sourceFindings.some((finding) => finding.id === "repo.manifest_route_missing"));
+    assert.equal(audit.repo.detectedFramework, "astro");
+    assert.equal(audit.repo.staticDirRelative, "dist");
+    assert.equal(audit.pages.length, 2);
+    assert.deepEqual(audit.repo.frameworkManifests, [
+      {
+        type: "astro_manifest",
+        path: path.join(repoPath, ".astro", "manifest.json"),
+        routes: ["/", "/services/"],
+      },
+    ]);
+    assert.ok(!audit.repo.sourceFindings.some((finding) => finding.id === "repo.manifest_route_missing"));
+  } finally {
+    fs.rmSync(path.join(repoPath, "dist"), { recursive: true, force: true });
+    fs.rmSync(path.join(repoPath, ".astro"), { recursive: true, force: true });
+  }
 });
 
 test("repo audit reports build failures as source findings", async () => {
@@ -353,6 +363,32 @@ test("repo audit reports missing route-list files", async () => {
 
   assert.equal(audit.pages.length, 0);
   assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_missing");
+});
+
+test("repo audit reports missing route-list files before full static route traversal", async () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-missing-route-list-"));
+  const staticDir = path.join(repoPath, "site-output");
+  const blockedDir = path.join(staticDir, "blocked");
+  fs.mkdirSync(blockedDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(staticDir, "index.html"),
+    "<title>Home</title><meta name='description' content='Home'><h1>Home</h1><p>Enough generated content.</p>",
+  );
+  fs.chmodSync(blockedDir, 0);
+
+  try {
+    const audit = await runRepoAudit({
+      repoPath,
+      staticDir,
+      routeList: path.join(repoPath, "missing-routes.txt"),
+    });
+
+    assert.equal(audit.pages.length, 0);
+    assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_missing");
+  } finally {
+    fs.chmodSync(blockedDir, 0o700);
+    fs.rmSync(repoPath, { recursive: true, force: true });
+  }
 });
 
 test("repo audit reports missing route-list entries", async () => {

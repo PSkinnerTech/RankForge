@@ -301,8 +301,6 @@ export const runRepoAudit = async (options = {}) => {
 
     const routeList = options.routeList ? path.resolve(repoPath, options.routeList) : null;
     const routeListResult = routeList ? readRouteListRoutes(routeList, staticDir) : null;
-    const staticRoutes = discoverStaticRoutes(staticDir);
-    const routes = routeListResult ? routeListResult.routes : staticRoutes;
     const routeSourceFindings = routeListResult?.sourceFindings || [];
     if (routeSourceFindings.length) {
       return emptyAudit(detected, {
@@ -313,6 +311,9 @@ export const runRepoAudit = async (options = {}) => {
         sourceFindings: routeSourceFindings,
       });
     }
+
+    const staticRoutes = discoverStaticRoutes(staticDir);
+    const routes = routeListResult ? routeListResult.routes : staticRoutes;
 
     if (!routes.length) {
       return emptyAudit(detected, {
