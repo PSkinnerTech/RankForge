@@ -921,9 +921,9 @@ Before publishing or tagging `0.2.0`:
 - Confirm readiness language remains separate from measured ranking or AI-answer visibility claims.
 - Push and merge the guardrail branch through the repository review workflow.
 
-Before extending developer repo audit beyond the completed build/config/route-list layer:
+Before extending developer repo audit beyond the completed build/config/route-list/framework-manifest layer:
 
-- Add Next.js and Astro fixtures only with deterministic local build scripts and no automatic dependency installation.
+- Add additional framework fixtures only with deterministic local build scripts and no automatic dependency installation.
 - Expand deterministic source-level findings only where source evidence can be parsed without brittle framework assumptions.
 - Keep repo-to-audit implementation separate from external API integrations.
 
