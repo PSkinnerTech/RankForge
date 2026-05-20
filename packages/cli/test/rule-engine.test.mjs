@@ -17,6 +17,17 @@ const snapshotFor = (html, overrides = {}) => ({
   ...overrides,
 });
 
+const renderedSnapshotFor = (rawHtml, renderedHtml, overrides = {}) => {
+  const renderedEvidence = extractHtmlEvidence(renderedHtml, "https://example.com/bad-page");
+  return snapshotFor(rawHtml, {
+    render: {
+      status: "rendered",
+      evidence: renderedEvidence,
+    },
+    ...overrides,
+  });
+};
+
 test("evaluates deterministic page findings", () => {
   const findings = evaluatePage(
     snapshotFor(`
@@ -178,4 +189,168 @@ test("flags structured data required property gaps", () => {
   const finding = findings.find((item) => item.ruleId === "structured_data.required_property_missing");
   assert.ok(finding);
   assert.match(finding.impact, /offers/);
+});
+
+test("flags rendered metadata and canonical changes", () => {
+  const findings = evaluatePage(renderedSnapshotFor(
+    `
+      <html>
+        <head>
+          <title>Raw title</title>
+          <meta name="description" content="Raw description">
+          <link rel="canonical" href="https://example.com/raw">
+        </head>
+        <body><h1>Product page</h1><p>${"Useful product copy ".repeat(25)}</p></body>
+      </html>
+    `,
+    `
+      <html>
+        <head>
+          <title>Rendered title</title>
+          <meta name="description" content="Rendered description">
+          <link rel="canonical" href="https://example.com/rendered">
+        </head>
+        <body><h1>Product page</h1><p>${"Useful product copy ".repeat(25)}</p></body>
+      </html>
+    `,
+  ));
+
+  const ids = findings.map((finding) => finding.ruleId);
+  assert.ok(ids.includes("technical.rendered_title_changed"));
+  assert.ok(ids.includes("technical.rendered_description_changed"));
+  assert.ok(ids.includes("technical.rendered_canonical_changed"));
+
+  const canonical = findings.find((finding) => finding.ruleId === "technical.rendered_canonical_changed");
+  assert.equal(canonical.severity, "P1");
+  assert.equal(canonical.owner, "Engineering");
+  assert.deepEqual(canonical.evidence, [
+    "$.pages[0].evidence.canonical",
+    "$.pages[0].render.evidence.canonical",
+  ]);
+});
+
+test("flags rendered primary heading and structured data loss", () => {
+  const findings = evaluatePage(renderedSnapshotFor(
+    `
+      <html>
+        <head>
+          <title>Organization profile</title>
+          <meta name="description" content="Organization profile description">
+          <link rel="canonical" href="https://example.com/bad-page">
+          <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Example"}</script>
+        </head>
+        <body><h1>Organization profile</h1><p>${"Useful organization context ".repeat(25)}</p></body>
+      </html>
+    `,
+    `
+      <html>
+        <head>
+          <title>Organization profile</title>
+          <meta name="description" content="Organization profile description">
+          <link rel="canonical" href="https://example.com/bad-page">
+        </head>
+        <body><p>${"Useful organization context ".repeat(25)}</p></body>
+      </html>
+    `,
+  ));
+
+  const ids = findings.map((finding) => finding.ruleId);
+  assert.ok(ids.includes("technical.rendered_primary_heading_missing"));
+  assert.ok(ids.includes("technical.rendered_structured_data_lost"));
+
+  const structuredData = findings.find((finding) => finding.ruleId === "technical.rendered_structured_data_lost");
+  assert.deepEqual(structuredData.evidence, [
+    "$.pages[0].evidence.structuredData",
+    "$.pages[0].render.evidence.structuredData",
+  ]);
+});
+
+test("flags rendered_content_missing without duplicate raw_rendered_mismatch", () => {
+  const findings = evaluatePage(renderedSnapshotFor(
+    `
+      <html>
+        <head>
+          <title>Long page</title>
+          <meta name="description" content="Long page description">
+          <link rel="canonical" href="https://example.com/bad-page">
+        </head>
+        <body><h1>Long page</h1><p>${"Primary content sentence with useful context. ".repeat(30)}</p></body>
+      </html>
+    `,
+    `
+      <html>
+        <head>
+          <title>Long page</title>
+          <meta name="description" content="Long page description">
+          <link rel="canonical" href="https://example.com/bad-page">
+        </head>
+        <body><h1>Long page</h1><p>Loading.</p></body>
+      </html>
+    `,
+  ));
+
+  const ids = findings.map((finding) => finding.ruleId);
+  assert.ok(ids.includes("technical.rendered_content_missing"));
+  assert.equal(ids.includes("technical.raw_rendered_mismatch"), false);
+});
+
+test("flags broad raw_rendered_mismatch when rendered content is still substantial", () => {
+  const findings = evaluatePage(renderedSnapshotFor(
+    `
+      <html>
+        <head>
+          <title>Comparison page</title>
+          <meta name="description" content="Comparison page description">
+          <link rel="canonical" href="https://example.com/bad-page">
+        </head>
+        <body><h1>Comparison page</h1><p>${"Detailed comparison content. ".repeat(45)}</p></body>
+      </html>
+    `,
+    `
+      <html>
+        <head>
+          <title>Comparison page</title>
+          <meta name="description" content="Comparison page description">
+          <link rel="canonical" href="https://example.com/bad-page">
+        </head>
+        <body><h1>Comparison page</h1><p>${"Detailed comparison content. ".repeat(20)}</p></body>
+      </html>
+    `,
+  ));
+
+  const mismatch = findings.find((finding) => finding.ruleId === "technical.raw_rendered_mismatch");
+  assert.ok(mismatch);
+  assert.deepEqual(mismatch.evidence, [
+    "$.pages[0].evidence.counts.visibleTextCharacters",
+    "$.pages[0].render.evidence.counts.visibleTextCharacters",
+  ]);
+});
+
+test("emits no render parity findings without rendered evidence or when rendered evidence matches", () => {
+  const html = `
+    <html>
+      <head>
+        <title>Stable page</title>
+        <meta name="description" content="Stable page description">
+        <link rel="canonical" href="https://example.com/bad-page">
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Example"}</script>
+      </head>
+      <body><h1>Stable page</h1><h2>Details</h2><p>${"Stable useful content. ".repeat(20)}</p></body>
+    </html>
+  `;
+  const parityRuleIds = [
+    "technical.rendered_title_changed",
+    "technical.rendered_description_changed",
+    "technical.rendered_canonical_changed",
+    "technical.rendered_primary_heading_missing",
+    "technical.rendered_structured_data_lost",
+    "technical.rendered_content_missing",
+    "technical.raw_rendered_mismatch",
+  ];
+
+  const withoutRenderedEvidence = evaluatePage(snapshotFor(html, { render: { status: "rendered" } }));
+  assert.deepEqual(withoutRenderedEvidence.filter((finding) => parityRuleIds.includes(finding.ruleId)), []);
+
+  const matchingRenderedEvidence = evaluatePage(renderedSnapshotFor(html, html));
+  assert.deepEqual(matchingRenderedEvidence.filter((finding) => parityRuleIds.includes(finding.ruleId)), []);
 });
