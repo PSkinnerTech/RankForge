@@ -5,6 +5,7 @@ import http from "node:http";
 import path from "node:path";
 import { runAudit } from "../src/audit.mjs";
 import { generateMarkdownReport } from "../src/report.mjs";
+import { runRepoAudit } from "../src/repo-audit.mjs";
 import { normalizeAuditForGolden, normalizeMarkdownForGolden } from "./helpers/golden.mjs";
 
 const rootDir = path.resolve("examples/fixture-sites/known-issues");
@@ -43,6 +44,28 @@ const withFixtureServer = async (fn) => {
   }
 };
 
+const cleanupFrameworkRepoOutputs = () => {
+  for (const target of [
+    "examples/fixture-repos/next-basic/out",
+    "examples/fixture-repos/next-basic/.next",
+    "examples/fixture-repos/astro-basic/dist",
+    "examples/fixture-repos/astro-basic/.astro",
+  ]) {
+    fs.rmSync(target, { recursive: true, force: true });
+  }
+};
+
+const frameworkRepoSummary = (audit) => ({
+  framework: audit.repo.detectedFramework,
+  staticDirRelative: audit.repo.staticDirRelative,
+  pageTitles: audit.pages.map((page) => page.evidence.title),
+  frameworkManifests: audit.repo.frameworkManifests.map((manifest) => ({
+    type: manifest.type,
+    routes: manifest.routes,
+  })),
+  sourceFindingIds: audit.repo.sourceFindings.map((finding) => finding.id),
+});
+
 test("known-issues fixture audit matches golden JSON and Markdown", async () => {
   await withFixtureServer(async (origin) => {
     const audit = await runAudit({
@@ -61,4 +84,35 @@ test("known-issues fixture audit matches golden JSON and Markdown", async () => 
     assert.deepEqual(summary, expectedSummary);
     assert.equal(markdown, expectedMarkdown);
   });
+});
+
+test("framework repo audit golden summary matches fixtures", async () => {
+  const nextRepo = path.resolve("examples/fixture-repos/next-basic");
+  const astroRepo = path.resolve("examples/fixture-repos/astro-basic");
+
+  try {
+    const nextAudit = await runRepoAudit({
+      repoPath: nextRepo,
+      buildCommand: "npm run build",
+      staticDir: "out",
+      maxBuildMs: 5000,
+    });
+    const astroAudit = await runRepoAudit({
+      repoPath: astroRepo,
+      buildCommand: "npm run build",
+      staticDir: "dist",
+      maxBuildMs: 5000,
+    });
+    const expected = JSON.parse(fs.readFileSync("examples/golden/repo-framework-summary.json", "utf8"));
+
+    assert.deepEqual(
+      {
+        next: frameworkRepoSummary(nextAudit),
+        astro: frameworkRepoSummary(astroAudit),
+      },
+      expected,
+    );
+  } finally {
+    cleanupFrameworkRepoOutputs();
+  }
 });

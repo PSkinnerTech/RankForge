@@ -1,0 +1,41 @@
+{
+  "next": {
+    "framework": "next",
+    "staticDirRelative": "out",
+    "pageTitles": [
+      "Next Fixture Home",
+      "Next Fixture About"
+    ],
+    "frameworkManifests": [
+      {
+        "type": "next_prerender_manifest",
+        "routes": [
+          "/",
+          "/about/",
+          "/missing/"
+        ]
+      }
+    ],
+    "sourceFindingIds": [
+      "repo.manifest_route_missing"
+    ]
+  },
+  "astro": {
+    "framework": "astro",
+    "staticDirRelative": "dist",
+    "pageTitles": [
+      "Astro Fixture Home",
+      "Astro Fixture Services"
+    ],
+    "frameworkManifests": [
+      {
+        "type": "astro_manifest",
+        "routes": [
+          "/",
+          "/services/"
+        ]
+      }
+    ],
+    "sourceFindingIds": []
+  }
+}
