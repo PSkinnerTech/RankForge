@@ -15,7 +15,7 @@ const normalizeCanonical = (value) => {
   if (!cleaned) return "";
 
   try {
-    return normalizeUrl(cleaned).toLowerCase();
+    return normalizeUrl(cleaned);
   } catch {
     return cleaned.toLowerCase();
   }

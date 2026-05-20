@@ -28,6 +28,15 @@ test("returns no facts when rendering was not requested", () => {
   assert.deepEqual(renderParityFacts(snapshot({ renderStatus: "not_requested" }), 0), []);
 });
 
+test("returns no facts when rendered evidence is absent", () => {
+  assert.deepEqual(renderParityFacts({
+    evidence: baseEvidence(),
+    render: {
+      status: "rendered",
+    },
+  }), []);
+});
+
 test("detects rendered title changes", () => {
   const facts = renderParityFacts(snapshot({
     renderEvidence: {
