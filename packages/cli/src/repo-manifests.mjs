@@ -40,6 +40,21 @@ const uniqueNormalizedRoutes = (routes) => {
   return normalized;
 };
 
+const htmlPathForRoute = (staticDir, route) => {
+  if (!staticDir) return null;
+  if (route === "/") return path.join(staticDir, "index.html");
+
+  const relativeRoute = route.startsWith("/") ? route.slice(1) : route;
+  if (relativeRoute.endsWith(".html")) return path.join(staticDir, relativeRoute);
+  if (relativeRoute.endsWith("/")) return path.join(staticDir, relativeRoute, "index.html");
+  return path.join(staticDir, relativeRoute, "index.html");
+};
+
+const hasGeneratedHtmlForRoute = (staticDir, route) => {
+  const htmlPath = htmlPathForRoute(staticDir, route);
+  return Boolean(htmlPath && fs.existsSync(htmlPath) && fs.statSync(htmlPath).isFile());
+};
+
 const invalidManifestFinding = (manifestPath, error) =>
   sourceFinding({
     id: "repo.route_manifest_invalid",
@@ -65,7 +80,7 @@ const staticRouteUnlistedFinding = (route) =>
     recommendation: "Confirm the generated route is intentional and represented in framework route metadata.",
   });
 
-export const analyzeFrameworkRouteManifests = ({ repoPath, detectedFramework, staticRoutes = [] }) => {
+export const analyzeFrameworkRouteManifests = ({ repoPath, staticDir, detectedFramework, staticRoutes = [] }) => {
   const config = manifestConfigs[detectedFramework];
   const frameworkManifests = [];
   const sourceFindings = [];
@@ -95,7 +110,7 @@ export const analyzeFrameworkRouteManifests = ({ repoPath, detectedFramework, st
   const staticRouteSet = new Set(uniqueNormalizedRoutes(staticRoutes.map((route) => route.route)));
 
   for (const route of manifestRoutes) {
-    if (!staticRouteSet.has(route)) sourceFindings.push(manifestRouteMissingFinding(route));
+    if (!hasGeneratedHtmlForRoute(staticDir, route)) sourceFindings.push(manifestRouteMissingFinding(route));
   }
   for (const route of staticRouteSet) {
     if (!manifestRouteSet.has(route)) sourceFindings.push(staticRouteUnlistedFinding(route));

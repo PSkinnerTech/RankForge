@@ -115,6 +115,34 @@ test("reports generated static routes that are not listed in a framework manifes
   assert.equal(result.sourceFindings[0].evidence, "/extra/");
 });
 
+test("checks manifest route presence against generated HTML files", () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-missing-file-route-"));
+  const staticDir = path.join(repoPath, "out");
+  const manifestDir = path.join(repoPath, ".next");
+  writeHtml(path.join(staticDir, "index.html"), "Home");
+  fs.mkdirSync(manifestDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(manifestDir, "prerender-manifest.json"),
+    JSON.stringify({ routes: { "/": {}, "/missing/": {} } }),
+  );
+
+  const result = analyzeFrameworkRouteManifests({
+    repoPath,
+    staticDir,
+    detectedFramework: "next",
+    staticRoutes: [
+      { type: "static_html", route: "/", path: path.join(staticDir, "index.html") },
+      { type: "static_html", route: "/missing/", path: path.join(staticDir, "missing", "index.html") }
+    ]
+  });
+
+  assert.deepEqual(
+    result.sourceFindings.map((finding) => finding.id),
+    ["repo.manifest_route_missing"],
+  );
+  assert.equal(result.sourceFindings[0].evidence, "/missing/");
+});
+
 test("ignores absent framework manifests", () => {
   const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-no-manifest-"));
   const staticDir = path.join(repoPath, "out");
