@@ -23,3 +23,24 @@ test("retrieves a rule by ID", () => {
   const rule = getRule("indexability.noindex");
   assert.equal(rule.id, "indexability.noindex");
 });
+
+test("defines render parity rule metadata", () => {
+  const expected = {
+    "technical.rendered_title_changed": "P2",
+    "technical.rendered_description_changed": "P3",
+    "technical.rendered_canonical_changed": "P1",
+    "technical.rendered_primary_heading_missing": "P1",
+    "technical.rendered_structured_data_lost": "P2",
+    "technical.rendered_content_missing": "P1",
+    "technical.raw_rendered_mismatch": "P2",
+  };
+
+  for (const [ruleId, severity] of Object.entries(expected)) {
+    const item = getRule(ruleId);
+    assert.ok(item, `${ruleId} is registered`);
+    assert.equal(item.dimension, "technical");
+    assert.equal(item.defaultSeverity, severity);
+    assert.ok(item.recommendation);
+    assert.ok(item.sources.length > 0);
+  }
+});
