@@ -73,6 +73,25 @@ test("detects structured data values absent from visible content", () => {
   ]);
 });
 
+test("does not treat structured data tokens as visible when they only appear as substrings", () => {
+  const facts = structuredDataVisibleContentFacts(
+    page("https://example.com/product", `
+      <html>
+        <head>
+          <title>Services</title>
+          <meta name="description" content="Services overview">
+          <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Ace Pro","offers":{"price":"99","priceCurrency":"USD"}}</script>
+        </head>
+        <body><h1>Services</h1><p>${longCopy("space process implementation support")}</p></body>
+      </html>
+    `),
+    0,
+  );
+
+  assert.equal(facts.length, 1);
+  assert.equal(facts[0].ruleId, "structured_data.visible_content_mismatch");
+});
+
 test("does not flag structured data values visible in page evidence", () => {
   const facts = structuredDataVisibleContentFacts(
     page("https://example.com/product", `

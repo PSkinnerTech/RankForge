@@ -70,11 +70,13 @@ const visibleContentSurface = (evidence = {}) =>
 const valueAppearsInSurface = (value, surface) => {
   const normalizedValue = normalizeText(value);
   if (normalizedValue.length < 4) return true;
-  if (surface.includes(normalizedValue)) return true;
+  const paddedSurface = ` ${surface} `;
+  if (paddedSurface.includes(` ${normalizedValue} `)) return true;
 
   const tokens = tokensFor(normalizedValue);
   if (tokens.length === 0) return true;
-  const matched = tokens.filter((token) => surface.includes(token)).length;
+  const surfaceTokens = new Set(tokensFor(surface));
+  const matched = tokens.filter((token) => surfaceTokens.has(token)).length;
   if (tokens.length === 1) return matched === 1;
   return matched >= Math.max(2, Math.ceil(tokens.length * 0.5));
 };
