@@ -67,6 +67,20 @@ test("explains a known rule as JSON", async () => {
   assert.ok(body.sources.length > 0);
 });
 
+test("explains deterministic rule depth rules as JSON", async () => {
+  for (const ruleId of [
+    "structured_data.visible_content_mismatch",
+    "geo.entity_clarity_gap",
+    "policy.duplicate_content_cluster",
+  ]) {
+    const result = await capture(["explain-rule", ruleId]);
+    assert.equal(result.exitCode, 0);
+    const body = JSON.parse(result.stdout);
+    assert.equal(body.id, ruleId);
+    assert.ok(body.sources.length > 0);
+  }
+});
+
 test("returns a non-zero exit for unknown commands", async () => {
   const result = await capture(["unknown-command"]);
   assert.equal(result.exitCode, 1);
