@@ -181,6 +181,75 @@ test("reports generated static routes that are not listed in a framework manifes
   assert.equal(result.sourceFindings[0].evidence, "/extra/");
 });
 
+test("ignores valid Next.js manifest files with unrecognized route schema", () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-next-unknown-schema-"));
+  const staticDir = path.join(repoPath, "out");
+  const manifestDir = path.join(repoPath, ".next");
+  writeHtml(path.join(staticDir, "index.html"), "Home");
+  writeHtml(path.join(staticDir, "extra", "index.html"), "Extra");
+  fs.mkdirSync(manifestDir, { recursive: true });
+  fs.writeFileSync(path.join(manifestDir, "prerender-manifest.json"), JSON.stringify({ notRoutes: {} }));
+
+  const result = analyzeFrameworkRouteManifests({
+    repoPath,
+    staticDir,
+    detectedFramework: "next",
+    staticRoutes: [
+      { type: "static_html", route: "/", path: path.join(staticDir, "index.html") },
+      { type: "static_html", route: "/extra/", path: path.join(staticDir, "extra", "index.html") }
+    ]
+  });
+
+  assert.deepEqual(result.frameworkManifests, []);
+  assert.deepEqual(result.sourceFindings, []);
+});
+
+test("ignores valid Astro manifest files with unrecognized route schema", () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-astro-unknown-schema-"));
+  const staticDir = path.join(repoPath, "dist");
+  const manifestDir = path.join(repoPath, ".astro");
+  writeHtml(path.join(staticDir, "index.html"), "Home");
+  writeHtml(path.join(staticDir, "extra", "index.html"), "Extra");
+  fs.mkdirSync(manifestDir, { recursive: true });
+  fs.writeFileSync(path.join(manifestDir, "manifest.json"), JSON.stringify({ assets: [] }));
+
+  const result = analyzeFrameworkRouteManifests({
+    repoPath,
+    staticDir,
+    detectedFramework: "astro",
+    staticRoutes: [
+      { type: "static_html", route: "/", path: path.join(staticDir, "index.html") },
+      { type: "static_html", route: "/extra/", path: path.join(staticDir, "extra", "index.html") }
+    ]
+  });
+
+  assert.deepEqual(result.frameworkManifests, []);
+  assert.deepEqual(result.sourceFindings, []);
+});
+
+test("keeps manifest route file checks inside the static directory", () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-contained-manifest-route-"));
+  const staticDir = path.join(repoPath, "out");
+  const manifestDir = path.join(repoPath, ".next");
+  writeHtml(path.join(repoPath, "outside", "index.html"), "Outside");
+  fs.mkdirSync(manifestDir, { recursive: true });
+  fs.writeFileSync(path.join(manifestDir, "prerender-manifest.json"), JSON.stringify({ routes: { "/../outside/": {} } }));
+
+  const result = analyzeFrameworkRouteManifests({
+    repoPath,
+    staticDir,
+    detectedFramework: "next",
+    staticRoutes: []
+  });
+
+  assert.deepEqual(
+    result.sourceFindings.map((finding) => finding.id),
+    ["repo.manifest_route_missing"],
+  );
+  assert.equal(result.sourceFindings[0].evidence, "/../outside/");
+  assert.ok(!JSON.stringify(result).includes(path.join(repoPath, "outside")));
+});
+
 test("checks manifest route presence against generated HTML files", () => {
   const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-missing-file-route-"));
   const staticDir = path.join(repoPath, "out");

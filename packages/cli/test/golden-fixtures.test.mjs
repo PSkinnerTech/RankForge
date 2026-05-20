@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import http from "node:http";
+import os from "node:os";
 import path from "node:path";
 import { runAudit } from "../src/audit.mjs";
 import { generateMarkdownReport } from "../src/report.mjs";
@@ -44,15 +45,11 @@ const withFixtureServer = async (fn) => {
   }
 };
 
-const cleanupFrameworkRepoOutputs = () => {
-  for (const target of [
-    "examples/fixture-repos/next-basic/out",
-    "examples/fixture-repos/next-basic/.next",
-    "examples/fixture-repos/astro-basic/dist",
-    "examples/fixture-repos/astro-basic/.astro",
-  ]) {
-    fs.rmSync(target, { recursive: true, force: true });
-  }
+const copyFixtureRepo = (name) => {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `openclaw-${name}-`));
+  const repoPath = path.join(tempRoot, name);
+  fs.cpSync(path.resolve("examples/fixture-repos", name), repoPath, { recursive: true });
+  return { repoPath, tempRoot };
 };
 
 const frameworkRepoSummary = (audit) => ({
@@ -87,18 +84,18 @@ test("known-issues fixture audit matches golden JSON and Markdown", async () => 
 });
 
 test("framework repo audit golden summary matches fixtures", async () => {
-  const nextRepo = path.resolve("examples/fixture-repos/next-basic");
-  const astroRepo = path.resolve("examples/fixture-repos/astro-basic");
+  const nextFixture = copyFixtureRepo("next-basic");
+  const astroFixture = copyFixtureRepo("astro-basic");
 
   try {
     const nextAudit = await runRepoAudit({
-      repoPath: nextRepo,
+      repoPath: nextFixture.repoPath,
       buildCommand: "npm run build",
       staticDir: "out",
       maxBuildMs: 5000,
     });
     const astroAudit = await runRepoAudit({
-      repoPath: astroRepo,
+      repoPath: astroFixture.repoPath,
       buildCommand: "npm run build",
       staticDir: "dist",
       maxBuildMs: 5000,
@@ -113,6 +110,7 @@ test("framework repo audit golden summary matches fixtures", async () => {
       expected,
     );
   } finally {
-    cleanupFrameworkRepoOutputs();
+    fs.rmSync(nextFixture.tempRoot, { recursive: true, force: true });
+    fs.rmSync(astroFixture.tempRoot, { recursive: true, force: true });
   }
 });

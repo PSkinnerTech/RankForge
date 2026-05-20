@@ -10,6 +10,13 @@ import { waitForHttp } from "../src/repo-process.mjs";
 
 const fixture = (name) => path.resolve("examples/fixture-repos", name);
 
+const copyFixtureRepo = (name) => {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `openclaw-${name}-`));
+  const repoPath = path.join(tempRoot, name);
+  fs.cpSync(fixture(name), repoPath, { recursive: true });
+  return { repoPath, tempRoot };
+};
+
 const freePort = async () => {
   const server = net.createServer();
   server.listen(0, "127.0.0.1");
@@ -209,9 +216,7 @@ test("repo audit runs explicit build command before static output audit", async 
 });
 
 test("Next.js static build audit records framework manifest evidence and route parity findings", async () => {
-  const repoPath = fixture("next-basic");
-  fs.rmSync(path.join(repoPath, "out"), { recursive: true, force: true });
-  fs.rmSync(path.join(repoPath, ".next"), { recursive: true, force: true });
+  const { repoPath, tempRoot } = copyFixtureRepo("next-basic");
 
   try {
     const audit = await runRepoAudit({
@@ -233,15 +238,12 @@ test("Next.js static build audit records framework manifest evidence and route p
     ]);
     assert.ok(audit.repo.sourceFindings.some((finding) => finding.id === "repo.manifest_route_missing"));
   } finally {
-    fs.rmSync(path.join(repoPath, "out"), { recursive: true, force: true });
-    fs.rmSync(path.join(repoPath, ".next"), { recursive: true, force: true });
+    fs.rmSync(tempRoot, { recursive: true, force: true });
   }
 });
 
 test("Astro static build audit records framework manifest evidence", async () => {
-  const repoPath = fixture("astro-basic");
-  fs.rmSync(path.join(repoPath, "dist"), { recursive: true, force: true });
-  fs.rmSync(path.join(repoPath, ".astro"), { recursive: true, force: true });
+  const { repoPath, tempRoot } = copyFixtureRepo("astro-basic");
 
   try {
     const audit = await runRepoAudit({
@@ -263,8 +265,7 @@ test("Astro static build audit records framework manifest evidence", async () =>
     ]);
     assert.ok(!audit.repo.sourceFindings.some((finding) => finding.id === "repo.manifest_route_missing"));
   } finally {
-    fs.rmSync(path.join(repoPath, "dist"), { recursive: true, force: true });
-    fs.rmSync(path.join(repoPath, ".astro"), { recursive: true, force: true });
+    fs.rmSync(tempRoot, { recursive: true, force: true });
   }
 });
 

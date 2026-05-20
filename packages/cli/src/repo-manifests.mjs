@@ -6,13 +6,15 @@ const manifestConfigs = {
   next: {
     type: "next_prerender_manifest",
     relativePath: path.join(".next", "prerender-manifest.json"),
-    routesFor: (json) => (json?.routes && typeof json.routes === "object" && !Array.isArray(json.routes) ? Object.keys(json.routes) : []),
+    routesFor: (json) =>
+      json?.routes && typeof json.routes === "object" && !Array.isArray(json.routes) ? Object.keys(json.routes) : null,
   },
   astro: {
     type: "astro_manifest",
     relativePath: path.join(".astro", "manifest.json"),
     routesFor: (json) => {
-      const routes = Array.isArray(json?.routes) ? json.routes : Array.isArray(json?.manifest?.routes) ? json.manifest.routes : [];
+      const routes = Array.isArray(json?.routes) ? json.routes : Array.isArray(json?.manifest?.routes) ? json.manifest.routes : null;
+      if (!routes) return null;
       return routes
         .filter((route) => typeof route === "string" || route?.type === "page")
         .map((route) => (typeof route === "string" ? route : route?.route))
@@ -81,15 +83,21 @@ const uniqueNormalizedRouteStrings = (routes) => {
   return normalized;
 };
 
+const isPathInside = (root, candidate) => {
+  const relative = path.relative(path.resolve(root), path.resolve(candidate));
+  return relative === "" || (!relative.startsWith("..") && !path.isAbsolute(relative));
+};
+
 const htmlPathsForRoute = (staticDir, { route, extensionless = false }) => {
   if (!staticDir) return [];
-  if (route === "/") return [path.join(staticDir, "index.html")];
+  const safePaths = (candidates) => candidates.filter((candidate) => isPathInside(staticDir, candidate));
+  if (route === "/") return safePaths([path.join(staticDir, "index.html")]);
 
   const relativeRoute = route.startsWith("/") ? route.slice(1) : route;
-  if (relativeRoute.endsWith(".html")) return [path.join(staticDir, relativeRoute)];
+  if (relativeRoute.endsWith(".html")) return safePaths([path.join(staticDir, relativeRoute)]);
   const directoryHtmlPath = path.join(staticDir, relativeRoute, "index.html");
-  if (!extensionless) return [directoryHtmlPath];
-  return [directoryHtmlPath, path.join(staticDir, relativeRoute.replace(/\/$/, ".html"))];
+  if (!extensionless) return safePaths([directoryHtmlPath]);
+  return safePaths([directoryHtmlPath, path.join(staticDir, relativeRoute.replace(/\/$/, ".html"))]);
 };
 
 const hasGeneratedHtmlForRoute = (staticDir, entry) =>
@@ -149,7 +157,10 @@ export const analyzeFrameworkRouteManifests = ({ repoPath, staticDir, detectedFr
     };
   }
 
-  const manifestEntries = uniqueRouteEntries(config.routesFor(json));
+  const routes = config.routesFor(json);
+  if (!routes) return { frameworkManifests, sourceFindings };
+
+  const manifestEntries = uniqueRouteEntries(routes);
   const manifestRoutes = uniqueNormalizedRoutes(manifestEntries);
   frameworkManifests.push({
     type: config.type,
