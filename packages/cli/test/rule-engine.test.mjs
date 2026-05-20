@@ -191,6 +191,95 @@ test("flags structured data required property gaps", () => {
   assert.match(finding.impact, /offers/);
 });
 
+test("flags structured data visible content mismatches", () => {
+  const findings = evaluatePage(
+    snapshotFor(`
+      <html>
+        <head>
+          <title>Consulting Services</title>
+          <meta name="description" content="Implementation support">
+          <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Hidden Enterprise Platform","offers":{"price":"99","priceCurrency":"USD"}}</script>
+        </head>
+        <body>
+          <h1>Consulting Services</h1>
+          <p>${"Implementation support for operational teams. ".repeat(40)}</p>
+        </body>
+      </html>
+    `),
+  );
+
+  const finding = findings.find((item) => item.ruleId === "structured_data.visible_content_mismatch");
+  assert.ok(finding);
+  assert.equal(finding.severity, "P1");
+  assert.deepEqual(finding.evidence.slice(0, 2), [
+    "$.pages[0].evidence.structuredData[0]",
+    "$.pages[0].evidence.visibleTextPreview",
+  ]);
+});
+
+test("does not flag structured data values visible in page evidence", () => {
+  const findings = evaluatePage(
+    snapshotFor(`
+      <html>
+        <head>
+          <title>Hidden Enterprise Platform</title>
+          <meta name="description" content="Hidden Enterprise Platform implementation">
+          <script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"Hidden Enterprise Platform","offers":{"price":"99","priceCurrency":"USD"}}</script>
+        </head>
+        <body>
+          <h1>Hidden Enterprise Platform</h1>
+          <p>${"Hidden Enterprise Platform implementation support. ".repeat(40)}</p>
+        </body>
+      </html>
+    `),
+  );
+
+  assert.equal(findings.some((item) => item.ruleId === "structured_data.visible_content_mismatch"), false);
+});
+
+test("flags entity clarity gaps on substantial pages with weak entity signals", () => {
+  const findings = evaluatePage(
+    snapshotFor(`
+      <html>
+        <head><title>Implementation Services</title><meta name="description" content="Implementation services"></head>
+        <body>
+          <h1>Implementation Services</h1>
+          <p>${"Detailed service scope, process, delivery model, and customer outcomes. ".repeat(45)}</p>
+        </body>
+      </html>
+    `, {
+      finalUrl: "https://example.com/services",
+    }),
+  );
+
+  const finding = findings.find((item) => item.ruleId === "geo.entity_clarity_gap");
+  assert.ok(finding);
+  assert.equal(finding.severity, "P2");
+});
+
+test("does not flag entity clarity gaps when two strong signals exist", () => {
+  const findings = evaluatePage(
+    snapshotFor(`
+      <html>
+        <head>
+          <title>Implementation Services</title>
+          <meta name="description" content="Implementation services">
+          <meta property="og:site_name" content="Example Co">
+          <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Example Co","url":"https://example.com"}</script>
+        </head>
+        <body>
+          <h1>Implementation Services</h1>
+          <p>${"Detailed service scope, process, delivery model, and customer outcomes. ".repeat(45)}</p>
+        </body>
+      </html>
+    `, {
+      finalUrl: "https://example.com/services",
+    }),
+  );
+
+  assert.equal(findings.some((item) => item.ruleId === "geo.entity_clarity_gap"), false);
+});
+
 test("flags rendered metadata and canonical changes", () => {
   const findings = evaluatePage(renderedSnapshotFor(
     `
