@@ -187,3 +187,50 @@ test("normalizes internal URL list entries like URL-list file lines", async () =
     );
   });
 });
+
+test("includes render parity findings when an injected renderer changes SEO signals", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-render-parity-"));
+  const html = path.join(dir, "index.html");
+  fs.writeFileSync(
+    html,
+    `
+      <html>
+        <head>
+          <title>Raw Render Parity Title</title>
+          <meta name="description" content="Raw render parity description">
+          <link rel="canonical" href="https://example.com/render-parity">
+          <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Render Parity Org"}</script>
+        </head>
+        <body>
+          <h1>Render Parity Org</h1>
+          <p>${"Useful render parity content ".repeat(60)}</p>
+        </body>
+      </html>
+    `,
+  );
+
+  const audit = await runAudit({
+    target: html,
+    renderer: async () => `
+      <html>
+        <head>
+          <title>Client Render Parity Title</title>
+          <meta name="description" content="Client render parity description">
+          <link rel="canonical" href="https://example.com/client-render-parity">
+        </head>
+        <body>
+          <p>Loading.</p>
+        </body>
+      </html>
+    `,
+  });
+
+  assert.equal(audit.pages[0].render.status, "rendered");
+  const ids = audit.findings.map((finding) => finding.ruleId);
+  assert.ok(ids.includes("technical.rendered_title_changed"));
+  assert.ok(ids.includes("technical.rendered_description_changed"));
+  assert.ok(ids.includes("technical.rendered_canonical_changed"));
+  assert.ok(ids.includes("technical.rendered_primary_heading_missing"));
+  assert.ok(ids.includes("technical.rendered_structured_data_lost"));
+  assert.ok(ids.includes("technical.rendered_content_missing"));
+});

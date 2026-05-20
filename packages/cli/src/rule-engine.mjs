@@ -1,4 +1,5 @@
 import { implementationTaskFor } from "./finding-task.mjs";
+import { renderParityFacts } from "./render-parity.mjs";
 import { getRule } from "./rules.mjs";
 import { validateStructuredData } from "./structured-data.mjs";
 
@@ -145,15 +146,9 @@ export const evaluatePage = (snapshot, pageIndex = 0) => {
     );
   }
 
-  if (snapshot.render?.status === "rendered" && snapshot.render.textDeltaCharacters > 300) {
+  for (const parityFact of renderParityFacts(snapshot, pageIndex)) {
     findings.push(
-      createFinding(
-        "technical.raw_rendered_mismatch",
-        snapshot,
-        [`$.pages[${pageIndex}].evidence.counts.visibleTextCharacters`, `$.pages[${pageIndex}].render.textDeltaCharacters`],
-        pageIndex,
-        "Large raw and rendered text differences can indicate JavaScript SEO risk.",
-      ),
+      createFinding(parityFact.ruleId, snapshot, parityFact.evidence, pageIndex, parityFact.impact),
     );
   }
 
