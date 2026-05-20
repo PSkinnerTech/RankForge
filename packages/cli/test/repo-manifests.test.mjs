@@ -89,6 +89,38 @@ test("reads Astro manifest routes when present", () => {
   assert.deepEqual(result.sourceFindings, []);
 });
 
+test("matches extensionless manifest routes to generated html files", () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-extensionless-route-"));
+  const staticDir = path.join(repoPath, "out");
+  const manifestDir = path.join(repoPath, ".next");
+  writeHtml(path.join(staticDir, "index.html"), "Home");
+  writeHtml(path.join(staticDir, "about.html"), "About");
+  fs.mkdirSync(manifestDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(manifestDir, "prerender-manifest.json"),
+    JSON.stringify({ routes: { "/": {}, "/about": {} } }),
+  );
+
+  const result = analyzeFrameworkRouteManifests({
+    repoPath,
+    staticDir,
+    detectedFramework: "next",
+    staticRoutes: [
+      { type: "static_html", route: "/", path: path.join(staticDir, "index.html") },
+      { type: "static_html", route: "/about.html", path: path.join(staticDir, "about.html") }
+    ]
+  });
+
+  assert.deepEqual(result.frameworkManifests, [
+    {
+      type: "next_prerender_manifest",
+      path: path.join(manifestDir, "prerender-manifest.json"),
+      routes: ["/", "/about/"]
+    }
+  ]);
+  assert.deepEqual(result.sourceFindings, []);
+});
+
 test("reports generated static routes that are not listed in a framework manifest", () => {
   const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-unlisted-route-"));
   const staticDir = path.join(repoPath, "out");

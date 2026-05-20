@@ -28,7 +28,45 @@ const normalizeRoute = (route) => {
   return `${withLeadingSlash}/`;
 };
 
+const routeEntry = (route) => {
+  if (typeof route !== "string") return null;
+  const cleanRoute = route.trim();
+  const normalizedRoute = normalizeRoute(cleanRoute);
+  if (!normalizedRoute) return null;
+
+  const withLeadingSlash = cleanRoute.startsWith("/") ? cleanRoute : `/${cleanRoute}`;
+  return {
+    route: normalizedRoute,
+    extensionless: withLeadingSlash !== "/" && !withLeadingSlash.endsWith("/") && !withLeadingSlash.endsWith(".html"),
+  };
+};
+
+const uniqueRouteEntries = (routes) => {
+  const entries = [];
+  const seen = new Set();
+  for (const route of routes) {
+    const entry = routeEntry(route);
+    if (!entry) continue;
+    const key = `${entry.route}:${entry.extensionless ? "extensionless" : "explicit"}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    entries.push(entry);
+  }
+  return entries;
+};
+
 const uniqueNormalizedRoutes = (routes) => {
+  const normalized = [];
+  const seen = new Set();
+  for (const { route } of routes) {
+    if (seen.has(route)) continue;
+    seen.add(route);
+    normalized.push(route);
+  }
+  return normalized;
+};
+
+const uniqueNormalizedRouteStrings = (routes) => {
   const normalized = [];
   const seen = new Set();
   for (const route of routes) {
@@ -40,19 +78,28 @@ const uniqueNormalizedRoutes = (routes) => {
   return normalized;
 };
 
-const htmlPathForRoute = (staticDir, route) => {
-  if (!staticDir) return null;
-  if (route === "/") return path.join(staticDir, "index.html");
+const htmlPathsForRoute = (staticDir, { route, extensionless = false }) => {
+  if (!staticDir) return [];
+  if (route === "/") return [path.join(staticDir, "index.html")];
 
   const relativeRoute = route.startsWith("/") ? route.slice(1) : route;
-  if (relativeRoute.endsWith(".html")) return path.join(staticDir, relativeRoute);
-  if (relativeRoute.endsWith("/")) return path.join(staticDir, relativeRoute, "index.html");
-  return path.join(staticDir, relativeRoute, "index.html");
+  if (relativeRoute.endsWith(".html")) return [path.join(staticDir, relativeRoute)];
+  const directoryHtmlPath = path.join(staticDir, relativeRoute, "index.html");
+  if (!extensionless) return [directoryHtmlPath];
+  return [directoryHtmlPath, path.join(staticDir, relativeRoute.replace(/\/$/, ".html"))];
 };
 
-const hasGeneratedHtmlForRoute = (staticDir, route) => {
-  const htmlPath = htmlPathForRoute(staticDir, route);
-  return Boolean(htmlPath && fs.existsSync(htmlPath) && fs.statSync(htmlPath).isFile());
+const hasGeneratedHtmlForRoute = (staticDir, entry) =>
+  htmlPathsForRoute(staticDir, entry).some((htmlPath) => fs.existsSync(htmlPath) && fs.statSync(htmlPath).isFile());
+
+const extensionlessHtmlRoute = (route) => (route !== "/" && route.endsWith("/") ? `${route.slice(0, -1)}.html` : null);
+
+const isStaticRouteListed = (staticRoute, manifestEntries) => {
+  for (const entry of manifestEntries) {
+    if (entry.route === staticRoute) return true;
+    if (entry.extensionless && extensionlessHtmlRoute(entry.route) === staticRoute) return true;
+  }
+  return false;
 };
 
 const invalidManifestFinding = (manifestPath, error) =>
@@ -99,21 +146,21 @@ export const analyzeFrameworkRouteManifests = ({ repoPath, staticDir, detectedFr
     };
   }
 
-  const manifestRoutes = uniqueNormalizedRoutes(config.routesFor(json));
+  const manifestEntries = uniqueRouteEntries(config.routesFor(json));
+  const manifestRoutes = uniqueNormalizedRoutes(manifestEntries);
   frameworkManifests.push({
     type: config.type,
     path: manifestPath,
     routes: manifestRoutes,
   });
 
-  const manifestRouteSet = new Set(manifestRoutes);
-  const staticRouteSet = new Set(uniqueNormalizedRoutes(staticRoutes.map((route) => route.route)));
+  const staticRouteSet = new Set(uniqueNormalizedRouteStrings(staticRoutes.map((route) => route.route)));
 
-  for (const route of manifestRoutes) {
-    if (!hasGeneratedHtmlForRoute(staticDir, route)) sourceFindings.push(manifestRouteMissingFinding(route));
+  for (const entry of manifestEntries) {
+    if (!hasGeneratedHtmlForRoute(staticDir, entry)) sourceFindings.push(manifestRouteMissingFinding(entry.route));
   }
   for (const route of staticRouteSet) {
-    if (!manifestRouteSet.has(route)) sourceFindings.push(staticRouteUnlistedFinding(route));
+    if (!isStaticRouteListed(route, manifestEntries)) sourceFindings.push(staticRouteUnlistedFinding(route));
   }
 
   return { frameworkManifests, sourceFindings };
