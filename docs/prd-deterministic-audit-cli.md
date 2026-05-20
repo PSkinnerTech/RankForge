@@ -858,14 +858,14 @@ Delivered developer-focused repo audit completion work:
 - Repo config support through `audit.config.json` for repeatable CI workflows.
 - Vite fixture coverage for deterministic build-and-static-output audits.
 - Phase C framework maturity coverage for deterministic Next.js and Astro fixture audits.
-- Framework route manifest evidence for stable generated artifacts.
+- Framework route manifest evidence for stable generated artifacts, currently Next.js prerender manifests.
 - Source-level route parity findings for manifest routes missing generated HTML and generated HTML routes absent from framework route manifests.
 - Source-level findings for generated sitemap/robots availability, static output availability, route-list issues, build failures, and preview startup failures.
 
 Remaining developer-focused repo audit work:
 
 - Deeper deterministic source-level findings for framework metadata usage and rendered/source mismatches where stable framework artifacts expose metadata expectations.
-- Additional framework-specific route manifest parsing only when stable generated artifacts are identified and covered by fixtures.
+- Additional framework-specific route manifest parsing only when stable generated artifacts are identified and covered by fixtures. Astro route metadata should be added through an explicit integration-generated artifact rather than inferred from an undocumented default file.
 
 ## 20. Risks and Mitigations
 

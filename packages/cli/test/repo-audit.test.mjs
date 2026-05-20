@@ -242,7 +242,7 @@ test("Next.js static build audit records framework manifest evidence and route p
   }
 });
 
-test("Astro static build audit records framework manifest evidence", async () => {
+test("Astro static build audit records framework detection without fixture-only manifest evidence", async () => {
   const { repoPath, tempRoot } = copyFixtureRepo("astro-basic");
 
   try {
@@ -256,13 +256,7 @@ test("Astro static build audit records framework manifest evidence", async () =>
     assert.equal(audit.repo.detectedFramework, "astro");
     assert.equal(audit.repo.staticDirRelative, "dist");
     assert.equal(audit.pages.length, 2);
-    assert.deepEqual(audit.repo.frameworkManifests, [
-      {
-        type: "astro_manifest",
-        path: path.join(repoPath, ".astro", "manifest.json"),
-        routes: ["/", "/services/"],
-      },
-    ]);
+    assert.deepEqual(audit.repo.frameworkManifests, []);
     assert.ok(!audit.repo.sourceFindings.some((finding) => finding.id === "repo.manifest_route_missing"));
   } finally {
     fs.rmSync(tempRoot, { recursive: true, force: true });

@@ -3,3 +3,7 @@ node_modules/
 dist/
 .env
 tmp/
+examples/fixture-repos/next-basic/.next/
+examples/fixture-repos/next-basic/out/
+examples/fixture-repos/astro-basic/dist/
+examples/fixture-repos/vite-basic/dist/

@@ -27,15 +27,7 @@
       "Astro Fixture Home",
       "Astro Fixture Services"
     ],
-    "frameworkManifests": [
-      {
-        "type": "astro_manifest",
-        "routes": [
-          "/",
-          "/services/"
-        ]
-      }
-    ],
+    "frameworkManifests": [],
     "sourceFindingIds": []
   }
 }

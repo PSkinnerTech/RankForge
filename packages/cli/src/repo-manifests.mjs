@@ -9,18 +9,6 @@ const manifestConfigs = {
     routesFor: (json) =>
       json?.routes && typeof json.routes === "object" && !Array.isArray(json.routes) ? Object.keys(json.routes) : null,
   },
-  astro: {
-    type: "astro_manifest",
-    relativePath: path.join(".astro", "manifest.json"),
-    routesFor: (json) => {
-      const routes = Array.isArray(json?.routes) ? json.routes : Array.isArray(json?.manifest?.routes) ? json.manifest.routes : null;
-      if (!routes) return null;
-      return routes
-        .filter((route) => typeof route === "string" || route?.type === "page")
-        .map((route) => (typeof route === "string" ? route : route?.route))
-        .filter(Boolean);
-    },
-  },
 };
 
 const normalizeRoute = (route) => {

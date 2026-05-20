@@ -52,8 +52,8 @@ test("reads Next.js prerender manifest and reports missing generated routes", ()
   assert.equal(result.sourceFindings[0].evidence, "/missing/");
 });
 
-test("reads Astro manifest routes when present", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-astro-manifest-"));
+test("does not treat Astro fixture-only metadata as a framework route manifest", () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-astro-unowned-manifest-"));
   const staticDir = path.join(repoPath, "dist");
   const manifestDir = path.join(repoPath, ".astro");
   writeHtml(path.join(staticDir, "index.html"), "Home");
@@ -79,47 +79,7 @@ test("reads Astro manifest routes when present", () => {
     ]
   });
 
-  assert.deepEqual(result.frameworkManifests, [
-    {
-      type: "astro_manifest",
-      path: path.join(manifestDir, "manifest.json"),
-      routes: ["/", "/services/"]
-    }
-  ]);
-  assert.deepEqual(result.sourceFindings, []);
-});
-
-test("ignores Astro endpoint routes when checking generated HTML", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-astro-endpoint-manifest-"));
-  const staticDir = path.join(repoPath, "dist");
-  const manifestDir = path.join(repoPath, ".astro");
-  writeHtml(path.join(staticDir, "index.html"), "Home");
-  fs.mkdirSync(manifestDir, { recursive: true });
-  fs.writeFileSync(
-    path.join(manifestDir, "manifest.json"),
-    JSON.stringify({
-      routes: [
-        { route: "/", type: "page" },
-        { route: "/rss.xml", type: "endpoint" },
-        { route: "/api/data.json", type: "endpoint" }
-      ]
-    }),
-  );
-
-  const result = analyzeFrameworkRouteManifests({
-    repoPath,
-    staticDir,
-    detectedFramework: "astro",
-    staticRoutes: [{ type: "static_html", route: "/", path: path.join(staticDir, "index.html") }]
-  });
-
-  assert.deepEqual(result.frameworkManifests, [
-    {
-      type: "astro_manifest",
-      path: path.join(manifestDir, "manifest.json"),
-      routes: ["/"]
-    }
-  ]);
+  assert.deepEqual(result.frameworkManifests, []);
   assert.deepEqual(result.sourceFindings, []);
 });
 
@@ -194,29 +154,6 @@ test("ignores valid Next.js manifest files with unrecognized route schema", () =
     repoPath,
     staticDir,
     detectedFramework: "next",
-    staticRoutes: [
-      { type: "static_html", route: "/", path: path.join(staticDir, "index.html") },
-      { type: "static_html", route: "/extra/", path: path.join(staticDir, "extra", "index.html") }
-    ]
-  });
-
-  assert.deepEqual(result.frameworkManifests, []);
-  assert.deepEqual(result.sourceFindings, []);
-});
-
-test("ignores valid Astro manifest files with unrecognized route schema", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-astro-unknown-schema-"));
-  const staticDir = path.join(repoPath, "dist");
-  const manifestDir = path.join(repoPath, ".astro");
-  writeHtml(path.join(staticDir, "index.html"), "Home");
-  writeHtml(path.join(staticDir, "extra", "index.html"), "Extra");
-  fs.mkdirSync(manifestDir, { recursive: true });
-  fs.writeFileSync(path.join(manifestDir, "manifest.json"), JSON.stringify({ assets: [] }));
-
-  const result = analyzeFrameworkRouteManifests({
-    repoPath,
-    staticDir,
-    detectedFramework: "astro",
     staticRoutes: [
       { type: "static_html", route: "/", path: path.join(staticDir, "index.html") },
       { type: "static_html", route: "/extra/", path: path.join(staticDir, "extra", "index.html") }
