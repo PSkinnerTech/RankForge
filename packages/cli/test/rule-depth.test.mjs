@@ -28,6 +28,25 @@ test("creates stable content fingerprints from visible text previews", () => {
   assert.equal(contentFingerprint("Short"), "");
 });
 
+test("keeps fingerprints exact after the first 500 normalized characters", () => {
+  const sharedPrefix = `${"Shared introduction content ".repeat(20)}shared exact prefix marker`;
+  const first = `${sharedPrefix} Original service details continue here.`;
+  const second = `${sharedPrefix} Different advisory details continue here.`;
+
+  assert.notEqual(
+    contentFingerprint(first),
+    contentFingerprint(second),
+  );
+
+  const pages = [
+    page("https://example.com/one", `<title>One</title><h1>One</h1><p>${first}</p>`),
+    page("https://example.com/two", `<title>Two</title><h1>Two</h1><p>${second}</p>`),
+    page("https://example.com/tri", `<title>Tri</title><h1>Tri</h1><p>${sharedPrefix} Third variation details continue here.</p>`),
+  ];
+
+  assert.deepEqual(duplicateContentClusterFacts(pages), []);
+});
+
 test("detects structured data values absent from visible content", () => {
   const facts = structuredDataVisibleContentFacts(
     page("https://example.com/product", `
@@ -147,7 +166,7 @@ test("does not flag entity clarity on thin or noindexed pages", () => {
 });
 
 test("detects duplicate content clusters for substantial pages", () => {
-  const copy = longCopy("Shared service detail");
+  const copy = "Shared service detail ".repeat(30);
   const facts = duplicateContentClusterFacts([
     page("https://example.com/a", `<title>Alpha Page</title><h1>Alpha Page</h1><p>${copy}</p>`),
     page("https://example.com/b", `<title>Bravo Page</title><h1>Bravo Page</h1><p>${copy}</p>`),

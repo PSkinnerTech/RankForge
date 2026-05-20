@@ -81,7 +81,7 @@ const valueAppearsInSurface = (value, surface) => {
 
 export const contentFingerprint = (value) => {
   const normalized = normalizeText(value);
-  return normalized.length >= 500 ? normalized.slice(0, 500) : "";
+  return normalized.length >= 500 ? normalized : "";
 };
 
 const pageContentForFingerprint = (evidence = {}) => {
