@@ -35,9 +35,9 @@ test("detects duplicate titles and descriptions", () => {
 test("detects duplicate content clusters beyond duplicate metadata", () => {
   const copy = longCopy("Detailed repeated service description");
   const findings = evaluateSite([
-    page("https://example.com/a", `<title>Alpha Page</title><meta name='description' content='A'><h1>Alpha Page</h1><p>${copy}</p>`),
-    page("https://example.com/b", `<title>Bravo Page</title><meta name='description' content='B'><h1>Bravo Page</h1><p>${copy}</p>`),
-    page("https://example.com/c", `<title>Cedar Page</title><meta name='description' content='C'><h1>Cedar Page</h1><p>${copy}</p>`),
+    page("https://example.com/a", `<title>Shared Page</title><meta name='description' content='A'><h1>Shared Page</h1><p>${copy}</p>`),
+    page("https://example.com/b", `<title>Shared Page</title><meta name='description' content='B'><h1>Shared Page</h1><p>${copy}</p>`),
+    page("https://example.com/c", `<title>Shared Page</title><meta name='description' content='C'><h1>Shared Page</h1><p>${copy}</p>`),
   ]);
 
   const finding = findings.find((item) => item.ruleId === "policy.duplicate_content_cluster");
@@ -52,6 +52,13 @@ test("detects duplicate content clusters beyond duplicate metadata", () => {
 
 test("does not flag duplicate content cluster false positives", () => {
   const copy = longCopy("Detailed repeated service description");
+  const completePreviewCopy = "Detailed repeated service description ".repeat(25);
+
+  assert.equal(evaluateSite([
+    page("https://example.com/a", `<title>Alpha Page</title><h1>Alpha Page</h1><p>${completePreviewCopy}</p>`),
+    page("https://example.com/b", `<title>Bravo Page</title><h1>Bravo Page</h1><p>${completePreviewCopy}</p>`),
+    page("https://example.com/c", `<title>Charlie Page</title><h1>Charlie Page</h1><p>${completePreviewCopy}</p>`),
+  ]).some((finding) => finding.ruleId === "policy.duplicate_content_cluster"), false);
 
   assert.equal(evaluateSite([
     page("https://example.com/a", `<title>Alpha Page</title><h1>Alpha Page</h1><p>${copy}</p>`),

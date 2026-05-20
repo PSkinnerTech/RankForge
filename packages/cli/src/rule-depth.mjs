@@ -86,20 +86,6 @@ export const contentFingerprint = (value) => {
   return normalized.length >= 500 ? normalized : "";
 };
 
-const pageContentForFingerprint = (evidence = {}) => {
-  let text = ` ${normalizeText(evidence.visibleTextPreview || "")} `;
-  const labels = [
-    evidence.title,
-    ...(Array.isArray(evidence.h1) ? evidence.h1 : []),
-  ].map(normalizeText).filter((label) => label.length > 2);
-
-  for (const label of labels) {
-    text = text.split(` ${label} `).join(" ");
-  }
-
-  return text.replace(/\s+/g, " ").trim();
-};
-
 export const structuredDataVisibleContentFacts = (page, pageIndex = 0) => {
   const evidence = page.evidence || {};
   const surface = visibleContentSurface(evidence);
@@ -182,7 +168,7 @@ export const duplicateContentClusterFacts = (pages = []) => {
     if (!isSuccessfulPage(page) || isNoindexed(evidence) || !sameCanonical(page)) continue;
     if ((evidence.counts?.visibleTextCharacters || 0) < 600) continue;
 
-    const fingerprint = contentFingerprint(pageContentForFingerprint(evidence));
+    const fingerprint = contentFingerprint(evidence.visibleTextPreview || "");
     if (!fingerprint) continue;
 
     const group = groups.get(fingerprint) || [];

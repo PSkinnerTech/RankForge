@@ -240,15 +240,15 @@ test("includes deterministic rule depth findings in audit output", async () => {
     response.setHeader("content-type", "text/html");
     const copy = "Detailed repeated service description with operational evidence and implementation context. ".repeat(8);
     if (request.url === "/a") {
-      response.end(`<title>Alpha Page</title><meta name="description" content="A"><h1>Alpha Page</h1><p>${copy}</p>`);
+      response.end(`<title>Shared Page</title><meta name="description" content="Shared duplicate page"><h1>Shared Page</h1><p>${copy}</p>`);
       return;
     }
     if (request.url === "/b") {
-      response.end(`<title>Bravo Page</title><meta name="description" content="B"><h1>Bravo Page</h1><p>${copy}</p>`);
+      response.end(`<title>Shared Page</title><meta name="description" content="Shared duplicate page"><h1>Shared Page</h1><p>${copy}</p>`);
       return;
     }
     if (request.url === "/c") {
-      response.end(`<title>Cedar Page</title><meta name="description" content="C"><h1>Cedar Page</h1><p>${copy}</p>`);
+      response.end(`<title>Shared Page</title><meta name="description" content="Shared duplicate page"><h1>Shared Page</h1><p>${copy}</p>`);
       return;
     }
     response.end(`

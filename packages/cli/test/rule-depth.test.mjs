@@ -187,9 +187,9 @@ test("does not flag entity clarity on thin or noindexed pages", () => {
 test("detects duplicate content clusters for substantial pages", () => {
   const copy = "Shared service detail ".repeat(30);
   const facts = duplicateContentClusterFacts([
-    page("https://example.com/a", `<title>Alpha Page</title><h1>Alpha Page</h1><p>${copy}</p>`),
-    page("https://example.com/b", `<title>Bravo Page</title><h1>Bravo Page</h1><p>${copy}</p>`),
-    page("https://example.com/c", `<title>Charlie Page</title><h1>Charlie Page</h1><p>${copy}</p>`),
+    page("https://example.com/a", `<title>Shared Page</title><h1>Shared Page</h1><p>${copy}</p>`),
+    page("https://example.com/b", `<title>Shared Page</title><h1>Shared Page</h1><p>${copy}</p>`),
+    page("https://example.com/c", `<title>Shared Page</title><h1>Shared Page</h1><p>${copy}</p>`),
   ]);
 
   assert.equal(facts.length, 1);
@@ -199,6 +199,16 @@ test("detects duplicate content clusters for substantial pages", () => {
     "https://example.com/b",
     "https://example.com/c",
   ]);
+});
+
+test("does not flag duplicate content clusters when titles and h1 labels differ", () => {
+  const copy = "Shared service detail ".repeat(30);
+
+  assert.deepEqual(duplicateContentClusterFacts([
+    page("https://example.com/a", `<title>Alpha Page</title><h1>Alpha Page</h1><p>${copy}</p>`),
+    page("https://example.com/b", `<title>Bravo Page</title><h1>Bravo Page</h1><p>${copy}</p>`),
+    page("https://example.com/c", `<title>Charlie Page</title><h1>Charlie Page</h1><p>${copy}</p>`),
+  ]), []);
 });
 
 test("does not flag duplicate content pairs, short pages, noindexed pages, or canonical alternates", () => {
