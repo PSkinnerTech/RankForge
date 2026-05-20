@@ -26,6 +26,8 @@ const requiredFiles = [
   "packages/cli/src/crawl.mjs",
   "packages/cli/src/repo-audit.mjs",
   "packages/cli/src/repo-detect.mjs",
+  "packages/cli/src/repo-findings.mjs",
+  "packages/cli/src/repo-manifests.mjs",
   "packages/cli/src/repo-process.mjs",
   "packages/cli/src/repo-routes.mjs",
   "packages/cli/src/rule-engine.mjs",
