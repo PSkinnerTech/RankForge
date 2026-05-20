@@ -52,6 +52,17 @@ test("detects rendered title changes", () => {
   ]);
 });
 
+test("detects rendered title removal", () => {
+  const facts = renderParityFacts(snapshot({
+    renderEvidence: {
+      ...baseEvidence(),
+      title: "",
+    },
+  }));
+
+  assert.equal(facts[0].ruleId, "technical.rendered_title_changed");
+});
+
 test("detects rendered description removal", () => {
   const facts = renderParityFacts(snapshot({
     renderEvidence: {
@@ -79,6 +90,17 @@ test("detects rendered canonical changes while treating equivalent formatting as
     renderEvidence: {
       ...baseEvidence(),
       canonical: "https://example.com/other",
+    },
+  }));
+
+  assert.equal(facts[0].ruleId, "technical.rendered_canonical_changed");
+});
+
+test("detects rendered canonical removal", () => {
+  const facts = renderParityFacts(snapshot({
+    renderEvidence: {
+      ...baseEvidence(),
+      canonical: "",
     },
   }));
 

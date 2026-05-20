@@ -69,7 +69,7 @@ export const renderParityFacts = (snapshot, pageIndex = 0) => {
 
   const rawTitle = cleanTextFolded(raw.title);
   const renderedTitle = cleanTextFolded(rendered.title);
-  if (rawTitle && renderedTitle && rawTitle !== renderedTitle) {
+  if (rawTitle && rawTitle !== renderedTitle) {
     facts.push(makeFact(
       "technical.rendered_title_changed",
       pageIndex,
@@ -91,7 +91,7 @@ export const renderParityFacts = (snapshot, pageIndex = 0) => {
 
   const rawCanonical = normalizeCanonical(raw.canonical);
   const renderedCanonical = normalizeCanonical(rendered.canonical);
-  if (rawCanonical && renderedCanonical && rawCanonical !== renderedCanonical) {
+  if (rawCanonical && rawCanonical !== renderedCanonical) {
     facts.push(makeFact(
       "technical.rendered_canonical_changed",
       pageIndex,
