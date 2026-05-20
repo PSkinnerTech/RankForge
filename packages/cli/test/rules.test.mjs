@@ -44,3 +44,11 @@ test("defines render parity rule metadata", () => {
     assert.ok(item.sources.length > 0);
   }
 });
+
+test("defines deterministic rule depth metadata", () => {
+  const severities = Object.fromEntries(rules.map((rule) => [rule.id, rule.defaultSeverity]));
+
+  assert.equal(severities["structured_data.visible_content_mismatch"], "P1");
+  assert.equal(severities["geo.entity_clarity_gap"], "P2");
+  assert.equal(severities["policy.duplicate_content_cluster"], "P2");
+});

@@ -2,6 +2,7 @@
 
 ## Unreleased - 2026-05-18
 
+- Added Phase D.2 deterministic rule-depth findings for duplicate content clusters, structured-data visible-content mismatches, and entity clarity gaps.
 - Added Phase D.1 render parity findings for explicitly rendered audits, including changed title, description, canonical, missing rendered heading/content, and structured-data loss checks.
 - Added Phase B repository audit mode so the CLI can inspect a source repository and audit either detected static output or an explicit preview server.
 - Added `detect-repo [path]` to report repository metadata including package manager, framework signal, build command, preview command, static output directory, and discovered route sources.

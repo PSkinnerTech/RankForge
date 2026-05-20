@@ -16,18 +16,18 @@ const hasValue = (value) => {
   return true;
 };
 
-const typeNames = (value) => {
+export const structuredDataTypeNames = (value) => {
   if (!value) return [];
   return Array.isArray(value) ? value.map(String) : [String(value)];
 };
 
-const nodesFrom = (value) => {
+export const structuredDataNodes = (value) => {
   if (!value) return [];
-  if (Array.isArray(value)) return value.flatMap(nodesFrom);
+  if (Array.isArray(value)) return value.flatMap(structuredDataNodes);
   if (typeof value !== "object") return [];
 
   const nodes = [value];
-  if (value["@graph"]) nodes.push(...nodesFrom(value["@graph"]));
+  if (value["@graph"]) nodes.push(...structuredDataNodes(value["@graph"]));
   return nodes;
 };
 
@@ -37,8 +37,8 @@ export const validateStructuredData = (structuredData = []) => {
   for (const [blockIndex, block] of structuredData.entries()) {
     if (!block?.data) continue;
 
-    for (const [nodeIndex, node] of nodesFrom(block.data).entries()) {
-      for (const type of typeNames(node["@type"])) {
+    for (const [nodeIndex, node] of structuredDataNodes(block.data).entries()) {
+      for (const type of structuredDataTypeNames(node["@type"])) {
         const required = requiredProperties[type];
         if (!required) continue;
 

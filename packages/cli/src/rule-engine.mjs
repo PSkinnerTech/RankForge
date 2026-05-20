@@ -1,5 +1,6 @@
 import { implementationTaskFor } from "./finding-task.mjs";
 import { renderParityFacts } from "./render-parity.mjs";
+import { entityClarityFacts, structuredDataVisibleContentFacts } from "./rule-depth.mjs";
 import { getRule } from "./rules.mjs";
 import { validateStructuredData } from "./structured-data.mjs";
 
@@ -269,6 +270,15 @@ export const evaluatePage = (snapshot, pageIndex = 0) => {
         pageIndex,
         `${issue.type} structured data is missing required properties: ${issue.missing.join(", ")}.`,
       ),
+    );
+  }
+
+  for (const depthFact of [
+    ...structuredDataVisibleContentFacts(snapshot, pageIndex),
+    ...entityClarityFacts(snapshot, pageIndex),
+  ]) {
+    findings.push(
+      createFinding(depthFact.ruleId, snapshot, depthFact.evidence, pageIndex, depthFact.impact),
     );
   }
 
