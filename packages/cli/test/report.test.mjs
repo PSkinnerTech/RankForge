@@ -114,3 +114,33 @@ test("includes repository build evidence when present", () => {
   assert.match(markdown, /Build exit code: 0/);
   assert.match(markdown, /Route list: \/repo\/routes.txt/);
 });
+
+test("includes framework manifest evidence when present", () => {
+  const markdown = generateMarkdownReport({
+    run: { target: "repo" },
+    findings: [],
+    scores: {},
+    integrations: {},
+    evidenceGaps: [],
+    sources: [],
+    repo: {
+      path: "/repo",
+      detectedFramework: "next",
+      packageManager: "npm",
+      staticDirRelative: "out",
+      routeSources: [{ type: "static_html", route: "/", path: "/repo/out/index.html" }],
+      frameworkManifests: [
+        {
+          type: "next_prerender_manifest",
+          path: "/repo/.next/prerender-manifest.json",
+          routes: ["/", "/about/", "/missing/"],
+        },
+      ],
+      sourceFindings: [],
+    },
+  });
+
+  assert.match(markdown, /Framework route manifests:/);
+  assert.match(markdown, /next_prerender_manifest: 3 routes/);
+  assert.match(markdown, /\/repo\/\.next\/prerender-manifest\.json/);
+});

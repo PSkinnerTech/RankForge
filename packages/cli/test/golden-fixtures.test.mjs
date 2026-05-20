@@ -2,9 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import http from "node:http";
+import os from "node:os";
 import path from "node:path";
 import { runAudit } from "../src/audit.mjs";
 import { generateMarkdownReport } from "../src/report.mjs";
+import { runRepoAudit } from "../src/repo-audit.mjs";
 import { normalizeAuditForGolden, normalizeMarkdownForGolden } from "./helpers/golden.mjs";
 
 const rootDir = path.resolve("examples/fixture-sites/known-issues");
@@ -43,6 +45,24 @@ const withFixtureServer = async (fn) => {
   }
 };
 
+const copyFixtureRepo = (name) => {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `openclaw-${name}-`));
+  const repoPath = path.join(tempRoot, name);
+  fs.cpSync(path.resolve("examples/fixture-repos", name), repoPath, { recursive: true });
+  return { repoPath, tempRoot };
+};
+
+const frameworkRepoSummary = (audit) => ({
+  framework: audit.repo.detectedFramework,
+  staticDirRelative: audit.repo.staticDirRelative,
+  pageTitles: audit.pages.map((page) => page.evidence.title),
+  frameworkManifests: audit.repo.frameworkManifests.map((manifest) => ({
+    type: manifest.type,
+    routes: manifest.routes,
+  })),
+  sourceFindingIds: audit.repo.sourceFindings.map((finding) => finding.id),
+});
+
 test("known-issues fixture audit matches golden JSON and Markdown", async () => {
   await withFixtureServer(async (origin) => {
     const audit = await runAudit({
@@ -61,4 +81,36 @@ test("known-issues fixture audit matches golden JSON and Markdown", async () => 
     assert.deepEqual(summary, expectedSummary);
     assert.equal(markdown, expectedMarkdown);
   });
+});
+
+test("framework repo audit golden summary matches fixtures", async () => {
+  const nextFixture = copyFixtureRepo("next-basic");
+  const astroFixture = copyFixtureRepo("astro-basic");
+
+  try {
+    const nextAudit = await runRepoAudit({
+      repoPath: nextFixture.repoPath,
+      buildCommand: "npm run build",
+      staticDir: "out",
+      maxBuildMs: 5000,
+    });
+    const astroAudit = await runRepoAudit({
+      repoPath: astroFixture.repoPath,
+      buildCommand: "npm run build",
+      staticDir: "dist",
+      maxBuildMs: 5000,
+    });
+    const expected = JSON.parse(fs.readFileSync("examples/golden/repo-framework-summary.json", "utf8"));
+
+    assert.deepEqual(
+      {
+        next: frameworkRepoSummary(nextAudit),
+        astro: frameworkRepoSummary(astroAudit),
+      },
+      expected,
+    );
+  } finally {
+    fs.rmSync(nextFixture.tempRoot, { recursive: true, force: true });
+    fs.rmSync(astroFixture.tempRoot, { recursive: true, force: true });
+  }
 });

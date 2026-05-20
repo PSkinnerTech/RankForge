@@ -2,20 +2,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { runAudit } from "./audit.mjs";
 import { detectRepo } from "./repo-detect.mjs";
+import { sourceFinding } from "./repo-findings.mjs";
+import { analyzeFrameworkRouteManifests } from "./repo-manifests.mjs";
 import { runCommand, startPreview, stopPreview } from "./repo-process.mjs";
 import { discoverStaticRoutes } from "./repo-routes.mjs";
 
 const toolVersion = "0.2.0";
-
-const sourceFinding = ({ id, severity = "P1", message, evidence, recommendation, confidence = "high", details }) => ({
-  id,
-  severity,
-  message,
-  evidence,
-  recommendation,
-  confidence,
-  ...(details ? { details } : {}),
-});
 
 const relativePath = (repoPath, targetPath) => {
   if (!targetPath) return null;
@@ -98,6 +90,7 @@ const repoEvidence = (detected, overrides = {}) => ({
   staticDir: detected.staticDir,
   staticDirRelative: detected.staticDirRelative,
   routeSources: detected.routeSources || [],
+  frameworkManifests: [],
   sourceFindings: [],
   notes: [],
   ...overrides,
@@ -308,7 +301,6 @@ export const runRepoAudit = async (options = {}) => {
 
     const routeList = options.routeList ? path.resolve(repoPath, options.routeList) : null;
     const routeListResult = routeList ? readRouteListRoutes(routeList, staticDir) : null;
-    const routes = routeListResult ? routeListResult.routes : discoverStaticRoutes(staticDir);
     const routeSourceFindings = routeListResult?.sourceFindings || [];
     if (routeSourceFindings.length) {
       return emptyAudit(detected, {
@@ -319,6 +311,9 @@ export const runRepoAudit = async (options = {}) => {
         sourceFindings: routeSourceFindings,
       });
     }
+
+    const staticRoutes = discoverStaticRoutes(staticDir);
+    const routes = routeListResult ? routeListResult.routes : staticRoutes;
 
     if (!routes.length) {
       return emptyAudit(detected, {
@@ -334,7 +329,13 @@ export const runRepoAudit = async (options = {}) => {
       });
     }
 
-    const outputSourceFindings = generatedOutputFindings(staticDir);
+    const manifestAnalysis = analyzeFrameworkRouteManifests({
+      repoPath,
+      staticDir,
+      detectedFramework: detected.detectedFramework,
+      staticRoutes,
+    });
+    const outputSourceFindings = [...generatedOutputFindings(staticDir), ...manifestAnalysis.sourceFindings];
     const audit = await runAudit({
       ...options,
       target: routes[0].path,
@@ -349,6 +350,7 @@ export const runRepoAudit = async (options = {}) => {
       staticDirRelative,
       routeList,
       routeSources: routes,
+      frameworkManifests: manifestAnalysis.frameworkManifests,
       sourceFindings: outputSourceFindings,
       notes: ["Audited static output directory."],
     });

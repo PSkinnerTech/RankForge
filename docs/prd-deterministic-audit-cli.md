@@ -857,13 +857,15 @@ Delivered developer-focused repo audit completion work:
 - Route-list support for repository audits, including missing, empty, non-HTML, missing-entry, and outside-static findings.
 - Repo config support through `audit.config.json` for repeatable CI workflows.
 - Vite fixture coverage for deterministic build-and-static-output audits.
+- Phase C framework maturity coverage for deterministic Next.js and Astro fixture audits.
+- Framework route manifest evidence for stable generated artifacts, currently Next.js prerender manifests.
+- Source-level route parity findings for manifest routes missing generated HTML and generated HTML routes absent from framework route manifests.
 - Source-level findings for generated sitemap/robots availability, static output availability, route-list issues, build failures, and preview startup failures.
 
 Remaining developer-focused repo audit work:
 
-- Next.js and Astro fixture coverage.
-- Deeper deterministic source-level findings for framework metadata usage and rendered/source mismatches where stable.
-- Optional framework-specific route manifest parsing when it can be done without brittle heuristics.
+- Deeper deterministic source-level findings for framework metadata usage and rendered/source mismatches where stable framework artifacts expose metadata expectations.
+- Additional framework-specific route manifest parsing only when stable generated artifacts are identified and covered by fixtures. Astro route metadata should be added through an explicit integration-generated artifact rather than inferred from an undocumented default file.
 
 ## 20. Risks and Mitigations
 
@@ -919,9 +921,9 @@ Before publishing or tagging `0.2.0`:
 - Confirm readiness language remains separate from measured ranking or AI-answer visibility claims.
 - Push and merge the guardrail branch through the repository review workflow.
 
-Before extending developer repo audit beyond the completed build/config/route-list layer:
+Before extending developer repo audit beyond the completed build/config/route-list/framework-manifest layer:
 
-- Add Next.js and Astro fixtures only with deterministic local build scripts and no automatic dependency installation.
+- Add additional framework fixtures only with deterministic local build scripts and no automatic dependency installation.
 - Expand deterministic source-level findings only where source evidence can be parsed without brittle framework assumptions.
 - Keep repo-to-audit implementation separate from external API integrations.
 

@@ -10,6 +10,13 @@ import { waitForHttp } from "../src/repo-process.mjs";
 
 const fixture = (name) => path.resolve("examples/fixture-repos", name);
 
+const copyFixtureRepo = (name) => {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `openclaw-${name}-`));
+  const repoPath = path.join(tempRoot, name);
+  fs.cpSync(fixture(name), repoPath, { recursive: true });
+  return { repoPath, tempRoot };
+};
+
 const freePort = async () => {
   const server = net.createServer();
   server.listen(0, "127.0.0.1");
@@ -208,6 +215,54 @@ test("repo audit runs explicit build command before static output audit", async 
   assert.ok(audit.pages.some((page) => page.evidence.title === "Vite Fixture Home"));
 });
 
+test("Next.js static build audit records framework manifest evidence and route parity findings", async () => {
+  const { repoPath, tempRoot } = copyFixtureRepo("next-basic");
+
+  try {
+    const audit = await runRepoAudit({
+      repoPath,
+      buildCommand: "npm run build",
+      staticDir: "out",
+      maxBuildMs: 5000,
+    });
+
+    assert.equal(audit.repo.detectedFramework, "next");
+    assert.equal(audit.repo.staticDirRelative, "out");
+    assert.equal(audit.pages.length, 2);
+    assert.deepEqual(audit.repo.frameworkManifests, [
+      {
+        type: "next_prerender_manifest",
+        path: path.join(repoPath, ".next", "prerender-manifest.json"),
+        routes: ["/", "/about/", "/missing/"],
+      },
+    ]);
+    assert.ok(audit.repo.sourceFindings.some((finding) => finding.id === "repo.manifest_route_missing"));
+  } finally {
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test("Astro static build audit records framework detection without fixture-only manifest evidence", async () => {
+  const { repoPath, tempRoot } = copyFixtureRepo("astro-basic");
+
+  try {
+    const audit = await runRepoAudit({
+      repoPath,
+      buildCommand: "npm run build",
+      staticDir: "dist",
+      maxBuildMs: 5000,
+    });
+
+    assert.equal(audit.repo.detectedFramework, "astro");
+    assert.equal(audit.repo.staticDirRelative, "dist");
+    assert.equal(audit.pages.length, 2);
+    assert.deepEqual(audit.repo.frameworkManifests, []);
+    assert.ok(!audit.repo.sourceFindings.some((finding) => finding.id === "repo.manifest_route_missing"));
+  } finally {
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
+});
+
 test("repo audit reports build failures as source findings", async () => {
   const audit = await runRepoAudit({
     repoPath: fixture("vite-basic"),
@@ -303,6 +358,32 @@ test("repo audit reports missing route-list files", async () => {
 
   assert.equal(audit.pages.length, 0);
   assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_missing");
+});
+
+test("repo audit reports missing route-list files before full static route traversal", async () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-missing-route-list-"));
+  const staticDir = path.join(repoPath, "site-output");
+  const blockedDir = path.join(staticDir, "blocked");
+  fs.mkdirSync(blockedDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(staticDir, "index.html"),
+    "<title>Home</title><meta name='description' content='Home'><h1>Home</h1><p>Enough generated content.</p>",
+  );
+  fs.chmodSync(blockedDir, 0);
+
+  try {
+    const audit = await runRepoAudit({
+      repoPath,
+      staticDir,
+      routeList: path.join(repoPath, "missing-routes.txt"),
+    });
+
+    assert.equal(audit.pages.length, 0);
+    assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_missing");
+  } finally {
+    fs.chmodSync(blockedDir, 0o700);
+    fs.rmSync(repoPath, { recursive: true, force: true });
+  }
 });
 
 test("repo audit reports missing route-list entries", async () => {
