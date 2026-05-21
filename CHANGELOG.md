@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased - 2026-05-18
+## Unreleased
+
+## 0.3.0 - 2026-05-21
 
 - Added Phase D.2 deterministic rule-depth findings for duplicate content clusters, structured-data visible-content mismatches, and entity clarity gaps.
 - Added Phase D.1 render parity findings for explicitly rendered audits, including changed title, description, canonical, missing rendered heading/content, and structured-data loss checks.
@@ -24,6 +26,8 @@
 - Kept Astro framework coverage limited to detection and static-output audits until an explicit integration-generated route artifact is available.
 - Hardened repo command guardrails so restricted mode blocks local build and preview command execution before spawning, and explicit preview options take precedence over static output so callers can audit live preview servers even when a stale `dist` directory exists.
 - Polished CLI Markdown reports with repo Markdown golden coverage and aligned the skill report template, README, PRD, and skill guidance around the same priorities, dimensions, developer tasks, repository evidence, imported measurements, evidence gaps, and sources structure.
+- Added a root package `private: true` guardrail to prevent accidental root package publishing.
+- Added CLI package metadata, package-facing README, and MIT license files to improve packed package readiness.
 - Expanded the test suite to cover repo detection, static route discovery, repo audit orchestration, preview lifecycle behavior, CLI validation, report/schema compatibility, packaging, and release-gate hardening.
 
 ## 0.2.0 - 2026-05-18

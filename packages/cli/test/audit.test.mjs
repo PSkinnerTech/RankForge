@@ -20,7 +20,7 @@ const withServer = async (handler, fn) => {
 test("returns minimal versioned audit output for a local HTML target", async () => {
   const audit = await runAudit({ target: "examples/fixture-site/index.html", crawl: { mode: "single", maxPages: 1, maxDepth: 0 } });
   assert.equal(audit.schemaVersion, "1.0.0");
-  assert.equal(audit.toolVersion, "0.2.0");
+  assert.equal(audit.toolVersion, "0.3.0");
   assert.match(audit.run.configHash, /^[a-f0-9]{64}$/);
   assert.deepEqual(audit.run.crawl, { mode: "single", maxPages: 1, maxDepth: 0 });
   assert.equal(audit.pages.length, 1);

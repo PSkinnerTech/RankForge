@@ -1,13 +1,35 @@
 {
   "name": "openclaw-geo-seo-audit",
-  "version": "0.2.0",
+  "version": "0.3.0",
+  "description": "Deterministic GEO/SEO readiness audit CLI for websites and source repositories.",
   "private": false,
   "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PSkinnerTech/openclaw-geo-seo-audit-skill.git",
+    "directory": "packages/cli"
+  },
+  "homepage": "https://github.com/PSkinnerTech/openclaw-geo-seo-audit-skill#readme",
+  "bugs": {
+    "url": "https://github.com/PSkinnerTech/openclaw-geo-seo-audit-skill/issues"
+  },
+  "keywords": [
+    "seo",
+    "geo",
+    "generative-engine-optimization",
+    "audit",
+    "cli",
+    "technical-seo",
+    "repository-audit"
+  ],
   "bin": {
     "openclaw-geo-seo-audit": "./src/index.mjs"
   },
   "files": [
     "src",
+    "README.md",
+    "LICENSE",
     "package.json"
   ],
   "scripts": {

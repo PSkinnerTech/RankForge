@@ -7,7 +7,7 @@ import { analyzeFrameworkRouteManifests } from "./repo-manifests.mjs";
 import { runCommand, startPreview, stopPreview } from "./repo-process.mjs";
 import { discoverStaticRoutes } from "./repo-routes.mjs";
 
-const toolVersion = "0.2.0";
+const toolVersion = "0.3.0";
 
 const relativePath = (repoPath, targetPath) => {
   if (!targetPath) return null;

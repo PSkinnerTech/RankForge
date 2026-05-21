@@ -3,7 +3,7 @@
 Status: Current implementation baseline plus developer repo-audit roadmap
 Date: 2026-05-18
 Repository: openclaw-geo-seo-audit-skill
-Current CLI package: openclaw-geo-seo-audit@0.2.0; main includes unreleased repo audit mode
+Current CLI package: openclaw-geo-seo-audit@0.3.0 release candidate
 Primary users: technical SEOs, growth teams, content strategists, frontend engineers, agency auditors, and AI agents running OpenClaw skills
 
 ## 1. Summary
@@ -19,7 +19,7 @@ The production direction remains a deterministic SEO/GEO readiness auditor. Actu
 
 ### Current baseline
 
-As of `openclaw-geo-seo-audit@0.2.0` plus the merged repo-audit branch, the repository contains a working deterministic CLI and OpenClaw skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON and Markdown, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets.
+As of the `openclaw-geo-seo-audit@0.3.0` release candidate, the repository contains a working deterministic CLI and OpenClaw skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON and Markdown, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets.
 
 The latest completed product target is developer-focused repo audit completion: repository audits now support explicit build commands, route lists, repo config, CI threshold failures, and deterministic source-level findings without overclaiming rankings.
 
@@ -30,7 +30,7 @@ The current repository contains a working deterministic CLI, an OpenClaw skill w
 Current remaining gaps:
 
 - The CLI can audit static output and explicit preview-server repositories with explicit build commands, route-list parity, and repo config files; remaining repo-audit work focuses on broader framework fixture coverage and deeper deterministic source-level findings.
-- Release documentation and changelog entries must stay aligned with the implemented `0.2.0` baseline plus unreleased repo-audit work before publishing the next package version.
+- Release documentation and changelog entries must stay aligned with the implemented `0.3.0` release candidate before publishing the next package version.
 - Some rule IDs exist in the taxonomy before full trigger coverage, especially deeper entity clarity, hidden text risk, duplicate content clusters, and structured-data visible-content mismatch.
 - Ranking and GEO visibility measurement still depends on supplied exports. API-backed Search Console, SERP provider, and AI-answer probes are future integrations.
 - The product needs developer-optimized repo audit workflows that can safely build or preview common web apps, crawl generated output, connect source-level evidence to rendered output, and produce CI-friendly failure semantics.
@@ -321,7 +321,7 @@ Top-level shape:
 ```json
 {
   "schemaVersion": "1.0.0",
-  "toolVersion": "0.2.0",
+  "toolVersion": "0.3.0",
   "run": {},
   "site": {},
   "pages": [],
@@ -915,7 +915,7 @@ Resolved for developer repo audit completion:
 
 ## 22. Release Stabilization And v1.5 Readiness Checklist
 
-Before publishing or tagging `0.2.0`:
+Before publishing or tagging `0.3.0`:
 
 - Verify the PRD, README, skill wrapper, changelog, and release checklist describe the same shipped CLI baseline.
 - Run `npm ci`, `npm audit --omit=dev`, `npm test`, `npm run validate`, and `npm pack --dry-run --workspace packages/cli`.

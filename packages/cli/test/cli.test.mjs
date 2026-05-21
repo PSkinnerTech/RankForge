@@ -30,7 +30,7 @@ const freePort = async () =>
 test("prints version", async () => {
   const result = await capture(["--version"]);
   assert.equal(result.exitCode, 0);
-  assert.match(result.stdout, /openclaw-geo-seo-audit/);
+  assert.equal(result.stdout.trim(), "openclaw-geo-seo-audit 0.3.0");
 });
 
 test("prints help", async () => {

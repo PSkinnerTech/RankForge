@@ -10,7 +10,7 @@ import { evaluateSite } from "./site-rule-engine.mjs";
 import { collectSnapshot } from "./snapshot.mjs";
 import { isHttpUrl } from "./url-utils.mjs";
 
-const toolVersion = "0.2.0";
+const toolVersion = "0.3.0";
 
 const readSourceMap = () => {
   const candidates = [

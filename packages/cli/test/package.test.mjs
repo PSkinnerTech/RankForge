@@ -17,4 +17,7 @@ test("packed CLI includes the source map used by audit output", async () => {
 
   assert.ok(files.includes("src/audit.mjs"));
   assert.ok(files.includes("src/source-map.json"));
+  assert.ok(files.includes("README.md"));
+  assert.ok(files.includes("LICENSE"));
+  assert.ok(files.includes("package.json"));
 });

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "toolVersion": "0.2.0",
+  "toolVersion": "0.3.0",
   "run": {
     "target": "http://fixture.test/",
     "mode": "full",
