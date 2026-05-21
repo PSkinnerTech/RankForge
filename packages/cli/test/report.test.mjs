@@ -131,11 +131,11 @@ test("generates a Markdown audit report from audit JSON", () => {
 
   assert.match(markdown, /# GEO\/SEO Audit Report/);
   assert.match(markdown, /Target: https:\/\/example\.com/);
-  assert.match(markdown, /Priority Findings/);
+  assert.match(markdown, /Top Priorities/);
   assert.match(markdown, /indexability\.noindex/);
   assert.match(markdown, /Lighthouse/);
   assert.match(markdown, /42\/100/);
-  assert.match(markdown, /Implementation Tasks/);
+  assert.match(markdown, /Developer Action Plan/);
   assert.match(markdown, /Engineering/);
   assert.match(markdown, /Evidence Gaps/);
   assert.match(markdown, /https:\/\/developers\.google\.com\/search\/docs\/crawling-indexing\/robots-meta-tag/);
@@ -170,10 +170,11 @@ test("includes repository evidence when audit repo evidence exists", () => {
     },
   });
 
-  assert.match(markdown, /## Repository Evidence/);
+  assert.match(markdown, /## Repository Audit Evidence/);
   assert.match(markdown, /Framework: generic-static/);
   assert.match(markdown, /Static dir: dist with pipe \\| value/);
-  assert.match(markdown, /repo\.static_dir_missing: Static directory is missing \\| invalid\./);
+  assert.match(markdown, /repo\.static_dir_missing/);
+  assert.match(markdown, /Static directory is missing \\| invalid\./);
 });
 
 test("includes repository build evidence when present", () => {
@@ -202,7 +203,7 @@ test("includes repository build evidence when present", () => {
   });
 
   assert.match(markdown, /Build command: npm run build/);
-  assert.match(markdown, /Build exit code: 0/);
+  assert.match(markdown, /Build result: exit 0 in 1234 ms/);
   assert.match(markdown, /Route list: \/repo\/routes.txt/);
 });
 
@@ -231,9 +232,32 @@ test("includes framework manifest evidence when present", () => {
     },
   });
 
-  assert.match(markdown, /Framework route manifests:/);
-  assert.match(markdown, /next_prerender_manifest: 3 routes/);
+  assert.match(markdown, /### Framework Route Manifests/);
+  assert.match(markdown, /\| next_prerender_manifest \| 3 \|/);
   assert.match(markdown, /\/repo\/\.next\/prerender-manifest\.json/);
+});
+
+test("keeps blank lines between no-finding empty states and following sections", () => {
+  const markdown = generateMarkdownReport({
+    run: { target: "repo", mode: "repo" },
+    findings: [],
+    scores: {},
+    integrations: {},
+    evidenceGaps: [],
+    sources: [],
+    repo: {
+      path: "/repo",
+      detectedFramework: "next",
+      routeSources: [],
+      frameworkManifests: [],
+      sourceFindings: [],
+    },
+  });
+
+  assert.doesNotMatch(markdown, /No page findings\.\n## Scores/);
+  assert.doesNotMatch(markdown, /No developer actions recorded\.\n## Repository Audit Evidence/);
+  assert.match(markdown, /No page findings\.\n\n## Scores/);
+  assert.match(markdown, /No developer actions recorded\.\n\n## Repository Audit Evidence/);
 });
 
 test("renders polished report sections in user-facing order", () => {
@@ -242,6 +266,7 @@ test("renders polished report sections in user-facing order", () => {
     "## Executive Summary",
     "## Top Priorities",
     "## Findings By Dimension",
+    "## Scores",
     "## Developer Action Plan",
     "## Imported Measurements",
     "## Evidence Gaps",
@@ -284,6 +309,34 @@ test("summarizes top priorities and groups findings by dimension", () => {
   assert.match(markdown, /\| Severity \| Rule \| Finding \| Affected URLs \| Evidence \| Sources \|/);
 });
 
+test("caps top priorities at five findings", () => {
+  const audit = polishedAuditFixture();
+  for (let index = 1; index <= 6; index += 1) {
+    audit.findings.push({
+      ruleId: `content.low_priority_${index}`,
+      severity: "P3",
+      dimension: "helpful_content",
+      title: `Low priority appended finding ${index}`,
+      impact: `Lower-priority impact ${index}.`,
+      recommendation: `Lower-priority recommendation ${index}.`,
+      owner: "Content",
+      effort: "S",
+      affectedUrls: [`https://example.com/low-priority-${index}`],
+      evidence: [`$.pages[${index}].evidence.lowPriority`],
+      sources: ["https://developers.google.com/search/docs/fundamentals/creating-helpful-content"],
+    });
+  }
+
+  const markdown = generateMarkdownReport(audit);
+  const topPrioritiesStart = markdown.indexOf("## Top Priorities");
+  const findingsByDimensionStart = markdown.indexOf("## Findings By Dimension");
+  const topPrioritiesSection = markdown.slice(topPrioritiesStart, findingsByDimensionStart);
+  const topPriorityBullets = topPrioritiesSection.split("\n").filter((line) => line.startsWith("- **"));
+
+  assert.equal(topPriorityBullets.length, 5);
+  assert.doesNotMatch(topPrioritiesSection, /content\.low_priority_6/);
+});
+
 test("renders developer action plan with owner, rule, URLs, and acceptance criteria", () => {
   const markdown = generateMarkdownReport(polishedAuditFixture());
 
@@ -304,4 +357,90 @@ test("deduplicates source URLs in stable order", () => {
     "- robots_meta: https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
     "- structured_data_intro: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data",
   ]);
+});
+
+test("keeps repository source findings separate from page findings", () => {
+  const audit = polishedAuditFixture();
+  audit.repo = {
+    path: "/repo",
+    detectedFramework: "next",
+    packageManager: "npm",
+    buildCommand: "npm run build",
+    build: { executed: true, exitCode: 0, durationMs: 1200 },
+    staticDirRelative: "out",
+    previewCommand: null,
+    previewUrl: null,
+    routeList: "/repo/routes.txt",
+    routeSources: [{ type: "static_html", route: "/", path: "/repo/out/index.html" }],
+    frameworkManifests: [{ type: "next_prerender_manifest", path: "/repo/.next/prerender-manifest.json", routes: ["/", "/about/"] }],
+    sourceFindings: [
+      {
+        id: "repo.manifest_route_missing",
+        severity: "P1",
+        message: "Framework manifest route is missing from static output.",
+        evidence: "/missing/",
+        recommendation: "Regenerate static output and rerun the repository audit.",
+        confidence: "high",
+      },
+    ],
+  };
+
+  const markdown = generateMarkdownReport(audit);
+  const repoIndex = markdown.indexOf("## Repository Audit Evidence");
+  const findingsIndex = markdown.indexOf("## Findings By Dimension");
+
+  assert.ok(repoIndex > findingsIndex);
+  assert.match(markdown, /### Repository Source Findings/);
+  assert.match(markdown, /\| Severity \| Source Finding \| Message \| Evidence \| Recommendation \|/);
+  assert.match(markdown, /repo\.manifest_route_missing/);
+  assert.doesNotMatch(markdown.slice(findingsIndex, repoIndex), /repo\.manifest_route_missing/);
+  assert.match(markdown, /Build command: npm run build/);
+  assert.match(markdown, /Build result: exit 0 in 1200 ms/);
+  assert.match(markdown, /Framework manifests: 1/);
+});
+
+test("separates imported measurements from deterministic readiness findings", () => {
+  const audit = polishedAuditFixture();
+  audit.integrations = {
+    searchConsole: { type: "search_console_csv", rows: [{ query: "seo audit", page: "https://example.com/", clicks: 5, impressions: 100, ctr: 5, position: 7.2 }] },
+    serp: { type: "serp_export", rows: [{ query: "seo audit", position: 3, url: "https://example.com/" }] },
+    aiAnswers: { type: "ai_answer_export", rows: [{ query: "best seo audit", citedUrls: ["https://example.com/"] }] },
+    lighthouse: { performanceScore: 42, metrics: { lcpMs: 4100, cls: 0.22, tbtMs: 500 }, formFactor: "mobile" },
+  };
+
+  const markdown = generateMarkdownReport(audit);
+
+  assert.match(markdown, /Evidence type: includes measured visibility imports; includes imported performance evidence/);
+  assert.match(markdown, /## Imported Measurements/);
+  assert.match(markdown, /Search Console: 1 row/);
+  assert.match(markdown, /SERP export: 1 row/);
+  assert.match(markdown, /AI-answer export: 1 row/);
+  assert.match(markdown, /Lighthouse: 42\/100 performance score \(mobile\); LCP 4100 ms; CLS 0\.22; TBT 500 ms\./);
+  assert.match(markdown, /Measured visibility imports are present and are reported separately from readiness findings\./);
+});
+
+test("makes partial imported measurement evidence explicit", () => {
+  const audit = polishedAuditFixture();
+  audit.integrations = {
+    lighthouse: { performanceScore: 80, metrics: {}, formFactor: "desktop" },
+  };
+
+  const markdown = generateMarkdownReport(audit);
+
+  assert.match(markdown, /Evidence type: includes imported performance evidence/);
+  assert.doesNotMatch(markdown, /Evidence type:.*includes measured visibility imports/);
+  assert.match(markdown, /Search Console: not supplied\./);
+  assert.match(markdown, /SERP export: not supplied\./);
+  assert.match(markdown, /AI-answer export: not supplied\./);
+  assert.match(markdown, /Lighthouse: 80\/100 performance score \(desktop\); LCP n\/a; CLS n\/a; TBT n\/a\./);
+});
+
+test("explains evidence gaps without turning them into findings", () => {
+  const markdown = generateMarkdownReport(polishedAuditFixture());
+
+  assert.match(markdown, /## Evidence Gaps/);
+  assert.match(markdown, /ranking\.integrations_missing: Measured rankings require Search Console, SERP, or AI answer evidence\./);
+  assert.match(markdown, /How to close common gaps:/);
+  assert.match(markdown, /Add `--search-console`, `--serp`, or `--ai-answers` to report observed visibility\./);
+  assert.doesNotMatch(markdown, /\| P\d \| ranking\.integrations_missing/);
 });
