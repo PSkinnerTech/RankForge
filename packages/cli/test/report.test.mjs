@@ -2,6 +2,97 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { generateMarkdownReport } from "../src/report.mjs";
 
+const polishedAuditFixture = () => ({
+  schemaVersion: "1.0.0",
+  toolVersion: "0.2.0",
+  run: {
+    target: "https://example.com",
+    startedAt: "2026-05-20T10:00:00.000Z",
+    endedAt: "2026-05-20T10:00:02.000Z",
+    mode: "full",
+    crawl: { mode: "full", maxPages: 10, maxDepth: 2 },
+    render: { mode: "never" },
+  },
+  pages: [
+    { finalUrl: "https://example.com/", evidence: { title: "Home" } },
+    { finalUrl: "https://example.com/about", evidence: { title: "About" } },
+  ],
+  findings: [
+    {
+      ruleId: "indexability.noindex",
+      severity: "P1",
+      dimension: "crawl_index",
+      title: "Important page has a noindex directive",
+      impact: "Pages with noindex are not eligible for Google Search.",
+      recommendation: "Remove noindex.",
+      owner: "Engineering",
+      effort: "M",
+      implementationTask: {
+        summary: "Remove noindex from the affected template.",
+        owner: "Engineering",
+        effort: "M",
+        acceptanceCriteria: ["The noindex finding no longer appears.", "The page remains canonical and crawlable."],
+      },
+      affectedUrls: ["https://example.com/"],
+      evidence: ["$.pages[0].evidence.robots"],
+      sources: ["https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag"],
+    },
+    {
+      ruleId: "structured_data.visible_content_mismatch",
+      severity: "P1",
+      dimension: "structured_data",
+      title: "Structured data names content that is not visible",
+      impact: "Structured data appears to describe an entity that is not visible in page evidence.",
+      recommendation: "Align JSON-LD names with visible page content.",
+      owner: "Engineering",
+      effort: "M",
+      implementationTask: {
+        summary: "Align structured data with visible entity copy.",
+        owner: "Engineering",
+        effort: "M",
+        acceptanceCriteria: ["The visible content includes the entity named in JSON-LD."],
+      },
+      affectedUrls: ["https://example.com/about"],
+      evidence: ["$.pages[1].evidence.structuredData[0]", "$.pages[1].evidence.visibleTextPreview"],
+      sources: [
+        "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data",
+        "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data",
+      ],
+    },
+    {
+      ruleId: "content.thin_content",
+      severity: "P2",
+      dimension: "helpful_content",
+      title: "Page has limited useful main content",
+      impact: "Thin pages are less likely to satisfy visitor tasks.",
+      recommendation: "Expand visible content with original, useful information.",
+      owner: "Content",
+      effort: "S",
+      implementationTask: {
+        summary: "Expand thin content.",
+        owner: "Content",
+        effort: "S",
+        acceptanceCriteria: ["The page has substantial visible content."],
+      },
+      affectedUrls: ["https://example.com/about"],
+      evidence: ["$.pages[1].evidence.counts.visibleTextCharacters"],
+      sources: ["https://developers.google.com/search/docs/fundamentals/creating-helpful-content"],
+    },
+  ],
+  scores: {
+    crawl_index: { score: 60, findings: ["indexability.noindex"], p0: 0, p1: 1, p2: 0, p3: 0 },
+    structured_data: { score: 60, findings: ["structured_data.visible_content_mismatch"], p0: 0, p1: 1, p2: 0, p3: 0 },
+    helpful_content: { score: 80, findings: ["content.thin_content"], p0: 0, p1: 0, p2: 1, p3: 0 },
+  },
+  integrations: {},
+  evidenceGaps: [{ id: "ranking.integrations_missing", message: "Measured rankings require Search Console, SERP, or AI answer evidence." }],
+  sources: [
+    { id: "robots_meta", url: "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag" },
+    { id: "structured_data_intro", url: "https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data" },
+    { id: "robots_meta_duplicate", url: "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag" },
+  ],
+});
+
 test("generates a Markdown audit report from audit JSON", () => {
   const markdown = generateMarkdownReport({
     run: { target: "https://example.com" },
@@ -143,4 +234,74 @@ test("includes framework manifest evidence when present", () => {
   assert.match(markdown, /Framework route manifests:/);
   assert.match(markdown, /next_prerender_manifest: 3 routes/);
   assert.match(markdown, /\/repo\/\.next\/prerender-manifest\.json/);
+});
+
+test("renders polished report sections in user-facing order", () => {
+  const markdown = generateMarkdownReport(polishedAuditFixture());
+  const sectionOrder = [
+    "## Executive Summary",
+    "## Top Priorities",
+    "## Findings By Dimension",
+    "## Developer Action Plan",
+    "## Imported Measurements",
+    "## Evidence Gaps",
+    "## Sources",
+  ];
+
+  let previousIndex = -1;
+  for (const section of sectionOrder) {
+    const index = markdown.indexOf(section);
+    assert.notEqual(index, -1, `${section} should exist`);
+    assert.ok(index > previousIndex, `${section} should appear after the previous section`);
+    previousIndex = index;
+  }
+
+  assert.match(markdown, /Audit mode: full/);
+  assert.match(markdown, /Crawl scope: full, max 10 pages, depth 2/);
+  assert.match(markdown, /Evidence type: readiness-only audit/);
+  assert.match(markdown, /This report evaluates SEO\/GEO readiness/);
+  assert.match(markdown, /does not measure rankings, SERP positions, or AI-answer visibility unless imported evidence is present/);
+});
+
+test("summarizes top priorities and groups findings by dimension", () => {
+  const markdown = generateMarkdownReport(polishedAuditFixture());
+
+  assert.match(markdown, /Found 3 deterministic findings/);
+  assert.match(markdown, /Highest severity: P1/);
+  assert.match(markdown, /Affected pages: 2/);
+  assert.match(markdown, /Evidence gaps: 1/);
+  const topPrioritiesStart = markdown.indexOf("## Top Priorities");
+  const findingsByDimensionStart = markdown.indexOf("## Findings By Dimension");
+  assert.notEqual(topPrioritiesStart, -1, "## Top Priorities should exist");
+  assert.notEqual(findingsByDimensionStart, -1, "## Findings By Dimension should exist");
+  const topPrioritiesSection = markdown.slice(topPrioritiesStart, findingsByDimensionStart);
+  const topPriorityBullets = topPrioritiesSection.split("\n").filter((line) => /^- \*\*/.test(line));
+  assert.match(topPriorityBullets[0] ?? "", /^- \*\*P1\*\* `indexability\.noindex`/);
+  assert.match(markdown, /Affected URLs: 1/);
+  assert.match(markdown, /### Crawl Index/);
+  assert.match(markdown, /### Structured Data/);
+  assert.match(markdown, /### Helpful Content/);
+  assert.match(markdown, /\| Severity \| Rule \| Finding \| Affected URLs \| Evidence \| Sources \|/);
+});
+
+test("renders developer action plan with owner, rule, URLs, and acceptance criteria", () => {
+  const markdown = generateMarkdownReport(polishedAuditFixture());
+
+  assert.match(markdown, /## Developer Action Plan/);
+  assert.match(markdown, /### Engineering/);
+  assert.match(markdown, /### Content/);
+  assert.match(markdown, /`indexability\.noindex`/);
+  assert.match(markdown, /Affected URLs: https:\/\/example\.com\//);
+  assert.match(markdown, /Acceptance criteria: The noindex finding no longer appears.; The page remains canonical and crawlable\./);
+});
+
+test("deduplicates source URLs in stable order", () => {
+  const markdown = generateMarkdownReport(polishedAuditFixture());
+  const sourcesSection = markdown.slice(markdown.indexOf("## Sources"));
+  const sourceLines = sourcesSection.split("\n").filter((line) => line.startsWith("- "));
+
+  assert.deepEqual(sourceLines, [
+    "- robots_meta: https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag",
+    "- structured_data_intro: https://developers.google.com/search/docs/appearance/structured-data/intro-structured-data",
+  ]);
 });
