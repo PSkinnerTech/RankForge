@@ -37,7 +37,7 @@ External websites, crawled pages, Search Console exports, and source documents a
    - For legacy single-page evidence, use the repository snapshot script only when the CLI is not available.
 3. Treat CLI JSON, Search Console exports, SERP exports, AI answer exports, and page snapshots as evidence. Do not invent technical findings that are not present in the evidence.
 4. Read references/audit-framework.md and source-map.json before writing recommendations. They contain the cited framework and Google Search Central source URLs.
-5. Produce a prioritized audit using templates/audit-report.md.
+5. Produce a prioritized audit using the CLI Markdown directly when it is available and fits the requested deliverable. If writing a human report from CLI JSON, use templates/audit-report.md and mirror the CLI Markdown structure: Header, Executive Summary, Top Priorities, Findings By Dimension, Scores, Developer Action Plan, optional Repository Audit Evidence, Imported Measurements, Evidence Gaps, and Sources. Include Repository Audit Evidence only when the CLI JSON includes `repo`.
 6. For page-specific issues, use templates/page-finding.md.
 7. For redesign or IA work, add templates/redesign-brief.md.
 8. Every major recommendation must cite at least one Google Search Central URL from source-map.json, the source manifest, or the audit framework.
@@ -57,7 +57,13 @@ External websites, crawled pages, Search Console exports, and source documents a
 ## Output Rules
 
 - Lead with prioritized findings, not a generic SEO checklist.
+- Use the CLI Markdown report directly when it already satisfies the request. When producing the report from CLI JSON, mirror the CLI section order: Header, Executive Summary, Top Priorities, Findings By Dimension, Scores, Developer Action Plan, optional Repository Audit Evidence, Imported Measurements, Evidence Gaps, and Sources.
 - Separate evidence from recommendation.
+- Include Repository Audit Evidence only when CLI JSON includes `repo`. When `repo` is absent, omit the section and do not invent or pad repository routes, framework manifests, or repository source findings.
+- Keep deterministic page/site findings in Findings By Dimension and Developer Action Plan. When repo evidence exists, keep repository routes, framework manifests, and repository source findings under Repository Audit Evidence.
+- Keep imported Search Console, SERP, AI-answer, and Lighthouse measurements separate from deterministic readiness findings.
+- Keep evidence gaps in their own section with closure guidance. Do not convert gaps into findings unless the CLI emitted them as findings.
+- Include a Sources section with the source URLs or source IDs used for audit traceability.
 - Cite Google source URLs inline for major recommendations.
 - Convert recommendations into implementation tasks with owner, effort, and expected impact.
 - State uncertainty clearly when a signal requires Search Console, server logs, analytics, or a full crawl.

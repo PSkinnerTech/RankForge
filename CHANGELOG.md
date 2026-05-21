@@ -23,6 +23,7 @@
 - Added Phase C repo audit framework maturity coverage with deterministic Next.js and Astro fixtures, stable Next.js route manifest evidence, and source-level route parity findings for manifest/static-output mismatches.
 - Kept Astro framework coverage limited to detection and static-output audits until an explicit integration-generated route artifact is available.
 - Hardened repo command guardrails so restricted mode blocks local build and preview command execution before spawning, and explicit preview options take precedence over static output so callers can audit live preview servers even when a stale `dist` directory exists.
+- Polished CLI Markdown reports with repo Markdown golden coverage and aligned the skill report template, README, PRD, and skill guidance around the same priorities, dimensions, developer tasks, repository evidence, imported measurements, evidence gaps, and sources structure.
 - Expanded the test suite to cover repo detection, static route discovery, repo audit orchestration, preview lifecycle behavior, CLI validation, report/schema compatibility, packaging, and release-gate hardening.
 
 ## 0.2.0 - 2026-05-18

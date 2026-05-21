@@ -63,6 +63,12 @@ npm run cli -- audit https://example.com --search-console gsc.csv --serp serp.js
 
 Ranking, SERP, and AI answer visibility are reported only from supplied evidence files. Lighthouse performance findings are reported only when a Lighthouse JSON export is supplied.
 
+## Markdown Reports
+
+Markdown reports follow the CLI structure: Header, Executive Summary, Top Priorities, Findings By Dimension, Scores, Developer Action Plan, optional Repository Audit Evidence, Imported Measurements, Evidence Gaps, and Sources. The header records target, audit mode, crawl scope, and evidence type; the summary and priorities are for fast triage; findings by dimension preserve deterministic page/site evidence; scores summarize readiness dimensions; and the developer action plan turns findings into implementation tasks with acceptance criteria.
+
+Repository reports include `Repository Audit Evidence` only when CLI JSON includes `repo`, with route, manifest, build, static-output, preview, and source-finding evidence. Repository source findings stay separate from rendered page/site findings. Imported measurements are also separated from deterministic readiness findings; rankings, SERP positions, AI-answer visibility, and Lighthouse measurements are reported only when those evidence files are supplied.
+
 ## Use
 
 Reference the full repository from an OpenClaw workspace when CLI-backed evidence collection is required. If you copy only `skill/geo-seo-audit` into a skills directory, pair it with an installed `openclaw-geo-seo-audit` CLI so the skill can collect deterministic evidence.
@@ -88,7 +94,7 @@ npm test
 
 The validation script checks that the required skill files, templates, examples, source manifest, citations, CLI scaffold, and snapshot script are present.
 
-The test suite includes a known-issues fixture site served through a local HTTP server. Its normalized audit summary and Markdown report are compared to golden files so rule, scoring, crawl, robots, sitemap, structured data, and report output changes are intentional.
+The test suite includes a known-issues fixture site served through a local HTTP server plus repository audit fixtures. Their normalized audit summaries and Markdown reports, including repo Markdown golden coverage, are compared to golden files so rule, scoring, crawl, robots, sitemap, structured data, repository evidence, and report output changes are intentional.
 
 Release and CI publishing steps are documented in `docs/release-checklist.md`.
 

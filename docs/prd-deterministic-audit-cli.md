@@ -629,27 +629,22 @@ Scoring rules:
 
 ## 14. Report Generation
 
-The CLI should support Markdown output, but the OpenClaw skill remains the preferred human-report layer.
+The CLI should support Markdown output. The OpenClaw skill may use CLI Markdown directly, or mirror the same structure when producing a human report from CLI JSON.
 
-Report sections:
+Polished report order and evidence boundaries:
 
-- Executive summary.
-- Priority findings.
-- Scores by dimension.
-- Page/template coverage.
-- Technical eligibility.
-- Crawl and index controls.
-- Helpful content and GEO readiness.
-- Entity clarity.
-- Structured data.
-- Search appearance.
-- Ranking evidence, if supplied.
-- Technical and content recommendations.
-- Implementation tasks.
-- Evidence gaps.
-- Appendix with raw evidence references.
+- Header: target, generated date, audit mode, crawl scope, and evidence type.
+- Executive Summary: deterministic finding count, highest severity, scored dimensions, audited and affected pages, repository source finding count, evidence gap count, and whether measured visibility imports are present.
+- Top Priorities: bounded list of the highest-priority deterministic page/site findings with affected URL count, impact, and next action.
+- Findings By Dimension: deterministic page and site findings grouped by audit dimension with rule IDs, affected URLs, evidence paths, and sources.
+- Scores: deterministic readiness scores by dimension with the finding IDs that affected each score.
+- Developer Action Plan: implementation tasks derived from deterministic findings, grouped for developer handoff with owner, effort, affected URLs, and acceptance criteria.
+- Repository Audit Evidence: included only when `repo` evidence exists, with repository routes, framework manifests, build/static-output/preview metadata, and repository source findings in their own subsection.
+- Imported Measurements: Search Console, SERP, AI-answer, and Lighthouse data only when supplied as evidence imports. These measurements remain separate from deterministic readiness findings.
+- Evidence Gaps: unavailable evidence and practical closure guidance, without turning gaps into findings unless the CLI emitted them as findings.
+- Sources: deduplicated source list for traceability.
 
-The report must lead with prioritized findings, not a generic checklist.
+Repository source findings must remain distinct from rendered page/site findings so reports can distinguish source, build, route-list, manifest, static-output, or preview evidence from observed website output. The report must lead with prioritized deterministic findings, not a generic checklist. Rankings, SERP positions, and AI-answer visibility must be described only when supplied evidence imports support those measurements.
 
 ## 15. Skill Wrapper Requirements
 
@@ -821,6 +816,13 @@ Delivered:
 - CI severity threshold support with `--fail-on`.
 - Restricted security mode with network, file, timeout, redirect, byte-cap, and rendering guardrails.
 - GitHub CI and release workflow scaffolding.
+
+### Phase E: Report Polish - Unreleased Current Branch
+
+Current branch work:
+
+- Polished CLI Markdown report structure, repo Markdown golden coverage, skill template, and docs so they share the same report order and evidence boundaries.
+- This phase does not add crawling, ranking, scoring, or source-analysis capabilities; it only aligns how existing deterministic findings, repository evidence, imported measurements, evidence gaps, and sources are presented.
 
 ### Milestone 6: Optional Evidence Imports - Initial baseline completed in `0.2.0`
 
