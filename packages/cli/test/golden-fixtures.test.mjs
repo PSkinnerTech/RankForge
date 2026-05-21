@@ -109,6 +109,10 @@ test("framework repo audit golden summary matches fixtures", async () => {
       },
       expected,
     );
+
+    const nextMarkdown = normalizeMarkdownForGolden(generateMarkdownReport(nextAudit), nextFixture.repoPath);
+    const expectedNextMarkdown = fs.readFileSync("examples/golden/repo-framework-report.md", "utf8");
+    assert.equal(nextMarkdown, expectedNextMarkdown);
   } finally {
     fs.rmSync(nextFixture.tempRoot, { recursive: true, force: true });
     fs.rmSync(astroFixture.tempRoot, { recursive: true, force: true });

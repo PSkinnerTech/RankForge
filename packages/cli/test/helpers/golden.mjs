@@ -66,7 +66,10 @@ export const normalizeAuditForGolden = (audit, origin) => ({
 });
 
 export const normalizeMarkdownForGolden = (markdown, origin) => {
-  const lines = scrubString(markdown, origin).replace(/^Generated: .+$/m, "Generated: <generated>").split("\n");
+  const lines = scrubString(markdown, origin)
+    .replace(/^Generated: .+$/m, "Generated: <generated>")
+    .replace(/^- Build result: exit 0 in \d+ ms$/gm, "- Build result: exit 0 in <duration> ms")
+    .split("\n");
   const sourcesIndex = lines.findIndex((line) => line === "## Sources");
   const kept = sourcesIndex === -1 ? lines : lines.slice(0, sourcesIndex);
   return `${kept.join("\n").trimEnd()}\n`;

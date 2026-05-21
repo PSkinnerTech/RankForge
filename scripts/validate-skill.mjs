@@ -92,6 +92,7 @@ const requiredFiles = [
   "examples/fixture-repos/astro-basic/src/index.html",
   "examples/fixture-repos/astro-basic/src/services.html",
   "examples/golden/repo-framework-summary.json",
+  "examples/golden/repo-framework-report.md",
   "examples/golden/repo-static-summary.json",
   "examples/golden/known-issues-summary.json",
   "examples/golden/known-issues-report.md",
