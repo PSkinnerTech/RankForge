@@ -4,7 +4,7 @@ import { generateMarkdownReport } from "../src/report.mjs";
 
 const polishedAuditFixture = () => ({
   schemaVersion: "1.0.0",
-  toolVersion: "0.2.0",
+  toolVersion: "0.3.0",
   run: {
     target: "https://example.com",
     startedAt: "2026-05-20T10:00:00.000Z",
@@ -180,7 +180,7 @@ test("includes repository evidence when audit repo evidence exists", () => {
 test("includes repository build evidence when present", () => {
   const markdown = generateMarkdownReport({
     schemaVersion: "1.0.0",
-    toolVersion: "0.2.0",
+    toolVersion: "0.3.0",
     run: { id: "run", startedAt: "now", endedAt: "now", target: "repo", mode: "repo" },
     site: { notes: [] },
     pages: [],

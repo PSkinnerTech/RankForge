@@ -5,7 +5,7 @@ import { validateAuditOutput } from "../src/audit-output-schema.mjs";
 test("accepts minimal valid audit output", () => {
   const result = validateAuditOutput({
     schemaVersion: "1.0.0",
-    toolVersion: "0.2.0",
+    toolVersion: "0.3.0",
     run: {},
     site: {},
     pages: [],
@@ -28,7 +28,7 @@ test("rejects missing top-level audit output fields", () => {
 test("rejects findings missing required fields", () => {
   const result = validateAuditOutput({
     schemaVersion: "1.0.0",
-    toolVersion: "0.2.0",
+    toolVersion: "0.3.0",
     run: {},
     site: {},
     pages: [],
@@ -45,7 +45,7 @@ test("rejects findings missing required fields", () => {
 test("accepts optional repo evidence section", () => {
   const audit = {
     schemaVersion: "1.0.0",
-    toolVersion: "0.2.0",
+    toolVersion: "0.3.0",
     run: {},
     site: {},
     pages: [],
@@ -67,7 +67,7 @@ test("accepts optional repo evidence section", () => {
 test("rejects optional repo evidence section when it is not an object", () => {
   const result = validateAuditOutput({
     schemaVersion: "1.0.0",
-    toolVersion: "0.2.0",
+    toolVersion: "0.3.0",
     run: {},
     site: {},
     pages: [],

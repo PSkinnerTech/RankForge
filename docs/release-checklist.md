@@ -10,6 +10,7 @@ Before publishing:
 - Confirm `CHANGELOG.md` contains the package version being released.
 - Confirm `README.md` and `skill/geo-seo-audit/SKILL.md` describe readiness versus measured rankings accurately.
 - Confirm raw source corpus files remain repository assets and are not included in the CLI package dry run.
+- Confirm the root `package.json` has `private: true` so accidental root publishes are blocked.
 
 ## Verification
 
@@ -21,6 +22,7 @@ npm audit --omit=dev
 npm test
 npm run validate
 npm pack --dry-run --workspace packages/cli
+npm pack --dry-run --json
 ```
 
 For CI gating, run audits with a severity threshold:
@@ -40,8 +42,25 @@ The audit command returns exit code `2` when findings meet or exceed the configu
 ## Publish Dry Run
 
 - Confirm `npm pack --dry-run --workspace packages/cli` includes only intended package files.
+- Confirm `npm pack --dry-run` at the repository root is not used as a publish target; the root package is private and the publishable package is the CLI workspace.
 - Confirm optional Playwright support remains optional.
 - Confirm fixture/golden files remain repository test assets and are not shipped in the CLI package.
+
+## Packed CLI Smoke
+
+Pack and install the CLI workspace in a temporary project before publishing:
+
+```bash
+tmpdir="$(mktemp -d)"
+npm pack --workspace packages/cli --pack-destination "$tmpdir"
+mkdir "$tmpdir/install"
+cd "$tmpdir/install"
+npm init -y
+npm install --ignore-scripts "$tmpdir"/openclaw-geo-seo-audit-*.tgz
+npx openclaw-geo-seo-audit --version
+npx openclaw-geo-seo-audit --help
+npx openclaw-geo-seo-audit explain-rule indexability.noindex
+```
 
 ## Post-Merge Verification
 
@@ -55,6 +74,7 @@ npm audit --omit=dev
 npm test
 npm run validate
 npm pack --dry-run --workspace packages/cli
+npm pack --dry-run --json
 git status --short --branch
 ```
 
@@ -63,7 +83,8 @@ Expected result:
 - Audit reports `found 0 vulnerabilities`.
 - Tests pass.
 - Validation reports `ok: true`.
-- Package dry run lists only intended CLI package files.
+- CLI package dry run lists only intended CLI package files.
+- Root pack dry run is treated as a private-root packaging sanity check, not a publish artifact.
 - Git status shows a clean `main` branch.
 
 ## GitHub Release Workflow
