@@ -24,7 +24,7 @@
     "repository-audit"
   ],
   "bin": {
-    "rankforge": "./src/index.mjs"
+    "rankforge": "src/index.mjs"
   },
   "files": [
     "src",

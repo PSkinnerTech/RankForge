@@ -2,10 +2,11 @@
 
 ## Unreleased
 
+## 0.3.0 - 2026-05-22
+
+- Renamed the project, repository, skill, package, and CLI identity to RankForge.
 - Added standalone HTML audit reports with `--html <file>` for both `audit` and `audit-repo`, including escaped user-supplied evidence, summary cards, priorities, findings tables, developer actions, repository evidence, measurements, evidence gaps, and sources.
-
-## 0.3.0 - 2026-05-21
-
+- Added a fresh Superbuilders smoke test pass covering `https://superbuilders.dev` and the `superbuilders/sb-home` source repository with RankForge-branded HTML report output.
 - Added Phase D.2 deterministic rule-depth findings for duplicate content clusters, structured-data visible-content mismatches, and entity clarity gaps.
 - Added Phase D.1 render parity findings for explicitly rendered audits, including changed title, description, canonical, missing rendered heading/content, and structured-data loss checks.
 - Added Phase B repository audit mode so the CLI can inspect a source repository and audit either detected static output or an explicit preview server.

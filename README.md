@@ -21,6 +21,32 @@ By default, the product reports SEO/GEO readiness. It does not claim measured ra
 - references/source-manifest.md and references/source-manifest.json - crawled source manifest
 - references/source-corpus/ - preserved Google Search Central extracts and raw HTML
 
+## Getting Started
+
+Install the CLI:
+
+```bash
+npm install -g rankforge
+```
+
+Audit a live website and generate a standalone HTML report:
+
+```bash
+rankforge audit https://example.com --security restricted --mode full --max-pages 25 --html audit.html
+```
+
+Audit a source repository after an explicit build:
+
+```bash
+rankforge audit-repo ./site --build-command "npm run build" --static-dir dist --html repo-audit.html
+```
+
+Use CI-style failure thresholds when you want the audit to gate a build:
+
+```bash
+rankforge audit-repo ./site --build-command "npm run build" --static-dir dist --fail-on P1 --out audit.json
+```
+
 ## CLI
 
 Run the CLI through the workspace:
