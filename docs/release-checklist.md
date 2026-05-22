@@ -11,6 +11,11 @@ Before publishing:
 - Confirm `README.md` and `skill/rankforge/SKILL.md` describe readiness versus measured rankings accurately.
 - Confirm raw source corpus files remain repository assets and are not included in the CLI package dry run.
 - Confirm the root `package.json` has `private: true` so accidental root publishes are blocked.
+- Confirm npm registry metadata points at the intended package and repository:
+
+```bash
+npm view rankforge version dist-tags.latest homepage bugs.url repository.url
+```
 
 ## Verification
 
@@ -87,9 +92,46 @@ Expected result:
 - Root pack dry run is treated as a private-root packaging sanity check, not a publish artifact.
 - Git status shows a clean `main` branch.
 
+## Publish Flow
+
+The currently verified manual publish path is:
+
+```bash
+npm publish --workspace packages/cli --access public
+```
+
+For accounts protected by npm web authentication, the npm CLI may print an authentication URL. Complete the browser security-key or passkey challenge, return to the terminal, and let the publish finish.
+
+For token-based publishing, use a granular npm access token with package read/write access and the npm-required two-factor bypass setting. Do not use a broad long-lived token when a narrower token is sufficient. Do not print tokens in logs.
+
+## Post-Publish Registry Smoke
+
+After publishing, verify the registry and install the package in a clean temporary project:
+
+```bash
+npm view rankforge version dist-tags.latest homepage bugs.url repository.url
+
+tmpdir="$(mktemp -d)"
+mkdir "$tmpdir/project"
+cd "$tmpdir/project"
+npm init -y
+npm install --ignore-scripts rankforge@0.3.0
+npx rankforge --version
+npx rankforge --help
+npx rankforge explain-rule indexability.noindex
+```
+
+Expected result:
+
+- `npm view` reports the released version as `latest`.
+- The temporary install succeeds without repository-local files.
+- `npx rankforge --version` prints the released version.
+- `npx rankforge explain-rule indexability.noindex` prints JSON for that rule.
+
 ## GitHub Release Workflow
 
-- Use `.github/workflows/release.yml`.
+- Use `.github/workflows/release.yml` for verification and optional token-backed publish attempts.
 - Run with `dry_run: "true"` first.
-- Publishing requires the `NPM_TOKEN` repository secret.
-- Run with `dry_run: "false"` only after tests, validation, package dry run, version, and changelog are correct.
+- Publishing with the workflow currently requires the `NPM_TOKEN` repository secret.
+- The preferred future direction is npm trusted publishing with provenance if it can be configured without weakening package publishing security.
+- Run with `dry_run: "false"` only after tests, validation, package dry run, version, changelog, and registry expectations are correct.
