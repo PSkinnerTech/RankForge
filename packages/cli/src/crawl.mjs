@@ -5,7 +5,7 @@ import { parseSitemap } from "./sitemap.mjs";
 import { compileSafeRegex } from "./regex-guards.mjs";
 import { isHttpUrl, normalizeUrl, sameOrigin } from "./url-utils.mjs";
 
-const userAgent = "OpenClawBot";
+const userAgent = "RankForgeBot";
 
 const fetchText = async (url, options = {}) => {
   const limits = resolveLimits(options.limits);

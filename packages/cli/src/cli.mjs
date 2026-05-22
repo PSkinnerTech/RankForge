@@ -8,9 +8,9 @@ import { detectRepo } from "./repo-detect.mjs";
 import { getRule } from "./rules.mjs";
 import { collectSnapshot } from "./snapshot.mjs";
 
-const version = "openclaw-geo-seo-audit 0.3.0";
+const version = "rankforge 0.3.0";
 
-const help = `Usage: openclaw-geo-seo-audit <command> [options]
+const help = `Usage: rankforge <command> [options]
 
 Commands:
   audit <target>                 Run a deterministic GEO/SEO readiness audit

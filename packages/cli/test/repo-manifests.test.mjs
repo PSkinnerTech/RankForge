@@ -11,7 +11,7 @@ const writeHtml = (file, title) => {
 };
 
 test("reads Next.js prerender manifest and reports missing generated routes", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-next-manifest-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-next-manifest-"));
   const staticDir = path.join(repoPath, "out");
   const manifestDir = path.join(repoPath, ".next");
   writeHtml(path.join(staticDir, "index.html"), "Home");
@@ -53,7 +53,7 @@ test("reads Next.js prerender manifest and reports missing generated routes", ()
 });
 
 test("does not treat Astro fixture-only metadata as a framework route manifest", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-astro-unowned-manifest-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-astro-unowned-manifest-"));
   const staticDir = path.join(repoPath, "dist");
   const manifestDir = path.join(repoPath, ".astro");
   writeHtml(path.join(staticDir, "index.html"), "Home");
@@ -84,7 +84,7 @@ test("does not treat Astro fixture-only metadata as a framework route manifest",
 });
 
 test("matches extensionless manifest routes to generated html files", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-extensionless-route-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-extensionless-route-"));
   const staticDir = path.join(repoPath, "out");
   const manifestDir = path.join(repoPath, ".next");
   writeHtml(path.join(staticDir, "index.html"), "Home");
@@ -116,7 +116,7 @@ test("matches extensionless manifest routes to generated html files", () => {
 });
 
 test("reports generated static routes that are not listed in a framework manifest", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-unlisted-route-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-unlisted-route-"));
   const staticDir = path.join(repoPath, "out");
   const manifestDir = path.join(repoPath, ".next");
   writeHtml(path.join(staticDir, "index.html"), "Home");
@@ -142,7 +142,7 @@ test("reports generated static routes that are not listed in a framework manifes
 });
 
 test("ignores valid Next.js manifest files with unrecognized route schema", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-next-unknown-schema-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-next-unknown-schema-"));
   const staticDir = path.join(repoPath, "out");
   const manifestDir = path.join(repoPath, ".next");
   writeHtml(path.join(staticDir, "index.html"), "Home");
@@ -165,7 +165,7 @@ test("ignores valid Next.js manifest files with unrecognized route schema", () =
 });
 
 test("keeps manifest route file checks inside the static directory", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-contained-manifest-route-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-contained-manifest-route-"));
   const staticDir = path.join(repoPath, "out");
   const manifestDir = path.join(repoPath, ".next");
   writeHtml(path.join(repoPath, "outside", "index.html"), "Outside");
@@ -188,7 +188,7 @@ test("keeps manifest route file checks inside the static directory", () => {
 });
 
 test("checks manifest route presence against generated HTML files", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-missing-file-route-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-missing-file-route-"));
   const staticDir = path.join(repoPath, "out");
   const manifestDir = path.join(repoPath, ".next");
   writeHtml(path.join(staticDir, "index.html"), "Home");
@@ -216,7 +216,7 @@ test("checks manifest route presence against generated HTML files", () => {
 });
 
 test("ignores absent framework manifests", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-no-manifest-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-no-manifest-"));
   const staticDir = path.join(repoPath, "out");
   writeHtml(path.join(staticDir, "index.html"), "Home");
 
@@ -232,7 +232,7 @@ test("ignores absent framework manifests", () => {
 });
 
 test("fails closed on malformed manifest JSON", () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-bad-manifest-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-bad-manifest-"));
   const staticDir = path.join(repoPath, "out");
   const manifestDir = path.join(repoPath, ".next");
   writeHtml(path.join(staticDir, "index.html"), "Home");

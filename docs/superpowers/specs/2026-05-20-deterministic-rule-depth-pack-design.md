@@ -1,14 +1,14 @@
 # Phase D.2 Deterministic Rule Depth Pack Design
 
 Date: 2026-05-20
-Repository: openclaw-geo-seo-audit-skill
+Repository: RankForge
 Status: Approved design direction; awaiting user review before implementation planning
 
 ## Purpose
 
 This spec defines Phase D.2 of the deterministic GEO/SEO audit PRD: a tight high-confidence rule pack that turns existing taxonomy rules into real deterministic findings.
 
-The product direction remains a deterministic audit CLI plus OpenClaw skill wrapper. The CLI is the source of evidence. The skill wrapper interprets CLI evidence, explains priorities, cites sources, and avoids inventing findings. Phase D.2 should improve audit depth without adding external integrations, LLM interpretation, browser requirements, or source-code framework parsing.
+The product direction remains a deterministic audit CLI plus RankForge skill wrapper. The CLI is the source of evidence. The skill wrapper interprets CLI evidence, explains priorities, cites sources, and avoids inventing findings. Phase D.2 should improve audit depth without adding external integrations, LLM interpretation, browser requirements, or source-code framework parsing.
 
 ## Current Context
 

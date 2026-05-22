@@ -1,6 +1,6 @@
 # Release Checklist
 
-Use this checklist before publishing `openclaw-geo-seo-audit`.
+Use this checklist before publishing `rankforge`.
 
 ## Documentation Alignment
 
@@ -8,7 +8,7 @@ Before publishing:
 
 - Confirm `docs/prd-deterministic-audit-cli.md` describes the current CLI package version and the next roadmap target.
 - Confirm `CHANGELOG.md` contains the package version being released.
-- Confirm `README.md` and `skill/geo-seo-audit/SKILL.md` describe readiness versus measured rankings accurately.
+- Confirm `README.md` and `skill/rankforge/SKILL.md` describe readiness versus measured rankings accurately.
 - Confirm raw source corpus files remain repository assets and are not included in the CLI package dry run.
 - Confirm the root `package.json` has `private: true` so accidental root publishes are blocked.
 
@@ -56,10 +56,10 @@ npm pack --workspace packages/cli --pack-destination "$tmpdir"
 mkdir "$tmpdir/install"
 cd "$tmpdir/install"
 npm init -y
-npm install --ignore-scripts "$tmpdir"/openclaw-geo-seo-audit-*.tgz
-npx openclaw-geo-seo-audit --version
-npx openclaw-geo-seo-audit --help
-npx openclaw-geo-seo-audit explain-rule indexability.noindex
+npm install --ignore-scripts "$tmpdir"/rankforge-*.tgz
+npx rankforge --version
+npx rankforge --help
+npx rankforge explain-rule indexability.noindex
 ```
 
 ## Post-Merge Verification

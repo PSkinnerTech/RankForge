@@ -169,7 +169,7 @@ const buildResult = (build) => {
 
 const appendHeader = (lines, audit) => {
   lines.push(
-    "# GEO/SEO Audit Report",
+    "# RankForge GEO/SEO Audit Report",
     "",
     `Target: ${escapeInline(audit.run?.target ?? audit.target ?? "unknown")}`,
     `Generated: ${escapeInline(audit.run?.endedAt ?? new Date().toISOString())}`,
@@ -569,8 +569,8 @@ const htmlHeader = (audit) => {
   return `
 <header class="report-header">
   <div>
-    <p class="eyebrow">GEO/SEO Audit Report</p>
-    <h1>GEO/SEO Audit Report</h1>
+    <p class="eyebrow">RankForge GEO/SEO Audit Report</p>
+    <h1>RankForge GEO/SEO Audit Report</h1>
     <p class="target">${escapeHtml(target)}</p>
   </div>
   <div class="meta-grid">
@@ -850,7 +850,7 @@ export const generateHtmlReport = (audit) => {
   const safeAudit = audit || {};
   const findings = sortedPageFindings(safeAudit);
   const target = safeAudit.run?.target ?? safeAudit.target ?? "unknown";
-  const title = `GEO/SEO Audit Report - ${normalizeInline(target)}`;
+  const title = `RankForge GEO/SEO Audit Report - ${normalizeInline(target)}`;
 
   return `<!doctype html>
 <html lang="en">

@@ -1,7 +1,7 @@
 export const auditOutputSchema = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
-  $id: "https://openclaw.dev/schemas/geo-seo-audit-output.schema.json",
-  title: "OpenClaw GEO/SEO Audit Output",
+  $id: "https://rankforge.dev/schemas/rankforge-output.schema.json",
+  title: "RankForge Output",
   type: "object",
   required: [
     "schemaVersion",

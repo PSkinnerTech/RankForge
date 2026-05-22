@@ -30,13 +30,14 @@ const freePort = async () =>
 test("prints version", async () => {
   const result = await capture(["--version"]);
   assert.equal(result.exitCode, 0);
-  assert.equal(result.stdout.trim(), "openclaw-geo-seo-audit 0.3.0");
+  assert.equal(result.stdout.trim(), "rankforge 0.3.0");
 });
 
 test("prints help", async () => {
   const result = await capture(["--help"]);
   assert.equal(result.exitCode, 0);
   assert.match(result.stdout, /Usage:/);
+  assert.match(result.stdout, /rankforge <command>/);
   assert.match(result.stdout, /validate-config/);
   assert.match(result.stdout, /explain-rule/);
   assert.match(result.stdout, /detect-repo/);
@@ -434,7 +435,7 @@ test("audit-repo runs build command from CLI", async () => {
 });
 
 test("audit-repo reads repo options from config file", async () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-repo-config-cli-"));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-repo-config-cli-"));
   const config = path.join(dir, "audit.config.json");
   fs.writeFileSync(
     config,

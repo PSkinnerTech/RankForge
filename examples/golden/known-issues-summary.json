@@ -29,12 +29,12 @@
     {
       "path": "/",
       "status": 200,
-      "title": "OpenClaw Fixture Home",
+      "title": "RankForge Fixture Home",
       "description": "A healthy fixture homepage for deterministic audit coverage.",
       "canonicalPath": "/",
       "robots": null,
       "h1": [
-        "OpenClaw Fixture Co"
+        "RankForge Fixture Co"
       ],
       "structuredDataBlocks": 1,
       "links": 9,
@@ -43,12 +43,12 @@
     {
       "path": "/about.html",
       "status": 200,
-      "title": "About OpenClaw Fixture Co",
+      "title": "About RankForge Fixture Co",
       "description": "About page for the deterministic fixture company.",
       "canonicalPath": "/about.html",
       "robots": null,
       "h1": [
-        "About OpenClaw Fixture Co"
+        "About RankForge Fixture Co"
       ],
       "structuredDataBlocks": 0,
       "links": 0,
@@ -57,12 +57,12 @@
     {
       "path": "/contact.html",
       "status": 200,
-      "title": "Contact OpenClaw Fixture Co",
+      "title": "Contact RankForge Fixture Co",
       "description": "Contact page for the deterministic fixture company.",
       "canonicalPath": "/contact.html",
       "robots": null,
       "h1": [
-        "Contact OpenClaw Fixture Co"
+        "Contact RankForge Fixture Co"
       ],
       "structuredDataBlocks": 0,
       "links": 0,

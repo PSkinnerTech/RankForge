@@ -1,4 +1,4 @@
-# openclaw-geo-seo-audit
+# rankforge
 
 Deterministic GEO/SEO readiness audits for websites and source repositories.
 
@@ -7,7 +7,7 @@ The CLI inspects crawlability, indexability, search appearance, structured data,
 ## Install
 
 ```bash
-npm install -g openclaw-geo-seo-audit
+npm install -g rankforge
 ```
 
 Playwright is optional. Install it in projects where rendered page evidence is needed.
@@ -15,10 +15,10 @@ Playwright is optional. Install it in projects where rendered page evidence is n
 ## Usage
 
 ```bash
-openclaw-geo-seo-audit --help
-openclaw-geo-seo-audit audit https://example.com --mode full --max-pages 25 --out audit.json --markdown audit.md --html audit.html
-openclaw-geo-seo-audit audit-repo ./site --static-dir dist --fail-on P1 --out repo-audit.json --markdown repo-audit.md --html repo-audit.html
-openclaw-geo-seo-audit explain-rule indexability.noindex
+rankforge --help
+rankforge audit https://example.com --mode full --max-pages 25 --out audit.json --markdown audit.md --html audit.html
+rankforge audit-repo ./site --static-dir dist --fail-on P1 --out repo-audit.json --markdown repo-audit.md --html repo-audit.html
+rankforge explain-rule indexability.noindex
 ```
 
 Use `--security restricted` for untrusted live-site audits or hosted wrappers. Restricted mode applies guarded network and file access limits and disables local command execution.

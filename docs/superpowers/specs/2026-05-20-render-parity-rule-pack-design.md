@@ -1,14 +1,14 @@
 # Render Parity Rule Pack Design
 
 Date: 2026-05-20
-Repository: openclaw-geo-seo-audit-skill
+Repository: RankForge
 Status: Approved design direction; awaiting user review before implementation planning
 
 ## Purpose
 
 This spec defines Phase D.1 of the deterministic GEO/SEO audit PRD: a render parity rule pack for developer repo audits.
 
-The product direction remains a deterministic audit CLI plus OpenClaw skill wrapper. The CLI is the source of evidence. The skill wrapper interprets CLI evidence, explains priorities, cites sources, and avoids inventing findings. This phase improves repo-audit depth by detecting when raw or generated HTML differs from rendered HTML in ways that create SEO/GEO readiness risk.
+The product direction remains a deterministic audit CLI plus RankForge skill wrapper. The CLI is the source of evidence. The skill wrapper interprets CLI evidence, explains priorities, cites sources, and avoids inventing findings. This phase improves repo-audit depth by detecting when raw or generated HTML differs from rendered HTML in ways that create SEO/GEO readiness risk.
 
 ## User-Approved Direction
 

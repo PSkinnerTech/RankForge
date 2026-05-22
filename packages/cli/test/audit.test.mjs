@@ -30,7 +30,7 @@ test("returns minimal versioned audit output for a local HTML target", async () 
 });
 
 test("includes deterministic findings in audit output", async () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-audit-"));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-"));
   const file = path.join(dir, "bad.html");
   fs.writeFileSync(
     file,

@@ -1,4 +1,4 @@
-# Example GEO/SEO Audit Output
+# Example RankForge Output
 
 Target: examples/fixture-site/index.html
 Date: 2026-05-16

@@ -1,7 +1,7 @@
 # Developer Repo Audit Completion Design
 
 Date: 2026-05-18
-Repository: openclaw-geo-seo-audit-skill
+Repository: RankForge
 Status: Approved direction; ready for implementation planning after user review
 
 ## Purpose
@@ -57,7 +57,7 @@ This keeps the product deterministic, safe, and debuggable. It also matches the 
 ### Static build audit
 
 ```bash
-openclaw-geo-seo-audit audit-repo . \
+rankforge audit-repo . \
   --build-command "npm run build" \
   --static-dir dist \
   --fail-on P1 \
@@ -77,7 +77,7 @@ Expected behavior:
 ### Route-list repo audit
 
 ```bash
-openclaw-geo-seo-audit audit-repo . \
+rankforge audit-repo . \
   --static-dir dist \
   --route-list routes.txt \
   --max-pages 50
@@ -92,7 +92,7 @@ Expected behavior:
 ### Config-driven CI audit
 
 ```bash
-openclaw-geo-seo-audit audit-repo . --config audit.config.json
+rankforge audit-repo . --config audit.config.json
 ```
 
 Expected behavior:
@@ -105,7 +105,7 @@ Expected behavior:
 ### Preview audit remains explicit
 
 ```bash
-openclaw-geo-seo-audit audit-repo . \
+rankforge audit-repo . \
   --preview-command "npm run preview -- --host 127.0.0.1" \
   --preview-url http://127.0.0.1:4173
 ```
@@ -299,7 +299,7 @@ Add tests in the same style as the existing CLI suite:
 Update:
 
 - `README.md` with developer CI examples.
-- `skill/geo-seo-audit/SKILL.md` with repo config and explicit build workflow guidance.
+- `skill/rankforge/SKILL.md` with repo config and explicit build workflow guidance.
 - `CHANGELOG.md` with Phase B+ unreleased notes.
 - `docs/prd-deterministic-audit-cli.md` after implementation to mark Phase B+ shipped.
 

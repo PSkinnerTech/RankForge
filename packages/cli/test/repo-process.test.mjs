@@ -165,7 +165,7 @@ test("rejects before spawning when another process already serves the preview UR
 
 test("restricted preview startup rejects private targets before spawning commands", async () => {
   const port = await freePort();
-  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-preview-guard-")), "spawned");
+  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-preview-guard-")), "spawned");
 
   await assert.rejects(
     () =>
@@ -182,7 +182,7 @@ test("restricted preview startup rejects private targets before spawning command
 });
 
 test("restricted preview startup rejects command execution before non-private preflight", async () => {
-  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-preview-restricted-")), "spawned");
+  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-preview-restricted-")), "spawned");
 
   await assert.rejects(
     () =>
@@ -244,7 +244,7 @@ test("requires preview URL", async () => {
 });
 
 test("runs build command and captures bounded output", async () => {
-  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-build-")), "built");
+  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-build-")), "built");
 
   const result = await runCommand({
     command: `node -e "require('node:fs').writeFileSync('${marker}', 'built'); console.log('build ok')"`,
@@ -306,7 +306,7 @@ test("reports build command timeout and stops process", async () => {
 });
 
 test("waits for build timeout cleanup before rejecting", async () => {
-  const pidFile = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-build-timeout-")), "pid");
+  const pidFile = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-build-timeout-")), "pid");
   const script = `
     process.on("SIGTERM", () => {});
     require("node:fs").writeFileSync(${JSON.stringify(pidFile)}, String(process.pid));
@@ -338,7 +338,7 @@ test("waits for build timeout cleanup before rejecting", async () => {
 });
 
 test("restricted mode blocks build command before spawning", async () => {
-  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-build-restricted-")), "spawned");
+  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-build-restricted-")), "spawned");
 
   await assert.rejects(
     () =>

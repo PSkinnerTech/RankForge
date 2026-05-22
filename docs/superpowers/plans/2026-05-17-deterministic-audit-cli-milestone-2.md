@@ -62,8 +62,8 @@ Create `packages/cli/test/html-extract.test.mjs` asserting extraction of title, 
 Create `packages/cli/test/robots.test.mjs` asserting:
 
 - `parseRobotsTxt` groups user agents.
-- `isAllowedByRobots(parsed, "/private/page", "OpenClawBot")` returns false when `Disallow: /private`.
-- `isAllowedByRobots(parsed, "/public/page", "OpenClawBot")` returns true.
+- `isAllowedByRobots(parsed, "/private/page", "RankForgeBot")` returns false when `Disallow: /private`.
+- `isAllowedByRobots(parsed, "/public/page", "RankForgeBot")` returns true.
 
 - [ ] **Step 4: Write sitemap parser tests**
 
@@ -124,7 +124,7 @@ Expected: URL and HTML extraction tests pass; robots/sitemap/snapshot/audit test
 Create:
 
 - `parseRobotsTxt(text)`
-- `isAllowedByRobots(parsed, pathOrUrl, userAgent = "OpenClawBot")`
+- `isAllowedByRobots(parsed, pathOrUrl, userAgent = "RankForgeBot")`
 
 Use simple longest-prefix behavior for `Allow` and `Disallow`.
 

@@ -30,7 +30,7 @@ It does not add LLM-generated prose, Search Console/SERP integrations, browser r
 - Create: `packages/cli/test/report.test.mjs`
 - Modify: `packages/cli/src/cli.mjs`
 - Modify: `README.md`
-- Modify: `skill/geo-seo-audit/SKILL.md`
+- Modify: `skill/rankforge/SKILL.md`
 - Modify: `scripts/validate-skill.mjs`
 
 ## Task 1: Add Failing GEO and Report Tests
@@ -47,7 +47,7 @@ Add a test showing a homepage-like page with substantial text but no answer sect
 
 Create `packages/cli/test/report.test.mjs` asserting `generateMarkdownReport(audit)` includes:
 
-- `# GEO/SEO Audit Report`
+- `# RankForge GEO/SEO Audit Report`
 - target URL/path
 - priority findings table
 - finding rule IDs
@@ -119,7 +119,7 @@ Run:
 ```bash
 npm test
 npm run validate
-npm run cli -- audit examples/fixture-site/index.html --markdown /tmp/openclaw-example-audit.md
+npm run cli -- audit examples/fixture-site/index.html --markdown /tmp/rankforge-example-audit.md
 ```
 
 Expected:

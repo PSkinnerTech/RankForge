@@ -47,8 +47,8 @@ Replace the current title block:
 ```markdown
 Status: Draft for review  
 Date: 2026-05-17  
-Repository: openclaw-geo-seo-audit-skill  
-Primary users: technical SEOs, growth teams, content strategists, frontend engineers, agency auditors, and AI agents running OpenClaw skills
+Repository: RankForge
+Primary users: technical SEOs, growth teams, content strategists, frontend engineers, agency auditors, and AI agents running RankForge skills
 ```
 
 with:
@@ -56,9 +56,9 @@ with:
 ```markdown
 Status: Current implementation baseline plus v1.5 roadmap  
 Date: 2026-05-18  
-Repository: openclaw-geo-seo-audit-skill  
-Current CLI package: openclaw-geo-seo-audit@0.2.0  
-Primary users: technical SEOs, growth teams, content strategists, frontend engineers, agency auditors, and AI agents running OpenClaw skills
+Repository: RankForge
+Current CLI package: rankforge@0.2.0
+Primary users: technical SEOs, growth teams, content strategists, frontend engineers, agency auditors, and AI agents running RankForge skills
 ```
 
 - [ ] **Step 2: Add implementation baseline after Section 1**
@@ -68,7 +68,7 @@ Insert this section immediately after the two-paragraph summary in `## 1. Summar
 ```markdown
 ### Current baseline
 
-As of `openclaw-geo-seo-audit@0.2.0`, the repository contains a working deterministic CLI and OpenClaw skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, and bounded same-origin crawls. It emits JSON and Markdown, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, and includes restricted-mode guardrails for untrusted targets.
+As of `rankforge@0.2.0`, the repository contains a working deterministic CLI and RankForge skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, and bounded same-origin crawls. It emits JSON and Markdown, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, and includes restricted-mode guardrails for untrusted targets.
 
 The next approved product target is v1.5 repo-to-audit mode: the CLI should inspect a website source repository, detect how to build or preview it, audit the generated site through the existing evidence engine, and add source-level findings where deterministic.
 ```
@@ -115,7 +115,7 @@ After `### 9.4 Explain Rule`, add:
 ### 9.5 Detect Repo
 
 ```bash
-openclaw-geo-seo-audit detect-repo .
+rankforge detect-repo .
 ```
 
 Planned behavior:
@@ -127,7 +127,7 @@ Planned behavior:
 ### 9.6 Audit Repo
 
 ```bash
-openclaw-geo-seo-audit audit-repo .
+rankforge audit-repo .
 ```
 
 Planned behavior:
@@ -203,14 +203,14 @@ Insert this section above `## 0.1.0 - 2026-05-16` in `CHANGELOG.md`:
 ```markdown
 ## 0.2.0 - 2026-05-18
 
-- Added the deterministic `openclaw-geo-seo-audit` CLI package with `audit`, `snapshot`, `validate-config`, and `explain-rule` commands.
+- Added the deterministic `rankforge` CLI package with `audit`, `snapshot`, `validate-config`, and `explain-rule` commands.
 - Added config-driven audits, URL-list sampling, bounded same-origin crawling, sitemap seeding, robots enforcement, include/exclude crawl filters, and JSON/Markdown outputs.
 - Added deterministic page and site rules for technical eligibility, crawl/index controls, search appearance, structured data, content answerability, entity signals, performance imports, and ranking-evidence gaps.
 - Added optional evidence imports for Search Console CSV, SERP JSON, AI-answer JSON, and Lighthouse JSON.
 - Added restricted security mode with network/file guardrails, request timeouts, response/file byte caps, manual redirect enforcement, and disabled browser rendering for restricted URL targets.
 - Added implementation-task metadata to findings and CI severity threshold support with `--fail-on`.
 - Added fixture-site and golden-output regression coverage plus GitHub CI and release workflow scaffolding.
-- Updated the OpenClaw skill wrapper to use the CLI as the deterministic evidence source and to avoid unsupported ranking claims.
+- Updated the RankForge skill wrapper to use the CLI as the deterministic evidence source and to avoid unsupported ranking claims.
 ```
 
 - [ ] **Step 2: Add documentation alignment to release checklist**
@@ -224,7 +224,7 @@ Before publishing:
 
 - Confirm `docs/prd-deterministic-audit-cli.md` describes the current CLI package version and the next roadmap target.
 - Confirm `CHANGELOG.md` contains the package version being released.
-- Confirm `README.md` and `skill/geo-seo-audit/SKILL.md` describe readiness versus measured rankings accurately.
+- Confirm `README.md` and `skill/rankforge/SKILL.md` describe readiness versus measured rankings accurately.
 - Confirm raw source corpus files remain repository assets and are not included in the CLI package dry run.
 ```
 
@@ -399,7 +399,7 @@ npm pack --dry-run --workspace packages/cli
 
 Expected output:
 
-- Package name is `openclaw-geo-seo-audit`.
+- Package name is `rankforge`.
 - Package version is `0.2.0`.
 - Tarball contents include `packages/cli/src` files and `packages/cli/package.json`.
 - Tarball contents do not include `references/source-corpus`, `examples/golden`, or docs.

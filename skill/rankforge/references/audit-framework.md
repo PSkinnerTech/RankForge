@@ -1,4 +1,4 @@
-# GEO/SEO Audit Framework
+# RankForge Audit Framework
 
 Use this framework to convert page evidence into prioritized findings and redesign recommendations. Cite the source URLs shown here in the audit.
 

@@ -129,7 +129,7 @@ test("generates a Markdown audit report from audit JSON", () => {
     sources: [{ id: "robots_meta", url: "https://developers.google.com/search/docs/crawling-indexing/robots-meta-tag" }],
   });
 
-  assert.match(markdown, /# GEO\/SEO Audit Report/);
+  assert.match(markdown, /# RankForge GEO\/SEO Audit Report/);
   assert.match(markdown, /Target: https:\/\/example\.com/);
   assert.match(markdown, /Top Priorities/);
   assert.match(markdown, /indexability\.noindex/);
@@ -173,7 +173,7 @@ test("generates a standalone escaped HTML audit report from audit JSON", () => {
 
   assert.match(html, /^<!doctype html>/);
   assert.match(html, /<html lang="en">/);
-  assert.match(html, /<title>GEO\/SEO Audit Report - https:\/\/example\.com\/\?q=&lt;unsafe&gt;<\/title>/);
+  assert.match(html, /<title>RankForge GEO\/SEO Audit Report - https:\/\/example\.com\/\?q=&lt;unsafe&gt;<\/title>/);
   assert.match(html, /<section class="report-section" aria-labelledby="executive-summary-heading">/);
   assert.match(html, /Top Priorities/);
   assert.match(html, /Findings By Dimension/);

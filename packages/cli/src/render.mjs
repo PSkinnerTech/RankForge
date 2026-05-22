@@ -20,7 +20,7 @@ export const renderHtml = async (target, options = {}) => {
     browser = await launcher.launch({ headless: true });
     const page = await browser.newPage({
       viewport: options.viewport || { width: 390, height: 844 },
-      userAgent: "OpenClaw GEO SEO audit renderer",
+      userAgent: "RankForge GEO SEO audit renderer",
     });
     if (/^https?:\/\//i.test(target)) {
       await page.goto(target, { waitUntil: "networkidle", timeout: options.timeout || 30000 });

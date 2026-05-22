@@ -1,14 +1,14 @@
 # Reporting And Skill Polish Design
 
 Date: 2026-05-20
-Repository: openclaw-geo-seo-audit-skill
+Repository: RankForge
 Status: Approved design direction; awaiting user review before implementation planning
 
 ## Purpose
 
 Phase E should turn the current deterministic audit evidence into a more finished user-facing report surface.
 
-The product direction remains a deterministic CLI plus OpenClaw skill wrapper. The CLI is the source of evidence. The skill wrapper interprets CLI output, explains priorities, cites sources, and avoids inventing findings. This phase improves how the existing evidence is presented; it does not add new crawling, rule triggers, integrations, scoring, or dashboards.
+The product direction remains a deterministic CLI plus RankForge skill wrapper. The CLI is the source of evidence. The skill wrapper interprets CLI output, explains priorities, cites sources, and avoids inventing findings. This phase improves how the existing evidence is presented; it does not add new crawling, rule triggers, integrations, scoring, or dashboards.
 
 The report should work for two audiences at once:
 
@@ -26,7 +26,7 @@ Main currently includes:
 - repository evidence output for `audit-repo`
 - source findings, build evidence, route sources, framework manifests, route-list evidence, and evidence gaps
 - imported Lighthouse evidence rendering
-- skill templates under `skill/geo-seo-audit/templates`
+- skill templates under `skill/rankforge/templates`
 - README, PRD, and `SKILL.md` language that separates readiness from measured ranking or visibility evidence
 - golden Markdown coverage for the known-issues fixture
 
@@ -229,7 +229,7 @@ Sources should remain available for audit traceability without making the priori
 
 ## Skill Wrapper And Templates
 
-Update `skill/geo-seo-audit/templates/audit-report.md` so agent-written reports follow the same section order as CLI Markdown reports.
+Update `skill/rankforge/templates/audit-report.md` so agent-written reports follow the same section order as CLI Markdown reports.
 
 The skill instructions should continue to say:
 
@@ -249,7 +249,7 @@ Likely files:
 
 - `README.md`
 - `docs/prd-deterministic-audit-cli.md`
-- `skill/geo-seo-audit/SKILL.md`
+- `skill/rankforge/SKILL.md`
 - `CHANGELOG.md`
 - `docs/release-checklist.md` if report verification or package-readiness language changes
 

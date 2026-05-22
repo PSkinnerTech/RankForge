@@ -13,7 +13,7 @@ Disallow: /
 `);
 
   assert.equal(parsed.groups.length, 2);
-  assert.equal(isAllowedByRobots(parsed, "/private/page", "OpenClawBot"), false);
-  assert.equal(isAllowedByRobots(parsed, "/private/public/page", "OpenClawBot"), true);
-  assert.equal(isAllowedByRobots(parsed, "/public/page", "OpenClawBot"), true);
+  assert.equal(isAllowedByRobots(parsed, "/private/page", "RankForgeBot"), false);
+  assert.equal(isAllowedByRobots(parsed, "/private/public/page", "RankForgeBot"), true);
+  assert.equal(isAllowedByRobots(parsed, "/public/page", "RankForgeBot"), true);
 });

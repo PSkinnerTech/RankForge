@@ -5,7 +5,7 @@ import { fetchWithGuards, readResponseTextLimited, readTextFileLimited, resolveL
 import { renderHtml } from "./render.mjs";
 import { isHttpUrl } from "./url-utils.mjs";
 
-const userAgent = "OpenClaw GEO SEO audit snapshot";
+const userAgent = "RankForge GEO SEO audit snapshot";
 
 const hash = (value) => crypto.createHash("sha256").update(value).digest("hex");
 

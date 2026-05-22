@@ -4,8 +4,8 @@ import { unsafeRegexReason } from "./regex-guards.mjs";
 
 export const auditConfigSchema = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
-  $id: "https://openclaw.dev/schemas/geo-seo-audit-config.schema.json",
-  title: "OpenClaw GEO/SEO Audit Config",
+  $id: "https://rankforge.dev/schemas/rankforge-config.schema.json",
+  title: "RankForge Config",
   type: "object",
   required: ["target"],
   additionalProperties: true,

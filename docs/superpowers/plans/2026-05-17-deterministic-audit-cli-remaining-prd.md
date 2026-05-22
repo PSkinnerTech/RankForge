@@ -53,6 +53,6 @@ Run:
 ```bash
 npm test
 npm run validate
-npm run cli -- audit examples/fixture-site/index.html --out /tmp/openclaw-audit.json --markdown /tmp/openclaw-audit.md
+npm run cli -- audit examples/fixture-site/index.html --out /tmp/rankforge-audit.json --markdown /tmp/rankforge-audit.md
 git status --short
 ```

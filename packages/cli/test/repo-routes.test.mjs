@@ -24,7 +24,7 @@ test("rejects missing static directories", () => {
 });
 
 test("rejects static paths that are not directories", () => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-static-routes-"));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-static-routes-"));
   const file = path.join(root, "index.html");
   fs.writeFileSync(file, "<h1>Home</h1>");
 
@@ -32,7 +32,7 @@ test("rejects static paths that are not directories", () => {
 });
 
 test("converts non-index HTML files to extension routes", () => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-static-routes-"));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-static-routes-"));
   fs.writeFileSync(path.join(root, "about.html"), "<h1>About</h1>");
 
   assert.deepEqual(discoverStaticRoutes(root), [

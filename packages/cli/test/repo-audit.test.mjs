@@ -11,7 +11,7 @@ import { waitForHttp } from "../src/repo-process.mjs";
 const fixture = (name) => path.resolve("examples/fixture-repos", name);
 
 const copyFixtureRepo = (name) => {
-  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `openclaw-${name}-`));
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `rankforge-${name}-`));
   const repoPath = path.join(tempRoot, name);
   fs.cpSync(fixture(name), repoPath, { recursive: true });
   return { repoPath, tempRoot };
@@ -64,7 +64,7 @@ test("static output audit uses detected static dir when none is configured", asy
 });
 
 test("explicit preview audit takes precedence over detected static output", async () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-repo-preview-precedence-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-repo-preview-precedence-"));
   fs.mkdirSync(path.join(repoPath, "dist"), { recursive: true });
   fs.mkdirSync(path.join(repoPath, "site"), { recursive: true });
   fs.writeFileSync(
@@ -151,7 +151,7 @@ test("missing explicit static dir returns repo source finding", async () => {
 });
 
 test("static dir with no HTML routes returns repo source finding", async () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-repo-audit-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-repo-audit-"));
   const staticDir = path.join(repoPath, "dist");
   fs.mkdirSync(staticDir, { recursive: true });
   fs.writeFileSync(path.join(staticDir, "robots.txt"), "User-agent: *\nAllow: /\n");
@@ -305,7 +305,7 @@ test("repo audit constrains static routes with route list", async () => {
 
 test("repo audit normalizes absolute route-list entries under static dir", async () => {
   const repoPath = fixture("vite-basic");
-  const routeList = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-routes-")), "routes.txt");
+  const routeList = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-routes-")), "routes.txt");
   fs.rmSync(path.join(repoPath, "dist"), { recursive: true, force: true });
   fs.writeFileSync(
     routeList,
@@ -331,7 +331,7 @@ test("repo audit normalizes absolute route-list entries under static dir", async
 
 test("repo audit rejects absolute route-list entries outside static dir without exposing machine paths as routes", async () => {
   const repoPath = fixture("vite-basic");
-  const routeListDir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-routes-"));
+  const routeListDir = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-routes-"));
   const externalPath = path.join(routeListDir, "external.html");
   const routeList = path.join(routeListDir, "routes.txt");
   fs.writeFileSync(externalPath, "<title>External</title><h1>External</h1>");
@@ -361,7 +361,7 @@ test("repo audit reports missing route-list files", async () => {
 });
 
 test("repo audit reports missing route-list files before full static route traversal", async () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-missing-route-list-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-missing-route-list-"));
   const staticDir = path.join(repoPath, "site-output");
   const blockedDir = path.join(staticDir, "blocked");
   fs.mkdirSync(blockedDir, { recursive: true });
@@ -388,7 +388,7 @@ test("repo audit reports missing route-list files before full static route trave
 
 test("repo audit reports missing route-list entries", async () => {
   const repoPath = fixture("vite-basic");
-  const routeList = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-routes-")), "routes.txt");
+  const routeList = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-routes-")), "routes.txt");
   fs.writeFileSync(routeList, "/missing/\n");
 
   const audit = await runRepoAudit({
@@ -403,7 +403,7 @@ test("repo audit reports missing route-list entries", async () => {
 });
 
 test("repo audit reports existing relative route-list entries with non-HTML extensions as not HTML", async () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-route-list-not-html-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-route-list-not-html-"));
   const staticDir = path.join(repoPath, "dist");
   const routeList = path.join(repoPath, "routes.txt");
   fs.mkdirSync(staticDir, { recursive: true });
@@ -421,7 +421,7 @@ test("repo audit reports existing relative route-list entries with non-HTML exte
 });
 
 test("static repo audit reports missing generated robots and sitemap files", async () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-static-source-findings-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-static-source-findings-"));
   const staticDir = path.join(repoPath, "dist");
   fs.mkdirSync(staticDir, { recursive: true });
   fs.writeFileSync(

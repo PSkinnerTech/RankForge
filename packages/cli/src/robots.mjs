@@ -48,7 +48,7 @@ const matchingGroups = (parsed, userAgent) => {
   return exact.length ? exact : groups.filter((group) => group.agents.includes("*"));
 };
 
-export const isAllowedByRobots = (parsed, pathOrUrl, userAgent = "OpenClawBot") => {
+export const isAllowedByRobots = (parsed, pathOrUrl, userAgent = "RankForgeBot") => {
   const pathname = pathFor(pathOrUrl);
   const rules = matchingGroups(parsed, userAgent)
     .flatMap((group) => group.rules)

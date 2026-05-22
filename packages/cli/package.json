@@ -1,5 +1,5 @@
 {
-  "name": "openclaw-geo-seo-audit",
+  "name": "rankforge",
   "version": "0.3.0",
   "description": "Deterministic GEO/SEO readiness audit CLI for websites and source repositories.",
   "private": false,
@@ -7,12 +7,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/PSkinnerTech/openclaw-geo-seo-audit-skill.git",
+    "url": "git+https://github.com/PSkinnerTech/RankForge.git",
     "directory": "packages/cli"
   },
-  "homepage": "https://github.com/PSkinnerTech/openclaw-geo-seo-audit-skill#readme",
+  "homepage": "https://github.com/PSkinnerTech/RankForge#readme",
   "bugs": {
-    "url": "https://github.com/PSkinnerTech/openclaw-geo-seo-audit-skill/issues"
+    "url": "https://github.com/PSkinnerTech/RankForge/issues"
   },
   "keywords": [
     "seo",
@@ -24,7 +24,7 @@
     "repository-audit"
   ],
   "bin": {
-    "openclaw-geo-seo-audit": "./src/index.mjs"
+    "rankforge": "./src/index.mjs"
   },
   "files": [
     "src",

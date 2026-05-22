@@ -58,7 +58,7 @@ Excluded:
 - Modify `packages/cli/src/report.mjs`: add repository evidence to Markdown reports when present.
 - Modify `scripts/validate-skill.mjs`: require new source and fixture files.
 - Modify `README.md`: document repo commands.
-- Modify `skill/geo-seo-audit/SKILL.md`: explain when to use repo-to-audit.
+- Modify `skill/rankforge/SKILL.md`: explain when to use repo-to-audit.
 - Create `packages/cli/test/repo-detect.test.mjs`.
 - Create `packages/cli/test/repo-routes.test.mjs`.
 - Create `packages/cli/test/repo-process.test.mjs`.
@@ -194,7 +194,7 @@ Create `examples/fixture-repos/npm-preview/package.json`:
 
 ```json
 {
-  "name": "openclaw-preview-fixture",
+  "name": "rankforge-preview-fixture",
   "private": true,
   "type": "module",
   "scripts": {
@@ -868,7 +868,7 @@ test("reports missing explicit static directories", async () => {
 });
 
 test("reports static directories without HTML routes", async () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-empty-static-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-empty-static-"));
   fs.mkdirSync(path.join(repoPath, "dist"));
 
   const audit = await runRepoAudit({
@@ -1448,7 +1448,7 @@ git commit -m "feat: add repo audit CLI commands"
 
 **Files:**
 - Modify: `README.md`
-- Modify: `skill/geo-seo-audit/SKILL.md`
+- Modify: `skill/rankforge/SKILL.md`
 - Modify: `scripts/validate-skill.mjs`
 
 - [ ] **Step 1: Update README CLI examples**
@@ -1469,12 +1469,12 @@ Add this paragraph near the CLI behavior description:
 
 - [ ] **Step 2: Update skill wrapper workflow**
 
-In `skill/geo-seo-audit/SKILL.md`, add to the CLI evidence collection list:
+In `skill/rankforge/SKILL.md`, add to the CLI evidence collection list:
 
 ```markdown
-   - For source repositories, run `openclaw-geo-seo-audit detect-repo <path>` first.
-   - If static output already exists, run `openclaw-geo-seo-audit audit-repo <path> --static-dir <dir> --out audit-results.json --markdown audit-report.md`.
-   - If the app must run locally, require an explicit preview command and URL: `openclaw-geo-seo-audit audit-repo <path> --preview-command "<command>" --preview-url <url> --out audit-results.json --markdown audit-report.md`.
+   - For source repositories, run `rankforge detect-repo <path>` first.
+   - If static output already exists, run `rankforge audit-repo <path> --static-dir <dir> --out audit-results.json --markdown audit-report.md`.
+   - If the app must run locally, require an explicit preview command and URL: `rankforge audit-repo <path> --preview-command "<command>" --preview-url <url> --out audit-results.json --markdown audit-report.md`.
    - Do not ask the CLI to install dependencies or run inferred framework commands unless the user explicitly approves those commands in a future release that supports them.
 ```
 
@@ -1507,9 +1507,9 @@ In `scripts/validate-skill.mjs`, add required entries for:
 Run:
 
 ```bash
-rg -n "audit-repo|detect-repo|preview-command|static-dir" README.md skill/geo-seo-audit/SKILL.md
+rg -n "audit-repo|detect-repo|preview-command|static-dir" README.md skill/rankforge/SKILL.md
 npm run validate
-git diff --check -- README.md skill/geo-seo-audit/SKILL.md scripts/validate-skill.mjs
+git diff --check -- README.md skill/rankforge/SKILL.md scripts/validate-skill.mjs
 ```
 
 Expected: repo command wording is present, validation reports `"ok": true`, and diff check passes.
@@ -1519,7 +1519,7 @@ Expected: repo command wording is present, validation reports `"ok": true`, and 
 Run:
 
 ```bash
-git add README.md skill/geo-seo-audit/SKILL.md scripts/validate-skill.mjs
+git add README.md skill/rankforge/SKILL.md scripts/validate-skill.mjs
 git commit -m "docs: document repo audit mode"
 ```
 
@@ -1574,8 +1574,8 @@ Run:
 
 ```bash
 npm run cli -- detect-repo examples/fixture-repos/static-basic
-npm run cli -- audit-repo examples/fixture-repos/static-basic --static-dir dist --out /tmp/openclaw-repo-audit.json --markdown /tmp/openclaw-repo-audit.md
-node -e "const fs=require('fs'); const a=JSON.parse(fs.readFileSync('/tmp/openclaw-repo-audit.json','utf8')); if (!a.repo || a.pages.length !== 2) process.exit(1); console.log(a.repo.detectedFramework, a.pages.length)"
+npm run cli -- audit-repo examples/fixture-repos/static-basic --static-dir dist --out /tmp/rankforge-repo-audit.json --markdown /tmp/rankforge-repo-audit.md
+node -e "const fs=require('fs'); const a=JSON.parse(fs.readFileSync('/tmp/rankforge-repo-audit.json','utf8')); if (!a.repo || a.pages.length !== 2) process.exit(1); console.log(a.repo.detectedFramework, a.pages.length)"
 ```
 
 Expected: detect output includes `generic-static`, audit output writes JSON and Markdown, and Node check prints `generic-static 2`.

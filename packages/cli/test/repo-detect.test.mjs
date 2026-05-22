@@ -28,7 +28,7 @@ test("returns absolute route source paths for relative repository paths", () => 
 });
 
 test("converts static HTML files to exact route source objects", () => {
-  const repoRoot = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-repo-detect-"));
+  const repoRoot = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-repo-detect-"));
   const distDir = path.join(repoRoot, "dist");
   const aboutDir = path.join(distDir, "about");
 

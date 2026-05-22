@@ -46,7 +46,7 @@ const withFixtureServer = async (fn) => {
 };
 
 const copyFixtureRepo = (name) => {
-  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `openclaw-${name}-`));
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `rankforge-${name}-`));
   const repoPath = path.join(tempRoot, name);
   fs.cpSync(path.resolve("examples/fixture-repos", name), repoPath, { recursive: true });
   return { repoPath, tempRoot };

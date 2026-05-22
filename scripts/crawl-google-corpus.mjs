@@ -174,7 +174,7 @@ const extractLinks = (html, base) => {
 
 const fetchPage = async (url) => {
   const response = await fetch(url, {
-    headers: { "user-agent": "OpenClaw GEO SEO audit skill corpus builder" },
+    headers: { "user-agent": "RankForge GEO SEO audit skill corpus builder" },
   });
   if (!response.ok) throw new Error(`${response.status} ${response.statusText}`);
   return response.text();

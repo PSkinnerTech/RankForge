@@ -15,7 +15,7 @@ const toolVersion = "0.3.0";
 const readSourceMap = () => {
   const candidates = [
     new URL("./source-map.json", import.meta.url),
-    new URL("../../../skill/geo-seo-audit/source-map.json", import.meta.url),
+    new URL("../../../skill/rankforge/source-map.json", import.meta.url),
   ];
 
   for (const file of candidates) {
@@ -167,7 +167,7 @@ export const runAudit = async (config) => {
       render: config.render || { mode: "never" },
       security: config.security || { mode: "local" },
       limits: config.limits || {},
-      userAgent: "OpenClaw GEO SEO audit snapshot",
+      userAgent: "RankForge GEO SEO audit snapshot",
       environment: {
         node: process.version,
         platform: process.platform,

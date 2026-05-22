@@ -1,14 +1,14 @@
 # Remaining PRD Roadmap Design
 
 Date: 2026-05-18
-Repository: openclaw-geo-seo-audit-skill
+Repository: RankForge
 Status: Approved roadmap direction; awaiting user review before implementation planning
 
 ## Purpose
 
 This spec plans the remaining work in the deterministic GEO/SEO audit PRD after release stabilization, initial repo-to-audit mode, and developer repo audit completion have landed on `main`.
 
-The product target remains a deterministic audit CLI plus OpenClaw skill wrapper. The CLI should be the source of evidence. The skill wrapper should interpret CLI evidence, explain priorities, cite sources, and avoid inventing findings. The product should audit websites from URLs, local apps, static output, and source repositories for SEO and GEO readiness. It should only report measured rankings, SERP visibility, or AI-answer visibility when supplied evidence or approved integrations provide those measurements.
+The product target remains a deterministic audit CLI plus RankForge skill wrapper. The CLI should be the source of evidence. The skill wrapper should interpret CLI evidence, explain priorities, cite sources, and avoid inventing findings. The product should audit websites from URLs, local apps, static output, and source repositories for SEO and GEO readiness. It should only report measured rankings, SERP visibility, or AI-answer visibility when supplied evidence or approved integrations provide those measurements.
 
 ## Current Completion State
 
@@ -17,7 +17,7 @@ The full PRD is approximately 75-80 percent complete.
 Completed or substantially complete:
 
 - Deterministic CLI package.
-- OpenClaw skill wrapper.
+- RankForge skill wrapper.
 - Local HTML, live URL, URL-list, sitemap-seeded, bounded crawl, static-output, and explicit preview-server audits.
 - Raw and optional rendered evidence collection.
 - Robots, sitemap, metadata, heading, canonical, link, structured-data, performance-import, and GEO/entity baseline rules.

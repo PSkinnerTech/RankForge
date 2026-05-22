@@ -41,13 +41,13 @@ const requiredFiles = [
   "packages/cli/src/structured-data.mjs",
   ".github/workflows/ci.yml",
   ".github/workflows/release.yml",
-  "skill/geo-seo-audit/SKILL.md",
-  "skill/geo-seo-audit/agents/openai.yaml",
-  "skill/geo-seo-audit/references/audit-framework.md",
-  "skill/geo-seo-audit/source-map.json",
-  "skill/geo-seo-audit/templates/audit-report.md",
-  "skill/geo-seo-audit/templates/page-finding.md",
-  "skill/geo-seo-audit/templates/redesign-brief.md",
+  "skill/rankforge/SKILL.md",
+  "skill/rankforge/agents/openai.yaml",
+  "skill/rankforge/references/audit-framework.md",
+  "skill/rankforge/source-map.json",
+  "skill/rankforge/templates/audit-report.md",
+  "skill/rankforge/templates/page-finding.md",
+  "skill/rankforge/templates/redesign-brief.md",
   "examples/audit.config.json",
   "examples/fixture-site/index.html",
   "examples/fixture-sites/known-issues/index.html",
@@ -108,11 +108,11 @@ for (const file of requiredFiles) {
   if (!fs.existsSync(file)) errors.push("Missing required file: " + file);
 }
 
-const skill = fs.readFileSync("skill/geo-seo-audit/SKILL.md", "utf8");
-if (!/^---\nname: geo-seo-audit\n/m.test(skill)) errors.push("SKILL.md frontmatter is missing name.");
+const skill = fs.readFileSync("skill/rankforge/SKILL.md", "utf8");
+if (!/^---\nname: rankforge\n/m.test(skill)) errors.push("SKILL.md frontmatter is missing name.");
 if (!/Google Search eligibility/.test(skill)) errors.push("SKILL.md description/body is too weak.");
 
-const framework = fs.readFileSync("skill/geo-seo-audit/references/audit-framework.md", "utf8");
+const framework = fs.readFileSync("skill/rankforge/references/audit-framework.md", "utf8");
 const googleUrlCount = (framework.match(/https:\/\/developers\.google\.com\/search\/docs\//g) || []).length;
 if (googleUrlCount < 20) errors.push("Audit framework should include at least 20 Google Search Central citations.");
 
@@ -122,7 +122,7 @@ if (!manifest.pages.some((page) => page.url && page.url.includes("ai-optimizatio
 if (!manifest.pages.some((page) => page.url && page.url.includes("robots-meta-tag"))) errors.push("Robots meta tag guidance missing from manifest.");
 if (!manifest.pages.some((page) => page.url && page.url.includes("structured-data/intro-structured-data"))) errors.push("Structured data intro missing from manifest.");
 
-const sourceMap = JSON.parse(fs.readFileSync("skill/geo-seo-audit/source-map.json", "utf8"));
+const sourceMap = JSON.parse(fs.readFileSync("skill/rankforge/source-map.json", "utf8"));
 for (const key of ["ai_optimization", "robots_meta", "structured_data_intro", "helpful_content"]) {
   if (!sourceMap[key]) errors.push(`source-map.json missing required source: ${key}`);
 }

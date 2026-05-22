@@ -13,7 +13,7 @@ const isUrl = /^https?:\/\//i.test(target);
 const readInput = async () => {
   if (isUrl) {
     const response = await fetch(target, {
-      headers: { "user-agent": "OpenClaw GEO SEO audit snapshot" },
+      headers: { "user-agent": "RankForge GEO SEO audit snapshot" },
       redirect: "follow",
     });
     return {

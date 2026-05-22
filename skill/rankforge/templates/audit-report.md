@@ -1,4 +1,4 @@
-# GEO/SEO Audit Report
+# RankForge GEO/SEO Audit Report
 
 Target: {{target}}
 Generated: {{generated_at}}

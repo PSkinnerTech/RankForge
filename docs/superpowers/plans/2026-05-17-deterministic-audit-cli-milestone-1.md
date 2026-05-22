@@ -29,7 +29,7 @@ Later plans will implement crawling, rendering, deterministic audit rules, GEO h
 - Modify: `package.json`
 - Modify: `README.md`
 - Modify: `scripts/validate-skill.mjs`
-- Modify: `skill/geo-seo-audit/SKILL.md`
+- Modify: `skill/rankforge/SKILL.md`
 - Create: `packages/cli/package.json`
 - Create: `packages/cli/src/index.mjs`
 - Create: `packages/cli/src/cli.mjs`
@@ -39,7 +39,7 @@ Later plans will implement crawling, rendering, deterministic audit rules, GEO h
 - Create: `packages/cli/test/cli.test.mjs`
 - Create: `packages/cli/test/config-schema.test.mjs`
 - Create: `packages/cli/test/rules.test.mjs`
-- Create: `skill/geo-seo-audit/source-map.json`
+- Create: `skill/rankforge/source-map.json`
 - Create: `examples/audit.config.json`
 
 ## Task 1: Add Failing CLI Contract Tests
@@ -69,7 +69,7 @@ const capture = async (args) => {
 test("prints version", async () => {
   const result = await capture(["--version"]);
   assert.equal(result.exitCode, 0);
-  assert.match(result.stdout, /openclaw-geo-seo-audit/);
+  assert.match(result.stdout, /rankforge/);
 });
 
 test("prints help", async () => {
@@ -179,12 +179,12 @@ Create `packages/cli/package.json`:
 
 ```json
 {
-  "name": "openclaw-geo-seo-audit",
+  "name": "rankforge",
   "version": "0.2.0",
   "private": false,
   "type": "module",
   "bin": {
-    "openclaw-geo-seo-audit": "./src/index.mjs"
+    "rankforge": "./src/index.mjs"
   },
   "scripts": {
     "test": "node --test test/*.test.mjs"
@@ -293,7 +293,7 @@ Create `examples/audit.config.json` using the example from the PRD with `target`
 Update `packages/cli/src/cli.mjs` so:
 
 ```bash
-openclaw-geo-seo-audit validate-config examples/audit.config.json
+rankforge validate-config examples/audit.config.json
 ```
 
 prints JSON:
@@ -319,11 +319,11 @@ Expected: config tests pass; rule tests still fail until Task 4.
 
 **Files:**
 - Create: `packages/cli/src/rules.mjs`
-- Create: `skill/geo-seo-audit/source-map.json`
+- Create: `skill/rankforge/source-map.json`
 
 - [ ] **Step 1: Add compact source citation map**
 
-Create `skill/geo-seo-audit/source-map.json` with canonical Google Search Central source IDs such as:
+Create `skill/rankforge/source-map.json` with canonical Google Search Central source IDs such as:
 
 ```json
 {
@@ -397,14 +397,14 @@ Expected: all CLI package tests pass.
 ## Task 5: Update Skill Wrapper and README
 
 **Files:**
-- Modify: `skill/geo-seo-audit/SKILL.md`
+- Modify: `skill/rankforge/SKILL.md`
 - Modify: `README.md`
 
 - [ ] **Step 1: Update skill workflow**
 
-Revise `skill/geo-seo-audit/SKILL.md` so it states:
+Revise `skill/rankforge/SKILL.md` so it states:
 
-- Run `openclaw-geo-seo-audit audit <target>` when available.
+- Run `rankforge audit <target>` when available.
 - Use CLI JSON as the default evidence source.
 - Do not invent findings not present in CLI JSON or supplied exports.
 - Use `source-map.json` and `references/audit-framework.md` for citations.
@@ -446,7 +446,7 @@ Update `requiredFiles` to include:
 - `packages/cli/src/config-schema.mjs`
 - `packages/cli/src/audit-output-schema.mjs`
 - `packages/cli/src/rules.mjs`
-- `skill/geo-seo-audit/source-map.json`
+- `skill/rankforge/source-map.json`
 - `examples/audit.config.json`
 
 - [ ] **Step 2: Validate rule count**
@@ -455,7 +455,7 @@ Import or parse `packages/cli/src/rules.mjs` and fail validation if fewer than 2
 
 - [ ] **Step 3: Validate source map**
 
-Parse `skill/geo-seo-audit/source-map.json` and fail validation if it lacks `ai_optimization`, `robots_meta`, `structured_data_intro`, and `helpful_content`.
+Parse `skill/rankforge/source-map.json` and fail validation if it lacks `ai_optimization`, `robots_meta`, `structured_data_intro`, and `helpful_content`.
 
 - [ ] **Step 4: Run final verification**
 

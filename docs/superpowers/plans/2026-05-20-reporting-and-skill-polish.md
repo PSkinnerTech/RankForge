@@ -21,10 +21,10 @@ Approved design: `docs/superpowers/specs/2026-05-20-reporting-and-skill-polish-d
 - Modify `packages/cli/test/golden-fixtures.test.mjs`: add repo Markdown golden coverage.
 - Create `examples/golden/repo-framework-report.md`: normalized Markdown report for an existing framework repo fixture.
 - Modify `examples/golden/known-issues-report.md`: update the known-issues Markdown golden to the polished report structure.
-- Modify `skill/geo-seo-audit/templates/audit-report.md`: align the skill-facing report template with the CLI report order.
+- Modify `skill/rankforge/templates/audit-report.md`: align the skill-facing report template with the CLI report order.
 - Modify `README.md`: document the polished report sections without claiming new audit capability.
 - Modify `docs/prd-deterministic-audit-cli.md`: align report behavior with Phase E.
-- Modify `skill/geo-seo-audit/SKILL.md`: reinforce report usage and evidence boundaries.
+- Modify `skill/rankforge/SKILL.md`: reinforce report usage and evidence boundaries.
 - Modify `CHANGELOG.md`: record report polish in Unreleased.
 - Modify `scripts/validate-skill.mjs`: require the new repo report golden.
 
@@ -304,7 +304,7 @@ const crawlScopeFor = (run = {}) => {
 
 const appendHeader = (lines, audit) => {
   lines.push(
-    "# GEO/SEO Audit Report",
+    "# RankForge GEO/SEO Audit Report",
     "",
     `Target: ${audit.run?.target || "unknown"}`,
     `Generated: ${audit.run?.endedAt || new Date().toISOString()}`,
@@ -776,7 +776,7 @@ import { runRepoAudit } from "./packages/cli/src/repo-audit.mjs";
 import { generateMarkdownReport } from "./packages/cli/src/report.mjs";
 import { normalizeMarkdownForGolden } from "./packages/cli/test/helpers/golden.mjs";
 
-const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-next-report-"));
+const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-next-report-"));
 const repoPath = path.join(tempRoot, "next-basic");
 fs.cpSync(path.resolve("examples/fixture-repos/next-basic"), repoPath, { recursive: true });
 try {
@@ -914,18 +914,18 @@ git commit -m "test: update polished report golden"
 ## Task 7: Update Skill Template And Docs
 
 **Files:**
-- Modify: `skill/geo-seo-audit/templates/audit-report.md`
-- Modify: `skill/geo-seo-audit/SKILL.md`
+- Modify: `skill/rankforge/templates/audit-report.md`
+- Modify: `skill/rankforge/SKILL.md`
 - Modify: `README.md`
 - Modify: `docs/prd-deterministic-audit-cli.md`
 - Modify: `CHANGELOG.md`
 
 - [ ] **Step 1: Replace skill audit report template**
 
-Replace `skill/geo-seo-audit/templates/audit-report.md` with:
+Replace `skill/rankforge/templates/audit-report.md` with:
 
 ```md
-# GEO/SEO Audit Report
+# RankForge GEO/SEO Audit Report
 
 Target: {{target}}
 Date: {{date}}
@@ -986,7 +986,7 @@ State whether this audit is readiness-only or includes measured visibility evide
 
 - [ ] **Step 2: Update SKILL report instruction wording**
 
-In `skill/geo-seo-audit/SKILL.md`, replace:
+In `skill/rankforge/SKILL.md`, replace:
 
 ```md
 5. Produce a prioritized audit using templates/audit-report.md.
@@ -1027,7 +1027,7 @@ In `CHANGELOG.md`, under `## Unreleased - 2026-05-18`, add:
 Run:
 
 ```bash
-rg -n "Top Priorities|Findings By Dimension|Developer Action Plan|Repository Audit Evidence|Imported Measurements|readiness" README.md docs/prd-deterministic-audit-cli.md skill/geo-seo-audit/SKILL.md skill/geo-seo-audit/templates/audit-report.md CHANGELOG.md
+rg -n "Top Priorities|Findings By Dimension|Developer Action Plan|Repository Audit Evidence|Imported Measurements|readiness" README.md docs/prd-deterministic-audit-cli.md skill/rankforge/SKILL.md skill/rankforge/templates/audit-report.md CHANGELOG.md
 ```
 
 Expected: output includes the new template headings and documentation wording.
@@ -1037,7 +1037,7 @@ Expected: output includes the new template headings and documentation wording.
 Run:
 
 ```bash
-git add skill/geo-seo-audit/templates/audit-report.md skill/geo-seo-audit/SKILL.md README.md docs/prd-deterministic-audit-cli.md CHANGELOG.md
+git add skill/rankforge/templates/audit-report.md skill/rankforge/SKILL.md README.md docs/prd-deterministic-audit-cli.md CHANGELOG.md
 git commit -m "docs: align report polish guidance"
 ```
 

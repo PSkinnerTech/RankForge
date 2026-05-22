@@ -1,19 +1,19 @@
-# OpenClaw GEO/SEO Audit Skill
+# RankForge
 
-An OpenClaw skill for auditing live websites or local web apps for Google Search eligibility, people-first content quality, generative AI visibility, structured data opportunities, search appearance, and redesign priorities.
+RankForge audits live websites, local web apps, and source repositories for Google Search eligibility, people-first content quality, generative AI visibility, structured data opportunities, search appearance, and redesign priorities.
 
 The skill is grounded in a preserved Google Search Central corpus, including Search Essentials, the AI optimization guide, SEO starter guide, crawl/indexing documentation, metadata guidance, structured data policies, and spam policies.
 
-This repository is evolving into a deterministic audit CLI plus an OpenClaw skill wrapper. The CLI is responsible for collecting and classifying evidence. The skill wrapper is responsible for producing a cited human report from that evidence.
+This repository contains a deterministic audit CLI plus a RankForge skill wrapper. The CLI is responsible for collecting and classifying evidence. The skill wrapper is responsible for producing a cited human report from that evidence.
 
 By default, the product reports SEO/GEO readiness. It does not claim measured rankings, SERP positions, or AI answer visibility unless Search Console, SERP, or AI answer evidence is supplied.
 
 ## What's Included
 
-- skill/geo-seo-audit/SKILL.md - the OpenClaw skill entry point
-- skill/geo-seo-audit/references/audit-framework.md - cited audit framework
-- skill/geo-seo-audit/templates/ - report, page finding, and redesign brief templates
-- skill/geo-seo-audit/source-map.json - compact Google Search Central citation map
+- skill/rankforge/SKILL.md - the RankForge skill entry point
+- skill/rankforge/references/audit-framework.md - cited audit framework
+- skill/rankforge/templates/ - report, page finding, and redesign brief templates
+- skill/rankforge/source-map.json - compact Google Search Central citation map
 - packages/cli/ - deterministic CLI package scaffold
 - scripts/collect-page-snapshot.mjs - lightweight URL/local HTML evidence collector
 - examples/ - sample local page and example audit output
@@ -71,11 +71,11 @@ Repository reports include `Repository Audit Evidence` only when CLI JSON includ
 
 ## Use
 
-Reference the full repository from an OpenClaw workspace when CLI-backed evidence collection is required. If you copy only `skill/geo-seo-audit` into a skills directory, pair it with an installed `openclaw-geo-seo-audit` CLI so the skill can collect deterministic evidence.
+Reference the full repository from a RankForge workspace when CLI-backed evidence collection is required. If you copy only `skill/rankforge` into a skills directory, pair it with an installed `rankforge` CLI so the skill can collect deterministic evidence.
 
 Example task:
 
-Use geo-seo-audit to audit https://example.com and produce prioritized findings, redesign recommendations, and implementation tasks.
+Use rankforge to audit https://example.com and produce prioritized findings, redesign recommendations, and implementation tasks.
 
 For local or live page evidence:
 

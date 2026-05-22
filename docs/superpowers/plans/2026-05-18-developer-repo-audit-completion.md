@@ -37,7 +37,7 @@ Excluded from this plan:
 - Modify `packages/cli/test/cli.test.mjs`: cover CLI parsing, validation, config-driven repo audit, fail-on, and report output behavior.
 - Do not modify `packages/cli/src/audit-output-schema.mjs`; current schema allows additive `repo` metadata.
 - Modify `packages/cli/src/report.mjs`: include build and route-list evidence in Markdown repo section.
-- Modify `README.md`, `skill/geo-seo-audit/SKILL.md`, `CHANGELOG.md`, `docs/prd-deterministic-audit-cli.md`, and `scripts/validate-skill.mjs`.
+- Modify `README.md`, `skill/rankforge/SKILL.md`, `CHANGELOG.md`, `docs/prd-deterministic-audit-cli.md`, and `scripts/validate-skill.mjs`.
 
 ## Task 1: Add Bounded Build Command Execution
 
@@ -51,7 +51,7 @@ Append these tests to `packages/cli/test/repo-process.test.mjs`:
 
 ```js
 test("runs build command and captures bounded output", async () => {
-  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-build-")), "built");
+  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-build-")), "built");
 
   const result = await runCommand({
     command: `node -e "require('node:fs').writeFileSync('${marker}', 'built'); console.log('build ok')"`,
@@ -101,7 +101,7 @@ test("reports build command timeout and stops process", async () => {
 });
 
 test("restricted mode blocks build command before spawning", async () => {
-  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-build-restricted-")), "spawned");
+  const marker = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-build-restricted-")), "spawned");
 
   await assert.rejects(
     () =>
@@ -254,7 +254,7 @@ Create `examples/fixture-repos/vite-basic/package.json`:
 
 ```json
 {
-  "name": "openclaw-vite-basic-fixture",
+  "name": "rankforge-vite-basic-fixture",
   "private": true,
   "type": "module",
   "scripts": {
@@ -745,7 +745,7 @@ test("repo audit reports missing route-list files", async () => {
 
 test("repo audit reports missing route-list entries", async () => {
   const repoPath = fixture("vite-basic");
-  const routeList = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-routes-")), "routes.txt");
+  const routeList = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-routes-")), "routes.txt");
   fs.writeFileSync(routeList, "/missing/\n");
 
   const audit = await runRepoAudit({
@@ -938,7 +938,7 @@ test("audit-repo runs build command from CLI", async () => {
 });
 
 test("audit-repo reads repo options from config file", async () => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-repo-config-cli-"));
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-repo-config-cli-"));
   const config = path.join(dir, "audit.config.json");
   fs.writeFileSync(
     config,
@@ -1124,7 +1124,7 @@ Append this test to `packages/cli/test/repo-audit.test.mjs`:
 
 ```js
 test("static repo audit reports missing generated robots and sitemap files", async () => {
-  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "openclaw-static-source-findings-"));
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-static-source-findings-"));
   const staticDir = path.join(repoPath, "dist");
   fs.mkdirSync(staticDir, { recursive: true });
   fs.writeFileSync(
@@ -1221,7 +1221,7 @@ git commit -m "feat: add static output source findings"
 - Modify: `packages/cli/src/report.mjs`
 - Modify: `packages/cli/test/report.test.mjs`
 - Modify: `README.md`
-- Modify: `skill/geo-seo-audit/SKILL.md`
+- Modify: `skill/rankforge/SKILL.md`
 - Modify: `CHANGELOG.md`
 - Modify: `docs/prd-deterministic-audit-cli.md`
 - Modify: `scripts/validate-skill.mjs`
@@ -1298,10 +1298,10 @@ npm run cli -- audit-repo . --config audit.config.json
 npm run cli -- audit-repo . --static-dir dist --route-list routes.txt
 ```
 
-Add this guidance to `skill/geo-seo-audit/SKILL.md` in the repo workflow section:
+Add this guidance to `skill/rankforge/SKILL.md` in the repo workflow section:
 
 ```markdown
-   - For developer repo audits, prefer explicit build commands: `openclaw-geo-seo-audit audit-repo <path> --build-command "<command>" --static-dir <dir> --out audit-results.json --markdown audit-report.md`.
+   - For developer repo audits, prefer explicit build commands: `rankforge audit-repo <path> --build-command "<command>" --static-dir <dir> --out audit-results.json --markdown audit-report.md`.
    - Use `--fail-on P0|P1|P2|P3` only when the user wants CI-style failure semantics.
    - Do not suggest automatic dependency installation or inferred command execution.
 ```
@@ -1343,7 +1343,7 @@ Expected: report tests pass and validation reports `"ok": true`.
 - [ ] **Step 7: Commit Task 8**
 
 ```bash
-git add packages/cli/src/report.mjs packages/cli/test/report.test.mjs README.md skill/geo-seo-audit/SKILL.md CHANGELOG.md docs/prd-deterministic-audit-cli.md scripts/validate-skill.mjs
+git add packages/cli/src/report.mjs packages/cli/test/report.test.mjs README.md skill/rankforge/SKILL.md CHANGELOG.md docs/prd-deterministic-audit-cli.md scripts/validate-skill.mjs
 git commit -m "docs: document developer repo audit workflow"
 ```
 
@@ -1407,9 +1407,9 @@ Expected: prints `sources 26`.
 Run:
 
 ```bash
-rm -f /tmp/openclaw-dev-repo-audit.json /tmp/openclaw-dev-repo-audit.md
-npm run cli -- audit-repo examples/fixture-repos/vite-basic --build-command "npm run build" --static-dir dist --out /tmp/openclaw-dev-repo-audit.json --markdown /tmp/openclaw-dev-repo-audit.md
-node -e "const fs=require('fs'); const a=JSON.parse(fs.readFileSync('/tmp/openclaw-dev-repo-audit.json','utf8')); if (!a.repo?.build?.executed || a.pages.length !== 2) process.exit(1); console.log(a.repo.detectedFramework, a.pages.length);"
+rm -f /tmp/rankforge-dev-repo-audit.json /tmp/rankforge-dev-repo-audit.md
+npm run cli -- audit-repo examples/fixture-repos/vite-basic --build-command "npm run build" --static-dir dist --out /tmp/rankforge-dev-repo-audit.json --markdown /tmp/rankforge-dev-repo-audit.md
+node -e "const fs=require('fs'); const a=JSON.parse(fs.readFileSync('/tmp/rankforge-dev-repo-audit.json','utf8')); if (!a.repo?.build?.executed || a.pages.length !== 2) process.exit(1); console.log(a.repo.detectedFramework, a.pages.length);"
 ```
 
 Expected: prints `vite 2`.

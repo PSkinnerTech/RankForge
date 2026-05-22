@@ -1,12 +1,12 @@
 # Release Stabilization And Repo-To-Audit Mode Design
 
 Date: 2026-05-18
-Repository: openclaw-geo-seo-audit-skill
+Repository: RankForge
 Status: Phase A complete; Phase B repo-to-audit mode ready for implementation planning
 
 ## Purpose
 
-OpenClaw GEO/SEO Audit should become a deterministic CLI and skill wrapper that can audit a website from a live URL, local app, static HTML output, or source repository. The core product must determine how well the website is designed for SEO and GEO readiness without overclaiming actual rankings.
+RankForge should become a deterministic CLI and skill wrapper that can audit a website from a live URL, local app, static HTML output, or source repository. The core product must determine how well the website is designed for SEO and GEO readiness without overclaiming actual rankings.
 
 The approved sequence is:
 
@@ -30,7 +30,7 @@ The skill wrapper is not the source of technical discovery. It runs the CLI, rea
 
 The repository already contains a working deterministic CLI package and skill wrapper:
 
-- CLI package: `openclaw-geo-seo-audit@0.2.0`.
+- CLI package: `rankforge@0.2.0`.
 - Commands: `audit`, `snapshot`, `validate-config`, and `explain-rule`.
 - Evidence collection for local HTML, live URLs, URL lists, bounded crawls, sitemap seeds, robots enforcement, and optional rendering hooks.
 - JSON and Markdown output.
@@ -106,7 +106,7 @@ Many users want to know whether a website is built correctly for SEO and GEO bef
 ### Core User Flow
 
 ```bash
-openclaw-geo-seo-audit audit-repo .
+rankforge audit-repo .
 ```
 
 Expected behavior:
@@ -135,8 +135,8 @@ The first version should not try to support every hosting platform, CMS, monorep
 ### Proposed CLI Additions
 
 ```bash
-openclaw-geo-seo-audit audit-repo <path>
-openclaw-geo-seo-audit detect-repo <path>
+rankforge audit-repo <path>
+rankforge detect-repo <path>
 ```
 
 Important options:

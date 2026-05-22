@@ -2,16 +2,16 @@
 
 Status: Current implementation baseline plus developer repo-audit roadmap
 Date: 2026-05-18
-Repository: openclaw-geo-seo-audit-skill
-Current CLI package: openclaw-geo-seo-audit@0.3.0 release candidate
-Primary users: technical SEOs, growth teams, content strategists, frontend engineers, agency auditors, and AI agents running OpenClaw skills
+Repository: RankForge
+Current CLI package: rankforge@0.3.0 release candidate
+Primary users: technical SEOs, growth teams, content strategists, frontend engineers, agency auditors, and AI agents running RankForge skills
 
 ## 1. Summary
 
-OpenClaw GEO/SEO Audit should evolve from a prompt-guided audit skill into a deterministic audit system with two clear layers:
+RankForge should evolve from a prompt-guided audit skill into a deterministic audit system with two clear layers:
 
 1. A CLI that crawls, renders, analyzes, validates, scores, and emits structured evidence.
-2. An OpenClaw skill wrapper that runs the CLI, consumes the evidence, and produces a cited human audit report.
+2. An RankForge skill wrapper that runs the CLI, consumes the evidence, and produces a cited human audit report.
 
 The CLI is responsible for facts. The skill is responsible for interpretation, prioritization, citations, and communication. This separation prevents the agent from inventing technical findings and makes audits repeatable, testable, and useful in CI or local workflows.
 
@@ -19,13 +19,13 @@ The production direction remains a deterministic SEO/GEO readiness auditor. Actu
 
 ### Current baseline
 
-As of the `openclaw-geo-seo-audit@0.3.0` release candidate, the repository contains a working deterministic CLI and OpenClaw skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON, Markdown, and standalone HTML reports, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets.
+As of the `rankforge@0.3.0` release candidate, the repository contains a working deterministic CLI and RankForge skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON, Markdown, and standalone HTML reports, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets.
 
 The latest completed product target is developer-focused repo audit completion: repository audits now support explicit build commands, route lists, repo config, CI threshold failures, and deterministic source-level findings without overclaiming rankings.
 
 ## 2. Problem
 
-The current repository contains a working deterministic CLI, an OpenClaw skill wrapper, a Google Search Central citation corpus, report templates, fixtures, golden-output tests, release workflows, and initial source-repository audit mode. The remaining problem is no longer whether deterministic auditing exists; it is how to make developer repo audits practical enough for repeated local and CI use without overclaiming ranking or AI-answer measurement.
+The current repository contains a working deterministic CLI, an RankForge skill wrapper, a Google Search Central citation corpus, report templates, fixtures, golden-output tests, release workflows, and initial source-repository audit mode. The remaining problem is no longer whether deterministic auditing exists; it is how to make developer repo audits practical enough for repeated local and CI use without overclaiming ranking or AI-answer measurement.
 
 Current remaining gaps:
 
@@ -50,7 +50,7 @@ The product must:
 - Evaluate crawlability, indexability, search appearance, structured data, entity clarity, content answerability, and GEO readiness.
 - Generate prioritized findings with stable rule IDs, severities, evidence paths, and Google Search Central citations.
 - Keep ranking measurement separate from readiness scoring unless real ranking evidence is supplied.
-- Update the OpenClaw skill so it wraps the CLI instead of asking the agent to manually inspect pages.
+- Update the RankForge skill so it wraps the CLI instead of asking the agent to manually inspect pages.
 - Include fixtures, deterministic tests, and golden outputs.
 
 ## 4. Non-Goals
@@ -82,7 +82,7 @@ Without Search Console, SERP, or AI answer evidence, the tool reports readiness 
 
 ### Local-first and CI-friendly
 
-The CLI should run locally, output JSON, and return useful exit codes. It should not require the OpenClaw agent to be useful.
+The CLI should run locally, output JSON, and return useful exit codes. It should not require the RankForge agent to be useful.
 
 ### Safe by default
 
@@ -106,7 +106,7 @@ Run audits against a local app before launch and receive implementation tasks wi
 
 Produce a cited, client-ready audit report with evidence, recommendations, effort, impact, and uncertainty.
 
-### OpenClaw agent
+### RankForge agent
 
 Run the CLI, inspect structured results, and generate a clear report without fabricating technical details.
 
@@ -124,8 +124,8 @@ The system has two implemented layers, plus a planned repo-to-audit extension.
 
 ### 8.1 CLI Layer
 
-Package name: `openclaw-geo-seo-audit`  
-Primary command: `openclaw-geo-seo-audit audit <target>`
+Package name: `rankforge`
+Primary command: `rankforge audit <target>`
 
 Responsibilities:
 
@@ -139,11 +139,11 @@ Responsibilities:
 - Optionally generate Markdown and standalone HTML.
 - Return meaningful exit codes.
 
-The CLI should work independently of OpenClaw.
+The CLI should work independently of RankForge.
 
 ### 8.2 Skill Wrapper Layer
 
-Skill name: `geo-seo-audit`
+Skill name: `rankforge`
 
 Responsibilities:
 
@@ -169,7 +169,7 @@ This layer adds a `repo` evidence section to the JSON output. Source-level evide
 ### 9.1 Audit
 
 ```bash
-openclaw-geo-seo-audit audit https://example.com
+rankforge audit https://example.com
 ```
 
 Required behavior:
@@ -203,7 +203,7 @@ Important options:
 ### 9.2 Snapshot
 
 ```bash
-openclaw-geo-seo-audit snapshot https://example.com/page
+rankforge snapshot https://example.com/page
 ```
 
 Required behavior:
@@ -214,7 +214,7 @@ Required behavior:
 ### 9.3 Validate Config
 
 ```bash
-openclaw-geo-seo-audit validate-config audit.config.json
+rankforge validate-config audit.config.json
 ```
 
 Required behavior:
@@ -225,7 +225,7 @@ Required behavior:
 ### 9.4 Explain Rule
 
 ```bash
-openclaw-geo-seo-audit explain-rule indexability.noindex_canonical_conflict
+rankforge explain-rule indexability.noindex_canonical_conflict
 ```
 
 Required behavior:
@@ -235,7 +235,7 @@ Required behavior:
 ### 9.5 Detect Repo
 
 ```bash
-openclaw-geo-seo-audit detect-repo .
+rankforge detect-repo .
 ```
 
 Implemented behavior:
@@ -247,7 +247,7 @@ Implemented behavior:
 ### 9.6 Audit Repo
 
 ```bash
-openclaw-geo-seo-audit audit-repo .
+rankforge audit-repo .
 ```
 
 Implemented behavior:
@@ -630,7 +630,7 @@ Scoring rules:
 
 ## 14. Report Generation
 
-The CLI should support Markdown and standalone HTML output. The OpenClaw skill may use CLI HTML or Markdown directly, or mirror the same structure when producing a human report from CLI JSON.
+The CLI should support Markdown and standalone HTML output. The RankForge skill may use CLI HTML or Markdown directly, or mirror the same structure when producing a human report from CLI JSON.
 
 Polished report order and evidence boundaries:
 
@@ -679,7 +679,7 @@ packages/
     src/
     package.json
 skill/
-  geo-seo-audit/
+  rankforge/
     SKILL.md
     references/
     templates/
@@ -732,7 +732,7 @@ Required fixtures:
 Product success:
 
 - A user can run one command against a live site and receive a complete JSON audit.
-- The OpenClaw skill can produce a report from CLI JSON without manual page inspection.
+- The RankForge skill can produce a report from CLI JSON without manual page inspection.
 - Every major finding has a rule ID, evidence path, and source citation.
 - The tool can audit local web apps before deployment.
 - Fixture tests produce stable golden outputs.
