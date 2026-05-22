@@ -8,6 +8,14 @@ This repository contains a deterministic audit CLI plus a RankForge skill wrappe
 
 By default, the product reports SEO/GEO readiness. It does not claim measured rankings, SERP positions, or AI answer visibility unless Search Console, SERP, or AI answer evidence is supplied.
 
+## Known Limits
+
+- RankForge reports SEO/GEO readiness, not guaranteed rankings or guaranteed AI-answer visibility.
+- Search Console, SERP, AI-answer, and Lighthouse measurements are reported only from supplied evidence files.
+- Repository audits run explicit build or preview commands only when the user supplies those commands.
+- RankForge does not install dependencies, modify audited source code, or execute inferred framework commands.
+- Audit output is a deterministic evidence snapshot. Human review is still needed for business priority, brand nuance, and legal or regulated-content decisions.
+
 ## What's Included
 
 - skill/rankforge/SKILL.md - the RankForge skill entry point
