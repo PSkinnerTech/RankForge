@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { generateMarkdownReport } from "../src/report.mjs";
+import { generateHtmlReport, generateMarkdownReport } from "../src/report.mjs";
 
 const polishedAuditFixture = () => ({
   schemaVersion: "1.0.0",
@@ -139,6 +139,48 @@ test("generates a Markdown audit report from audit JSON", () => {
   assert.match(markdown, /Engineering/);
   assert.match(markdown, /Evidence Gaps/);
   assert.match(markdown, /https:\/\/developers\.google\.com\/search\/docs\/crawling-indexing\/robots-meta-tag/);
+});
+
+test("generates a standalone escaped HTML audit report from audit JSON", () => {
+  const html = generateHtmlReport({
+    run: { target: "https://example.com/?q=<unsafe>" },
+    findings: [
+      {
+        ruleId: "appearance.title_unsafe",
+        severity: "P2",
+        dimension: "search_appearance",
+        title: "Title includes <script>alert(1)</script>",
+        impact: "Unsafe text must not become executable markup.",
+        recommendation: "Escape report content.",
+        implementationTask: {
+          summary: "Escape report content.",
+          owner: "Engineering",
+          effort: "S",
+          acceptanceCriteria: ["Raw HTML is escaped."],
+        },
+        affectedUrls: ["https://example.com/?q=<unsafe>&x=1"],
+        evidence: ["$.pages[0].evidence.title"],
+        sources: ["https://developers.google.com/search/docs/appearance/title-link"],
+      },
+    ],
+    scores: {
+      search_appearance: { score: 70, findings: ["appearance.title_unsafe"] },
+    },
+    integrations: {},
+    evidenceGaps: [],
+    sources: [{ id: "title_links", url: "https://developers.google.com/search/docs/appearance/title-link" }],
+  });
+
+  assert.match(html, /^<!doctype html>/);
+  assert.match(html, /<html lang="en">/);
+  assert.match(html, /<title>GEO\/SEO Audit Report - https:\/\/example\.com\/\?q=&lt;unsafe&gt;<\/title>/);
+  assert.match(html, /<section class="report-section" aria-labelledby="executive-summary-heading">/);
+  assert.match(html, /Top Priorities/);
+  assert.match(html, /Findings By Dimension/);
+  assert.match(html, /Developer Action Plan/);
+  assert.match(html, /Title includes &lt;script&gt;alert\(1\)&lt;\/script&gt;/);
+  assert.match(html, /https:\/\/example\.com\/\?q=&lt;unsafe&gt;&amp;x=1/);
+  assert.doesNotMatch(html, /<script>alert\(1\)<\/script>/);
 });
 
 test("includes repository evidence when audit repo evidence exists", () => {

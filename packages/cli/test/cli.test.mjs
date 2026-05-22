@@ -56,6 +56,7 @@ test("prints help", async () => {
   assert.match(result.stdout, /--max-depth <n>/);
   assert.match(result.stdout, /--security local\|restricted/);
   assert.match(result.stdout, /--fail-on <severity>/);
+  assert.match(result.stdout, /--html <file>/);
 });
 
 test("explains a known rule as JSON", async () => {
@@ -137,6 +138,25 @@ test("does not fail CI when findings are below fail-on threshold", async () => {
   assert.equal(result.exitCode, 0);
 });
 
+test("audit writes an HTML report", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-html-cli-"));
+  const page = path.join(dir, "index.html");
+  const out = path.join(dir, "audit.json");
+  const html = path.join(dir, "audit.html");
+  fs.writeFileSync(
+    page,
+    "<html><head><title>HTML Output</title><meta name='description' content='HTML output'></head><body><h1>HTML Output</h1><p>Substantial content for a deterministic report.</p></body></html>",
+  );
+
+  const result = await capture(["audit", page, "--out", out, "--html", html]);
+
+  assert.equal(result.exitCode, 0);
+  assert.deepEqual(JSON.parse(result.stdout), { ok: true, out, html });
+  assert.equal(JSON.parse(fs.readFileSync(out, "utf8")).pages[0].evidence.title, "HTML Output");
+  assert.match(fs.readFileSync(html, "utf8"), /^<!doctype html>/);
+  assert.match(fs.readFileSync(html, "utf8"), /GEO\/SEO Audit Report/);
+});
+
 test("detects repository audit metadata", async () => {
   const result = await capture(["detect-repo", "examples/fixture-repos/static-basic"]);
 
@@ -170,10 +190,11 @@ test("audit-repo with missing static dir returns source finding failure code", a
   assert.equal(body.repo.sourceFindings[0].id, "repo.static_dir_missing");
 });
 
-test("audit-repo writes JSON and Markdown reports", async () => {
+test("audit-repo writes JSON, Markdown, and HTML reports", async () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-repo-cli-"));
   const out = path.join(dir, "audit.json");
   const markdown = path.join(dir, "audit.md");
+  const html = path.join(dir, "audit.html");
 
   const result = await capture([
     "audit-repo",
@@ -184,12 +205,16 @@ test("audit-repo writes JSON and Markdown reports", async () => {
     out,
     "--markdown",
     markdown,
+    "--html",
+    html,
   ]);
 
   assert.equal(result.exitCode, 0);
-  assert.deepEqual(JSON.parse(result.stdout), { ok: true, out, markdown });
+  assert.deepEqual(JSON.parse(result.stdout), { ok: true, out, markdown, html });
   assert.equal(JSON.parse(fs.readFileSync(out, "utf8")).repo.detectedFramework, "generic-static");
   assert.match(fs.readFileSync(markdown, "utf8"), /GEO\/SEO Audit Report/);
+  assert.match(fs.readFileSync(html, "utf8"), /^<!doctype html>/);
+  assert.match(fs.readFileSync(html, "utf8"), /Repository Audit Evidence/);
 });
 
 test("audit-repo rejects missing out path", async () => {
@@ -204,6 +229,24 @@ test("audit-repo rejects missing markdown path", async () => {
 
   assert.equal(result.exitCode, 1);
   assert.match(result.stderr, /--markdown requires a file path/);
+});
+
+test("audit rejects missing html path", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "geo-seo-html-missing-"));
+  const page = path.join(dir, "index.html");
+  fs.writeFileSync(page, "<title>Missing HTML path</title><h1>Missing HTML path</h1>");
+
+  const result = await capture(["audit", page, "--html"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--html requires a file path/);
+});
+
+test("audit-repo rejects missing html path", async () => {
+  const result = await capture(["audit-repo", "examples/fixture-repos/static-basic", "--static-dir", "dist", "--html"]);
+
+  assert.equal(result.exitCode, 1);
+  assert.match(result.stderr, /--html requires a file path/);
 });
 
 test("audit-repo rejects option token as out path", async () => {

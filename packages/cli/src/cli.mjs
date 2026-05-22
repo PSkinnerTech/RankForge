@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { runAudit } from "./audit.mjs";
 import { readAuditConfig, resolveAuditConfigPaths, validateAuditConfig } from "./config-schema.mjs";
-import { generateMarkdownReport } from "./report.mjs";
+import { generateHtmlReport, generateMarkdownReport } from "./report.mjs";
 import { runRepoAudit } from "./repo-audit.mjs";
 import { detectRepo } from "./repo-detect.mjs";
 import { getRule } from "./rules.mjs";
@@ -42,6 +42,7 @@ Audit options:
   --fail-on <severity>           Return exit code 2 when findings include P0, P1, P2, or P3 threshold
   --out <file>                   Write audit JSON
   --markdown <file>              Write Markdown report
+  --html <file>                  Write standalone HTML report
   --help                         Show this help
   --version                      Show CLI version
 
@@ -61,6 +62,7 @@ Repo audit options:
   --fail-on <severity>           Return exit code 2 when repo or page findings meet P0, P1, P2, or P3 threshold
   --out <file>                   Write repository audit JSON
   --markdown <file>              Write repository audit Markdown report
+  --html <file>                  Write repository audit HTML report
 `;
 
 const writeJson = (io, value) => {
@@ -70,6 +72,14 @@ const writeJson = (io, value) => {
 const optionValue = (options, name) => {
   const index = options.indexOf(name);
   return index === -1 ? null : options[index + 1] || null;
+};
+
+const outputFileOption = (options, name) => {
+  const index = options.indexOf(name);
+  if (index === -1) return null;
+  const value = options[index + 1];
+  if (!value || value.startsWith("--")) throw new Error(`${name} requires a file path.`);
+  return value;
 };
 
 const auditOptionsWithValues = new Set([
@@ -94,6 +104,7 @@ const auditOptionsWithValues = new Set([
   "--fail-on",
   "--out",
   "--markdown",
+  "--html",
 ]);
 
 const repoOptionsWithValues = new Set([
@@ -112,6 +123,7 @@ const repoOptionsWithValues = new Set([
   "--fail-on",
   "--out",
   "--markdown",
+  "--html",
 ]);
 
 const severityRank = { P0: 0, P1: 1, P2: 2, P3: 3 };
@@ -384,33 +396,29 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
 
     try {
       const output = await runAudit(mergeAuditConfig(target, options));
-      const outIndex = options.indexOf("--out");
-      const markdownIndex = options.indexOf("--markdown");
+      const outPath = outputFileOption(options, "--out");
+      const markdownPath = outputFileOption(options, "--markdown");
+      const htmlPath = outputFileOption(options, "--html");
       const failOn = optionValue(options, "--fail-on");
       const failedThreshold = failsThreshold(output.findings, failOn);
       const result = { ok: true };
 
-      if (outIndex !== -1) {
-        const outPath = options[outIndex + 1];
-        if (!outPath) {
-          io.stderr.write("--out requires a file path.\n");
-          return 1;
-        }
+      if (outPath) {
         fs.writeFileSync(outPath, `${JSON.stringify(output, null, 2)}\n`);
         result.out = outPath;
       }
 
-      if (markdownIndex !== -1) {
-        const markdownPath = options[markdownIndex + 1];
-        if (!markdownPath) {
-          io.stderr.write("--markdown requires a file path.\n");
-          return 1;
-        }
+      if (markdownPath) {
         fs.writeFileSync(markdownPath, generateMarkdownReport(output));
         result.markdown = markdownPath;
       }
 
-      if (outIndex !== -1 || markdownIndex !== -1) {
+      if (htmlPath) {
+        fs.writeFileSync(htmlPath, generateHtmlReport(output));
+        result.html = htmlPath;
+      }
+
+      if (outPath || markdownPath || htmlPath) {
         if (failedThreshold) result.failedThreshold = failOn;
         writeJson(io, result);
         return failedThreshold ? 2 : 0;
@@ -445,10 +453,12 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
     try {
       const outRequested = options.includes("--out");
       const markdownRequested = options.includes("--markdown");
+      const htmlRequested = options.includes("--html");
       const outPath = outRequested ? repoOptionValue(options, "--out", null, "--out requires a file path.") : null;
       const markdownPath = markdownRequested
         ? repoOptionValue(options, "--markdown", null, "--markdown requires a file path.")
         : null;
+      const htmlPath = htmlRequested ? repoOptionValue(options, "--html", null, "--html requires a file path.") : null;
       const failOn = repoOptionValue(options, "--fail-on");
       if (failOn && !(failOn in severityRank)) throw new Error("--fail-on must be one of: P0, P1, P2, P3");
 
@@ -458,8 +468,12 @@ export const runCli = async (args, io = { stdout: process.stdout, stderr: proces
 
       if (outPath) fs.writeFileSync(outPath, `${JSON.stringify(output, null, 2)}\n`);
       if (markdownPath) fs.writeFileSync(markdownPath, generateMarkdownReport(output));
-      if (outPath || markdownPath) {
-        const result = { ok: true, out: outPath || null, markdown: markdownPath || null };
+      if (htmlPath) fs.writeFileSync(htmlPath, generateHtmlReport(output));
+      if (outPath || markdownPath || htmlPath) {
+        const result = { ok: true };
+        if (outRequested) result.out = outPath;
+        if (markdownRequested) result.markdown = markdownPath;
+        if (htmlRequested) result.html = htmlPath;
         if (failedThreshold) result.failedThreshold = failOn;
         writeJson(io, result);
       } else {

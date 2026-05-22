@@ -19,7 +19,7 @@ The production direction remains a deterministic SEO/GEO readiness auditor. Actu
 
 ### Current baseline
 
-As of the `openclaw-geo-seo-audit@0.3.0` release candidate, the repository contains a working deterministic CLI and OpenClaw skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON and Markdown, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets.
+As of the `openclaw-geo-seo-audit@0.3.0` release candidate, the repository contains a working deterministic CLI and OpenClaw skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON, Markdown, and standalone HTML reports, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets.
 
 The latest completed product target is developer-focused repo audit completion: repository audits now support explicit build commands, route lists, repo config, CI threshold failures, and deterministic source-level findings without overclaiming rankings.
 
@@ -136,7 +136,7 @@ Responsibilities:
 - Run deterministic rules.
 - Score audit dimensions.
 - Generate machine-readable JSON.
-- Optionally generate Markdown.
+- Optionally generate Markdown and standalone HTML.
 - Return meaningful exit codes.
 
 The CLI should work independently of OpenClaw.
@@ -184,6 +184,7 @@ Important options:
 --config audit.config.json
 --out audit-results.json
 --markdown audit-report.md
+--html audit-report.html
 --max-pages 100
 --max-depth 3
 --mode full|sample|single
@@ -629,7 +630,7 @@ Scoring rules:
 
 ## 14. Report Generation
 
-The CLI should support Markdown output. The OpenClaw skill may use CLI Markdown directly, or mirror the same structure when producing a human report from CLI JSON.
+The CLI should support Markdown and standalone HTML output. The OpenClaw skill may use CLI HTML or Markdown directly, or mirror the same structure when producing a human report from CLI JSON.
 
 Polished report order and evidence boundaries:
 
@@ -941,7 +942,7 @@ The implemented `0.2.0` baseline includes:
 - Technical/indexability/search appearance rules.
 - JSON-LD parsing and initial structured data checks.
 - GEO/entity readiness heuristics.
-- JSON and Markdown output.
+- JSON, Markdown, and standalone HTML output.
 - Fixture tests and golden outputs.
 
 The merged repo-to-audit baseline adds source-repository audits after `0.2.0` release stabilization. Repo-to-audit mode remains a focused extension of the current CLI rather than a replacement for URL, local app, static file, or URL-list audits. The next phase should optimize this mode for developer local and CI workflows.

@@ -28,7 +28,7 @@ npm pack --dry-run --json
 For CI gating, run audits with a severity threshold:
 
 ```bash
-npm run cli -- audit https://example.com --mode full --max-pages 25 --fail-on P1 --out audit.json --markdown audit.md
+npm run cli -- audit https://example.com --mode full --max-pages 25 --fail-on P1 --out audit.json --markdown audit.md --html audit.html
 ```
 
 The audit command returns exit code `2` when findings meet or exceed the configured `--fail-on` severity.

@@ -31,21 +31,21 @@ npm run cli -- --version
 npm run cli -- validate-config examples/audit.config.json
 npm run cli -- explain-rule indexability.noindex
 npm run cli -- snapshot examples/fixture-site/index.html
-npm run cli -- audit examples/fixture-site/index.html --markdown audit-report.md
+npm run cli -- audit examples/fixture-site/index.html --html audit-report.html
 npm run cli -- audit --config examples/audit.config.json --mode single
-npm run cli -- audit https://example.com --url-list urls.txt --markdown audit-report.md
+npm run cli -- audit https://example.com --url-list urls.txt --html audit-report.html
 npm run cli -- audit https://example.com --mode full --max-pages 25 --max-depth 2 --respect-robots true --sitemap https://example.com/sitemap.xml
 npm run cli -- audit https://example.com --mode full --security restricted --timeout-ms 15000 --max-html-bytes 2000000
-npm run cli -- audit https://example.com --mode full --fail-on P1 --out audit.json --markdown audit.md
+npm run cli -- audit https://example.com --mode full --fail-on P1 --out audit.json --markdown audit.md --html audit.html
 npm run cli -- detect-repo .
-npm run cli -- audit-repo . --static-dir dist --out repo-audit.json --markdown repo-audit.md
+npm run cli -- audit-repo . --static-dir dist --out repo-audit.json --markdown repo-audit.md --html repo-audit.html
 npm run cli -- audit-repo . --preview-command "npm run preview -- --host 127.0.0.1" --preview-url http://127.0.0.1:4173 --max-pages 25
-npm run cli -- audit-repo . --build-command "npm run build" --static-dir dist --fail-on P1 --out audit.json --markdown audit.md
+npm run cli -- audit-repo . --build-command "npm run build" --static-dir dist --fail-on P1 --out audit.json --markdown audit.md --html audit.html
 npm run cli -- audit-repo . --config audit.config.json
 npm run cli -- audit-repo . --static-dir dist --route-list routes.txt
 ```
 
-The current `audit` command collects single-page, supplied URL-list, or bounded same-origin crawl evidence, can read `audit.config.json`, can seed from a sitemap, can enforce robots.txt, can filter crawls with include/exclude patterns, evaluates deterministic page and site rules, and can write JSON or Markdown. Extracted page evidence includes metadata, canonicals, hreflang, favicon and site-name signals, preview directives, headings, links, image inventory, JSON-LD blocks, schema types, author/date signals, and internal/external link counts. Browser rendering is available when Playwright is installed or when a renderer is injected by code; otherwise the CLI records rendering as unavailable. The `detect-repo [path]` command reports repository framework, package-manager, route, and build-output signals and defaults to the current directory when no path is supplied. The `audit-repo` command exits 2 when repo source findings are present.
+The current `audit` command collects single-page, supplied URL-list, or bounded same-origin crawl evidence, can read `audit.config.json`, can seed from a sitemap, can enforce robots.txt, can filter crawls with include/exclude patterns, evaluates deterministic page and site rules, and can write JSON, Markdown, or standalone HTML. Extracted page evidence includes metadata, canonicals, hreflang, favicon and site-name signals, preview directives, headings, links, image inventory, JSON-LD blocks, schema types, author/date signals, and internal/external link counts. Browser rendering is available when Playwright is installed or when a renderer is injected by code; otherwise the CLI records rendering as unavailable. The `detect-repo [path]` command reports repository framework, package-manager, route, and build-output signals and defaults to the current directory when no path is supplied. The `audit-repo` command exits 2 when repo source findings are present.
 
 `audit-repo` is intended for source repository audits. In the first repo-to-audit release, static output directories and explicit preview commands are supported. Framework and package-manager signals are reported by `detect-repo`, but the CLI does not automatically install dependencies or run inferred framework scripts.
 
@@ -63,9 +63,9 @@ npm run cli -- audit https://example.com --search-console gsc.csv --serp serp.js
 
 Ranking, SERP, and AI answer visibility are reported only from supplied evidence files. Lighthouse performance findings are reported only when a Lighthouse JSON export is supplied.
 
-## Markdown Reports
+## HTML and Markdown Reports
 
-Markdown reports follow the CLI structure: Header, Executive Summary, Top Priorities, Findings By Dimension, Scores, Developer Action Plan, optional Repository Audit Evidence, Imported Measurements, Evidence Gaps, and Sources. The header records target, audit mode, crawl scope, and evidence type; the summary and priorities are for fast triage; findings by dimension preserve deterministic page/site evidence; scores summarize readiness dimensions; and the developer action plan turns findings into implementation tasks with acceptance criteria.
+HTML and Markdown reports follow the CLI structure: Header, Executive Summary, Top Priorities, Findings By Dimension, Scores, Developer Action Plan, optional Repository Audit Evidence, Imported Measurements, Evidence Gaps, and Sources. The header records target, audit mode, crawl scope, and evidence type; the summary and priorities are for fast triage; findings by dimension preserve deterministic page/site evidence; scores summarize readiness dimensions; and the developer action plan turns findings into implementation tasks with acceptance criteria. HTML reports are standalone browser-viewable files with embedded styles and escaped audit evidence.
 
 Repository reports include `Repository Audit Evidence` only when CLI JSON includes `repo`, with route, manifest, build, static-output, preview, and source-finding evidence. Repository source findings stay separate from rendered page/site findings. Imported measurements are also separated from deterministic readiness findings; rankings, SERP positions, AI-answer visibility, and Lighthouse measurements are reported only when those evidence files are supplied.
 

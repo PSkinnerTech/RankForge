@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added standalone HTML audit reports with `--html <file>` for both `audit` and `audit-repo`, including escaped user-supplied evidence, summary cards, priorities, findings tables, developer actions, repository evidence, measurements, evidence gaps, and sources.
+
 ## 0.3.0 - 2026-05-21
 
 - Added Phase D.2 deterministic rule-depth findings for duplicate content clusters, structured-data visible-content mismatches, and entity clarity gaps.

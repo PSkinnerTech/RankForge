@@ -16,8 +16,8 @@ Playwright is optional. Install it in projects where rendered page evidence is n
 
 ```bash
 openclaw-geo-seo-audit --help
-openclaw-geo-seo-audit audit https://example.com --mode full --max-pages 25 --out audit.json --markdown audit.md
-openclaw-geo-seo-audit audit-repo ./site --static-dir dist --fail-on P1 --out repo-audit.json --markdown repo-audit.md
+openclaw-geo-seo-audit audit https://example.com --mode full --max-pages 25 --out audit.json --markdown audit.md --html audit.html
+openclaw-geo-seo-audit audit-repo ./site --static-dir dist --fail-on P1 --out repo-audit.json --markdown repo-audit.md --html repo-audit.html
 openclaw-geo-seo-audit explain-rule indexability.noindex
 ```
 
@@ -25,6 +25,6 @@ Use `--security restricted` for untrusted live-site audits or hosted wrappers. R
 
 ## Outputs
 
-The CLI emits versioned JSON and optional Markdown. Findings include stable rule IDs, severity, evidence paths, implementation-task guidance, and source citations where applicable.
+The CLI emits versioned JSON plus optional Markdown and standalone HTML reports. Findings include stable rule IDs, severity, evidence paths, implementation-task guidance, and source citations where applicable.
 
 Readiness scores are not ranking guarantees. Treat scores and findings as deterministic implementation evidence, then combine them with measured visibility data when available.
