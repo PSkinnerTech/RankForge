@@ -1,9 +1,9 @@
 # Product Requirements Document: Deterministic GEO/SEO Audit CLI + Skill Wrapper
 
-Status: Current implementation baseline plus developer repo-audit roadmap
-Date: 2026-05-18
+Status: Published 0.3.0 baseline plus first five post-release roadmap
+Date: 2026-05-22
 Repository: RankForge
-Current CLI package: rankforge@0.3.0 release candidate
+Current CLI package: rankforge@0.3.0 (published on npm)
 Primary users: technical SEOs, growth teams, content strategists, frontend engineers, agency auditors, and AI agents running RankForge skills
 
 ## 1. Summary
@@ -11,7 +11,7 @@ Primary users: technical SEOs, growth teams, content strategists, frontend engin
 RankForge should evolve from a prompt-guided audit skill into a deterministic audit system with two clear layers:
 
 1. A CLI that crawls, renders, analyzes, validates, scores, and emits structured evidence.
-2. An RankForge skill wrapper that runs the CLI, consumes the evidence, and produces a cited human audit report.
+2. A RankForge skill wrapper that runs the CLI, consumes the evidence, and produces a cited human audit report.
 
 The CLI is responsible for facts. The skill is responsible for interpretation, prioritization, citations, and communication. This separation prevents the agent from inventing technical findings and makes audits repeatable, testable, and useful in CI or local workflows.
 
@@ -19,18 +19,18 @@ The production direction remains a deterministic SEO/GEO readiness auditor. Actu
 
 ### Current baseline
 
-As of the `rankforge@0.3.0` release candidate, the repository contains a working deterministic CLI and RankForge skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON, Markdown, and standalone HTML reports, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets.
+As of the published `rankforge@0.3.0` release, the repository contains a working deterministic CLI and RankForge skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON, Markdown, and standalone HTML reports, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets.
 
-The latest completed product target is developer-focused repo audit completion: repository audits now support explicit build commands, route lists, repo config, CI threshold failures, and deterministic source-level findings without overclaiming rankings.
+The latest completed product target is developer-focused repo audit completion: repository audits now support explicit build commands, route lists, repo config, CI threshold failures, and deterministic source-level findings without overclaiming rankings. The next roadmap target is the first five post-release tracks: stabilization, developer repo audit maturity, report usefulness polish, public docs/examples, and release automation.
 
 ## 2. Problem
 
-The current repository contains a working deterministic CLI, an RankForge skill wrapper, a Google Search Central citation corpus, report templates, fixtures, golden-output tests, release workflows, and initial source-repository audit mode. The remaining problem is no longer whether deterministic auditing exists; it is how to make developer repo audits practical enough for repeated local and CI use without overclaiming ranking or AI-answer measurement.
+The current repository contains a published deterministic CLI, a RankForge skill wrapper, a Google Search Central citation corpus, report templates, fixtures, golden-output tests, release workflows, and initial source-repository audit mode. The remaining problem is no longer whether deterministic auditing exists; it is how to make developer repo audits practical enough for repeated local and CI use without overclaiming ranking or AI-answer measurement.
 
 Current remaining gaps:
 
 - The CLI can audit static output and explicit preview-server repositories with explicit build commands, route-list parity, and repo config files; remaining repo-audit work focuses on broader framework fixture coverage and deeper deterministic source-level findings.
-- Release documentation and changelog entries must stay aligned with the implemented `0.3.0` release candidate before publishing the next package version.
+- Release documentation, PRD language, and checklist steps must stay aligned with the published `0.3.0` package before the next implementation phase begins.
 - Some rule IDs exist in the taxonomy before full trigger coverage, especially deeper entity clarity, hidden text risk, duplicate content clusters, and structured-data visible-content mismatch.
 - Ranking and GEO visibility measurement still depends on supplied exports. API-backed Search Console, SERP provider, and AI-answer probes are future integrations.
 - The product needs developer-optimized repo audit workflows that can safely build or preview common web apps, crawl generated output, connect source-level evidence to rendered output, and produce CI-friendly failure semantics.
@@ -65,6 +65,12 @@ The product will not:
 - Attempt exhaustive enterprise crawling in v1.
 - Automatically make site changes.
 - Ship a large raw third-party documentation corpus unless licensing and package size are intentionally addressed.
+
+## 4.1 Published-State Known Limits
+
+The published `rankforge@0.3.0` package is a readiness auditor, not a ranking measurement platform. It reports deterministic SEO/GEO readiness from fetched pages, generated static output, repository evidence, and supplied imports. Rankings, SERP positions, Search Console performance, AI-answer visibility, and Lighthouse performance measurements are reported only when the user supplies those evidence files.
+
+Repository audits require explicit build or preview commands when command execution is needed. RankForge does not install dependencies, infer and execute framework commands, modify audited source code, or claim that a passed audit guarantees search or generative-engine performance.
 
 ## 5. Product Principles
 
@@ -120,7 +126,7 @@ Run the CLI, inspect structured results, and generate a clear report without fab
 
 ## 8. Architecture
 
-The system has two implemented layers, plus a planned repo-to-audit extension.
+The system has three implemented layers.
 
 ### 8.1 CLI Layer
 
@@ -818,9 +824,9 @@ Delivered:
 - Restricted security mode with network, file, timeout, redirect, byte-cap, and rendering guardrails.
 - GitHub CI and release workflow scaffolding.
 
-### Phase E: Report Polish - Unreleased Current Branch
+### Phase E: Report Polish - Published in `0.3.0`
 
-Current branch work:
+Published baseline:
 
 - Polished CLI Markdown report structure, repo Markdown golden coverage, skill template, and docs so they share the same report order and evidence boundaries.
 - This phase does not add crawling, ranking, scoring, or source-analysis capabilities; it only aligns how existing deterministic findings, repository evidence, imported measurements, evidence gaps, and sources are presented.
@@ -916,7 +922,7 @@ Resolved for developer repo audit completion:
 
 ## 22. Release Stabilization And v1.5 Readiness Checklist
 
-Before publishing or tagging `0.3.0`:
+For the published `0.3.0` baseline:
 
 - Verify the PRD, README, skill wrapper, changelog, and release checklist describe the same shipped CLI baseline.
 - Run `npm ci`, `npm audit --omit=dev`, `npm test`, `npm run validate`, and `npm pack --dry-run --workspace packages/cli`.
