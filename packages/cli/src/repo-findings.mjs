@@ -19,10 +19,20 @@ const sourceFindingGuidance = {
     developerAction: "Run the explicit build command and confirm the configured static directory exists.",
     acceptanceCriteria: ["Rerun RankForge and confirm repo.static_dir_missing is absent."],
   },
+  "repo.static_route_unlisted": {
+    inspectNext: ["static output directory", "route discovery", "route manifest"],
+    developerAction: "Update the route manifest or static export so every generated HTML route is represented in audit evidence.",
+    acceptanceCriteria: ["Rerun RankForge and confirm repo.static_route_unlisted is absent."],
+  },
   "repo.static_routes_missing": {
     inspectNext: ["static output directory", "generated route files", "framework export settings"],
     developerAction: "Update the build or export configuration so HTML routes are emitted into the static output directory.",
     acceptanceCriteria: ["Rerun RankForge and confirm repo.static_routes_missing is absent."],
+  },
+  "repo.route_manifest_invalid": {
+    inspectNext: ["route manifest", "manifest JSON syntax", "audit.config.json"],
+    developerAction: "Fix the configured route manifest so RankForge can parse the list of auditable routes.",
+    acceptanceCriteria: ["Rerun RankForge and confirm repo.route_manifest_invalid is absent."],
   },
   "repo.route_list_missing": {
     inspectNext: ["route manifest", "configured route list path", "audit.config.json"],
@@ -76,12 +86,14 @@ const sourceFindingGuidance = {
   },
 };
 
+const normalizeGuidance = (guidance = {}) => ({
+  inspectNext: Array.isArray(guidance.inspectNext) ? [...guidance.inspectNext] : [],
+  developerAction: guidance.developerAction ?? "",
+  acceptanceCriteria: Array.isArray(guidance.acceptanceCriteria) ? [...guidance.acceptanceCriteria] : [],
+});
+
 export const guidanceForSourceFinding = (id) =>
-  sourceFindingGuidance[id] ?? {
-    inspectNext: [],
-    developerAction: "",
-    acceptanceCriteria: [],
-  };
+  normalizeGuidance(sourceFindingGuidance[id]);
 
 export const sourceFinding = ({
   id,
@@ -105,8 +117,8 @@ export const sourceFinding = ({
     recommendation,
     confidence,
     ...(details ? { details } : {}),
-    inspectNext: inspectNext ?? guidance.inspectNext,
+    inspectNext: Array.isArray(inspectNext) ? [...inspectNext] : guidance.inspectNext,
     developerAction: developerAction ?? guidance.developerAction,
-    acceptanceCriteria: acceptanceCriteria ?? guidance.acceptanceCriteria,
+    acceptanceCriteria: Array.isArray(acceptanceCriteria) ? [...acceptanceCriteria] : guidance.acceptanceCriteria,
   };
 };

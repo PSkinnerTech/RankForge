@@ -7,7 +7,9 @@ const supportedIds = [
   "repo.build_timeout",
   "repo.build_unavailable",
   "repo.static_dir_missing",
+  "repo.static_route_unlisted",
   "repo.static_routes_missing",
+  "repo.route_manifest_invalid",
   "repo.route_list_missing",
   "repo.route_list_empty",
   "repo.route_list_entry_missing",
@@ -57,4 +59,34 @@ test("sourceFinding allows call sites to override developer guidance", () => {
   assert.deepEqual(finding.inspectNext, ["custom file"]);
   assert.equal(finding.developerAction, "Choose the custom audit path.");
   assert.deepEqual(finding.acceptanceCriteria, ["The custom audit path is used."]);
+});
+
+test("sourceFinding returns fresh guidance arrays", () => {
+  const firstFinding = sourceFinding({
+    id: "repo.static_dir_missing",
+    message: "Configured static output directory does not exist or is not a directory.",
+    evidence: "dist",
+    recommendation: "Run the repository build or pass an existing static output directory.",
+  });
+  firstFinding.inspectNext.push("mutated target");
+
+  const secondFinding = sourceFinding({
+    id: "repo.static_dir_missing",
+    message: "Configured static output directory does not exist or is not a directory.",
+    evidence: "dist",
+    recommendation: "Run the repository build or pass an existing static output directory.",
+  });
+
+  assert.ok(!secondFinding.inspectNext.includes("mutated target"));
+});
+
+test("guidanceForSourceFinding returns fresh guidance arrays", () => {
+  const firstGuidance = guidanceForSourceFinding("repo.static_dir_missing");
+  firstGuidance.inspectNext.push("mutated target");
+  firstGuidance.acceptanceCriteria.push("mutated criteria");
+
+  const secondGuidance = guidanceForSourceFinding("repo.static_dir_missing");
+
+  assert.ok(!secondGuidance.inspectNext.includes("mutated target"));
+  assert.ok(!secondGuidance.acceptanceCriteria.includes("mutated criteria"));
 });
