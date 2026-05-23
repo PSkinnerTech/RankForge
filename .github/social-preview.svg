@@ -1,0 +1,36 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="rightShade" x1="360" y1="0" x2="1280" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#020506" stop-opacity="0"/>
+      <stop offset="0.64" stop-color="#020506" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#020506" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="floorShade" x1="0" y1="640" x2="0" y2="250" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#020506" stop-opacity="0.78"/>
+      <stop offset="1" stop-color="#020506" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="forgeLine" x1="710" y1="425" x2="1188" y2="425" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF7417"/>
+      <stop offset="0.48" stop-color="#FFC45A"/>
+      <stop offset="1" stop-color="#20D6C0"/>
+    </linearGradient>
+    <filter id="heavyGlow" x="-20%" y="-70%" width="140%" height="240%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#000000" flood-opacity="0.74"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="#FF8A24" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <image href="assets/social-preview-forge-bg.png" x="0" y="0" width="1280" height="640" preserveAspectRatio="xMidYMid slice"/>
+  <rect width="1280" height="640" fill="url(#rightShade)"/>
+  <rect width="1280" height="640" fill="url(#floorShade)"/>
+  <rect width="1280" height="640" fill="#020506" opacity="0.06"/>
+
+  <g filter="url(#heavyGlow)">
+    <text x="706" y="353" fill="#FFF4E2" font-family="DIN Condensed, Avenir Next Condensed, Impact, ui-sans-serif, system-ui, sans-serif" font-size="138" font-weight="800" letter-spacing="1.5">Rank</text>
+    <text x="920" y="353" fill="#FFBA55" font-family="DIN Condensed, Avenir Next Condensed, Impact, ui-sans-serif, system-ui, sans-serif" font-size="138" font-weight="800" letter-spacing="1.5">Forge</text>
+  </g>
+
+  <path d="M708 423H1186" stroke="url(#forgeLine)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M760 440C842 419 910 421 985 440C1064 459 1124 450 1188 418" stroke="#20D6C0" stroke-opacity="0.34" stroke-width="2"/>
+  <circle cx="1188" cy="418" r="5" fill="#20D6C0"/>
+</svg>
