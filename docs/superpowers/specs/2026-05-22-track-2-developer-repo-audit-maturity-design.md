@@ -78,7 +78,7 @@ The fixture should prove three behaviors:
 - missing or unsafe route-list entries still produce source findings instead of silent omissions
 - static route discovery alone is not treated as equivalent to a complete SPA route inventory
 
-The implementation plan should decide whether this requires a new route-list resolution mode or a conservative extension to the existing static HTML resolution rules. The design requirement is that the behavior remains explicit and test-covered.
+The completed implementation keeps this behavior explicit and test-covered, using route-list entries as declared audit intent that resolves to deterministic generated HTML evidence instead of implicit SPA route discovery.
 
 ### 2. Route-List Developer Documentation
 
@@ -153,7 +153,7 @@ The example should live outside active CI unless intentionally wired in later. I
 
 ## Architecture And Boundaries
 
-Track 2 should be implemented through small, additive changes:
+Track 2 was implemented through small, additive changes:
 
 - fixture files under `examples/fixture-repos/`
 - focused repo-audit tests under `packages/cli/test/`
@@ -189,7 +189,7 @@ The intended developer workflow is:
 
 ## Testing Strategy
 
-The implementation plan should include:
+The Track 2 validation strategy was designed to cover:
 
 - failing fixture tests for Vite/SPA route-list coverage before code changes
 - focused route-list safety tests for missing, outside-static-dir, and non-HTML entries
@@ -212,17 +212,17 @@ Track 2 is complete when:
 - CI passes after all changes
 - all new language preserves readiness-versus-measurement boundaries
 
-## Implementation Planning Notes
+## Historical Implementation Planning Notes
 
-The implementation plan should be task-based and suitable for subagent-driven execution. A likely task split is:
+These notes capture the task split used during implementation planning and are retained as historical design context:
 
 1. SPA fixture and route-list behavior tests.
 2. Source-finding guidance model and report rendering.
 3. Route-list docs and GitHub Actions example.
 4. Golden updates, validation, and changelog/PRD alignment.
 
-The plan should keep tasks independent enough that each subagent can work from one focused slice and return a reviewable diff.
+The work was split into focused slices so each area could produce a reviewable diff.
 
 ## Implementation Outcome
 
-Track 2 was implemented after approval and planning. The completed work preserves the design boundaries above: RankForge now documents and tests explicit SPA route-list auditing, surfaces developer-oriented source-finding guidance in reports, and provides CI artifact examples without claiming ranking measurement or adding future CI formats such as SARIF or JUnit.
+Track 2 was implemented after design planning. The completed work preserves the design boundaries above: RankForge now documents and tests explicit SPA route-list auditing, surfaces developer-oriented source-finding guidance in reports, and provides CI artifact examples without claiming ranking measurement or adding future CI formats such as SARIF or JUnit.
