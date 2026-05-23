@@ -30,7 +30,7 @@ const freePort = async () =>
 test("prints version", async () => {
   const result = await capture(["--version"]);
   assert.equal(result.exitCode, 0);
-  assert.equal(result.stdout.trim(), "rankforge 0.3.0");
+  assert.equal(result.stdout.trim(), "rankforge 0.4.0");
 });
 
 test("prints help", async () => {

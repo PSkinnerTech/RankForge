@@ -1,6 +1,6 @@
 {
   "name": "rankforge",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Deterministic GEO/SEO readiness audit CLI for websites and source repositories.",
   "private": false,
   "type": "module",

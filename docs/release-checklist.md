@@ -115,7 +115,7 @@ tmpdir="$(mktemp -d)"
 mkdir "$tmpdir/project"
 cd "$tmpdir/project"
 npm init -y
-npm install --ignore-scripts rankforge@0.3.0
+npm install --ignore-scripts rankforge@0.4.0
 npx rankforge --version
 npx rankforge --help
 npx rankforge explain-rule indexability.noindex
