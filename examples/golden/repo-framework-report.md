@@ -98,6 +98,7 @@ This report evaluates SEO/GEO readiness. It does not measure rankings, SERP posi
 - Path: http://fixture.test
 - Framework: next
 - Package manager: npm
+- Repo audit mode: static output
 - Static dir: out
 - Preview command: n/a
 - Preview URL: n/a
@@ -124,9 +125,9 @@ This report evaluates SEO/GEO readiness. It does not measure rankings, SERP posi
 
 ### Repository Source Findings
 
-| Severity | Source Finding | Message | Evidence | Recommendation |
-|---|---|---|---|---|
-| P1 | repo.manifest_route_missing | Framework route manifest lists a route that is missing from static output. | /missing/ | Ensure the framework build emits this route or remove it from generated route metadata. |
+| Severity | Source Finding | Message | Evidence | Inspect Next | Next Action | Acceptance Check |
+|---|---|---|---|---|---|---|
+| P1 | repo.manifest_route_missing | Framework route manifest lists a route that is missing from static output. | /missing/ | web app manifest; HTML head links; static assets | Add a manifest route and link it from audited HTML pages. | Rerun RankForge and confirm repo.manifest_route_missing is absent. |
 
 ## Imported Measurements
 

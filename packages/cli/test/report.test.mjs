@@ -207,6 +207,9 @@ test("includes repository evidence when audit repo evidence exists", () => {
           evidence: "dist",
           recommendation: "Build the repository or pass an existing static directory.",
           confidence: "high",
+          inspectNext: ["dist", "build command", "audit.config.json"],
+          developerAction: "Run the explicit build command and confirm the configured static output directory exists.",
+          acceptanceCriteria: ["Rerun RankForge and confirm repo.static_dir_missing is absent."],
         },
       ],
     },
@@ -215,8 +218,13 @@ test("includes repository evidence when audit repo evidence exists", () => {
   assert.match(markdown, /## Repository Audit Evidence/);
   assert.match(markdown, /Framework: generic-static/);
   assert.match(markdown, /Static dir: dist with pipe \\| value/);
+  assert.match(markdown, /Repo audit mode: static output/);
   assert.match(markdown, /repo\.static_dir_missing/);
   assert.match(markdown, /Static directory is missing \\| invalid\./);
+  assert.match(markdown, /\| Severity \| Source Finding \| Message \| Evidence \| Inspect Next \| Next Action \| Acceptance Check \|/);
+  assert.match(markdown, /dist; build command; audit\.config\.json/);
+  assert.match(markdown, /Run the explicit build command and confirm the configured static output directory exists\./);
+  assert.match(markdown, /Rerun RankForge and confirm repo\.static_dir_missing is absent\./);
 });
 
 test("includes repository build evidence when present", () => {
@@ -433,12 +441,53 @@ test("keeps repository source findings separate from page findings", () => {
 
   assert.ok(repoIndex > findingsIndex);
   assert.match(markdown, /### Repository Source Findings/);
-  assert.match(markdown, /\| Severity \| Source Finding \| Message \| Evidence \| Recommendation \|/);
+  assert.match(markdown, /\| Severity \| Source Finding \| Message \| Evidence \| Inspect Next \| Next Action \| Acceptance Check \|/);
   assert.match(markdown, /repo\.manifest_route_missing/);
   assert.doesNotMatch(markdown.slice(findingsIndex, repoIndex), /repo\.manifest_route_missing/);
   assert.match(markdown, /Build command: npm run build/);
   assert.match(markdown, /Build result: exit 0 in 1200 ms/);
   assert.match(markdown, /Framework manifests: 1/);
+});
+
+test("renders repository source finding guidance in escaped HTML reports", () => {
+  const html = generateHtmlReport({
+    run: { target: "repo", mode: "repo" },
+    findings: [],
+    scores: {},
+    integrations: {},
+    evidenceGaps: [],
+    sources: [],
+    repo: {
+      path: "/repo",
+      detectedFramework: "vite",
+      packageManager: "npm",
+      staticDirRelative: "dist",
+      routeList: "/repo/routes.txt",
+      routeSources: [{ type: "route_list_mapped", route: "/pricing/", path: "/repo/dist/index.html" }],
+      frameworkManifests: [],
+      sourceFindings: [
+        {
+          id: "repo.route_list_entry_missing",
+          severity: "P1",
+          message: "Route list entry does not resolve to a generated HTML file.",
+          evidence: "/bad/ <unsafe>",
+          recommendation: "Build the route or remove it from the route list.",
+          confidence: "high",
+          inspectNext: ["route-list entry", "generated HTML output"],
+          developerAction: "Generate the mapped HTML file or remove the missing route-list entry.",
+          acceptanceCriteria: ["Rerun RankForge and confirm repo.route_list_entry_missing is absent."],
+        },
+      ],
+    },
+  });
+
+  assert.match(html, /Repo audit mode/);
+  assert.match(html, /route-list static output/);
+  assert.match(html, /Inspect Next/);
+  assert.match(html, /route-list entry; generated HTML output/);
+  assert.match(html, /Generate the mapped HTML file or remove the missing route-list entry\./);
+  assert.match(html, /\/bad\/ &lt;unsafe&gt;/);
+  assert.doesNotMatch(html, /\/bad\/ <unsafe>/);
 });
 
 test("separates imported measurements from deterministic readiness findings", () => {

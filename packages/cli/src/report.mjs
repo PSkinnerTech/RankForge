@@ -167,6 +167,21 @@ const buildResult = (build) => {
   return `exit ${exitCode} in ${duration}`;
 };
 
+const repoAuditMode = (repo) => {
+  if (!repo) return "n/a";
+  if (repo.previewUrl) return "preview server";
+  if (repo.routeList) return "route-list static output";
+  if (repo.staticDir || repo.staticDirRelative) return "static output";
+  return "no usable audit path";
+};
+
+const sourceFindingInspectNext = (finding) => formatList(finding.inspectNext || []);
+const sourceFindingAction = (finding) => normalizeInline(finding.developerAction ?? finding.recommendation);
+const sourceFindingAcceptance = (finding) => formatList(finding.acceptanceCriteria || []);
+const htmlSourceFindingInspectNext = (finding) => htmlListText(finding.inspectNext || []);
+const htmlSourceFindingAction = (finding) => escapeHtml(finding.developerAction ?? finding.recommendation);
+const htmlSourceFindingAcceptance = (finding) => htmlListText(finding.acceptanceCriteria || []);
+
 const appendHeader = (lines, audit) => {
   lines.push(
     "# RankForge GEO/SEO Audit Report",
@@ -323,6 +338,7 @@ const appendRepositoryEvidence = (lines, repo) => {
   lines.push(`- Path: ${escapeInline(repo.path)}`);
   lines.push(`- Framework: ${escapeInline(repo.detectedFramework)}`);
   lines.push(`- Package manager: ${escapeInline(repo.packageManager)}`);
+  lines.push(`- Repo audit mode: ${escapeInline(repoAuditMode(repo))}`);
   lines.push(`- Static dir: ${escapeInline(repo.staticDirRelative ?? repo.staticDir)}`);
   lines.push(`- Preview command: ${escapeInline(repo.previewCommand)}`);
   lines.push(`- Preview URL: ${escapeInline(repo.previewUrl)}`);
@@ -351,11 +367,11 @@ const appendRepositoryEvidence = (lines, repo) => {
   }
 
   lines.push("", "### Repository Source Findings", "");
-  lines.push("| Severity | Source Finding | Message | Evidence | Recommendation |");
-  lines.push("|---|---|---|---|---|");
+  lines.push("| Severity | Source Finding | Message | Evidence | Inspect Next | Next Action | Acceptance Check |");
+  lines.push("|---|---|---|---|---|---|---|");
   for (const finding of sourceFindings) {
     lines.push(
-      `| ${escapeCell(finding.severity)} | ${escapeCell(finding.id)} | ${escapeCell(finding.message)} | ${escapeCell(finding.evidence)} | ${escapeCell(finding.recommendation)} |`,
+      `| ${escapeCell(finding.severity)} | ${escapeCell(finding.id)} | ${escapeCell(finding.message)} | ${escapeCell(finding.evidence)} | ${sourceFindingInspectNext(finding)} | ${escapeCell(sourceFindingAction(finding))} | ${sourceFindingAcceptance(finding)} |`,
     );
   }
 };
@@ -721,6 +737,7 @@ const htmlRepositoryEvidence = (repo) => {
     ["Path", repo.path],
     ["Framework", repo.detectedFramework],
     ["Package manager", repo.packageManager],
+    ["Repo audit mode", repoAuditMode(repo)],
     ["Static dir", repo.staticDirRelative ?? repo.staticDir],
     ["Preview command", repo.previewCommand],
     ["Preview URL", repo.previewUrl],
@@ -751,7 +768,9 @@ const htmlRepositoryEvidence = (repo) => {
     `<span class="rule-id">${escapeHtml(finding.id)}</span>`,
     escapeHtml(finding.message),
     escapeHtml(finding.evidence),
-    escapeHtml(finding.recommendation),
+    htmlSourceFindingInspectNext(finding),
+    htmlSourceFindingAction(finding),
+    htmlSourceFindingAcceptance(finding),
   ]);
 
   return htmlSection(
@@ -766,7 +785,7 @@ ${htmlTable(["Type", "Route", "Source"], routeRows, "No repository routes record
 <h3>Framework Route Manifests</h3>
 ${htmlTable(["Type", "Routes", "Path"], manifestRows, "No framework route manifests recorded.")}
 <h3>Repository Source Findings</h3>
-${htmlTable(["Severity", "Source Finding", "Message", "Evidence", "Recommendation"], sourceFindingRows, "No repository source findings recorded.")}`,
+${htmlTable(["Severity", "Source Finding", "Message", "Evidence", "Inspect Next", "Next Action", "Acceptance Check"], sourceFindingRows, "No repository source findings recorded.")}`,
   );
 };
 
