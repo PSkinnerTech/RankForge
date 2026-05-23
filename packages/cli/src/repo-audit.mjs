@@ -107,6 +107,17 @@ const htmlPathForRoute = (staticDir, route) => {
   return path.join(staticDir, normalized, "index.html");
 };
 
+const htmlPathForMappedEntry = (staticDir, generatedHtml) => {
+  const cleanPath = generatedHtml.trim();
+  if (!cleanPath || cleanPath.startsWith("#")) return null;
+  return path.isAbsolute(cleanPath) ? cleanPath : path.join(staticDir, cleanPath);
+};
+
+const isPathInside = (baseDir, targetPath) => {
+  const relative = path.relative(path.resolve(baseDir), path.resolve(targetPath));
+  return relative === "" || (relative && !relative.startsWith("..") && !path.isAbsolute(relative));
+};
+
 const routeForStaticFile = (staticDir, filePath) => {
   const relative = path.relative(staticDir, filePath);
   if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) return null;
@@ -122,6 +133,12 @@ const routeForEntry = (entry, staticDir, filePath) => {
   const clean = entry.trim();
   if (!clean || clean.startsWith("#")) return null;
   if (path.isAbsolute(clean)) return routeForStaticFile(staticDir, filePath);
+  return clean.startsWith("/") ? clean : `/${clean}`;
+};
+
+const routeForMappedEntry = (entry) => {
+  const clean = entry.trim();
+  if (!clean || clean.startsWith("#")) return null;
   return clean.startsWith("/") ? clean : `/${clean}`;
 };
 
@@ -161,8 +178,25 @@ const readRouteListRoutes = (routeListPath, staticDir) => {
   const routes = [];
   const sourceFindings = [];
   for (const entry of entries) {
-    const filePath = htmlPathForRoute(staticDir, entry);
-    const route = filePath ? routeForEntry(entry, staticDir, filePath) : null;
+    const tokens = entry.trim().split(/\s+/);
+    const mapped = tokens.length >= 2;
+    const filePath = mapped ? htmlPathForMappedEntry(staticDir, tokens[1]) : htmlPathForRoute(staticDir, entry);
+    const route = filePath
+      ? mapped
+        ? routeForMappedEntry(tokens[0])
+        : routeForEntry(entry, staticDir, filePath)
+      : null;
+    if (mapped && filePath && !isPathInside(staticDir, filePath)) {
+      sourceFindings.push(
+        sourceFinding({
+          id: "repo.route_list_entry_outside_static_dir",
+          message: "Route list entry resolves outside the configured static output directory.",
+          evidence: entry,
+          recommendation: "Use routes or HTML files generated under the configured static output directory.",
+        }),
+      );
+      continue;
+    }
     if (!filePath || !fs.existsSync(filePath)) {
       sourceFindings.push(
         sourceFinding({
@@ -196,7 +230,7 @@ const readRouteListRoutes = (routeListPath, staticDir) => {
       );
       continue;
     }
-    routes.push({ type: "route_list", route, path: filePath });
+    routes.push({ type: mapped ? "route_list_mapped" : "route_list", route, path: filePath });
   }
 
   return { routes, sourceFindings };

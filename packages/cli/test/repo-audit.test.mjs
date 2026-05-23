@@ -303,6 +303,84 @@ test("repo audit constrains static routes with route list", async () => {
   assert.equal(audit.pages.length, 2);
 });
 
+test("repo audit maps SPA route-list routes to an explicit generated HTML shell", async () => {
+  const { repoPath, tempRoot } = copyFixtureRepo("vite-spa");
+
+  try {
+    const audit = await runRepoAudit({
+      repoPath,
+      buildCommand: "npm run build",
+      staticDir: "dist",
+      routeList: "routes.txt",
+      maxBuildMs: 5000,
+    });
+
+    assert.equal(audit.repo.detectedFramework, "vite");
+    assert.equal(audit.repo.staticDirRelative, "dist");
+    assert.deepEqual(
+      audit.repo.routeSources.map((route) => ({
+        type: route.type,
+        route: route.route,
+        path: path.relative(repoPath, route.path),
+      })),
+      [
+        { type: "route_list_mapped", route: "/", path: path.join("dist", "index.html") },
+        { type: "route_list_mapped", route: "/pricing/", path: path.join("dist", "index.html") },
+        { type: "route_list_mapped", route: "/docs/", path: path.join("dist", "index.html") },
+      ],
+    );
+    assert.equal(audit.pages.length, 3);
+    assert.ok(audit.pages.every((page) => page.evidence.title === "Vite SPA Shell"));
+    assert.deepEqual(audit.repo.sourceFindings, []);
+  } finally {
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
+});
+
+test("repo audit reports missing mapped SPA route-list generated files", async () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-spa-missing-mapped-file-"));
+  const staticDir = path.join(repoPath, "dist");
+  const routeList = path.join(repoPath, "routes.txt");
+  fs.mkdirSync(staticDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(staticDir, "index.html"),
+    "<title>SPA Shell</title><meta name='description' content='SPA'><h1>SPA Shell</h1><p>Enough generated content.</p>",
+  );
+  fs.writeFileSync(routeList, "/pricing/ missing.html\n");
+
+  try {
+    const audit = await runRepoAudit({ repoPath, staticDir, routeList });
+
+    assert.equal(audit.pages.length, 0);
+    assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_entry_missing");
+    assert.equal(audit.repo.sourceFindings[0].evidence, "/pricing/ missing.html");
+  } finally {
+    fs.rmSync(repoPath, { recursive: true, force: true });
+  }
+});
+
+test("repo audit rejects mapped SPA route-list generated files outside static output", async () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-spa-outside-static-"));
+  const staticDir = path.join(repoPath, "dist");
+  const outsideDir = path.join(repoPath, "outside");
+  const routeList = path.join(repoPath, "routes.txt");
+  fs.mkdirSync(staticDir, { recursive: true });
+  fs.mkdirSync(outsideDir, { recursive: true });
+  fs.writeFileSync(path.join(staticDir, "index.html"), "<title>SPA Shell</title><h1>SPA Shell</h1>");
+  fs.writeFileSync(path.join(outsideDir, "external.html"), "<title>External</title><h1>External</h1>");
+  fs.writeFileSync(routeList, `/pricing/ ${path.join(outsideDir, "external.html")}\n`);
+
+  try {
+    const audit = await runRepoAudit({ repoPath, staticDir, routeList });
+
+    assert.equal(audit.pages.length, 0);
+    assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_entry_outside_static_dir");
+    assert.deepEqual(audit.repo.routeSources, []);
+  } finally {
+    fs.rmSync(repoPath, { recursive: true, force: true });
+  }
+});
+
 test("repo audit normalizes absolute route-list entries under static dir", async () => {
   const repoPath = fixture("vite-basic");
   const routeList = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-routes-")), "routes.txt");

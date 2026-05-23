@@ -1,0 +1,4 @@
+# route generated-html
+/ index.html
+/pricing/ index.html
+/docs/ index.html
