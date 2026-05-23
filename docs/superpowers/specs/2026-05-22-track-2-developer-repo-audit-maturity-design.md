@@ -6,9 +6,9 @@ Status: Implemented after approved implementation planning
 
 ## Purpose
 
-Track 2 should make `rankforge audit-repo` feel practical for frontend developers who want to audit source repositories before launch or inside CI. RankForge already supports explicit builds, static output audits, preview-server audits, route lists, repo config, JSON/Markdown/HTML reports, and source findings. The next step is to make those capabilities clearer and more useful for common developer workflows, especially Vite and single-page app static-output audits.
+Track 2 made `rankforge audit-repo` more practical for frontend developers who want to audit source repositories before launch or inside CI. RankForge already supported explicit builds, static output audits, preview-server audits, route lists, repo config, JSON/Markdown/HTML reports, and source findings. This pass made those capabilities clearer and more useful for common developer workflows, especially Vite and single-page app static-output audits.
 
-The product goal is not deeper ranking measurement or broad framework integration. It is a tighter repo-audit experience where a developer can understand which routes were audited, what generated artifacts were inspected, which source/config/build files should be checked next, and how to preserve the resulting reports as CI artifacts.
+The product goal is not deeper ranking measurement or broad framework integration. It is a tighter repo-audit experience where a developer can understand which routes were audited, what generated artifacts were inspected, which source/config/build files to check next, and how to preserve the resulting reports as CI artifacts.
 
 ## Current Baseline
 
@@ -49,30 +49,30 @@ Remaining repo-audit maturity work is intentionally outside Track 2: broader hig
 - Do not claim rankings, SERP position, AI-answer visibility, or business impact without supplied evidence imports.
 - Do not make `README.md` carry every detail; longer workflow material belongs in focused docs or examples.
 
-## Recommended Approach
+## Implemented Approach
 
-Use a tight additive maturity pass:
+The implementation used a tight additive maturity pass:
 
-1. Add deterministic SPA fixture coverage that models the common Vite static SPA case: one generated HTML shell plus a user-supplied route list of intended client routes.
-2. Document the route-list workflow as the explicit contract for SPA/client routes.
-3. Add a small source-finding guidance layer that maps known repo finding IDs to "inspect next" artifacts and developer-oriented remediation hints.
-4. Surface that guidance in Markdown and HTML reports while keeping the JSON additions optional and backward-compatible.
-5. Add a docs-only GitHub Actions example that a user can copy into their own repository and that local tests can sanity-check for expected commands and artifact outputs.
+1. Added deterministic SPA fixture coverage that models the common Vite static SPA case: one generated HTML shell plus a user-supplied route list of intended client routes.
+2. Documented the route-list workflow as the explicit contract for SPA/client routes.
+3. Added a small source-finding guidance layer that maps known repo finding IDs to "inspect next" artifacts and developer-oriented remediation hints.
+4. Surfaced that guidance in Markdown and HTML reports while keeping the JSON additions optional and backward-compatible.
+5. Added a docs-only GitHub Actions example that a user can copy into their own repository and that local tests can sanity-check for expected commands and artifact outputs.
 
-This approach improves the strongest near-term developer use case without pretending RankForge can infer every route or framework behavior from source code.
+This approach improved the strongest near-term developer use case without pretending RankForge can infer every route or framework behavior from source code.
 
 ## Deliverables
 
 ### 1. Vite/SPA Route-List Fixture
 
-Add a fixture that represents a Vite-style SPA static build:
+The implemented fixture represents a Vite-style SPA static build:
 
 - source route intent is declared in a route-list file such as `/`, `/pricing/`, and `/docs/`
 - generated output contains a single `dist/index.html` HTML shell
 - route-list auditing resolves each declared client route to deterministic audit evidence without crawling arbitrary JavaScript
 - reports make it clear that the audited evidence came from the static SPA shell and the declared route list
 
-The fixture should prove three behaviors:
+The fixture proves three behaviors:
 
 - declared SPA routes can be audited deterministically through `--route-list`
 - missing or unsafe route-list entries still produce source findings instead of silent omissions
@@ -82,16 +82,16 @@ The completed implementation keeps this behavior explicit and test-covered, usin
 
 ### 2. Route-List Developer Documentation
 
-Add concise route-list documentation for repo audits:
+The implementation added concise route-list documentation for repo audits:
 
 - when route lists are needed
 - how entries are interpreted
-- how Vite/SPA fallback routes should be represented
+- how Vite/SPA fallback routes are represented
 - how route-list files interact with `--build-command`, `--static-dir`, and `--config`
 - copy-paste local commands for JSON, Markdown, and HTML reports
 - copy-paste CI commands with `--fail-on`
 
-The docs should distinguish:
+The docs distinguish:
 
 - multi-page static output where generated HTML files exist for each route
 - SPA static output where intended client routes must be declared because generated HTML alone cannot prove route coverage
@@ -99,15 +99,15 @@ The docs should distinguish:
 
 ### 3. Source-Finding Remediation Hints
 
-Add deterministic remediation guidance for repo source findings. The guidance should be based only on known finding IDs and observed evidence, not on inferred source code behavior.
+The implementation added deterministic remediation guidance for repo source findings. The guidance is based only on known finding IDs and observed evidence, not on inferred source code behavior.
 
-Each supported source finding should be able to expose:
+Each supported source finding can expose:
 
 - an `inspectNext` list such as `package.json`, `audit.config.json`, `dist/index.html`, `dist/robots.txt`, `dist/sitemap.xml`, route-list file, preview command, or framework manifest path
 - a short developer action written as an implementation task
 - an acceptance check that can be verified by rerunning RankForge
 
-Initial high-confidence mappings should cover:
+Initial high-confidence mappings cover:
 
 - `repo.build_failed`
 - `repo.build_timeout`
@@ -125,22 +125,22 @@ Initial high-confidence mappings should cover:
 - `repo.manifest_route_missing`
 - `repo.audit_path_missing`
 
-These hints should be additive. Existing consumers that read only `id`, `severity`, `message`, `evidence`, and `recommendation` should continue to work.
+These hints are additive. Existing consumers that read only `id`, `severity`, `message`, `evidence`, and `recommendation` continue to work.
 
 ### 4. Repo Report Developer Guidance
 
-Update Markdown and HTML repo report sections so developers can answer four questions quickly:
+Markdown and HTML repo report sections were updated so developers can answer four questions quickly:
 
 - What repo mode ran: static output, route-list static output, preview server, or no usable audit path.
 - Which routes or route declarations produced page evidence.
-- Which generated files, config files, commands, or manifests should be inspected next.
+- Which generated files, config files, commands, or manifests are inspected next.
 - Which command reruns the audit after a fix.
 
-The report should keep source findings in `Repository Source Findings`. It should not merge repo problems into page findings or scored page dimensions. The language should describe evidence and readiness only.
+The report keeps source findings in `Repository Source Findings`. It does not merge repo problems into page findings or scored page dimensions. The language describes evidence and readiness only.
 
 ### 5. GitHub Actions Artifact Example
 
-Add a copy-paste GitHub Actions example for projects that install RankForge from npm and run a repo audit after an explicit build. The workflow should:
+The implementation added a copy-paste GitHub Actions example for projects that install RankForge from npm and run a repo audit after an explicit build. The workflow:
 
 - set up Node on a supported major version
 - install project dependencies with the project's package manager
@@ -149,7 +149,7 @@ Add a copy-paste GitHub Actions example for projects that install RankForge from
 - upload JSON, Markdown, and HTML outputs as artifacts
 - make the threshold behavior clear so a failing audit still leaves useful artifacts when possible
 
-The example should live outside active CI unless intentionally wired in later. It should be validated by tests or script checks for syntax-sensitive essentials: workflow name, RankForge command, three output paths, and artifact upload step.
+The example lives outside active CI unless intentionally wired in later. It is validated by tests for syntax-sensitive essentials: workflow name, RankForge command, three output paths, and artifact upload step.
 
 ## Architecture And Boundaries
 
@@ -162,7 +162,7 @@ Track 2 was implemented through small, additive changes:
 - documentation under `docs/` with only short links or examples added to `README.md`
 - a docs/example workflow file that is not an active repository workflow
 
-The JSON output model may grow optional fields on repo source findings, but existing fields and report section boundaries should not change incompatibly. Route-list changes must remain bounded to the configured static directory or explicit generated HTML evidence. RankForge should not read router source files or execute framework-specific discovery commands.
+The JSON output model grew optional fields on repo source findings while existing fields and report section boundaries remained compatible. Route-list changes remain bounded to the configured static directory or explicit generated HTML evidence. RankForge does not read router source files or execute framework-specific discovery commands.
 
 ## Data Flow
 
@@ -181,11 +181,11 @@ The intended developer workflow is:
 ## Error Handling And Safety
 
 - Route-list entries must not allow arbitrary filesystem traversal or report machine paths as routes.
-- Invalid route-list entries should become repo source findings, not partial silent success.
+- Invalid route-list entries become repo source findings, not partial silent success.
 - Build and preview command execution remains explicit and blocked in restricted mode.
 - Report guidance must not claim that a missing generated artifact guarantees a ranking loss.
-- CI docs should avoid committing secrets, tokens, or external service credentials.
-- Example workflows should preserve artifacts even when the audit threshold fails, as long as report files were generated.
+- CI docs avoid committing secrets, tokens, or external service credentials.
+- Example workflows preserve artifacts even when the audit threshold fails, as long as report files were generated.
 
 ## Testing Strategy
 
@@ -202,7 +202,7 @@ The Track 2 validation strategy was designed to cover:
 
 ## Acceptance Criteria
 
-Track 2 is complete when:
+Track 2 completion was verified by confirming:
 
 - a deterministic SPA fixture proves route-list auditing for client-route intent
 - route-list docs include copy-paste local and CI commands

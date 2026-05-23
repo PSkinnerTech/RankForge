@@ -8,7 +8,7 @@ Primary users: technical SEOs, growth teams, content strategists, frontend engin
 
 ## 1. Summary
 
-RankForge should evolve from a prompt-guided audit skill into a deterministic audit system with two clear layers:
+RankForge is evolving from a prompt-guided audit skill into a deterministic audit system with two clear layers:
 
 1. A CLI that crawls, renders, analyzes, validates, scores, and emits structured evidence.
 2. A RankForge skill wrapper that runs the CLI, consumes the evidence, and produces a cited human audit report.
@@ -21,11 +21,11 @@ The production direction remains a deterministic SEO/GEO readiness auditor. Actu
 
 As of the published `rankforge@0.3.0` release, the repository contains a working deterministic CLI and RankForge skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON, Markdown, and standalone HTML reports, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets. Post-release Track 2 adds clearer developer repo-audit maturity around Vite/SPAs, mapped route lists, source-finding remediation guidance, and CI artifact examples.
 
-The latest completed product target is developer-focused repo audit completion: repository audits now support explicit build commands, route lists, repo config, CI threshold failures, mapped SPA route lists, CI artifact examples, and deterministic source-level findings without overclaiming rankings. Track 2 is complete; the next roadmap targets among the remaining first-five post-release tracks are report usefulness polish, public docs/examples, and release automation.
+The latest completed product target is developer-focused repo audit completion: repository audits now support explicit build commands, route lists, repo config, CI threshold failures, mapped SPA route lists, CI artifact examples, and deterministic source-level findings without overclaiming rankings. Track 2 is complete; remaining first-five post-release tracks include report usefulness polish, public docs/examples, and release automation.
 
 ## 2. Problem
 
-The current repository contains a published deterministic CLI, a RankForge skill wrapper, a Google Search Central citation corpus, report templates, fixtures, golden-output tests, release workflows, and initial source-repository audit mode. The remaining problem is no longer whether deterministic auditing exists; it is how to make developer repo audits practical enough for repeated local and CI use without overclaiming ranking or AI-answer measurement.
+The current repository contains a published deterministic CLI, a RankForge skill wrapper, a Google Search Central citation corpus, report templates, fixtures, golden-output tests, release workflows, and source-repository audit mode with completed Track 2 developer-audit maturity. The remaining product work is no longer proving deterministic auditing exists; it is extending the completed repo-audit workflow with broader high-confidence framework signals, future CI-native output formats, public examples, and release automation without overclaiming ranking or AI-answer measurement.
 
 Current remaining gaps:
 
@@ -33,7 +33,7 @@ Current remaining gaps:
 - Release documentation, PRD language, and checklist steps must stay aligned with the published `0.3.0` package before the next implementation phase begins.
 - Some rule IDs exist in the taxonomy before full trigger coverage, especially deeper entity clarity, hidden text risk, duplicate content clusters, and structured-data visible-content mismatch.
 - Ranking and GEO visibility measurement still depends on supplied exports. API-backed Search Console, SERP provider, and AI-answer probes are future integrations.
-- The product needs developer-optimized repo audit workflows that can safely build or preview common web apps, crawl generated output, connect source-level evidence to rendered output, and produce CI-friendly failure semantics.
+- Future work can broaden developer-optimized repo audit workflows with more framework signals, CI-native integrations, and release automation while preserving explicit build/preview commands, generated-output crawling, source-level evidence, and CI-friendly failure semantics.
 
 Users need a tool that can inspect a site from discovery through report generation, identify concrete implementation issues, distinguish known evidence from uncertainty, and produce actionable tasks with cited rationale.
 
@@ -951,7 +951,7 @@ The implemented `0.2.0` baseline includes:
 - JSON, Markdown, and standalone HTML output.
 - Fixture tests and golden outputs.
 
-The merged repo-to-audit baseline adds source-repository audits after `0.2.0` release stabilization. Repo-to-audit mode remains a focused extension of the current CLI rather than a replacement for URL, local app, static file, or URL-list audits. The next phase should optimize this mode for developer local and CI workflows.
+The merged repo-to-audit baseline adds source-repository audits after `0.2.0` release stabilization. Repo-to-audit mode remains a focused extension of the current CLI rather than a replacement for URL, local app, static file, or URL-list audits. Track 2 optimized this mode for developer local and CI workflows; future phases broaden framework coverage, CI-native outputs, and release automation.
 
 The roadmap still defers:
 
