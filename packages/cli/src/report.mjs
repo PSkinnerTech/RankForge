@@ -176,10 +176,12 @@ const repoAuditMode = (repo) => {
 };
 
 const sourceFindingInspectNext = (finding) => formatList(finding.inspectNext || []);
-const sourceFindingAction = (finding) => normalizeInline(finding.developerAction ?? finding.recommendation);
+const sourceFindingActionValue = (finding) =>
+  normalizeInline(finding.developerAction, "") || finding.recommendation;
+const sourceFindingAction = (finding) => normalizeInline(sourceFindingActionValue(finding));
 const sourceFindingAcceptance = (finding) => formatList(finding.acceptanceCriteria || []);
 const htmlSourceFindingInspectNext = (finding) => htmlListText(finding.inspectNext || []);
-const htmlSourceFindingAction = (finding) => escapeHtml(finding.developerAction ?? finding.recommendation);
+const htmlSourceFindingAction = (finding) => escapeHtml(sourceFindingActionValue(finding));
 const htmlSourceFindingAcceptance = (finding) => htmlListText(finding.acceptanceCriteria || []);
 
 const appendHeader = (lines, audit) => {

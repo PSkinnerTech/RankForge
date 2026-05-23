@@ -490,6 +490,46 @@ test("renders repository source finding guidance in escaped HTML reports", () =>
   assert.doesNotMatch(html, /\/bad\/ <unsafe>/);
 });
 
+test("falls back to recommendation for blank repository source developer actions", () => {
+  const audit = {
+    run: { target: "repo", mode: "repo" },
+    findings: [],
+    scores: {},
+    integrations: {},
+    evidenceGaps: [],
+    sources: [],
+    repo: {
+      path: "/repo",
+      detectedFramework: "next",
+      packageManager: "npm",
+      staticDirRelative: "out",
+      routeSources: [],
+      frameworkManifests: [],
+      sourceFindings: [
+        {
+          id: "repo.blank_developer_action",
+          severity: "P1",
+          message: "Repository source finding needs guidance.",
+          evidence: "/missing/",
+          recommendation: "Build | route and escape <unsafe>.",
+          developerAction: "",
+        },
+      ],
+    },
+  };
+
+  const markdown = generateMarkdownReport(audit);
+  const markdownSourceFindings = markdown.slice(markdown.indexOf("### Repository Source Findings"));
+  const html = generateHtmlReport(audit);
+
+  assert.match(markdownSourceFindings, /repo\.blank_developer_action/);
+  assert.match(markdownSourceFindings, /Build \\\| route and escape <unsafe>\./);
+  assert.doesNotMatch(markdownSourceFindings, /n\/a \| n\/a$/m);
+  assert.match(html, /repo\.blank_developer_action/);
+  assert.match(html, /Build \| route and escape &lt;unsafe&gt;\./);
+  assert.doesNotMatch(html, /Build \| route and escape <unsafe>\./);
+});
+
 test("separates imported measurements from deterministic readiness findings", () => {
   const audit = polishedAuditFixture();
   audit.integrations = {
