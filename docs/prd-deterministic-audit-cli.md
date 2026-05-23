@@ -21,7 +21,7 @@ The production direction remains a deterministic SEO/GEO readiness auditor. Actu
 
 As of the published `rankforge@0.3.0` release, the repository contains a working deterministic CLI and RankForge skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON, Markdown, and standalone HTML reports, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets. Post-release Track 2 adds clearer developer repo-audit maturity around Vite/SPAs, mapped route lists, source-finding remediation guidance, and CI artifact examples.
 
-The latest completed product target is developer-focused repo audit completion: repository audits now support explicit build commands, route lists, repo config, CI threshold failures, and deterministic source-level findings without overclaiming rankings. The next roadmap target is the first five post-release tracks: stabilization, developer repo audit maturity, report usefulness polish, public docs/examples, and release automation.
+The latest completed product target is developer-focused repo audit completion: repository audits now support explicit build commands, route lists, repo config, CI threshold failures, mapped SPA route lists, CI artifact examples, and deterministic source-level findings without overclaiming rankings. Track 2 is complete; the next roadmap targets among the remaining first-five post-release tracks are report usefulness polish, public docs/examples, and release automation.
 
 ## 2. Problem
 
