@@ -64,6 +64,40 @@ test("accepts optional repo evidence section", () => {
   assert.deepEqual(validateAuditOutput(audit), { ok: true, errors: [] });
 });
 
+test("accepts optional repo source finding guidance fields", () => {
+  const audit = {
+    schemaVersion: "1.0.0",
+    toolVersion: "0.3.0",
+    run: {},
+    site: {},
+    pages: [],
+    integrations: {},
+    scores: {},
+    findings: [],
+    evidenceGaps: [],
+    sources: [],
+    repo: {
+      path: "/repo",
+      detectedFramework: "vite",
+      sourceFindings: [
+        {
+          id: "repo.static_dir_missing",
+          severity: "P1",
+          message: "Configured static output directory does not exist or is not a directory.",
+          evidence: "dist",
+          recommendation: "Run the repository build or pass an existing static output directory.",
+          confidence: "high",
+          inspectNext: ["configured static output directory", "build command", "audit.config.json"],
+          developerAction: "Run the explicit build command and confirm the configured static directory exists.",
+          acceptanceCriteria: ["Rerun RankForge and confirm repo.static_dir_missing is absent."],
+        },
+      ],
+    },
+  };
+
+  assert.deepEqual(validateAuditOutput(audit), { ok: true, errors: [] });
+});
+
 test("rejects optional repo evidence section when it is not an object", () => {
   const result = validateAuditOutput({
     schemaVersion: "1.0.0",
