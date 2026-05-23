@@ -34,12 +34,13 @@ For a single-page application, many routes may map to the same generated `index.
 
 This tells RankForge to audit each public route while reading the SPA shell from `dist/index.html`. The route still appears as the intended URL path in the audit evidence and reports.
 
-## Config File
+## Config File Example
 
 You can keep the same workflow in `audit.config.json`:
 
 ```json
 {
+  "target": ".",
   "repo": {
     "buildCommand": "npm run build",
     "staticDir": "dist",
