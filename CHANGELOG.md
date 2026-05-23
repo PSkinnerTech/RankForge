@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Added explicit route-to-HTML route-list mappings for SPA repository audits, with deterministic Vite SPA fixture coverage.
+- Added repo source-finding developer guidance, including inspect-next targets, next actions, and rerun acceptance checks.
+- Improved Markdown and HTML repository evidence reports so source findings show the next artifact to inspect.
+- Added route-list documentation and a copy-paste GitHub Actions example that uploads JSON, Markdown, and HTML RankForge reports.
+
 ## 0.3.0 - 2026-05-22
 
 - Renamed the project, repository, skill, package, and CLI identity to RankForge.

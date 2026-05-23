@@ -19,7 +19,7 @@ The production direction remains a deterministic SEO/GEO readiness auditor. Actu
 
 ### Current baseline
 
-As of the published `rankforge@0.3.0` release, the repository contains a working deterministic CLI and RankForge skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON, Markdown, and standalone HTML reports, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets.
+As of the published `rankforge@0.3.0` release, the repository contains a working deterministic CLI and RankForge skill wrapper. The CLI can audit local HTML, live URLs, URL lists, sitemap-seeded crawls, bounded same-origin crawls, static output repositories, and explicit preview-server repositories. It emits JSON, Markdown, and standalone HTML reports, imports supplied ranking/performance evidence, evaluates deterministic page and site rules, includes repo evidence for source-repository audits, and includes restricted-mode guardrails for untrusted targets. Post-release Track 2 adds clearer developer repo-audit maturity around Vite/SPAs, mapped route lists, source-finding remediation guidance, and CI artifact examples.
 
 The latest completed product target is developer-focused repo audit completion: repository audits now support explicit build commands, route lists, repo config, CI threshold failures, and deterministic source-level findings without overclaiming rankings. The next roadmap target is the first five post-release tracks: stabilization, developer repo audit maturity, report usefulness polish, public docs/examples, and release automation.
 
@@ -29,7 +29,7 @@ The current repository contains a published deterministic CLI, a RankForge skill
 
 Current remaining gaps:
 
-- The CLI can audit static output and explicit preview-server repositories with explicit build commands, route-list parity, and repo config files; remaining repo-audit work focuses on broader framework fixture coverage and deeper deterministic source-level findings.
+- The CLI can audit static output and explicit preview-server repositories with explicit build commands, route-list parity, repo config files, mapped SPA route lists, and source-finding remediation guidance; remaining repo-audit work focuses on additional high-confidence framework signals and later CI output formats such as SARIF or JUnit.
 - Release documentation, PRD language, and checklist steps must stay aligned with the published `0.3.0` package before the next implementation phase begins.
 - Some rule IDs exist in the taxonomy before full trigger coverage, especially deeper entity clarity, hidden text risk, duplicate content clusters, and structured-data visible-content mismatch.
 - Ranking and GEO visibility measurement still depends on supplied exports. API-backed Search Console, SERP provider, and AI-answer probes are future integrations.
