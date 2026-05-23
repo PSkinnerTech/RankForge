@@ -127,7 +127,7 @@ This report evaluates SEO/GEO readiness. It does not measure rankings, SERP posi
 
 | Severity | Source Finding | Message | Evidence | Inspect Next | Next Action | Acceptance Check |
 |---|---|---|---|---|---|---|
-| P1 | repo.manifest_route_missing | Framework route manifest lists a route that is missing from static output. | /missing/ | web app manifest; HTML head links; static assets | Add a manifest route and link it from audited HTML pages. | Rerun RankForge and confirm repo.manifest_route_missing is absent. |
+| P1 | repo.manifest_route_missing | Framework route manifest lists a route that is missing from static output. | /missing/ | framework route manifest; generated static output; framework route configuration | Update the framework build/export configuration so every manifest route is emitted to static output, or remove stale route metadata. | Rerun RankForge and confirm repo.manifest_route_missing is absent. |
 
 ## Imported Measurements
 

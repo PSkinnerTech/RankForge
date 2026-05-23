@@ -375,6 +375,9 @@ test("repo audit rejects mapped SPA route-list generated files outside static ou
 
     assert.equal(audit.pages.length, 0);
     assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_entry_outside_static_dir");
+    assert.equal(audit.repo.sourceFindings[0].evidence, "/pricing/ -> <outside static output>");
+    assert.ok(!audit.repo.sourceFindings[0].evidence.includes(outsideDir));
+    assert.ok(!audit.repo.sourceFindings[0].evidence.includes(path.join(outsideDir, "external.html")));
     assert.deepEqual(audit.repo.routeSources, []);
   } finally {
     fs.rmSync(repoPath, { recursive: true, force: true });
@@ -397,6 +400,9 @@ test("repo audit rejects mapped SPA route-list symlinks that escape static outpu
 
     assert.equal(audit.pages.length, 0);
     assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_entry_outside_static_dir");
+    assert.equal(audit.repo.sourceFindings[0].evidence, "/pricing/ -> <outside static output>");
+    assert.ok(!audit.repo.sourceFindings[0].evidence.includes(outsideDir));
+    assert.ok(!audit.repo.sourceFindings[0].evidence.includes(path.join(outsideDir, "external.html")));
     assert.deepEqual(audit.repo.routeSources, []);
   } finally {
     fs.rmSync(repoPath, { recursive: true, force: true });
@@ -446,6 +452,9 @@ test("repo audit rejects absolute route-list entries outside static dir without 
 
   assert.equal(audit.pages.length, 0);
   assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_entry_outside_static_dir");
+  assert.equal(audit.repo.sourceFindings[0].evidence, "<route outside static output>");
+  assert.ok(!audit.repo.sourceFindings[0].evidence.includes(routeListDir));
+  assert.ok(!audit.repo.sourceFindings[0].evidence.includes(externalPath));
   assert.ok(!audit.repo.routeSources.some((source) => source.route === externalPath));
 });
 

@@ -10,8 +10,8 @@ const sourceFindingGuidance = {
     acceptanceCriteria: ["Rerun RankForge and confirm repo.build_timeout is absent."],
   },
   "repo.build_unavailable": {
-    inspectNext: ["package scripts", "framework configuration", "audit.config.json"],
-    developerAction: "Add or configure an explicit build command so RankForge can generate repository audit evidence.",
+    inspectNext: ["security mode", "build command", "prebuilt static output"],
+    developerAction: "Use local security mode for trusted repository builds, or audit prebuilt static output instead of executing the build command.",
     acceptanceCriteria: ["Rerun RankForge and confirm repo.build_unavailable is absent."],
   },
   "repo.static_dir_missing": {
@@ -75,8 +75,8 @@ const sourceFindingGuidance = {
     acceptanceCriteria: ["Rerun RankForge and confirm repo.sitemap_missing is absent."],
   },
   "repo.manifest_route_missing": {
-    inspectNext: ["web app manifest", "HTML head links", "static assets"],
-    developerAction: "Add a manifest route and link it from audited HTML pages.",
+    inspectNext: ["framework route manifest", "generated static output", "framework route configuration"],
+    developerAction: "Update the framework build/export configuration so every manifest route is emitted to static output, or remove stale route metadata.",
     acceptanceCriteria: ["Rerun RankForge and confirm repo.manifest_route_missing is absent."],
   },
   "repo.audit_path_missing": {

@@ -144,6 +144,18 @@ const routeForMappedEntry = (entry) => {
   return clean.startsWith("/") ? clean : `/${clean}`;
 };
 
+const sanitizeMappedEntryEvidence = (route, target, fallbackToken) => {
+  const routeToken = route || "<invalid route>";
+  if (fallbackToken) return `${routeToken} -> ${fallbackToken}`;
+  return path.isAbsolute(target) ? `${routeToken} -> <generated HTML>` : `${routeToken} ${target}`;
+};
+
+const routeListEntryEvidence = ({ entry, mapped, route, target, fallbackToken }) => {
+  if (mapped) return sanitizeMappedEntryEvidence(route, target, fallbackToken);
+  const clean = entry.trim();
+  return path.isAbsolute(clean) ? (fallbackToken || "<route outside static output>") : entry;
+};
+
 const readRouteListRoutes = (routeListPath, staticDir) => {
   if (!fs.existsSync(routeListPath) || !fs.statSync(routeListPath).isFile()) {
     return {
@@ -182,6 +194,7 @@ const readRouteListRoutes = (routeListPath, staticDir) => {
   for (const entry of entries) {
     const tokens = entry.trim().split(/\s+/);
     const mapped = tokens.length >= 2;
+    const mappedTarget = mapped ? tokens[1] : null;
     const filePath = mapped ? htmlPathForMappedEntry(staticDir, tokens[1]) : htmlPathForRoute(staticDir, entry);
     const route = filePath
       ? mapped
@@ -193,7 +206,13 @@ const readRouteListRoutes = (routeListPath, staticDir) => {
         sourceFinding({
           id: "repo.route_list_entry_outside_static_dir",
           message: "Route list entry resolves outside the configured static output directory.",
-          evidence: entry,
+          evidence: routeListEntryEvidence({
+            entry,
+            mapped,
+            route,
+            target: mappedTarget,
+            fallbackToken: mapped ? "<outside static output>" : "<route outside static output>",
+          }),
           recommendation: "Use routes or HTML files generated under the configured static output directory.",
         }),
       );
@@ -204,7 +223,13 @@ const readRouteListRoutes = (routeListPath, staticDir) => {
         sourceFinding({
           id: "repo.route_list_entry_missing",
           message: "Route list entry does not resolve to a generated HTML file.",
-          evidence: entry,
+          evidence: routeListEntryEvidence({
+            entry,
+            mapped,
+            route,
+            target: mappedTarget,
+            fallbackToken: mapped && path.isAbsolute(mappedTarget) ? "<missing generated HTML>" : null,
+          }),
           recommendation: "Build the route or remove it from the route list.",
         }),
       );
@@ -215,7 +240,13 @@ const readRouteListRoutes = (routeListPath, staticDir) => {
         sourceFinding({
           id: "repo.route_list_entry_outside_static_dir",
           message: "Route list entry resolves outside the configured static output directory.",
-          evidence: entry,
+          evidence: routeListEntryEvidence({
+            entry,
+            mapped,
+            route,
+            target: mappedTarget,
+            fallbackToken: mapped ? "<outside static output>" : "<route outside static output>",
+          }),
           recommendation: "Use routes or HTML files generated under the configured static output directory.",
         }),
       );
@@ -226,7 +257,13 @@ const readRouteListRoutes = (routeListPath, staticDir) => {
         sourceFinding({
           id: "repo.route_list_entry_outside_static_dir",
           message: "Route list entry resolves outside the configured static output directory.",
-          evidence: entry,
+          evidence: routeListEntryEvidence({
+            entry,
+            mapped,
+            route,
+            target: mappedTarget,
+            fallbackToken: mapped ? "<outside static output>" : "<route outside static output>",
+          }),
           recommendation: "Use routes or HTML files generated under the configured static output directory.",
         }),
       );
@@ -237,7 +274,7 @@ const readRouteListRoutes = (routeListPath, staticDir) => {
         sourceFinding({
           id: "repo.route_list_entry_not_html",
           message: "Route list entry does not resolve to an HTML file.",
-          evidence: entry,
+          evidence: routeListEntryEvidence({ entry, mapped, route, target: mappedTarget }),
           recommendation: "Route-list entries must point to generated HTML pages.",
         }),
       );

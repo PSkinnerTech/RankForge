@@ -45,6 +45,36 @@ test("sourceFinding attaches additive developer guidance by default", () => {
   assert.ok(finding.acceptanceCriteria.some((item) => item.includes("repo.static_dir_missing")));
 });
 
+test("build unavailable guidance matches restricted command execution", () => {
+  const finding = sourceFinding({
+    id: "repo.build_unavailable",
+    message: "Build command execution is disabled in restricted security mode.",
+    evidence: "npm run build",
+    recommendation: "Use local security mode for trusted repository builds, or audit prebuilt static output.",
+  });
+
+  assert.deepEqual(finding.inspectNext, ["security mode", "build command", "prebuilt static output"]);
+  assert.match(finding.developerAction, /local security mode/);
+  assert.match(finding.developerAction, /prebuilt static output/);
+});
+
+test("manifest route guidance points to framework route output", () => {
+  const finding = sourceFinding({
+    id: "repo.manifest_route_missing",
+    message: "Framework route manifest includes a route missing from generated static output.",
+    evidence: "/missing/",
+    recommendation: "Update the framework export or route manifest so generated routes match.",
+  });
+
+  assert.deepEqual(finding.inspectNext, [
+    "framework route manifest",
+    "generated static output",
+    "framework route configuration",
+  ]);
+  assert.match(finding.developerAction, /framework build\/export configuration/);
+  assert.doesNotMatch(finding.developerAction, /HTML head links/);
+});
+
 test("sourceFinding allows call sites to override developer guidance", () => {
   const finding = sourceFinding({
     id: "repo.audit_path_missing",

@@ -45,7 +45,7 @@ test("GitHub Actions repo audit example uploads JSON Markdown and HTML artifacts
   assert.match(workflow, /actions\/setup-node@v6/);
   assert.match(workflow, /npm ci/);
   assert.match(workflow, /npm run build/);
-  assert.match(workflow, /npx --yes rankforge audit-repo \. --static-dir dist --fail-on P1 --out rankforge-audit\.json --markdown rankforge-audit\.md --html rankforge-audit\.html/);
+  assert.match(workflow, /npx --yes rankforge audit-repo \. --static-dir dist --route-list routes\.txt --fail-on P1 --out rankforge-audit\.json --markdown rankforge-audit\.md --html rankforge-audit\.html/);
   assert.match(workflow, /actions\/upload-artifact@v6/);
   assert.match(workflow, /rankforge-audit\.json/);
   assert.match(workflow, /rankforge-audit\.md/);

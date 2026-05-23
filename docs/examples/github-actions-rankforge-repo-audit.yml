@@ -17,7 +17,7 @@ jobs:
       - name: Run RankForge repo audit
         id: rankforge
         continue-on-error: true
-        run: npx --yes rankforge audit-repo . --static-dir dist --fail-on P1 --out rankforge-audit.json --markdown rankforge-audit.md --html rankforge-audit.html
+        run: npx --yes rankforge audit-repo . --static-dir dist --route-list routes.txt --fail-on P1 --out rankforge-audit.json --markdown rankforge-audit.md --html rankforge-audit.html
       - name: Upload RankForge reports
         if: always()
         uses: actions/upload-artifact@v6
