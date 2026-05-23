@@ -381,6 +381,28 @@ test("repo audit rejects mapped SPA route-list generated files outside static ou
   }
 });
 
+test("repo audit rejects mapped SPA route-list symlinks that escape static output", async () => {
+  const repoPath = fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-spa-symlink-outside-static-"));
+  const staticDir = path.join(repoPath, "dist");
+  const outsideDir = path.join(repoPath, "outside");
+  const routeList = path.join(repoPath, "routes.txt");
+  fs.mkdirSync(staticDir, { recursive: true });
+  fs.mkdirSync(outsideDir, { recursive: true });
+  fs.writeFileSync(path.join(outsideDir, "external.html"), "<title>External</title><h1>External</h1>");
+  fs.symlinkSync(path.join("..", "outside", "external.html"), path.join(staticDir, "shell.html"));
+  fs.writeFileSync(routeList, "/pricing/ shell.html\n");
+
+  try {
+    const audit = await runRepoAudit({ repoPath, staticDir, routeList });
+
+    assert.equal(audit.pages.length, 0);
+    assert.equal(audit.repo.sourceFindings[0].id, "repo.route_list_entry_outside_static_dir");
+    assert.deepEqual(audit.repo.routeSources, []);
+  } finally {
+    fs.rmSync(repoPath, { recursive: true, force: true });
+  }
+});
+
 test("repo audit normalizes absolute route-list entries under static dir", async () => {
   const repoPath = fixture("vite-basic");
   const routeList = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "rankforge-routes-")), "routes.txt");
