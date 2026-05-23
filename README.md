@@ -55,6 +55,14 @@ Use CI-style failure thresholds when you want the audit to gate a build:
 rankforge audit-repo ./site --build-command "npm run build" --static-dir dist --fail-on P1 --out audit.json
 ```
 
+For Vite apps and other SPAs, provide a route list when multiple client routes map to `dist/index.html`:
+
+```bash
+rankforge audit-repo ./site --build-command "npm run build" --static-dir dist --route-list routes.txt --out audit.json --markdown audit.md --html audit.html
+```
+
+See [Repository Route Lists](docs/repo-audit-route-lists.md) for static HTML and single-page application examples.
+
 ## CLI
 
 Run the CLI through the workspace:

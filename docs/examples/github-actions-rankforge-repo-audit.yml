@@ -1,0 +1,33 @@
+name: RankForge Repo Audit
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  rankforge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 20
+      - run: npm ci
+      - run: npm run build
+      - name: Run RankForge repo audit
+        id: rankforge
+        continue-on-error: true
+        run: npx --yes rankforge audit-repo . --static-dir dist --fail-on P1 --out rankforge-audit.json --markdown rankforge-audit.md --html rankforge-audit.html
+      - name: Upload RankForge reports
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: rankforge-audit
+          path: |
+            rankforge-audit.json
+            rankforge-audit.md
+            rankforge-audit.html
+          if-no-files-found: error
+      - name: Fail if RankForge threshold failed
+        if: steps.rankforge.outcome == 'failure'
+        run: exit 1
